@@ -1054,7 +1054,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .host-role {
   font-size: 12px; font-weight: 800;
   letter-spacing: 2.5px; text-transform: uppercase;
-  color: var(--crimson); margin-bottom: 22px;
+  color: var(--ink); margin-bottom: 22px;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -1062,7 +1062,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .host-role::before {
   content: '';
   width: 14px; height: 2px;
-  background: var(--crimson);
+  background: var(--ink);
   flex-shrink: 0;
 }
 .host-bio {
