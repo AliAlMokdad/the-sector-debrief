@@ -1,0 +1,61 @@
+name: Sync YouTube → data.js
+
+on:
+  schedule:
+    # Daily at 06:00 UTC. Tweak as you like.
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}   # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write          # needed to push the updated data.js
+  pull-requests: write     # used when the script opens a PR (failsafe path)
+
+concurrency:
+  group: sync-youtube
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run sync script
+        id: sync
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: |
+          set +e
+          node scripts/sync-youtube.js
+          code=$?
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          if [ $code -eq 1 ]; then
+            echo "Sync errored."
+            exit 1
+          fi
+          if [ $code -eq 2 ]; then
+            echo "No changes needed — exiting clean."
+            exit 0
+          fi
+          # exit 0 → there are changes to commit
+          echo "changed=1" >> "$GITHUB_OUTPUT"
+
+      - name: Commit & push (only if changed)
+        if: steps.sync.outputs.changed == '1'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "sector-debrief-bot"
+          git config user.email "actions@github.com"
+          git add js/data.js
+          if git diff --cached --quiet; then
+            echo "No staged changes after all — nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(sync): refresh episodes + stats from YouTube"
+          git push

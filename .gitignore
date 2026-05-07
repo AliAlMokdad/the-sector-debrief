@@ -1,0 +1,11 @@
+# Local Claude Code config (contains absolute Windows paths)
+.claude/
+
+# Editor + OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/

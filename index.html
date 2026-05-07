@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Sector Debrief · Honest conversations on humanitarian work</title>
+  <meta name="description" content="The real conversations that shape the humanitarian and development world. Honest talk about political shifts, shrinking budgets, power dynamics, localization, and the future of crisis response."/>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Sector Debrief"/>
+  <meta property="og:description" content="The conversations that happen when the microphones are off."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:image" content="assets/cover.jpg"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="css/style.css?v=2026-05-07-9"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-07-9"/>
+
+  <!-- Schema.org PodcastSeries -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "PodcastSeries",
+    "name": "The Sector Debrief",
+    "description": "The real conversations that shape the humanitarian and development world.",
+    "url": "https://thesectordebrief.com",
+    "author": [
+      { "@type": "Person", "name": "Ali Al Mokdad" },
+      { "@type": "Person", "name": "Kim Kucinskas" },
+      { "@type": "Person", "name": "Thomas Jepson-Lay" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<a class="skip-link" href="#main-home">Skip to content</a>
+
+<!-- ═══════ INTRO LOADER ═══════ -->
+<div class="intro" id="intro">
+  <!-- Drifting brand brushes for vibe -->
+  <svg class="intro-brush intro-brush-1" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 40 Q50 5 100 40 T195 40" stroke="#B83A2A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="intro-brush intro-brush-2" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 50 Q80 5 140 55 T230 40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="intro-brush intro-brush-3" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 30 L210 30" stroke="#E8B82C" stroke-width="22" fill="none" stroke-linecap="round"/>
+  </svg>
+  <svg class="intro-brush intro-brush-4" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M10 60 Q80 5 160 50 T230 35" stroke="#2A4530" stroke-width="12" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="intro-inner">
+    <!-- Real microphone mark with pulsing on-air dot -->
+    <div class="intro-mark" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 10.5v1.5a6.5 6.5 0 0 0 13 0v-1.5"/><line x1="12" y1="18.5" x2="12" y2="21.5"/><line x1="8.5" y1="21.5" x2="15.5" y2="21.5"/></svg>
+      <span class="intro-mark-pulse"></span>
+    </div>
+
+    <h1 class="intro-title">
+      <span class="word"><span>The</span></span>
+      <span class="word"><span>Sector</span></span>
+      <span class="word"><span>Debrief</span></span>
+    </h1>
+
+    <!-- Animated waveform bars under the title -->
+    <div class="intro-wave" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="intro-tag">
+      <span class="intro-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      Honest conversations &middot; 2026
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-logo" data-nav="home" href="#home">
+      <span class="nav-logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 10.5v1.5a6.5 6.5 0 0 0 13 0v-1.5"/><line x1="12" y1="18.5" x2="12" y2="21.5"/><line x1="8.5" y1="21.5" x2="15.5" y2="21.5"/></svg>
+      </span>
+      <span>The Sector Debrief</span>
+    </a>
+    <ul class="nav-links" id="primary-nav">
+      <li><a data-nav="home"     href="#home">Home</a></li>
+      <li><a data-nav="episodes" href="#episodes">Episodes</a></li>
+      <li><a data-nav="blog"     href="#blog">Blog</a></li>
+      <li><a data-nav="about"    href="#about">About</a></li>
+      <li><a data-nav="contact"  href="#contact">Contact</a></li>
+    </ul>
+    <a class="nav-cta" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank">▶ Listen</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ═══════ HOME PAGE ═══════ -->
+<main class="page" data-page="home" id="main-home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- decorative brush strokes (drift in Google-colored choreography) -->
+    <svg class="brush brush-1" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,40 Q50,5 100,40 T195,40" stroke="#B83A2A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.85"/>
+    </svg>
+    <svg class="brush brush-2" viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,60 Q40,10 80,40 T155,30" stroke="#1E3D7A" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.75"/>
+    </svg>
+    <svg class="brush brush-3" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,30 L210,30" stroke="#E8B82C" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.7"/>
+    </svg>
+    <svg class="brush brush-4" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10,50 Q80,5 140,55 T230,40" stroke="#2A4530" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.65"/>
+    </svg>
+    <svg class="brush brush-5" viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,30 Q60,55 120,15 T175,30" stroke="#1E3D7A" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <svg class="brush brush-6" viewBox="0 0 280 50" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,25 Q90,5 180,35 T270,20" stroke="#B83A2A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.55"/>
+    </svg>
+
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span class="google-strip" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          Humanitarian &amp; Development Podcast
+        </div>
+        <h1>
+          <span class="line"><span>The <span class="accent-blue">Sector</span></span></span>
+          <span class="line"><span><span class="underline-mustard">Debrief</span><span class="accent-red">.</span></span></span>
+        </h1>
+        <p class="hero-tagline">"The real conversations that shape humanitarian and development work. The ones that happen when the microphones are off."</p>
+
+        <div class="platforms">
+          <a class="platform-btn primary" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank">
+            <span>▶</span> YouTube
+          </a>
+          <a class="platform-btn" href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW" target="_blank">
+            <span>♫</span> Spotify
+          </a>
+          <a class="platform-btn" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank">
+            <span>♬</span> Apple Podcasts
+          </a>
+        </div>
+
+        <canvas class="waveform" id="waveform"></canvas>
+      </div>
+
+      <!-- Round cover artwork — the actual podcast identity -->
+      <div class="hero-cover">
+        <div class="hero-cover-rotor">
+          <svg class="hero-cover-text" viewBox="0 0 200 200">
+            <defs>
+              <path id="circlePath" d="M 100,100 m -86,0 a 86,86 0 1,1 172,0 a 86,86 0 1,1 -172,0"/>
+            </defs>
+            <text>
+              <textPath href="#circlePath" startOffset="0">
+                THE SECTOR DEBRIEF · HONEST CONVERSATIONS · THE SECTOR DEBRIEF · HONEST CONVERSATIONS ·
+              </textPath>
+            </text>
+          </svg>
+        </div>
+        <a class="hero-cover-img" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" aria-label="Watch on YouTube">
+          <img src="assets/cover.jpg" alt="The Sector Debrief · featuring Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay"/>
+          <div class="hero-cover-badge">
+            <span class="badge-dot"></span>
+            <span>NEW EPISODE OUT</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Google-color dots in the middle of the home flow -->
+  <div class="floating-dots floating-dots-mid" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stats-grid stats-grid-2 reveal-stagger">
+      <div class="stat">
+        <div class="stat-num" id="stat-episodes">5</div>
+        <div class="stat-label">Episodes Released</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="stat-views">75,951</div>
+        <div class="stat-label">Total Views on YouTube</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LATEST EPISODES -->
+  <section>
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Latest Episodes</div>
+        <h2 class="section-title" data-split>Fresh from <em>the table</em></h2>
+      </div>
+      <a class="section-link" data-nav="episodes" href="#episodes">All Episodes →</a>
+    </div>
+    <div class="episodes-grid reveal-stagger" id="home-episodes"></div>
+  </section>
+
+  <!-- QUOTES MARQUEE -->
+  <div class="quotes-marquee">
+    <div class="quotes-marquee-head">
+      <div class="section-eyebrow">Voices</div>
+      <h2>What people <em>actually</em> said</h2>
+    </div>
+    <div class="quotes-track" id="quotes-track"></div>
+  </div>
+
+  <!-- SUBSCRIBE CTA (replaces newsletter) -->
+  <section style="padding-top: 0;">
+    <div class="newsletter sub-cta">
+      <div class="newsletter-inner sub-cta-min">
+        <a class="yt-sub-btn" href="https://www.youtube.com/channel/UCUrZ0l2uqp2zgJ5WrjcRXDg?sub_confirmation=1" target="_blank" rel="noopener">
+          <span class="yt-icon" aria-hidden="true">▶</span>
+          <span class="yt-label">Subscribe on YouTube</span>
+          <span class="yt-arrow" aria-hidden="true">→</span>
+        </a>
+        <div class="yt-kicker">
+          <span class="yt-kicker-rule" aria-hidden="true"></span>
+          <span class="yt-kicker-text"><em>No noise.</em> Just the work.</span>
+          <span class="yt-kicker-rule" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════ EPISODES PAGE ═══════ -->
+<main class="page" data-page="episodes">
+  <!-- decorative page brushes -->
+  <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,40 Q50,5 100,40 T195,40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
+  </svg>
+  <svg class="page-brush page-brush-b" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,50 Q80,5 140,55 T230,40" stroke="#B83A2A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.45"/>
+  </svg>
+  <svg class="page-brush page-brush-c" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,30 L210,30" stroke="#E8B82C" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.55"/>
+  </svg>
+  <svg class="page-brush page-brush-d" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 50 Q80 5 140 55 T230 40" stroke="#2A4530" stroke-width="11" fill="none" stroke-linecap="round" opacity="0.4"/>
+  </svg>
+
+  <section style="padding-top: 140px;">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Every Episode</div>
+        <h2 class="section-title" data-split>The full <em>archive</em></h2>
+      </div>
+      <a class="section-link" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank">YouTube Playlist ↗</a>
+    </div>
+
+    <!-- Featured (latest) episode -->
+    <div class="ep-featured reveal" id="ep-featured"></div>
+
+    <!-- Search bar -->
+    <div class="filter-bar reveal">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search by title, theme, guest, or topic..."/>
+      </div>
+    </div>
+
+    <div class="episodes-grid reveal-stagger" id="episodes-grid"></div>
+  </section>
+</main>
+
+<!-- ═══════ BLOG PAGE ═══════ -->
+<main class="page" data-page="blog">
+  <!-- decorative page brushes -->
+  <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,40 Q50,5 100,40 T195,40" stroke="#B83A2A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.55"/>
+  </svg>
+  <svg class="page-brush page-brush-b" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10,50 Q80,5 140,55 T230,40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.4"/>
+  </svg>
+  <svg class="page-brush page-brush-c" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,30 L210,30" stroke="#E8B82C" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.45"/>
+  </svg>
+
+  <section style="padding-top: 140px;">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Long Reads</div>
+        <h2 class="section-title" data-split>The <em>essays</em></h2>
+      </div>
+    </div>
+    <div class="about-intro intro-solo reveal" style="margin-bottom: 40px;">
+      <p>Every episode becomes an <em>essay</em>. Long-form notes from each conversation, plus the occasional editorial from the hosts.</p>
+    </div>
+
+    <!-- Pause & Reflect hero (rotates through ALL reflections from every essay) -->
+    <section class="pause-hero reveal" id="pause-hero" aria-labelledby="pause-hero-heading">
+      <div class="pause-hero-eyebrow">
+        <span class="pause-pulse" aria-hidden="true"></span>
+        <h3 id="pause-hero-heading">Pause &amp; reflect</h3>
+      </div>
+      <div class="pause-hero-card">
+        <div class="pause-mark" aria-hidden="true">"</div>
+        <p class="pause-question" id="pause-hero-q" aria-live="off" aria-atomic="true">…</p>
+        <div class="pause-hero-source" id="pause-hero-source"></div>
+        <div class="pause-hero-actions">
+          <button class="pause-btn pause-next" id="pause-hero-next" type="button">
+            <span class="pause-icon" aria-hidden="true">↻</span>
+            <span>Ask me another</span>
+          </button>
+          <button class="pause-btn pause-share" id="pause-hero-read" type="button" aria-label="Open the essay this came from">
+            <span aria-hidden="true">→</span>
+          </button>
+          <button class="pause-btn pause-share" id="pause-hero-copy" type="button" aria-label="Copy question">
+            <span aria-hidden="true">⧉</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="blog-grid reveal-stagger" id="blog-grid"></div>
+  </section>
+</main>
+
+<!-- (Quotes tab removed — quotes still appear on the home page marquee) -->
+
+<!-- ═══════ ABOUT PAGE ═══════ -->
+<main class="page" data-page="about">
+  <!-- decorative page brushes -->
+  <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 40 Q50 5 100 40 T195 40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
+  </svg>
+  <svg class="page-brush page-brush-b" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 50 Q80 5 140 55 T230 40" stroke="#B83A2A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.45"/>
+  </svg>
+  <svg class="page-brush page-brush-c" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 30 L210 30" stroke="#E8B82C" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.5"/>
+  </svg>
+
+  <section style="padding-top: 140px;">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Who we are</div>
+        <h2 class="section-title" data-split>The <em>hosts</em></h2>
+      </div>
+    </div>
+    <div class="about-intro intro-solo reveal">
+      <p>
+        The Sector Debrief was started by three practitioners who spent enough time inside the humanitarian and development world to know that the most useful conversations rarely make it into the official record.
+        <strong>So we started recording them.</strong> The aim is not consensus. It's clarity. The format is not panel. It's conversation. The standard is not balance. It's <em>honesty</em>.
+      </p>
+    </div>
+    <div class="hosts-grid reveal-stagger" id="hosts-grid"></div>
+
+    <!-- Why we made this -->
+    <div class="manifesto">
+      <div class="manifesto-blob"></div>
+      <div class="manifesto-inner">
+        <div class="manifesto-eyebrow">Why we made this</div>
+        <p class="manifesto-text">
+          The most useful thinking in our world rarely makes it into the official record. It happens in side conversations, after the panels, between the slides, when nobody is taking notes. We made <em>The Sector Debrief</em> for that conversation. Three voices. One table. The microphones are on. <em class="hl">Let&rsquo;s talk like the room is empty.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════ CONTACT PAGE ═══════ -->
+<main class="page" data-page="contact">
+  <!-- decorative page brushes -->
+  <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 40 Q50 5 100 40 T195 40" stroke="#2A4530" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
+  </svg>
+  <svg class="page-brush page-brush-b" viewBox="0 0 240 100" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 50 Q80 5 140 55 T230 40" stroke="#1E3D7A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.45"/>
+  </svg>
+  <svg class="page-brush page-brush-c" viewBox="0 0 220 60" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 30 L210 30" stroke="#B83A2A" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.5"/>
+  </svg>
+
+  <section style="padding-top: 140px;">
+    <div class="section-head reveal">
+      <div>
+        <div class="section-eyebrow">Get in touch</div>
+        <h2 class="section-title" data-split>Say <em>hello</em></h2>
+      </div>
+    </div>
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <h3>Want to be on the show? Have a story we should tell? Disagree with something we said?</h3>
+        <p>We read everything. We respond to most. We're particularly interested in voices from <strong>field operations, national NGOs, and parts of the sector that don't usually get invited to the panels.</strong></p>
+
+        <div class="contact-platforms-label">Find the show on</div>
+        <div class="platform-orbs">
+          <a class="orb orb-yt" href="https://www.youtube.com/@TheSectorDebrief" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+            <span class="orb-tip">YouTube</span>
+          </a>
+          <a class="orb orb-sp" href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW?si=68161263c1ef4610" target="_blank" rel="noopener" aria-label="Spotify">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.4-1.4c4.6-1 8.5-.6 11.7 1.3a.75.75 0 0 1 .3 1zm1.5-3.3a1 1 0 0 1-1.3.3c-3.3-2-8.3-2.6-12.2-1.4a1 1 0 0 1-.6-2c4.4-1.3 9.9-.7 13.7 1.7.5.3.6 1 .4 1.4zm.1-3.4C15.2 8.3 8.4 8 4.5 9.2a1.2 1.2 0 1 1-.7-2.3c4.5-1.4 12-1 16.7 1.8a1.2 1.2 0 0 1-1.4 2z"/></svg>
+            <span class="orb-tip">Spotify</span>
+          </a>
+          <a class="orb orb-ap" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank" rel="noopener" aria-label="Apple Podcasts">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm0 4.7a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm-2.2 13c0-.7.6-1.3 1.3-1.3h1.7c.8 0 1.4.6 1.4 1.3l-.7 4.5c-.1.6-.6 1-1.2 1h-.6c-.6 0-1.1-.4-1.2-1l-.7-4.5z"/></svg>
+            <span class="orb-tip">Apple Podcasts</span>
+          </a>
+          <a class="orb orb-ih" href="https://iheart.com/podcast/1333-the-sector-debrief-313409566" target="_blank" rel="noopener" aria-label="iHeart">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.6s-7.5-4.5-9.5-9.4C1 8.4 3.4 4.4 7 4.4c2.2 0 3.7 1.3 5 3 1.3-1.7 2.8-3 5-3 3.6 0 6 4 4.5 7.8C19.5 17 12 21.6 12 21.6z"/></svg>
+            <span class="orb-tip">iHeart</span>
+          </a>
+          <a class="orb orb-gk" href="https://grokipedia.com/page/The_Sector_Debrief" target="_blank" rel="noopener" aria-label="Grokipedia">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 9.5 12 7l4 2.5M8 14.5 12 17l4-2.5M8 9.5v5M16 9.5v5"/></svg>
+            <span class="orb-tip">Grokipedia</span>
+          </a>
+          <a class="orb orb-pl" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" rel="noopener" aria-label="Full Playlist">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M3 6h13M3 12h13M3 18h9"/><path d="M21 8v10l-4-5z" fill="currentColor" stroke="none"/></svg>
+            <span class="orb-tip">Playlist</span>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" action="https://formsubmit.co/ali_moukdad@hotmail.com" method="POST" novalidate>
+        <!-- FormSubmit configuration -->
+        <input type="hidden" name="_subject" value="🎙 New Sector Debrief contact form submission"/>
+        <input type="hidden" name="_template" value="table"/>
+        <input type="hidden" name="_captcha" value="false"/>
+        <input type="hidden" name="_next" value="#contact"/>
+        <!-- honeypot (visually hidden but available to bots) -->
+        <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"/>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cf-name">Full name</label>
+            <input id="cf-name" type="text" name="name" required autocomplete="name"/>
+          </div>
+          <div class="form-field">
+            <label for="cf-email">Your email</label>
+            <input id="cf-email" type="email" name="email" required autocomplete="email"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="cf-org">Organization</label>
+          <input id="cf-org" type="text" name="organization" autocomplete="organization"/>
+        </div>
+        <div class="form-field">
+          <label for="cf-type">What's this about?</label>
+          <select id="cf-type" name="type" required>
+            <option value="">Select…</option>
+            <option>Guest application</option>
+            <option>Episode idea</option>
+            <option>Sponsorship</option>
+            <option>Press / media</option>
+            <option>Disagreement (welcome)</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <button class="form-submit" type="submit">Send Message →</button>
+        <div class="form-success" id="form-success">✓ Message sent. We'll get back to you within a few days.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer reveal">
+  <!-- Floating Google-color dots, drifting inside the dark footer -->
+  <div class="floating-dots floating-dots-footer" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <span class="nav-logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 10.5v1.5a6.5 6.5 0 0 0 13 0v-1.5"/><line x1="12" y1="18.5" x2="12" y2="21.5"/><line x1="8.5" y1="21.5" x2="15.5" y2="21.5"/></svg>
+          </span>
+          <span>The Sector Debrief</span>
+        </div>
+        <p class="footer-tagline">"The conversations that happen when the microphones are off."</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul class="footer-links">
+          <li><a data-nav="home"     href="#home">Home</a></li>
+          <li><a data-nav="episodes" href="#episodes">Episodes</a></li>
+          <li><a data-nav="blog"     href="#blog">Blog</a></li>
+          <li><a data-nav="about"    href="#about">About</a></li>
+          <li><a data-nav="contact"  href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The Hosts</h4>
+        <ul class="footer-links">
+          <li><a data-nav="about" href="#about">Ali Al Mokdad</a></li>
+          <li><a data-nav="about" href="#about">Kim Kucinskas</a></li>
+          <li><a data-nav="about" href="#about">Thomas Jepson-Lay</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Listen on</h4>
+        <div class="footer-platforms">
+          <a class="footer-orb footer-orb-yt" href="https://www.youtube.com/@TheSectorDebrief" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+            <span class="footer-orb-tip">YouTube</span>
+          </a>
+          <a class="footer-orb footer-orb-sp" href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW?si=68161263c1ef4610" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.4-1.4c4.6-1 8.5-.6 11.7 1.3a.75.75 0 0 1 .3 1zm1.5-3.3a1 1 0 0 1-1.3.3c-3.3-2-8.3-2.6-12.2-1.4a1 1 0 0 1-.6-2c4.4-1.3 9.9-.7 13.7 1.7.5.3.6 1 .4 1.4zm.1-3.4C15.2 8.3 8.4 8 4.5 9.2a1.2 1.2 0 1 1-.7-2.3c4.5-1.4 12-1 16.7 1.8a1.2 1.2 0 0 1-1.4 2z"/></svg>
+            <span class="footer-orb-tip">Spotify</span>
+          </a>
+          <a class="footer-orb footer-orb-ap" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm0 4.7a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm-2.2 13c0-.7.6-1.3 1.3-1.3h1.7c.8 0 1.4.6 1.4 1.3l-.7 4.5c-.1.6-.6 1-1.2 1h-.6c-.6 0-1.1-.4-1.2-1l-.7-4.5z"/></svg>
+            <span class="footer-orb-tip">Apple Podcasts</span>
+          </a>
+          <a class="footer-orb footer-orb-ih" href="https://iheart.com/podcast/1333-the-sector-debrief-313409566" target="_blank" rel="noopener noreferrer" aria-label="iHeart">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.6s-7.5-4.5-9.5-9.4C1 8.4 3.4 4.4 7 4.4c2.2 0 3.7 1.3 5 3 1.3-1.7 2.8-3 5-3 3.6 0 6 4 4.5 7.8C19.5 17 12 21.6 12 21.6z"/></svg>
+            <span class="footer-orb-tip">iHeart</span>
+          </a>
+        </div>
+        <h4 style="margin-top: 28px;">Subscribe</h4>
+        <a class="footer-yt-cta" href="https://www.youtube.com/channel/UCUrZ0l2uqp2zgJ5WrjcRXDg?sub_confirmation=1" target="_blank" rel="noopener">
+          <span class="yt-icon">▶</span>
+          <span>Subscribe on YouTube</span>
+        </a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <span>© 2026 The Sector Debrief</span>
+      <span class="google-strip footer-strip" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+      <span>Conversations that travel</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ MINI PLAYER ═══════ -->
+<div class="mini-player" id="mini-player" role="region" aria-label="Now playing">
+  <div class="mini-thumb"><img id="mini-thumb-img" src="" alt=""/></div>
+  <div class="mini-info">
+    <div class="mini-info-title" id="mini-title"></div>
+    <div class="mini-info-sub" id="mini-sub"></div>
+  </div>
+  <div class="mini-controls">
+    <button class="mini-btn" id="mini-prev" aria-label="Previous episode" title="Previous episode">⏮</button>
+    <button class="mini-play" id="mini-toggle" aria-label="Open episode" title="Open episode">▶</button>
+    <button class="mini-btn" id="mini-next" aria-label="Next episode" title="Next episode">⏭</button>
+    <button class="mini-btn" id="mini-close" aria-label="Close mini player" title="Close mini player">×</button>
+  </div>
+</div>
+
+<!-- ═══════ MODALS ═══════ -->
+<div class="modal-backdrop" id="modal-backdrop" role="presentation">
+  <div class="modal" id="modal-episode" role="dialog" aria-modal="true" aria-labelledby="modal-episode-title"></div>
+</div>
+<div class="modal-backdrop" id="modal-blog-backdrop" role="presentation">
+  <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title"></div>
+</div>
+
+<script src="js/data.js?v=2026-05-07-9"></script>
+<script src="js/motion.js?v=2026-05-07-9"></script>
+<script src="js/app.js?v=2026-05-07-9"></script>
+
+<style>
+  /* Mobile nav fallback */
+  @media (max-width: 640px) {
+    .nav-links.mobile-open {
+      display: flex !important;
+      position: fixed; top: 64px; left: 0; right: 0;
+      flex-direction: column; gap: 0;
+      background: var(--cream);
+      border-bottom: 2px solid var(--ink);
+      padding: 16px 20px;
+    }
+    .nav-links.mobile-open li { padding: 12px 0; border-bottom: 1px solid var(--cream-deep); }
+  }
+</style>
+
+</body>
+</html>
