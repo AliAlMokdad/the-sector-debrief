@@ -24,7 +24,7 @@ const DATA_FILE  = process.env.DATA_FILE
   ? path.resolve(process.env.DATA_FILE)
   : path.resolve(__dirname, '..', 'js', 'data.js');
 const DRY_RUN    = !!process.env.DRY_RUN;
-const RSS_URL    = `https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`;
+const RSS_URL    = `https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L`;
 
 // ── fetch ──
 function getText(url) {
@@ -141,7 +141,7 @@ function rewriteDataFile(text, newEpisodesJS, episodeCount) {
 // ── main ──
 async function main() {
   console.log(`▸ RSS sync starting — ${new Date().toISOString()}`);
-  console.log(`  channel: ${CHANNEL_ID}`);
+
   console.log(`  feed:    ${RSS_URL}`);
 
   const xml      = await getText(RSS_URL);
