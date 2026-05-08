@@ -34,8 +34,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-08c"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-08c"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-08d"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-08d"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -453,7 +453,7 @@
         <input type="hidden" name="_subject" value="🎙 New Sector Debrief contact form submission"/>
         <input type="hidden" name="_template" value="table"/>
         <input type="hidden" name="_captcha" value="false"/>
-        <input type="hidden" name="_next" value="https://thesectordebrief.com/#contact"/>
+        <input type="hidden" name="_next" value="https://thesectordebrief.com/?sent=1#contact"/>
         <!-- honeypot (visually hidden but available to bots) -->
         <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"/>
 
@@ -486,6 +486,31 @@
         <div class="form-field">
           <label for="cf-message">Message</label>
           <textarea id="cf-message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+        <!-- I'm not a robot -->
+        <div class="robot-check" id="robot-check">
+          <label class="robot-check-label">
+            <input type="checkbox" id="not-robot" class="robot-check-input" aria-required="true" aria-label="Confirm you are not a robot"/>
+            <span class="robot-check-box" aria-hidden="true">
+              <svg class="robot-check-tick" viewBox="0 0 12 10" fill="none"><polyline points="1.5,5.5 4.5,8.5 10.5,1.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span>I'm not a robot</span>
+          </label>
+          <div class="robot-check-brand" aria-hidden="true">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <circle cx="22" cy="22" r="20" fill="#4285F4"/>
+              <circle cx="22" cy="22" r="12" fill="#fff"/>
+              <circle cx="22" cy="22" r="6" fill="#4285F4"/>
+            </svg>
+            <div>
+              <div class="robot-check-name">reCAPTCHA</div>
+              <div class="robot-check-links">
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy</a>
+                <span>·</span>
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms</a>
+              </div>
+            </div>
+          </div>
         </div>
         <button class="form-submit" type="submit">Send Message →</button>
         <div class="form-success" id="form-success">✓ Message sent. We'll get back to you within a few days.</div>
@@ -587,9 +612,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title"></div>
 </div>
 
-<script src="js/data.js?v=2026-05-08c"></script>
-<script src="js/motion.js?v=2026-05-08c"></script>
-<script src="js/app.js?v=2026-05-08c"></script>
+<script src="js/data.js?v=2026-05-08d"></script>
+<script src="js/motion.js?v=2026-05-08d"></script>
+<script src="js/app.js?v=2026-05-08d"></script>
 
 </body>
 </html>
