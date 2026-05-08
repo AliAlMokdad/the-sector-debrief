@@ -21,7 +21,7 @@ const EPISODES = [
     guest: null,
     date: '2026-05-07',
     duration: '',
-    description: 'Kim Kucinskas returns from a month on the road — Buenos Aires and the Skoll World Forum in Oxford — and needs to think out loud. Ali Al Mokdad, Kim, and Thomas Jepson-Lay work through what it means to make sense of a sector in transition: what is civil society actually for, and why are people no longer experiencing it as a public good? "This is not just a funding problem. It's a social contract problem."',
+    description: 'Kim Kucinskas returns from a month on the road and needs to think out loud. Ali Al Mokdad, Kim, and Thomas Jepson-Lay work through what it means to make sense of a sector in transition — what is civil society for, and why are people no longer experiencing it as a public good? Not just a funding problem. A social contract problem.',
     themes: ['Civil Society', 'Transition', 'Sense-Making']
   },
   {
