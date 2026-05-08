@@ -2,22 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Redirecting · The Sector Debrief</title>
+  <title>Redirecting — The Sector Debrief</title>
   <meta name="robots" content="noindex"/>
   <script>
-    // GitHub Pages serves this for any unknown path. Map common SPA paths
-    // (/about, /episodes, /blog, /contact) to the corresponding hash route
-    // on the home page so deep links from old URLs / external sites still
-    // land somewhere useful.
     (function(){
       var seg = location.pathname
-        .replace(/^\/the-sector-debrief\//, '')
+        .replace(/^\//, '')
         .replace(/\/$/, '')
         .split('/')[0]
         .toLowerCase();
       var valid = ['home','episodes','blog','about','contact'];
       var hash = valid.indexOf(seg) >= 0 ? '#' + seg : '#home';
-      location.replace('/the-sector-debrief/' + hash);
+      location.replace('/' + hash);
     })();
   </script>
   <style>
@@ -27,6 +23,6 @@
 </head>
 <body>
   <h1>Redirecting…</h1>
-  <p>If you aren't redirected, <a href="/the-sector-debrief/">go to the home page</a>.</p>
+  <p>If you aren't redirected, <a href="/">go to the home page</a>.</p>
 </body>
 </html>
