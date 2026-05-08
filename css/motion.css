@@ -22,21 +22,22 @@
   pointer-events: none; z-index: 9999;
   border-radius: 50%;
   will-change: transform, background;
-  transform: translate3d(0, 0, 0);
+  opacity: 0; /* starts hidden — JS reveals on first mousemove to avoid (0,0) flash */
 }
 .cursor-dot {
   width: 8px; height: 8px;
   margin: -4px 0 0 -4px;
   background: var(--mustard);
-  /* difference blend so the dot stays visible on both cream and ink surfaces */
   mix-blend-mode: difference;
   transition: opacity 0.2s, background 0.2s;
+  --cur-x: 0px;
+  --cur-y: 0px;
+  transform: translate3d(var(--cur-x), var(--cur-y), 0);
 }
 .cursor-ring {
   width: 38px; height: 38px;
   margin: -19px 0 0 -19px;
   border: 1.5px solid var(--ink);
-  /* combined translate (set by JS) + scale (set by hover state) */
   --cur-scale: 1;
   --cur-x: 0px;
   --cur-y: 0px;
@@ -47,11 +48,6 @@
               opacity 0.25s,
               border-radius 0.25s var(--ease-standard);
   mix-blend-mode: difference;
-}
-.cursor-dot {
-  --cur-x: 0px;
-  --cur-y: 0px;
-  transform: translate3d(var(--cur-x), var(--cur-y), 0);
 }
 body.cursor-hover .cursor-ring {
   --cur-scale: 1.7;
@@ -221,9 +217,9 @@ body.cursor-text .cursor-dot { opacity: 0; }
   animation: introBrushIn 1s 0.2s ease both;
 }
 .intro-brush path {
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  animation: pgBrushDraw 1.4s 0.4s var(--ease-emphasis) both;
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: brushDraw 1.4s 0.4s var(--ease-emphasis) both;
 }
 .intro-brush-1 { top: 18%; left: 8%;  width: 220px; transform: rotate(-12deg); animation-delay: 0.2s; }
 .intro-brush-2 { top: 65%; right: 8%; width: 240px; transform: rotate(8deg);   animation-delay: 0.35s; }
@@ -273,7 +269,7 @@ body.cursor-text .cursor-dot { opacity: 0; }
 .hero-tagline,
 .hero-meta,
 .platforms,
-.hero-art {
+.hero-cover {
   opacity: 0; transform: translateY(24px);
   animation: heroFadeUp 0.9s cubic-bezier(.2,.8,.2,1) both;
 }
@@ -281,9 +277,18 @@ body.cursor-text .cursor-dot { opacity: 0; }
 .hero-tagline  { animation-delay: 3.0s; }
 .hero-meta     { animation-delay: 3.15s; }
 .platforms     { animation-delay: 3.25s; }
-.hero-art      { animation-delay: 3.0s; transform: translateY(40px) scale(0.96); }
+.hero-cover    { animation-delay: 3.0s; transform: translateY(40px) scale(0.96); }
 @keyframes heroFadeUp {
   to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── HERO COVER image scale-in reveal ── */
+.hero-cover-img img {
+  transform: scale(1.08);
+  animation: heroImg 1.4s 3.2s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes heroImg {
+  to { transform: scale(1); }
 }
 
 /* ── SCROLL REVEAL ── */
@@ -429,7 +434,7 @@ body.cursor-text .cursor-dot { opacity: 0; }
   animation: brushDrift6 16s ease-in-out infinite alternate;
 }
 
-/* ambient drift on brushes — Google-style choreography */
+/* ambient drift on brushes */
 .brush-1 { animation: brushDrift1 9s ease-in-out infinite alternate; }
 .brush-2 { animation: brushDrift2 10s ease-in-out infinite alternate; }
 .brush-3 { animation: brushDrift3 12s ease-in-out infinite alternate; }
@@ -472,29 +477,12 @@ body.cursor-text .cursor-dot { opacity: 0; }
   margin: 32px 0 0;
   opacity: 0;
   animation: heroFadeUp 0.9s 3.4s ease both;
-  /* Painted-stripe fallback for when JS hasn't drawn yet */
   background: repeating-linear-gradient(90deg,
     var(--ink) 0 2px,
     transparent 2px 8px);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
           mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
 }
-
-/* ── INK LINK HOVER ── */
-.nav-links a {
-  overflow: hidden;
-  transition: color 0.3s;
-}
-.nav-links a span.ink {
-  position: absolute; bottom: 4px; left: 0;
-  height: 8px; width: 0;
-  background: var(--mustard);
-  z-index: -1;
-  transition: width 0.4s cubic-bezier(.2,.8,.2,1);
-  opacity: 0.7;
-  transform: skewX(-8deg);
-}
-.nav-links a:hover span.ink { width: 100%; }
 
 /* ── EPISODE CARD HOVER PLAY GLOW ── */
 .ep-thumb-play {
@@ -520,7 +508,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
 .ep-card .ep-body {
   transition: transform 0.5s var(--ease-emphasis);
 }
-/* sweep glow: a soft Google-color halo following the cursor */
 .ep-card::after {
   content: '';
   position: absolute; inset: -2px;
@@ -553,27 +540,15 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 .ep-card:hover .ep-title::before { width: 80%; }
 
-/* Smooth Material lift on card hover, replaces basic tilt */
 .ep-card.tilt:hover {
   z-index: 5;
   box-shadow: 0 18px 40px -10px rgba(26,22,20,0.18);
 }
-
-/* link sweep across entire card */
 .ep-card .ep-link.primary {
   transition: background 0.3s var(--ease-standard),
               transform 0.3s var(--ease-spring);
 }
 .ep-card:hover .ep-link.primary { background: var(--crimson); }
-
-/* ── HERO ART pulse ── */
-.hero-art-thumb::before {
-  content: ''; position: absolute;
-  inset: 0; z-index: 2;
-  background: radial-gradient(circle at center, transparent 60%, rgba(26,22,20,0.4));
-  pointer-events: none;
-}
-.hero-art:hover { transform: translate(-6px,-6px) rotate(-0.5deg); }
 
 /* ── QUOTES MARQUEE polish ── */
 .quotes-track { transform: translateZ(0); }
@@ -662,15 +637,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 .blog-card.in .blog-card-img img { transform: scale(1); }
 
-/* ── HERO ART image reveal ── */
-.hero-art-thumb img {
-  transform: scale(1.08);
-  animation: heroImg 1.4s 3.2s cubic-bezier(.2,.8,.2,1) both;
-}
-@keyframes heroImg {
-  to { transform: scale(1); }
-}
-
 /* ── grain overlay (subtle film texture) ── */
 body::after {
   content: '';
@@ -683,7 +649,6 @@ body::after {
 
 /* ═══════════════════════════════════════════════════
    BOTTOM-OF-PAGE VIBE LAYER
-   Decorative motion that keeps energy alive past the fold.
    ═══════════════════════════════════════════════════ */
 
 /* ── FOOTER: painterly top edge + drifting blob ── */
@@ -726,7 +691,7 @@ body::after {
   100% { transform: translate(160px,20px) scale(0.95); }
 }
 
-/* footer columns rise in when footer enters view (gracefully visible by default) */
+/* footer columns rise in when footer enters view */
 .footer-grid > div {
   opacity: 1;
   transform: translateY(0);
@@ -755,12 +720,11 @@ body::after {
   filter: blur(0.2px);
   box-shadow: 0 6px 18px -6px rgba(0,0,0,0.25);
 }
-.floating-dots span:nth-child(1) { background: #4285F4; }  /* blue */
-.floating-dots span:nth-child(2) { background: #EA4335; }  /* red */
-.floating-dots span:nth-child(3) { background: #FBBC05; }  /* yellow */
-.floating-dots span:nth-child(4) { background: #34A853; }  /* green */
+.floating-dots span:nth-child(1) { background: #4285F4; }
+.floating-dots span:nth-child(2) { background: #EA4335; }
+.floating-dots span:nth-child(3) { background: #FBBC05; }
+.floating-dots span:nth-child(4) { background: #34A853; }
 
-/* MIDDLE — sits between hero and Latest Episodes */
 .floating-dots-mid {
   height: 0;
   margin: 0 auto;
@@ -782,7 +746,6 @@ body::after {
   100% { transform: translate(-18px,16px)  scale(0.9);  opacity: 0.85;}
 }
 
-/* FOOTER — drifts above the dark slab so the dots pop on ink */
 .floating-dots-footer {
   position: absolute;
   top: 24px; left: 0; right: 0;
