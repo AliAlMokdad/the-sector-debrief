@@ -652,40 +652,67 @@ function bindMini() {
 function bindContactForm() {
   const form = $('#contact-form');
   if (!form) return;
+
+  // Show success banner when returning from a native FormSubmit redirect (?sent=1)
+  const params = new URLSearchParams(location.search);
+  if (params.get('sent') === '1') {
+    const success = $('#form-success');
+    if (success) {
+      success.style.display = 'block';
+      success.classList.remove('is-error');
+      success.textContent = '✓ Message sent. We\'ll get back to you within a few days.';
+      setTimeout(() => { success.style.display = 'none'; }, 7000);
+    }
+    history.replaceState(null, '', location.pathname + '#contact');
+  }
+
+  // Robot check interaction
+  const robotInput = $('#not-robot');
+  const robotBox   = document.querySelector('.robot-check');
+  robotInput?.addEventListener('change', () => {
+    robotBox?.classList.remove('robot-check-error');
+  });
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = form.querySelector('.form-submit');
+
+    // Must tick the robot check first
+    if (robotInput && !robotInput.checked) {
+      robotBox?.classList.add('robot-check-error');
+      robotInput.focus();
+      return;
+    }
+
+    const btn     = form.querySelector('.form-submit');
     const success = $('#form-success');
     const original = btn.textContent;
     btn.textContent = 'Sending…';
     btn.disabled = true;
+
     try {
       const data = new FormData(form);
-      const ajaxUrl = 'https://formsubmit.co/ajax/ali_moukdad@hotmail.com';
-      const res = await fetch(ajaxUrl, {
+      const res = await fetch('https://formsubmit.co/ajax/ali_moukdad@hotmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: data
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || (json && json.success === 'false')) throw new Error('network');
+      if (!res.ok || json.success === 'false') throw new Error('failed');
+
       success.style.display = 'block';
       success.classList.remove('is-error');
       success.textContent = '✓ Message sent. We\'ll get back to you within a few days.';
       form.reset();
+      if (robotInput) robotInput.checked = false;
       btn.textContent = original;
       btn.disabled = false;
-      setTimeout(() => { success.style.display = 'none'; }, 6000);
-    } catch (err) {
+      setTimeout(() => { success.style.display = 'none'; }, 7000);
+    } catch {
+      // AJAX failed — fall back to native form POST (triggers FormSubmit activation email
+      // on first use, then redirects back to the site via _next)
       btn.textContent = original;
       btn.disabled = false;
-      success.style.display = 'block';
-      success.classList.add('is-error');
-      success.textContent = 'Send failed. Try again, or DM us on LinkedIn (links in the footer).';
-      setTimeout(() => {
-        success.style.display = 'none';
-        success.classList.remove('is-error');
-      }, 6000);
+      form.submit();
     }
   });
 }
