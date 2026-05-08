@@ -2375,3 +2375,105 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
 .hidden { display: none !important; }
 .text-center { text-align: center; }
 .scroll-lock { overflow: hidden; }
+
+/* ═══════════════════════════════════════════
+   ROBOT CHECK
+   ═══════════════════════════════════════════ */
+.robot-check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1.5px solid rgba(26,22,20,0.18);
+  border-radius: 6px;
+  padding: 14px 16px;
+  background: #f9f7f2;
+  margin: 4px 0 2px;
+  transition: border-color 0.15s;
+}
+.robot-check.robot-check-error {
+  border-color: var(--crimson);
+  animation: shakeX 0.35s ease;
+}
+@keyframes shakeX {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+.robot-check-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  user-select: none;
+  flex: 1;
+}
+.robot-check-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.robot-check-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #c0bdb8;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.robot-check-input:checked + .robot-check-box {
+  background: #4285F4;
+  border-color: #4285F4;
+  color: #fff;
+}
+.robot-check-input:focus-visible + .robot-check-box {
+  outline: 2px solid #4285F4;
+  outline-offset: 2px;
+}
+.robot-check-tick {
+  width: 13px;
+  height: 11px;
+  opacity: 0;
+  transition: opacity 0.1s 0.05s;
+}
+.robot-check-input:checked + .robot-check-box .robot-check-tick {
+  opacity: 1;
+}
+.robot-check-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+.robot-check-name {
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+}
+.robot-check-links {
+  font-size: 9px;
+  color: #999;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.robot-check-links a {
+  color: #999;
+  text-decoration: none;
+}
+.robot-check-links a:hover { text-decoration: underline; }
+@media (max-width: 640px) {
+  .robot-check { padding: 12px 14px; }
+  .robot-check-label { font-size: 13px; }
+}
