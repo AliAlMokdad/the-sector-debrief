@@ -1,23 +1,16 @@
-name: Sync YouTube → data.js
+name: Sync YouTube Episodes
 
 on:
   schedule:
-    # Daily at 06:00 UTC. Tweak as you like.
-    - cron: '0 6 * * *'
-  workflow_dispatch: {}   # lets you run it manually from the Actions tab
-
-permissions:
-  contents: write          # needed to push the updated data.js
-  pull-requests: write     # used when the script opens a PR (failsafe path)
-
-concurrency:
-  group: sync-youtube
-  cancel-in-progress: false
+    - cron: '0 6 * * *'   # 06:00 UTC daily
+  workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
 
@@ -25,37 +18,37 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run sync script
-        id: sync
+      # ── RSS sync (no API key needed — always runs) ──
+      - name: Sync episodes via RSS (no API key required)
+        id: rss_sync
+        run: |
+          node scripts/sync-rss.js || EXIT=$?
+          if [ "${EXIT:-0}" = "2" ]; then
+            echo "rss_changed=false" >> "$GITHUB_OUTPUT"
+          elif [ "${EXIT:-0}" = "0" ]; then
+            echo "rss_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            exit $EXIT
+          fi
+        continue-on-error: false
+
+      # ── Full API sync (runs only when API key is set — adds view counts + durations) ──
+      - name: Sync episodes via YouTube API (if key configured)
+        if: env.YOUTUBE_API_KEY != ''
+        run: |
+          node scripts/sync-youtube.js || true
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: |
-          set +e
-          node scripts/sync-youtube.js
-          code=$?
-          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
-          if [ $code -eq 1 ]; then
-            echo "Sync errored."
-            exit 1
-          fi
-          if [ $code -eq 2 ]; then
-            echo "No changes needed — exiting clean."
-            exit 0
-          fi
-          # exit 0 → there are changes to commit
-          echo "changed=1" >> "$GITHUB_OUTPUT"
 
-      - name: Commit & push (only if changed)
-        if: steps.sync.outputs.changed == '1'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # ── Commit any changes ──
+      - name: Commit updated data.js
         run: |
-          git config user.name  "sector-debrief-bot"
-          git config user.email "actions@github.com"
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add js/data.js
           if git diff --cached --quiet; then
-            echo "No staged changes after all — nothing to commit."
-            exit 0
+            echo "No changes to commit."
+          else
+            git commit -m "chore(data): sync episodes from YouTube [skip ci]"
+            git push
           fi
-          git commit -m "chore(sync): refresh episodes + stats from YouTube"
-          git push
