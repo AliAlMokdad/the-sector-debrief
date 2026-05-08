@@ -70,8 +70,7 @@ function epCard(ep) {
       <div class="ep-body">
         <div class="ep-meta">
           <span>${fmtMonthYear(ep.date)}</span>
-          <span>·</span>
-          <span>${ep.duration}</span>
+          ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
           ${ep.guest ? `<span class="ep-meta-tag">w/ ${ep.guest.split(' ')[0]}</span>` : ''}
         </div>
         <h3 class="ep-title" data-ep="${ep.id}">${ep.title}</h3>
@@ -159,8 +158,7 @@ function renderFeaturedEpisode(ep) {
       <h3 class="ep-feat-title" data-ep="${ep.id}">${ep.title}</h3>
       <div class="ep-feat-meta">
         <span>${fmtDate(ep.date)}</span>
-        <span>·</span>
-        <span>${ep.duration}</span>
+        ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
         ${ep.guest ? `<span>·</span><span>w/ ${ep.guest}</span>` : ''}
       </div>
       <div class="ep-feat-themes">${themeChips}</div>
@@ -177,6 +175,7 @@ function renderFeaturedEpisode(ep) {
 // ─── BLOG COVER GENERATOR ─────────────────────────────────
 const BLOG_COVER_THEMES = {
   0: { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
+  6: { bg: '#2A4530', fg: '#F5F0E2', accent: '#E8B82C', word: 'CHANGING',  shape: 'arc'    },
   5: { bg: '#0D1B2A', fg: '#E8B82C', accent: '#B83A2A', word: 'IDENTITY',  shape: 'circle' },
   4: { bg: '#FAF6EA', fg: '#1E3D7A', accent: '#C9963F', word: 'PATIENCE',  shape: 'arc'    },
   3: { bg: '#1A1614', fg: '#B83A2A', accent: '#E8B82C', word: 'PRESSURE',  shape: 'lines'  },
@@ -458,8 +457,7 @@ function openEpisode(ep) {
         <span>Episode ${ep.n}</span>
         <span>·</span>
         <span>${fmtDate(ep.date)}</span>
-        <span>·</span>
-        <span>${ep.duration}</span>
+        ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
         ${ep.guest ? `<span>· w/ ${ep.guest}</span>` : ''}
       </div>
       <h2 class="modal-title" id="modal-episode-title">${ep.title}</h2>
