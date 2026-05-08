@@ -117,6 +117,73 @@ const QUOTES = [
 // AI-generated long-form blog posts — one per episode + one pinned editorial
 const BLOG_POSTS = [
   {
+    epId: '7w_FXEcBzs4',
+    epN: 6,
+    slug: 'sector-is-changing',
+    title: 'The Sector Is Changing. How Do You Make Sense Of It?',
+    excerpt: 'Kim Kucinskas came back from a month on the road — Buenos Aires, then Oxford — and needed to think out loud. This episode is that conversation. About civil society, public goods, and what it actually means to make sense of a sector in transition.',
+    readTime: '6 min',
+    reflections: [
+      "What does 'civil society' mean to the people you serve? Not to your org's theory of change — to the actual humans. When did you last check?",
+      "Pick one thing your sector does that the public experiences as a burden rather than a benefit. What would it take to change that?",
+      "Kim says this isn't just a funding problem — it's a social contract problem. Which contracts in your work have quietly expired without anyone saying so?",
+      "If your organisation disappeared tomorrow, what gap would the public actually notice? What wouldn't they notice?",
+      "What's the difference between making sense of something and making peace with it? Are you doing the first, or just the second?"
+    ],
+    body: `<p>There's a particular kind of conversation that only happens when someone has just come back from somewhere. The ideas are still loud. The context hasn't settled yet. The person hasn't had time to translate the experience into the version they'll give at the next panel.</p>
+
+<p>Kim Kucinskas had just come back from two back-to-back trips — a gathering of bridge builders and network weavers in Buenos Aires, and the Skoll World Forum in Oxford. She came into this conversation needing to think out loud. What happened became one of the most honest episodes we've recorded.</p>
+
+<h2>It's Not a Funding Problem</h2>
+
+<p>The framing Kim introduces early in the conversation is one the hosts return to throughout: <em>this is not just a funding problem. It's a social contract problem.</em></p>
+
+<p>That distinction matters. A funding problem has a funding solution. You find different donors, build new revenue streams, cut costs, restructure. The sector is very good at treating everything as a funding problem, because funding problems are, in theory, solvable.</p>
+
+<p>Social contract problems are harder. They ask whether the people you're supposed to serve still believe the arrangement is working for them. Whether the implicit bargain — we provide services, you grant us legitimacy — still holds. Whether the public experiences civil society as a public good, or as a specialist industry operating on their behalf without their meaningful involvement.</p>
+
+<blockquote>When people stop experiencing civil society as theirs, the social contract starts to break. The funding crisis is often just the signal that the contract was already in trouble.</blockquote>
+
+<h2>What Civil Society Is Actually For</h2>
+
+<p>The Buenos Aires gathering gave Kim something specific to think with: a room full of people who were building bridges between sectors, between communities, between formal and informal power. People who didn't fit cleanly into the old categories of donor, implementer, beneficiary.</p>
+
+<p>The question that kept surfacing: <em>what is civil society actually for?</em> Not in the theory of change sense. In the lived-experience-of-the-public sense.</p>
+
+<p>In too many places, the answer has quietly become: civil society is for civil society. It advocates, convenes, documents, reports, and coordinates — increasingly with itself. The people nominally at the centre of the work feel this. They've been feeling it for a while. The funding contraction is forcing the conversation that should have happened years ago.</p>
+
+<h2>Skoll and the Question of Scale</h2>
+
+<p>Oxford had a different energy. The Skoll World Forum still carries the weight of the sector's optimism about social enterprise and systems change. Kim came away with a complicated feeling.</p>
+
+<p>The ideas were good. The people were thoughtful. The problem is the gap between the quality of the thinking in the room and the pace of change outside it. The sector has never been better at analysing itself. It has rarely been slower at acting on the analysis.</p>
+
+<p>Thomas names the thing nobody wants to say: <em>the sector has gotten very comfortable with being in transition.</em> Transition is a safe state. It implies change is coming. It excuses the present. The harder question is what happens when transition becomes the permanent condition — when the work of preparing for change substitutes for change itself.</p>
+
+<h2>Making Sense vs. Making Peace</h2>
+
+<p>One of the most useful distinctions in this episode is the difference between <em>making sense</em> of what's happening and <em>making peace</em> with it.</p>
+
+<p>Making sense is active. It requires taking in information that challenges your framework and updating your mental model. It's uncomfortable. It usually means admitting that something you believed no longer holds.</p>
+
+<p>Making peace is passive. It's what happens when you're too tired to make sense. When you absorb the reality and decide not to fight it. When the strategy document quietly shifts from "here's how we change things" to "here's how we survive things."</p>
+
+<p>The sector is doing a lot of making peace right now and calling it strategic adaptation. Kim, Thomas, and Ali don't pretend there's a clean answer. But they name the distinction. That's a start.</p>
+
+<h2>What the Conversation Was Actually About</h2>
+
+<p>By the end of the episode, it's clear this conversation was really about one question: <em>who is civil society accountable to?</em></p>
+
+<p>Not theoretically. Not in the annual report. In practice, in the decisions, in the rooms where the choices get made.</p>
+
+<p>If the answer is primarily donors, funders, peer organisations, and internal governance structures — the social contract is already broken, and the funding crisis is just the invoice arriving. If the answer is genuinely the people the work is for, then there's still something worth building from.</p>
+
+<p>Most organisations are somewhere in the middle, drifting toward the first and hoping nobody notices.</p>
+
+<p>This episode is for the people who noticed.</p>`
+  },
+
+  {
     epId: null,
     epN: 0,
     pinned: true,
