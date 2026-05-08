@@ -21,18 +21,14 @@ function _doNavigate(page, opts) {
   state.page = page;
   $$('.page').forEach(p => p.classList.toggle('active', p.dataset.page === page));
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
-  // Skip the forced scroll-to-top when restoring from history, so Back/Forward
-  // returns the user to where they were on that page.
   if (!opts.preserveScroll) {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
-  // pushState for fresh navigations, replaceState for the same page (init hop)
   if (location.hash !== '#' + page) {
     const method = history.state?.page ? 'pushState' : 'replaceState';
     history[method]({ page }, '', '#' + page);
   }
   closeMobileNav();
-  // Re-trigger reveal animations on the new page
   setTimeout(() => {
     if (window.refreshReveal) window.refreshReveal();
     if (window.applyTilt) window.applyTilt();
@@ -40,8 +36,7 @@ function _doNavigate(page, opts) {
   }, 60);
 }
 function navigate(page) {
-  closeMobileNav(); // close immediately so the menu doesn't linger through the curtain
-  // Close any open modal so it doesn't survive the page change
+  closeMobileNav();
   while ($$('.modal-backdrop.active').length) closeModal();
   if (window.navigateWithCurtain && state.page !== page) {
     window.navigateWithCurtain(page, _doNavigate);
@@ -52,14 +47,10 @@ function navigate(page) {
 
 // ─── HERO / HOME ───
 function renderHome() {
-  // Hero now uses static round cover artwork; no JS render needed there.
-
-  // Latest 3 episodes
   const latest = $('#home-episodes');
   latest.innerHTML = EPISODES.slice(0, 3).map(epCard).join('');
   bindEpCards(latest);
 
-  // Stats
   const setStat = (id, val) => { const el = $(id); if (el) el.textContent = val; };
   setStat('#stat-episodes', STATS.episodes);
   setStat('#stat-views',    STATS.views);
@@ -86,23 +77,21 @@ function epCard(ep) {
         <h3 class="ep-title" data-ep="${ep.id}">${ep.title}</h3>
         <p class="ep-desc">${ep.description}</p>
         <div class="ep-actions">
-          <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank">▶ YouTube</a>
-          <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank">Spotify</a>
-          <a class="ep-link" href="${PLATFORMS.apple}" target="_blank">Apple</a>
+          <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ YouTube</a>
+          <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Spotify</a>
+          <a class="ep-link" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">Apple</a>
         </div>
       </div>
     </article>
   `;
 }
 function bindEpCards(scope) {
-  // Standard cards
   $$('.ep-thumb, .ep-title', scope).forEach(t => {
     t.addEventListener('click', () => {
       const ep = EPISODES.find(e => e.id === t.dataset.ep);
       if (ep) openEpisode(ep);
     });
   });
-  // Featured episode card (different class names, same intent)
   $$('.ep-feat-thumb, .ep-feat-title', scope).forEach(t => {
     t.addEventListener('click', () => {
       const ep = EPISODES.find(e => e.id === t.dataset.ep);
@@ -125,8 +114,6 @@ function renderEpisodes() {
         || ep.themes.some(t => t.toLowerCase().includes(q));
   });
 
-  // When searching, hide featured and show ALL matches in the grid.
-  // Otherwise: latest episode as featured + remaining 4 in grid.
   const isFiltering = !!state.search;
   if (featured) featured.style.display = isFiltering ? 'none' : '';
 
@@ -144,7 +131,6 @@ function renderEpisodes() {
   if (isFiltering) {
     grid.innerHTML = filtered.map(epCard).join('');
   } else {
-    // Featured = newest
     if (featured) {
       featured.innerHTML = renderFeaturedEpisode(filtered[0]);
       bindEpCards(featured);
@@ -180,17 +166,15 @@ function renderFeaturedEpisode(ep) {
       <div class="ep-feat-themes">${themeChips}</div>
       <p class="ep-feat-desc">${ep.description}</p>
       <div class="ep-actions">
-        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank">▶ Watch on YouTube</a>
-        <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank">Spotify</a>
-        <a class="ep-link" href="${PLATFORMS.apple}" target="_blank">Apple</a>
+        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
+        <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Spotify</a>
+        <a class="ep-link" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">Apple</a>
       </div>
     </div>
   `;
 }
 
 // ─── BLOG COVER GENERATOR ─────────────────────────────────
-// Builds an abstract painterly SVG cover unique to each post.
-// Different palette + motif + composition per episode.
 const BLOG_COVER_THEMES = {
   0: { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
   5: { bg: '#0D1B2A', fg: '#E8B82C', accent: '#B83A2A', word: 'IDENTITY',  shape: 'circle' },
@@ -260,7 +244,6 @@ function blogCoverSVG(epN) {
 }
 
 // ─── PAUSE & REFLECT (Blog page hero) ───
-// Rotates through all reflections from all posts, with auto-advance + manual cycle.
 function renderPauseHero() {
   const root = document.getElementById('pause-hero');
   if (!root) return;
@@ -270,7 +253,6 @@ function renderPauseHero() {
   const readBtn = document.getElementById('pause-hero-read');
   const copyBtn = document.getElementById('pause-hero-copy');
 
-  // Build a flat list: [{question, post}, ...]
   const pool = BLOG_POSTS.flatMap(p =>
     (p.reflections || []).map(q => ({ q, post: p }))
   );
@@ -317,17 +299,15 @@ function renderPauseHero() {
     timer = setInterval(() => show(idx + 1), 8500);
   }
   function stopTimer() { if (timer) { clearInterval(timer); timer = null; } }
-  // Pause when the tab is hidden, resume when visible
   document.addEventListener('visibilitychange', () => {
     document.hidden ? stopTimer() : startTimer();
   });
 
   nextBtn?.addEventListener('click', () => {
-    // Manual cycle: announce the new question to screen readers
     qEl.setAttribute('aria-live', 'polite');
     show(idx + 1);
     setTimeout(() => qEl.setAttribute('aria-live', 'off'), 1200);
-    startTimer(); // reset auto-rotate
+    startTimer();
   });
   readBtn?.addEventListener('click', () => {
     const slug = root.dataset.activeSlug;
@@ -343,13 +323,11 @@ function renderPauseHero() {
     setTimeout(() => { copyBtn.innerHTML = original; }, 1100);
   });
 
-  // Pause auto-rotate when out of view (saves cycles + respects intent)
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => e.isIntersecting ? startTimer() : stopTimer());
   }, { threshold: 0.4 });
   obs.observe(root);
 
-  // Pause auto-rotate on hover so users can read in peace
   root.addEventListener('mouseenter', stopTimer);
   root.addEventListener('mouseleave', startTimer);
 
@@ -391,14 +369,12 @@ function renderBlog() {
 
 // ─── QUOTES ───
 function renderQuotes() {
-  // Marquee on home
   const track = $('#quotes-track');
   if (track) {
-    const dup = [...QUOTES, ...QUOTES]; // duplicate for seamless loop
+    const dup = [...QUOTES, ...QUOTES];
     track.innerHTML = dup.map(quoteCard).join('');
     bindQuoteShare(track);
   }
-  // Full grid on quotes page
   const grid = $('#quotes-grid');
   if (grid) {
     grid.innerHTML = QUOTES.map(quoteCard).join('');
@@ -431,11 +407,11 @@ function bindQuoteShare(scope) {
       if (n === 'x')  target = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
       if (n === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
       if (n === 'wa') target = `https://wa.me/?text=${text}%20${url}`;
-      // Sparkle burst at click point
       const r = b.getBoundingClientRect();
       if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
       if (n === 'copy') {
-        navigator.clipboard.writeText(decodeURIComponent(text));
+        // dataset.text for copy button is plain text (HTML-entity-decoded by browser); write it directly
+        navigator.clipboard.writeText(b.dataset.text);
         flash(b, '✓');
         return;
       }
@@ -456,7 +432,6 @@ function renderAbout() {
     <article class="host" data-accent="${h.accent}">
       <div class="host-avatar host-avatar-photo">
         <img src="${h.photo}" alt="${h.name}" decoding="async"/>
-        ${h.photo ? '' : `<div class="host-avatar-fallback" aria-hidden="true">${h.initial}</div>`}
       </div>
       <h3 class="host-name">${h.name}</h3>
       <div class="host-role">${h.role}</div>
@@ -490,19 +465,16 @@ function openEpisode(ep) {
       <h2 class="modal-title" id="modal-episode-title">${ep.title}</h2>
       <p class="modal-desc">${ep.description}</p>
       <div class="modal-actions">
-        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank">▶ Open in YouTube</a>
-        <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank">🎵 Spotify</a>
-        <a class="ep-link" href="${PLATFORMS.apple}" target="_blank">🎧 Apple Podcasts</a>
+        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
+        <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">🎵 Spotify</a>
+        <a class="ep-link" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">🎧 Apple Podcasts</a>
       </div>
     </div>
   `;
   $('#modal-backdrop').classList.add('active');
   document.body.classList.add('scroll-lock');
-  // Capture last focused element so we can restore on close
   state.lastTrigger = document.activeElement;
-  // Move focus into the modal so keyboard users can use it
   setTimeout(() => $('#modal-episode .modal-close')?.focus(), 50);
-  // Activate mini player
   showMini(ep);
 }
 
@@ -545,11 +517,11 @@ function openBlog(slug) {
   const footer = ep ? `
       <div style="margin-top: 40px; padding-top: 28px; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div style="font-size: 13px; color: var(--ink-mute); letter-spacing: 0.5px;">Listen to the full episode &rarr;</div>
-        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${post.epId}" target="_blank">▶ Watch Episode ${post.epN}</a>
+        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${post.epId}" target="_blank" rel="noopener noreferrer">▶ Watch Episode ${post.epN}</a>
       </div>` : `
       <div style="margin-top: 40px; padding-top: 28px; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div style="font-size: 13px; color: var(--ink-mute); letter-spacing: 0.5px;">Subscribe and join the conversation &rarr;</div>
-        <a class="ep-link primary" href="https://www.youtube.com/channel/UCUrZ0l2uqp2zgJ5WrjcRXDg?sub_confirmation=1" target="_blank">▶ Subscribe on YouTube</a>
+        <a class="ep-link primary" href="https://www.youtube.com/channel/UCUrZ0l2uqp2zgJ5WrjcRXDg?sub_confirmation=1" target="_blank" rel="noopener noreferrer">▶ Subscribe on YouTube</a>
       </div>`;
   m.innerHTML = `
     <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
@@ -634,11 +606,7 @@ window.closeModal = function() {
   if (!open.length) return;
   const top = open[open.length - 1];
   top.classList.remove('active');
-  // Stop the YouTube iframe inside that backdrop only.
-  // Setting src to itself re-loads (and can autoplay again) — blank it instead
-  // so audio/video actually halts when the modal closes.
   top.querySelectorAll('iframe').forEach(f => { f.src = 'about:blank'; });
-  // Release scroll-lock only when nothing is left open; restore focus then
   if (!$$('.modal-backdrop.active').length) {
     document.body.classList.remove('scroll-lock');
     if (state.lastTrigger && typeof state.lastTrigger.focus === 'function') {
@@ -671,7 +639,7 @@ function bindMini() {
   $('#mini-prev')?.addEventListener('click', () => {
     const i = indexOfCurrent();
     if (i < 0) return;
-    const next = EPISODES[(i + 1) % EPISODES.length]; // EPISODES is newest-first; "prev" feels like older
+    const next = EPISODES[(i + 1) % EPISODES.length];
     showMini(next);
   });
   $('#mini-next')?.addEventListener('click', () => {
@@ -683,8 +651,6 @@ function bindMini() {
 }
 
 // ─── CONTACT FORM ───
-// Submits via fetch to FormSubmit AJAX endpoint so we get a real delivery
-// AND show inline success without leaving the SPA.
 function bindContactForm() {
   const form = $('#contact-form');
   if (!form) return;
@@ -713,7 +679,6 @@ function bindContactForm() {
       btn.disabled = false;
       setTimeout(() => { success.style.display = 'none'; }, 6000);
     } catch (err) {
-      // Fallback: native form POST (will leave the page) on a transient error
       btn.textContent = original;
       btn.disabled = false;
       success.style.display = 'block';
@@ -726,9 +691,6 @@ function bindContactForm() {
     }
   });
 }
-
-// ─── NEWSLETTER ───
-function bindNewsletter() {} // intentionally empty — newsletter form replaced with direct YouTube subscribe
 
 // ─── SEARCH ───
 function bindSearch() {
@@ -757,8 +719,6 @@ function closeMobileNav() {
 }
 
 // ─── COUNTER ANIMATION ───
-// Handles "75,951", "4.2K", "12", "3M", etc. — strips formatting, animates,
-// then re-applies the original separator style on the final value.
 function animateCounters() {
   const els = $$('.stat-num');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -766,23 +726,18 @@ function animateCounters() {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
       const target = e.target;
-      // Once-only guard: don't re-tween when scrolling back, or when the
-      // observer is rebound after navigation.
       if (target.dataset.counted) return;
       target.dataset.counted = '1';
       const final = target.textContent.trim();
       if (reducedMotion) {
-        // Honour user preference: no tween, just show the final number
         obs.unobserve(target);
         return;
       }
-      // Pull a numeric value out of "75,951" or "4.2K" or "75951"
       const cleaned = final.replace(/,/g, '');
       const m = cleaned.match(/(-?\d+(?:\.\d+)?)/);
       if (!m) return;
       const num = parseFloat(m[1]);
       if (isNaN(num)) return;
-      // Suffix is anything non-numeric after the number (e.g. "K", "M", "+")
       const afterIdx = cleaned.indexOf(m[1]) + m[1].length;
       const suffix = cleaned.slice(afterIdx);
       const usedComma = final.includes(',');
@@ -815,7 +770,6 @@ function animateCounters() {
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
-  // Render all pages
   renderHome();
   renderEpisodes();
   renderBlog();
@@ -823,11 +777,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderQuotes();
   renderAbout();
 
-  // Initial route
   const initial = (location.hash || '#home').slice(1);
   navigate(['home','episodes','blog','about','contact'].includes(initial) ? initial : 'home');
 
-  // Wire up nav
   $$('[data-nav]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
@@ -835,18 +787,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Modal close on backdrop
   $$('.modal-backdrop').forEach(b => {
     b.addEventListener('click', e => {
       if (e.target === b) closeModal();
     });
   });
 
-  // Esc closes modal
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // Browser Back / Forward — keep the SPA in sync with location.hash
-  // (preserve scroll on history restore so users return to where they were)
   addEventListener('popstate', e => {
     const page = (location.hash || '#home').slice(1);
     if (['home','episodes','blog','about','contact'].includes(page) && page !== state.page) {
@@ -854,27 +802,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // hashchange — handle direct address-bar edits and stale "#quotes" links
   addEventListener('hashchange', () => {
     const page = (location.hash || '#home').slice(1);
     const valid = ['home','episodes','blog','about','contact'];
     if (valid.includes(page)) {
       if (page !== state.page) _doNavigate(page);
     } else {
-      // Unknown hash (e.g. legacy #quotes) — soft-redirect to home
       history.replaceState({ page: 'home' }, '', '#home');
       if (state.page !== 'home') _doNavigate('home');
     }
   });
 
   bindContactForm();
-  bindNewsletter();
   bindSearch();
   bindMobileNav();
   bindMini();
   animateCounters();
 
-  // Apply motion enhancements to all freshly rendered content
   setTimeout(() => {
     if (window.applyTilt)     window.applyTilt(document);
     if (window.applyMagnetic) window.applyMagnetic();
