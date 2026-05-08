@@ -37,9 +37,20 @@
     let dx = mx, dy = my;     // dot position (lightly eased)
     let rx = mx, ry = my;     // ring position (more eased)
     let vx = 0, vy = 0;       // ring velocity for spring smoothing
-    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    let cursorReady = false;   // prevent (0,0) flash before first mousemove
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      if (!cursorReady) {
+        cursorReady = true;
+        dot.style.opacity = 1;
+        ring.style.opacity = 1;
+      }
+    });
     document.addEventListener('mouseleave', () => { dot.style.opacity = 0; ring.style.opacity = 0; });
-    document.addEventListener('mouseenter', () => { dot.style.opacity = 1; ring.style.opacity = 1; });
+    document.addEventListener('mouseenter', () => {
+      if (cursorReady) { dot.style.opacity = 1; ring.style.opacity = 1; }
+    });
 
     // Reduced motion: just pin the cursor to the pointer with no easing/rAF loop
     if (reducedMotion) {
@@ -62,7 +73,6 @@
       vx = (vx + (mx - rx) * STIFFNESS) * DAMPING;
       vy = (vy + (my - ry) * STIFFNESS) * DAMPING;
       rx += vx; ry += vy;
-      // Use CSS vars so :hover scale composes with translate (no transform conflict)
       dot.style.setProperty('--cur-x', dx + 'px');
       dot.style.setProperty('--cur-y', dy + 'px');
       ring.style.setProperty('--cur-x', rx + 'px');
@@ -78,7 +88,7 @@
     };
     document.addEventListener('mouseover', e => {
       const t = e.target;
-      if (t.closest('.ep-thumb, .hero-art-thumb, [data-cursor="play"]')) setState('play');
+      if (t.closest('.ep-thumb, .hero-cover-img, [data-cursor="play"]')) setState('play');
       else if (t.closest('a, button, [data-cursor="hover"], .ep-card, .blog-card, .quote-card, .host')) setState('hover');
       else if (t.closest('input, textarea')) setState('text');
       else setState(null);
@@ -119,7 +129,6 @@
     el.dataset.split = '1';
     el.classList.add('split');
     const html = el.innerHTML;
-    // Wrap each word in .word > span (preserve any inline tags as separate words)
     const tmp = document.createElement('div');
     tmp.innerHTML = html;
     const out = [];
@@ -154,14 +163,11 @@
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 
     document.querySelectorAll('.reveal, .reveal-stagger, .split, .blog-card').forEach(el => {
-      // Skip elements that have already revealed — re-observing them creates
-      // redundant observers and wastes work.
       if (el.classList.contains('in')) return;
       obs.observe(el);
     });
   }
 
-  // Re-run reveal observation when content is dynamically rendered
   window.refreshReveal = function() {
     initReveal();
   };
@@ -189,10 +195,8 @@
       pending = true;
       requestAnimationFrame(flush);
     });
-    // Animated snap-back: explicit rest pose so the existing transition runs
     function reset(card) {
       card.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(0)';
-      // After the transition completes, clear the inline so subsequent hovers re-animate cleanly
       setTimeout(() => { if (card.matches(':hover')) return; card.style.transform = ''; }, 450);
     }
     document.addEventListener('mouseout', e => {
@@ -200,10 +204,10 @@
       if (card && !card.contains(e.relatedTarget)) reset(card);
     }, true);
   }
-  // Attach tilt to dynamically created cards
+  // Attach tilt to dynamically created cards (episode + blog + host only — not round cover image)
   window.applyTilt = function(scope = document) {
     if (isTouch || reducedMotion) return;
-    scope.querySelectorAll('.ep-card, .blog-card, .host, .hero-art').forEach(c => {
+    scope.querySelectorAll('.ep-card, .blog-card, .host').forEach(c => {
       if (c.classList.contains('tilt')) return;
       c.classList.add('tilt');
     });
@@ -251,7 +255,7 @@
         pending = false;
         const y = scrollY;
         els.forEach((el, i) => {
-          if (el.offsetParent === null) return; // skip when display:none
+          if (el.offsetParent === null) return;
           el.style.translate = `0 ${y * (i + 1) * 0.08}px`;
         });
       });
@@ -290,14 +294,12 @@
 
       for (let i = 0; i < bars; i++) {
         phases[i] += speeds[i];
-        // Multi-frequency wave for organic feel
         const a = Math.sin(phases[i]) * 0.5
                 + Math.sin(t * 0.6 + i * 0.2) * 0.3
                 + Math.sin(t * 1.4 + i * 0.5) * 0.2;
         const amp = (Math.abs(a) * 0.6 + 0.2) * h * 0.85;
         const y = (h - amp) / 2;
 
-        // gradient pick
         let color = baseColor1;
         if (i % 7 === 0) color = baseColor2;
         else if (i % 5 === 0) color = baseColor3;
@@ -306,7 +308,6 @@
         const x = i * bw + bw * 0.2;
         const barW = bw * 0.6;
         const radius = barW / 2;
-        // rounded rect
         ctx.beginPath();
         ctx.moveTo(x + radius, y);
         ctx.lineTo(x + barW - radius, y);
@@ -334,7 +335,6 @@
     document.body.appendChild(c);
     return c;
   }
-  // Override navigate() with cinematic transition
   window.navigateWithCurtain = function(page, navigateFn) {
     if (reducedMotion) { navigateFn(page); return; }
     const c = makeCurtain();
@@ -368,16 +368,14 @@
 
   // ─── INIT ───
   document.addEventListener('DOMContentLoaded', async () => {
-    startIntro();   // <-- actually trigger the loader exit
+    startIntro();
     initCursor();
     initScrollProgress();
     initNavScroll();
     initParallax();
 
-    // Split section titles for reveal (mark .split class)
     document.querySelectorAll('[data-split]').forEach(splitText);
 
-    // Allow rest of DOM (data-driven) to render first
     setTimeout(() => {
       initReveal();
       initTilt();
@@ -385,7 +383,5 @@
       initMagnetic();
       initWaveform();
     }, 50);
-
-    // Don't block — let intro fade simultaneously while content paints
   });
 })();
