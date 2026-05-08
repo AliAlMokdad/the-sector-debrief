@@ -12,8 +12,18 @@ const PLATFORMS = {
   rss:      'https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L'
 };
 
-// All 5 episodes from the playlist (newest first)
+// All 6 episodes from the playlist (newest first)
 const EPISODES = [
+  {
+    n: 6,
+    id: '7w_FXEcBzs4',
+    title: 'The Sector Is Changing. How Do You Make Sense Of It?',
+    guest: null,
+    date: '2026-05-07',
+    duration: '',
+    description: 'Kim Kucinskas returns from a month on the road — Buenos Aires and the Skoll World Forum in Oxford — and needs to think out loud. Ali Al Mokdad, Kim, and Thomas Jepson-Lay work through what it means to make sense of a sector in transition: what is civil society actually for, and why are people no longer experiencing it as a public good? "This is not just a funding problem. It's a social contract problem."',
+    themes: ['Civil Society', 'Transition', 'Sense-Making']
+  },
   {
     n: 5,
     id: 'bv47XLE50hw',
