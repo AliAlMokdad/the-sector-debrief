@@ -65,8 +65,8 @@
 
     // Spring-smoothed ring + lightly eased dot for buttery motion
     const STIFFNESS = 0.18;
-    const DAMPING   = 0.78;
-    const DOT_EASE  = 0.5;
+    const DAMPING   = 0.84;
+    const DOT_EASE  = 0.35;
     function loop() {
       dx += (mx - dx) * DOT_EASE;
       dy += (my - dy) * DOT_EASE;
