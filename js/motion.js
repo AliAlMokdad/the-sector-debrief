@@ -118,6 +118,7 @@
   // ─── NAV scroll-shrink ───
   function initNavScroll() {
     const nav = document.querySelector('.nav');
+    if (!nav) return;
     const tick = () => nav.classList.toggle('scrolled', scrollY > 40);
     addEventListener('scroll', tick, { passive: true });
     tick();
@@ -281,9 +282,14 @@
 
     let t = 0;
     let visible = true;
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(c);
+    let rafId = null;
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !rafId) rafId = requestAnimationFrame(draw);
+    }).observe(c);
     function draw() {
-      if (!visible) { requestAnimationFrame(draw); return; }
+      rafId = null;
+      if (!visible) return;
       t += 0.04;
       ctx.clearRect(0, 0, c.width, c.height);
       const w = c.width, h = c.height;
@@ -320,9 +326,9 @@
         ctx.quadraticCurveTo(x, y, x + radius, y);
         ctx.fill();
       }
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
-    draw();
+    rafId = requestAnimationFrame(draw);
   }
 
   // ─── PAGE TRANSITION CURTAIN ───
@@ -345,7 +351,7 @@
       c.classList.remove('enter');
       c.classList.add('exit');
       setTimeout(() => { c.classList.remove('exit'); }, 700);
-    }, 600);
+    }, 750);
   };
 
   // ─── SHARE SPARKLE ───

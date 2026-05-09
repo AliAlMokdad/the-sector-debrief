@@ -333,6 +333,8 @@ body > * { position: relative; z-index: 1; }
 .platform-btn.primary::before { background: var(--crimson); }
 .platform-btn.primary:hover { background: var(--crimson); color: var(--cream); }
 .platform-btn.primary:hover::before { background: var(--cobalt); }
+.platform-btn:active { transform: translate(0, 0) scale(0.97); transition-duration: 0.08s; }
+.platform-btn:active::before { transform: translate(2px, 2px); }
 
 /* ── HERO COVER (round logo art) ── */
 .hero-cover {
@@ -753,7 +755,8 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   border-radius: 2px;
   transition: all 0.15s;
 }
-.ep-link:hover { background: var(--ink); color: var(--cream); }
+.ep-link:hover { background: var(--ink); color: var(--cream); transform: translateY(-1px); }
+.ep-link:active { transform: translateY(1px) scale(0.97); transition-duration: 0.08s; }
 .ep-link.primary { background: var(--ink); color: var(--cream); }
 .ep-link.primary:hover { background: var(--crimson); border-color: var(--crimson); }
 
@@ -1831,8 +1834,10 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   border-radius: 50%; z-index: 5;
   display: flex; align-items: center; justify-content: center;
   font-size: 18px;
+  transition: background 0.25s var(--ease-standard), transform 0.4s var(--ease-spring);
 }
-.modal-close:hover { background: var(--crimson); }
+.modal-close:hover { background: var(--crimson); transform: rotate(90deg); }
+.modal-close:active { transform: rotate(90deg) scale(0.92); }
 .modal-video {
   aspect-ratio: 16/9; width: 100%;
   background: var(--ink);

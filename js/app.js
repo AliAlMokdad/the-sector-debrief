@@ -450,7 +450,7 @@ function openEpisode(ep) {
   m.innerHTML = `
     <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
     <div class="modal-video">
-      <iframe src="https://www.youtube.com/embed/${ep.id}?rel=0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/${ep.id}?rel=0" loading="lazy" title="Episode ${ep.n}: ${ep.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="modal-body">
       <div class="modal-meta">

@@ -21,7 +21,7 @@
   position: fixed; top: 0; left: 0;
   pointer-events: none; z-index: 9999;
   border-radius: 50%;
-  will-change: transform, background;
+  will-change: transform;
   opacity: 0; /* starts hidden · JS reveals on first mousemove to avoid (0,0) flash */
 }
 .cursor-dot {
@@ -50,7 +50,7 @@
   mix-blend-mode: difference;
 }
 body.cursor-hover .cursor-ring {
-  --cur-scale: 1.7;
+  --cur-scale: 1.55;
   background: var(--mustard);
   border-color: var(--mustard);
   mix-blend-mode: normal;
@@ -240,7 +240,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
   100% { transform: translateY(0); }
 }
 @keyframes fadeInDelayed { to { opacity: 1; } }
-@keyframes introBar { to { width: 100%; } }
 @keyframes introInnerOut {
   0%   { transform: translateY(0); opacity: 1; }
   100% { transform: translateY(-30px); opacity: 0; }
