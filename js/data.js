@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-// THE SECTOR DEBRIEF — Data Layer
+// THE SECTOR DEBRIEF · Data Layer
 // Episodes pulled from YouTube playlist:
 // PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L
 // ═══════════════════════════════════════════════════
@@ -21,7 +21,7 @@ const EPISODES = [
     guest: null,
     date: '2026-05-07',
     duration: '',
-    description: 'Kim Kucinskas returns from a month on the road and needs to think out loud. Ali Al Mokdad, Kim, and Thomas Jepson-Lay work through what it means to make sense of a sector in transition — what is civil society for, and why are people no longer experiencing it as a public good? Not just a funding problem. A social contract problem.',
+    description: 'Kim Kucinskas returns from a month on the road and needs to think out loud. Ali Al Mokdad, Kim, and Thomas Jepson-Lay work through what it means to make sense of a sector in transition. What is civil society for, and why are people no longer experiencing it as a public good? Not just a funding problem. A social contract problem.',
     themes: ['Civil Society', 'Transition', 'Sense-Making']
   },
   {
@@ -76,7 +76,7 @@ const EPISODES = [
   }
 ];
 
-// Quotes — pulled directly from the show's "Sector Debrief Shorts" playlist.
+// Quotes · pulled directly from the show's "Sector Debrief Shorts" playlist.
 // Each one is a real moment from a real episode, attributed to the person
 // who said it on camera.
 const QUOTES = [
@@ -114,25 +114,25 @@ const QUOTES = [
   { text: "The pause. The discernment. The moment of honest reflection before jumping back into what has always been done. That is exactly what leadership requires right now.", source: "Thomas Jepson-Lay", color: "q-crimson" }
 ];
 
-// AI-generated long-form blog posts — one per episode + one pinned editorial
+// AI-generated long-form blog posts · one per episode + one pinned editorial
 const BLOG_POSTS = [
   {
     epId: '7w_FXEcBzs4',
     epN: 6,
     slug: 'sector-is-changing',
     title: 'The Sector Is Changing. How Do You Make Sense Of It?',
-    excerpt: 'Kim Kucinskas came back from a month on the road — Buenos Aires, then Oxford — and needed to think out loud. This episode is that conversation. About civil society, public goods, and what it actually means to make sense of a sector in transition.',
+    excerpt: 'Kim Kucinskas came back from a month on the road, Buenos Aires then Oxford, and needed to think out loud. This episode is that conversation. About civil society, public goods, and what it actually means to make sense of a sector in transition.',
     readTime: '6 min',
     reflections: [
-      "What does 'civil society' mean to the people you serve? Not to your org's theory of change — to the actual humans. When did you last check?",
+      "What does 'civil society' mean to the people you serve? Not to your org's theory of change. To the actual humans. When did you last check?",
       "Pick one thing your sector does that the public experiences as a burden rather than a benefit. What would it take to change that?",
-      "Kim says this isn't just a funding problem — it's a social contract problem. Which contracts in your work have quietly expired without anyone saying so?",
+      "Kim says this isn't just a funding problem. It's a social contract problem. Which contracts in your work have quietly expired without anyone saying so?",
       "If your organisation disappeared tomorrow, what gap would the public actually notice? What wouldn't they notice?",
       "What's the difference between making sense of something and making peace with it? Are you doing the first, or just the second?"
     ],
     body: `<p>There's a particular kind of conversation that only happens when someone has just come back from somewhere. The ideas are still loud. The context hasn't settled yet. The person hasn't had time to translate the experience into the version they'll give at the next panel.</p>
 
-<p>Kim Kucinskas had just come back from two back-to-back trips — a gathering of bridge builders and network weavers in Buenos Aires, and the Skoll World Forum in Oxford. She came into this conversation needing to think out loud. What happened became one of the most honest episodes we've recorded.</p>
+<p>Kim Kucinskas had just come back from two back-to-back trips. A gathering of bridge builders and network weavers in Buenos Aires, and the Skoll World Forum in Oxford. She came into this conversation needing to think out loud. What happened became one of the most honest episodes we've recorded.</p>
 
 <h2>It's Not a Funding Problem</h2>
 
@@ -140,7 +140,7 @@ const BLOG_POSTS = [
 
 <p>That distinction matters. A funding problem has a funding solution. You find different donors, build new revenue streams, cut costs, restructure. The sector is very good at treating everything as a funding problem, because funding problems are, in theory, solvable.</p>
 
-<p>Social contract problems are harder. They ask whether the people you're supposed to serve still believe the arrangement is working for them. Whether the implicit bargain — we provide services, you grant us legitimacy — still holds. Whether the public experiences civil society as a public good, or as a specialist industry operating on their behalf without their meaningful involvement.</p>
+<p>Social contract problems are harder. They ask whether the people you're supposed to serve still believe the arrangement is working for them. Whether the implicit bargain (we provide services, you grant us legitimacy) still holds. Whether the public experiences civil society as a public good, or as a specialist industry operating on their behalf without their meaningful involvement.</p>
 
 <blockquote>When people stop experiencing civil society as theirs, the social contract starts to break. The funding crisis is often just the signal that the contract was already in trouble.</blockquote>
 
@@ -150,7 +150,7 @@ const BLOG_POSTS = [
 
 <p>The question that kept surfacing: <em>what is civil society actually for?</em> Not in the theory of change sense. In the lived-experience-of-the-public sense.</p>
 
-<p>In too many places, the answer has quietly become: civil society is for civil society. It advocates, convenes, documents, reports, and coordinates — increasingly with itself. The people nominally at the centre of the work feel this. They've been feeling it for a while. The funding contraction is forcing the conversation that should have happened years ago.</p>
+<p>In too many places, the answer has quietly become: civil society is for civil society. It advocates, convenes, documents, reports, and coordinates, increasingly with itself. The people nominally at the centre of the work feel this. They've been feeling it for a while. The funding contraction is forcing the conversation that should have happened years ago.</p>
 
 <h2>Skoll and the Question of Scale</h2>
 
@@ -158,7 +158,7 @@ const BLOG_POSTS = [
 
 <p>The ideas were good. The people were thoughtful. The problem is the gap between the quality of the thinking in the room and the pace of change outside it. The sector has never been better at analysing itself. It has rarely been slower at acting on the analysis.</p>
 
-<p>Thomas names the thing nobody wants to say: <em>the sector has gotten very comfortable with being in transition.</em> Transition is a safe state. It implies change is coming. It excuses the present. The harder question is what happens when transition becomes the permanent condition — when the work of preparing for change substitutes for change itself.</p>
+<p>Thomas names the thing nobody wants to say: <em>the sector has gotten very comfortable with being in transition.</em> Transition is a safe state. It implies change is coming. It excuses the present. The harder question is what happens when transition becomes the permanent condition. When the work of preparing for change substitutes for change itself.</p>
 
 <h2>Making Sense vs. Making Peace</h2>
 
@@ -176,7 +176,7 @@ const BLOG_POSTS = [
 
 <p>Not theoretically. Not in the annual report. In practice, in the decisions, in the rooms where the choices get made.</p>
 
-<p>If the answer is primarily donors, funders, peer organisations, and internal governance structures — the social contract is already broken, and the funding crisis is just the invoice arriving. If the answer is genuinely the people the work is for, then there's still something worth building from.</p>
+<p>If the answer is primarily donors, funders, peer organisations, and internal governance structures, the social contract is already broken, and the funding crisis is just the invoice arriving. If the answer is genuinely the people the work is for, then there's still something worth building from.</p>
 
 <p>Most organisations are somewhere in the middle, drifting toward the first and hoping nobody notices.</p>
 
@@ -548,7 +548,7 @@ const BLOG_POSTS = [
   }
 ];
 
-// Translations placeholder — for true production, would auto-translate via Claude API
+// Translations placeholder · for true production, would auto-translate via Claude API
 const TRANSLATIONS = {
   en: { name: 'English', dir: 'ltr' },
   fr: { name: 'Français', dir: 'ltr' },
@@ -585,7 +585,7 @@ const HOSTS = [
   }
 ];
 
-// Real channel stats — updated from the YouTube channel
+// Real channel stats · updated from the YouTube channel
 // Total Views as of latest sync: 75,951
 const STATS = {
   episodes: EPISODES.length,

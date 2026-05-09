@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-// THE SECTOR DEBRIEF — Application
+// THE SECTOR DEBRIEF · Application
 // ═══════════════════════════════════════════════════
 
 const $ = (s, c = document) => c.querySelector(s);
@@ -314,7 +314,7 @@ function renderPauseHero() {
   });
   copyBtn?.addEventListener('click', () => {
     const text = pool[idx].q;
-    navigator.clipboard?.writeText(`"${text}" — The Sector Debrief`);
+    navigator.clipboard?.writeText(`"${text}" · The Sector Debrief`);
     const r = copyBtn.getBoundingClientRect();
     if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
     const original = copyBtn.innerHTML;
@@ -581,14 +581,14 @@ function bindPause(scope, post) {
       } else {
         const text = list[idx];
         const url = encodeURIComponent('https://thesectordebrief.com');
-        const t   = encodeURIComponent(`"${text}"\n\n— The Sector Debrief`);
+        const t   = encodeURIComponent(`"${text}"\n\n· The Sector Debrief`);
         const r   = btn.getBoundingClientRect();
         if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
         if (action === 'share-x')  window.open(`https://twitter.com/intent/tweet?text=${t}&url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'share-li') window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'share-wa') window.open(`https://wa.me/?text=${t}%20${url}`, '_blank', 'width=600,height=500');
         if (action === 'copy') {
-          navigator.clipboard.writeText(`"${text}" — The Sector Debrief`);
+          navigator.clipboard.writeText(`"${text}" · The Sector Debrief`);
           const original = btn.innerHTML;
           btn.innerHTML = '✓';
           setTimeout(() => { btn.innerHTML = original; }, 1100);
@@ -708,7 +708,7 @@ function bindContactForm() {
       btn.disabled = false;
       setTimeout(() => { success.style.display = 'none'; }, 7000);
     } catch {
-      // AJAX failed — fall back to native form POST (triggers FormSubmit activation email
+      // AJAX failed · fall back to native form POST (triggers FormSubmit activation email
       // on first use, then redirects back to the site via _next)
       btn.textContent = original;
       btn.disabled = false;

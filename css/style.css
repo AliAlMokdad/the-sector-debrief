@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════
-   THE SECTOR DEBRIEF — Visual Identity
+   THE SECTOR DEBRIEF · Visual Identity
    Palette inspired by expressionist painting:
    cream canvas + cobalt, crimson, mustard, forest, rust
    ═══════════════════════════════════════════════════ */
@@ -12,10 +12,10 @@
   --paper:        #FAF6EA;
 
   --ink:          #1A1614;
-  --ink-soft:     #2C2622;   /* darker than before — was #3A332D — pure-text contrast */
-  --ink-mute:     #524A42;   /* darker than before — was #6B6258 — readable secondary */
+  --ink-soft:     #2C2622;   /* darker than before · was #3A332D · pure-text contrast */
+  --ink-mute:     #524A42;   /* darker than before · was #6B6258 · readable secondary */
 
-  --cobalt:       #2C5BAA;   /* slightly brighter — original #1E3D7A felt muddy under dark text */
+  --cobalt:       #2C5BAA;   /* slightly brighter · original #1E3D7A felt muddy under dark text */
   --cobalt-deep:  #1A3866;   /* original #102447 was almost-black */
 
   --crimson:      #B83A2A;
@@ -25,7 +25,7 @@
   --mustard-deep: #C99A14;
 
   --forest:       #2A4530;
-  --rust:         #A0531F;   /* deeper than original #C26830 — was failing 4.5:1 with cream text on rust quote cards */
+  --rust:         #A0531F;   /* deeper than original #C26830 · was failing 4.5:1 with cream text on rust quote cards */
   --clay:         #8B3A2A;
 
   /* Type */
@@ -50,7 +50,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
-/* Global focus-visible — keyboard nav stays visible across the site */
+/* Global focus-visible · keyboard nav stays visible across the site */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -69,7 +69,7 @@ select:focus-visible,
   border-radius: 4px;
 }
 
-/* Honeypot — visually hidden but still fillable by naive bots */
+/* Honeypot · visually hidden but still fillable by naive bots */
 .honeypot {
   position: absolute !important;
   left: -9999px !important;
@@ -497,7 +497,7 @@ body > * { position: relative; z-index: 1; }
 }
 .sub-cta-min .yt-sub-btn .yt-icon { width: 32px; height: 32px; font-size: 13px; }
 
-/* Kicker line under the button — Fraunces italic with tiny rules either side */
+/* Kicker line under the button · Fraunces italic with tiny rules either side */
 .yt-kicker {
   display: inline-flex; align-items: center; justify-content: center;
   gap: 16px;
@@ -585,7 +585,7 @@ body > * { position: relative; z-index: 1; }
   padding-left: 1px;
 }
 
-/* (Legacy .hero-art* styles removed — replaced by .hero-cover) */
+/* (Legacy .hero-art* styles removed · replaced by .hero-cover) */
 
 /* ═══════════════════════════════════════════
    SECTION
@@ -625,7 +625,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   color: var(--ink);
 }
 .section-title em { color: var(--cobalt); transition: color 0.4s var(--ease-standard); }
-/* Per-page em accent — gives each page its own emphasis hue */
+/* Per-page em accent · gives each page its own emphasis hue */
 [data-page="episodes"] .section-title em,
 [data-page="episodes"] .about-intro p em { color: var(--crimson); }
 [data-page="blog"] .section-title em,
@@ -943,7 +943,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   color: var(--ink); padding-bottom: 2px;
   border-bottom: 2px solid var(--mustard);
 }
-/* (.lang-pill removed — language switcher no longer rendered) */
+/* (.lang-pill removed · language switcher no longer rendered) */
 
 /* ═══════════════════════════════════════════
    ABOUT / HOSTS
@@ -1072,7 +1072,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   font-weight: 400;
   letter-spacing: 0.05px;
 }
-/* (.host-org removed — no longer rendered) */
+/* (.host-org removed · no longer rendered) */
 .host-linkedin {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 12px; font-weight: 700;
@@ -1101,7 +1101,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .host-linkedin:hover .li-arrow { transform: translateX(4px); }
 .host { display: flex; flex-direction: column; }
 
-/* (.icon-box brand colors removed — contact list replaced with .platform-orbs) */
+/* (.icon-box brand colors removed · contact list replaced with .platform-orbs) */
 
 /* ── PLATFORM ORBS (contact page) ── */
 .contact-platforms-label {
@@ -1358,7 +1358,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   transition: background 0.25s var(--ease-standard), color 0.25s var(--ease-standard);
 }
 .theme-chip:hover { background: var(--ink); color: var(--cream); }
-/* Featured card chips share the same neutral treatment — let the offset shadow carry the color story */
+/* Featured card chips share the same neutral treatment · let the offset shadow carry the color story */
 .ep-feat-themes .theme-chip { background: var(--cream-deep); color: var(--ink); border-color: var(--ink); }
 .ep-feat-themes .theme-chip:hover { background: var(--mustard); color: var(--ink); border-color: var(--ink); }
 .ep-feat-desc {
@@ -1457,7 +1457,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   0%   { transform: translate(0,0) scale(1) rotate(0); }
   100% { transform: translate(-40px,40px) scale(1.1) rotate(20deg); }
 }
-/* (manifestoBlobC dead-keyframe removed — motion.css owns the live drift now) */
+/* (manifestoBlobC dead-keyframe removed · motion.css owns the live drift now) */
 .manifesto-inner { position: relative; z-index: 1; max-width: 760px; }
 .manifesto-eyebrow {
   font-size: 11px; font-weight: 700;
@@ -2123,7 +2123,7 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   outline-offset: 3px;
 }
 
-/* Skip-to-content link — visually hidden until focused */
+/* Skip-to-content link · visually hidden until focused */
 .skip-link {
   position: fixed;
   top: -48px; left: 16px;
@@ -2161,7 +2161,7 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   .pause-btn.pause-next { padding: 0 14px; font-size: 11px; }
   .pause-btn.pause-share { width: 36px; height: 36px; }
 }
-/* (.lang-switcher removed — language UI no longer rendered) */
+/* (.lang-switcher removed · language UI no longer rendered) */
 
 /* ═══════════════════════════════════════════
    PAGE TRANSITIONS / SECTIONS

@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════
-// MOTION LAYER — cursor, tilt, scroll, transitions, waveform
+// MOTION LAYER · cursor, tilt, scroll, transitions, waveform
 // ═══════════════════════════════════════════════════
 
 (() => {
@@ -204,7 +204,7 @@
       if (card && !card.contains(e.relatedTarget)) reset(card);
     }, true);
   }
-  // Attach tilt to dynamically created cards (episode + blog + host only — not round cover image)
+  // Attach tilt to dynamically created cards (episode + blog + host only · not round cover image)
   window.applyTilt = function(scope = document) {
     if (isTouch || reducedMotion) return;
     scope.querySelectorAll('.ep-card, .blog-card, .host').forEach(c => {
