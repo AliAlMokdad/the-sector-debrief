@@ -24,6 +24,16 @@ const state = {
 };
 
 // ─── ROUTER ───
+// Force every reveal-animated element inside a scope to be visible immediately.
+// This is critical for SPA hash navigation: when a `.page` is `display:none` and
+// then becomes `.active`, IntersectionObserver doesn't reliably fire for already-
+// in-viewport elements, leaving content stuck at opacity 0.
+function _showRevealsIn(scope) {
+  if (!scope) return;
+  scope.querySelectorAll('.reveal, .reveal-stagger, .split, .blog-card').forEach(el => {
+    el.classList.add('in');
+  });
+}
 function _doNavigate(page, opts) {
   opts = opts || {};
   state.page = page;
@@ -39,6 +49,12 @@ function _doNavigate(page, opts) {
   // Update skip-link target so "Skip to content" jumps to the active page landmark
   const skipLink = document.getElementById('skip-link');
   if (skipLink) skipLink.setAttribute('href', '#main-' + page);
+  // Force-show all reveal content inside the now-active page so SPA navigation
+  // doesn't leave content stuck at opacity 0.
+  const activePage = document.querySelector(`.page[data-page="${page}"]`);
+  _showRevealsIn(activePage);
+  // Also keep the footer always visible; it doesn't need an entrance animation.
+  document.querySelectorAll('.footer').forEach(f => f.classList.add('in'));
   closeMobileNav();
   setTimeout(() => {
     if (window.refreshReveal) window.refreshReveal();
