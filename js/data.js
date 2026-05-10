@@ -557,7 +557,7 @@ const TRANSLATIONS = {
 
 const HOSTS = [
   {
-    photo: 'assets/host-ali.png',
+    photo: 'assets/host-ali.jpg',
     initial: 'A',
     name: 'Ali Al Mokdad',
     role: 'Co-Host',
@@ -566,7 +566,7 @@ const HOSTS = [
     accent: 'cobalt'
   },
   {
-    photo: 'assets/host-kim.png',
+    photo: 'assets/host-kim.jpg',
     initial: 'K',
     name: 'Kim Kucinskas',
     role: 'Co-Host',
@@ -575,7 +575,7 @@ const HOSTS = [
     accent: 'crimson'
   },
   {
-    photo: 'assets/host-thomas.png',
+    photo: 'assets/host-thomas.jpg',
     initial: 'T',
     name: 'Thomas Jepson-Lay',
     role: 'Co-Host',
