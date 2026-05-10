@@ -473,7 +473,7 @@ function renderAbout() {
   grid.innerHTML = HOSTS.map(h => `
     <article class="host" data-accent="${escAttr(h.accent)}">
       <div class="host-avatar host-avatar-photo">
-        <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="600" height="600" decoding="async" loading="lazy"/>
+        <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="600" height="600" decoding="async"/>
       </div>
       <h3 class="host-name">${h.name}</h3>
       <div class="host-role">${h.role}</div>
