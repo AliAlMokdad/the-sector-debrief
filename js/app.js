@@ -7,6 +7,14 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const fmtDate = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 const fmtMonthYear = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 
+// Escape user-facing strings before interpolating into HTML attributes (alt, title, etc.)
+const escAttr = (s) => String(s == null ? '' : s)
+  .replace(/&/g, '&amp;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;');
+
 const state = {
   page: 'home',
   search: '',
@@ -22,12 +30,15 @@ function _doNavigate(page, opts) {
   $$('.page').forEach(p => p.classList.toggle('active', p.dataset.page === page));
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
   if (!opts.preserveScroll) {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo(0, 0);
   }
-  if (location.hash !== '#' + page) {
+  if (!opts.fromHashChange && location.hash !== '#' + page) {
     const method = history.state?.page ? 'pushState' : 'replaceState';
     history[method]({ page }, '', '#' + page);
   }
+  // Update skip-link target so "Skip to content" jumps to the active page landmark
+  const skipLink = document.getElementById('skip-link');
+  if (skipLink) skipLink.setAttribute('href', '#main-' + page);
   closeMobileNav();
   setTimeout(() => {
     if (window.refreshReveal) window.refreshReveal();
@@ -37,7 +48,8 @@ function _doNavigate(page, opts) {
 }
 function navigate(page) {
   closeMobileNav();
-  while ($$('.modal-backdrop.active').length) closeModal();
+  // Bounded close to prevent any pathological infinite loop
+  for (let i = 0; i < 5 && $$('.modal-backdrop.active').length; i++) closeModal();
   if (window.navigateWithCurtain && state.page !== page) {
     window.navigateWithCurtain(page, _doNavigate);
   } else {
@@ -58,10 +70,11 @@ function renderHome() {
 
 // ─── EPISODE CARD ───
 function epCard(ep) {
+  const altTitle = escAttr(ep.title);
   return `
-    <article class="ep-card" data-ep-id="${ep.id}">
+    <article class="ep-card" data-ep="${ep.id}">
       <div class="ep-thumb" data-ep="${ep.id}">
-        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="${ep.title}"/>
+        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="${altTitle}" loading="lazy"/>
         <div class="ep-thumb-overlay">
           <span class="ep-thumb-num">Ep ${String(ep.n).padStart(2,'0')}</span>
         </div>
@@ -84,18 +97,17 @@ function epCard(ep) {
     </article>
   `;
 }
+// Event delegation: attach ONCE per scope container, even if children re-render.
 function bindEpCards(scope) {
-  $$('.ep-thumb, .ep-title', scope).forEach(t => {
-    t.addEventListener('click', () => {
-      const ep = EPISODES.find(e => e.id === t.dataset.ep);
-      if (ep) openEpisode(ep);
-    });
-  });
-  $$('.ep-feat-thumb, .ep-feat-title', scope).forEach(t => {
-    t.addEventListener('click', () => {
-      const ep = EPISODES.find(e => e.id === t.dataset.ep);
-      if (ep) openEpisode(ep);
-    });
+  if (!scope || scope.dataset.epDelegated) return;
+  scope.dataset.epDelegated = '1';
+  scope.addEventListener('click', e => {
+    const trigger = e.target.closest('.ep-thumb, .ep-title, .ep-feat-thumb, .ep-feat-title');
+    if (!trigger || !scope.contains(trigger)) return;
+    // Don't intercept clicks on inner buttons/links inside the action row
+    if (e.target.closest('.ep-actions, .ep-link')) return;
+    const ep = EPISODES.find(x => x.id === trigger.dataset.ep);
+    if (ep) openEpisode(ep);
   });
 }
 
@@ -117,13 +129,22 @@ function renderEpisodes() {
   if (featured) featured.style.display = isFiltering ? 'none' : '';
 
   if (!filtered.length) {
+    const safeQuery = escAttr(state.search);
     grid.innerHTML = `
       <div class="ep-empty" style="grid-column:1/-1;">
         <div class="ep-empty-icon" aria-hidden="true">⌕</div>
-        <h3 class="ep-empty-title">No episodes match "${state.search}"</h3>
+        <h3 class="ep-empty-title">No episodes match &ldquo;${safeQuery}&rdquo;</h3>
         <p class="ep-empty-sub">Try a different word, or browse them all.</p>
-        <button type="button" class="ep-empty-btn" onclick="document.getElementById('search-input').value=''; state.search=''; renderEpisodes();">Clear search</button>
+        <button type="button" class="ep-empty-btn" id="ep-empty-clear">Clear search</button>
       </div>`;
+    const clearBtn = document.getElementById('ep-empty-clear');
+    clearBtn?.addEventListener('click', () => {
+      const input = document.getElementById('search-input');
+      if (input) input.value = '';
+      state.search = '';
+      renderEpisodes();
+      input?.focus();
+    });
     return;
   }
 
@@ -145,9 +166,10 @@ function renderEpisodes() {
 
 function renderFeaturedEpisode(ep) {
   const themeChips = ep.themes.map(t => `<span class="theme-chip">${t}</span>`).join('');
+  const altTitle = escAttr(ep.title);
   return `
     <div class="ep-feat-thumb" data-ep="${ep.id}">
-      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="${ep.title}" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
+      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="${altTitle}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
       <div class="ep-feat-overlay">
         <div class="ep-feat-num">E${String(ep.n).padStart(2,'0')}</div>
         <div class="ep-feat-play"></div>
@@ -184,8 +206,12 @@ const BLOG_COVER_THEMES = {
 };
 
 function blogCoverSVG(epN) {
-  const t = BLOG_COVER_THEMES[epN] || BLOG_COVER_THEMES[1];
+  const n = Number.isFinite(Number(epN)) ? Number(epN) : 1;
+  const t = BLOG_COVER_THEMES[n] || BLOG_COVER_THEMES[1];
   const W = 800, H = 500;
+  const labelText = n === 0
+    ? 'EDITORIAL  ·  THE SECTOR DEBRIEF'
+    : `EPISODE ${String(n).padStart(2,'0')}  ·  THE SECTOR DEBRIEF`;
   let motif = '';
   if (t.shape === 'circle') {
     motif = `
@@ -237,7 +263,7 @@ function blogCoverSVG(epN) {
     <rect width='${W}' height='${H}' fill='${t.bg}'/>
     ${motif}
     <text x='40' y='${H - 60}' font-family='Fraunces, Playfair Display, serif' font-weight='700' font-size='${wordSize}' fill='${labelColor}' letter-spacing='-2'>${t.word}</text>
-    <text x='42' y='${H - 25}' font-family='Inter, sans-serif' font-size='12' font-weight='600' letter-spacing='3' fill='${labelColor}' opacity='0.7'>EPISODE ${String(epN).padStart(2,'0')}  ·  THE SECTOR DEBRIEF</text>
+    <text x='42' y='${H - 25}' font-family='Inter, sans-serif' font-size='12' font-weight='600' letter-spacing='3' fill='${labelColor}' opacity='0.7'>${labelText}</text>
   </svg>`;
   return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
 }
@@ -245,7 +271,8 @@ function blogCoverSVG(epN) {
 // ─── PAUSE & REFLECT (Blog page hero) ───
 function renderPauseHero() {
   const root = document.getElementById('pause-hero');
-  if (!root) return;
+  if (!root || root.dataset.pauseBound) return;
+  root.dataset.pauseBound = '1';
   const qEl   = document.getElementById('pause-hero-q');
   const srcEl = document.getElementById('pause-hero-source');
   const nextBtn = document.getElementById('pause-hero-next');
@@ -266,7 +293,7 @@ function renderPauseHero() {
     qEl.textContent = item.q;
     const label = item.post.pinned
       ? 'From: Notes from the Editing Room'
-      : `From: Episode ${item.post.epN} · ${item.post.title.split(':')[0]}`;
+      : `From: Episode ${item.post.epN} · ${item.post.title}`;
     srcEl.textContent = label;
     root.dataset.activeSlug = item.post.slug;
   }
@@ -428,9 +455,9 @@ function flash(el, text) {
 function renderAbout() {
   const grid = $('#hosts-grid');
   grid.innerHTML = HOSTS.map(h => `
-    <article class="host" data-accent="${h.accent}">
+    <article class="host" data-accent="${escAttr(h.accent)}">
       <div class="host-avatar host-avatar-photo">
-        <img src="${h.photo}" alt="${h.name}" decoding="async"/>
+        <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" decoding="async" loading="lazy"/>
       </div>
       <h3 class="host-name">${h.name}</h3>
       <div class="host-role">${h.role}</div>
@@ -469,10 +496,14 @@ function openEpisode(ep) {
       </div>
     </div>
   `;
-  $('#modal-backdrop').classList.add('active');
-  document.body.classList.add('scroll-lock');
+  // De-mark any existing top modal, then mark this one as topmost
+  $$('.modal-backdrop.active').forEach(b => b.classList.remove('is-top'));
+  const backdrop = $('#modal-backdrop');
+  backdrop.classList.add('active', 'is-top');
+  lockBodyScroll();
   state.lastTrigger = document.activeElement;
   setTimeout(() => $('#modal-episode .modal-close')?.focus(), 50);
+  trapFocus($('#modal-episode'));
   showMini(ep);
 }
 
@@ -539,10 +570,13 @@ function openBlog(slug) {
       ${footer}
     </div>
   `;
-  $('#modal-blog-backdrop').classList.add('active');
-  document.body.classList.add('scroll-lock');
+  $$('.modal-backdrop.active').forEach(b => b.classList.remove('is-top'));
+  const blogBack = $('#modal-blog-backdrop');
+  blogBack.classList.add('active', 'is-top');
+  lockBodyScroll();
   state.lastTrigger = document.activeElement;
   setTimeout(() => $('#modal-blog .modal-close')?.focus(), 50);
+  trapFocus($('#modal-blog'));
   bindPause(m, post);
 }
 
@@ -598,21 +632,67 @@ function bindPause(scope, post) {
   });
 }
 
-// Close only the topmost open modal; only release scroll-lock when none remain
+// Close only the topmost open modal; only release scroll-lock when none remain.
+// Remove iframes outright (rather than setting src=blank) · Firefox sometimes
+// keeps audio playing on src swap. Removal guarantees teardown.
 window.closeModal = function() {
   const open = $$('.modal-backdrop.active');
   if (!open.length) return;
   const top = open[open.length - 1];
-  top.classList.remove('active');
-  top.querySelectorAll('iframe').forEach(f => { f.src = 'about:blank'; });
+  top.classList.remove('active', 'is-top');
+  top.querySelectorAll('iframe').forEach(f => f.remove());
   if (!$$('.modal-backdrop.active').length) {
     document.body.classList.remove('scroll-lock');
+    // Release iOS scroll-lock and restore scroll position
+    const lockedY = parseInt(document.body.dataset.scrollLockY || '0', 10);
+    if (document.body.dataset.scrollLockY) {
+      document.body.style.top = '';
+      document.body.style.position = '';
+      document.body.style.width = '';
+      delete document.body.dataset.scrollLockY;
+      window.scrollTo(0, lockedY);
+    }
     if (state.lastTrigger && typeof state.lastTrigger.focus === 'function') {
       try { state.lastTrigger.focus({ preventScroll: true }); } catch (_) {}
       state.lastTrigger = null;
     }
+  } else {
+    // Re-mark the new top modal so it sits above the one below
+    const stillOpen = $$('.modal-backdrop.active');
+    stillOpen[stillOpen.length - 1].classList.add('is-top');
   }
 };
+
+// Lock scroll on iOS (which ignores body { overflow: hidden }) by pinning the body.
+function lockBodyScroll() {
+  if (document.body.classList.contains('scroll-lock')) return;
+  const y = window.scrollY || window.pageYOffset || 0;
+  document.body.dataset.scrollLockY = String(y);
+  document.body.style.top = `-${y}px`;
+  document.body.style.position = 'fixed';
+  document.body.style.width = '100%';
+  document.body.classList.add('scroll-lock');
+}
+
+// Simple focus trap: tab-cycle inside the modal until it closes.
+function trapFocus(modal) {
+  if (!modal) return () => {};
+  const sel = 'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
+  function onKey(e) {
+    if (e.key !== 'Tab') return;
+    const nodes = [...modal.querySelectorAll(sel)].filter(el => el.offsetParent !== null);
+    if (!nodes.length) return;
+    const first = nodes[0];
+    const last  = nodes[nodes.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+  modal.addEventListener('keydown', onKey);
+  return () => modal.removeEventListener('keydown', onKey);
+}
 
 // ─── MINI PLAYER ───
 function showMini(ep) {
@@ -633,16 +713,19 @@ function bindMini() {
   $('#mini-toggle')?.addEventListener('click', () => {
     if (state.player.ep) openEpisode(state.player.ep);
   });
+  // EPISODES is stored newest-first. Older episode = index + 1, newer = index - 1.
   const indexOfCurrent = () => EPISODES.findIndex(e => e.id === state.player.ep?.id);
   $('#mini-prev')?.addEventListener('click', () => {
     const i = indexOfCurrent();
     if (i < 0) return;
-    const next = EPISODES[(i + 1) % EPISODES.length];
-    showMini(next);
+    // "Previous episode" should go to the older one (higher index in newest-first array)
+    const prev = EPISODES[(i + 1) % EPISODES.length];
+    showMini(prev);
   });
   $('#mini-next')?.addEventListener('click', () => {
     const i = indexOfCurrent();
     if (i < 0) return;
+    // "Next episode" should go to the newer one (lower index)
     const next = EPISODES[(i - 1 + EPISODES.length) % EPISODES.length];
     showMini(next);
   });
@@ -652,6 +735,10 @@ function bindMini() {
 function bindContactForm() {
   const form = $('#contact-form');
   if (!form) return;
+
+  // Make _next dynamic so staging / preview environments don't bounce users to production.
+  const nextInput = form.querySelector('input[name="_next"]');
+  if (nextInput) nextInput.value = location.origin + '/?sent=1#contact';
 
   // Show success banner when returning from a native FormSubmit redirect (?sent=1)
   const params = new URLSearchParams(location.search);
@@ -663,7 +750,8 @@ function bindContactForm() {
       success.textContent = '✓ Message sent. We\'ll get back to you within a few days.';
       setTimeout(() => { success.style.display = 'none'; }, 7000);
     }
-    history.replaceState(null, '', location.pathname + '#contact');
+    // Strip ?sent=1 from URL while keeping #contact route
+    history.replaceState(null, '', location.origin + '/#contact');
   }
 
   // Robot check interaction
@@ -675,6 +763,19 @@ function bindContactForm() {
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
+
+    // Honeypot: if a bot filled the hidden _honey field, silently pretend success.
+    const honey = form.querySelector('input[name="_honey"]');
+    if (honey && honey.value) {
+      form.reset();
+      const success = $('#form-success');
+      if (success) {
+        success.style.display = 'block';
+        success.textContent = '✓ Message sent.';
+        setTimeout(() => { success.style.display = 'none'; }, 7000);
+      }
+      return;
+    }
 
     // Must tick the robot check first
     if (robotInput && !robotInput.checked) {
@@ -717,13 +818,15 @@ function bindContactForm() {
   });
 }
 
-// ─── SEARCH ───
+// ─── SEARCH (120ms debounce so we don't re-render on every keystroke) ───
 function bindSearch() {
   const input = $('#search-input');
   if (!input) return;
+  let t = null;
   input.addEventListener('input', () => {
     state.search = input.value;
-    renderEpisodes();
+    if (t) clearTimeout(t);
+    t = setTimeout(renderEpisodes, 120);
   });
 }
 
@@ -739,8 +842,14 @@ function bindMobileNav() {
 }
 function closeMobileNav() {
   const toggle = $('#nav-toggle');
-  $('.nav-links')?.classList.remove('mobile-open');
+  const links = $('.nav-links');
+  const wasOpen = links?.classList.contains('mobile-open');
+  links?.classList.remove('mobile-open');
   toggle?.setAttribute('aria-expanded', 'false');
+  // If menu was open and focus is somewhere inside it, return focus to the toggle button
+  if (wasOpen && links && links.contains(document.activeElement)) {
+    toggle?.focus();
+  }
 }
 
 // ─── COUNTER ANIMATION ───
@@ -793,8 +902,31 @@ function animateCounters() {
   els.forEach(el => obs.observe(el));
 }
 
+// ─── SEO: inject PodcastEpisode JSON-LD from EPISODES data ───
+function injectEpisodeSchema() {
+  const slot = document.getElementById('ld-episodes');
+  if (!slot || typeof EPISODES === 'undefined') return;
+  const series = 'https://thesectordebrief.com/#series';
+  const items = EPISODES.map((ep, i) => ({
+    '@context': 'https://schema.org',
+    '@type': 'PodcastEpisode',
+    'name': ep.title,
+    'description': (ep.description || '').slice(0, 280),
+    'datePublished': ep.date,
+    'episodeNumber': ep.n,
+    'url': `https://www.youtube.com/watch?v=${ep.id}`,
+    'partOfSeries': { '@type': 'PodcastSeries', 'name': 'The Sector Debrief', '@id': series },
+    'associatedMedia': {
+      '@type': 'MediaObject',
+      'contentUrl': `https://www.youtube.com/watch?v=${ep.id}`
+    }
+  }));
+  try { slot.textContent = JSON.stringify(items); } catch (_) {}
+}
+
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
+  injectEpisodeSchema();
   renderHome();
   renderEpisodes();
   renderBlog();
@@ -820,22 +952,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  addEventListener('popstate', e => {
-    const page = (location.hash || '#home').slice(1);
-    if (['home','episodes','blog','about','contact'].includes(page) && page !== state.page) {
-      _doNavigate(page, { preserveScroll: true });
-    }
-  });
-
-  addEventListener('hashchange', () => {
-    const page = (location.hash || '#home').slice(1);
+  // Browsers fire BOTH popstate + hashchange on hash navigation.
+  // We handle popstate (richer event) and skip hashchange when popstate just ran.
+  let lastHashHandled = location.hash;
+  function handleHashRoute(opts) {
     const valid = ['home','episodes','blog','about','contact'];
-    if (valid.includes(page)) {
-      if (page !== state.page) _doNavigate(page);
+    const raw = (location.hash || '#home').slice(1);
+    if (valid.includes(raw)) {
+      if (raw !== state.page) _doNavigate(raw, opts);
     } else {
       history.replaceState({ page: 'home' }, '', '#home');
-      if (state.page !== 'home') _doNavigate('home');
+      if (state.page !== 'home') _doNavigate('home', opts);
     }
+    lastHashHandled = location.hash;
+  }
+  addEventListener('popstate', () => handleHashRoute({ preserveScroll: true, fromHashChange: true }));
+  addEventListener('hashchange', () => {
+    if (lastHashHandled === location.hash) return; // already handled by popstate
+    handleHashRoute({ fromHashChange: true });
   });
 
   bindContactForm();

@@ -15,11 +15,21 @@
     return new Promise((res) => {
       const intro = document.querySelector('.intro');
       if (!intro) return res();
-      // exit after 2.6s (matches CSS exit delay)
-      setTimeout(() => {
+      let resolved = false;
+      function finish() {
+        if (resolved) return;
+        resolved = true;
         intro.classList.add('exit');
         setTimeout(() => { intro.remove(); res(); }, 1400);
-      }, 50);
+      }
+      // Click anywhere on the intro to skip
+      intro.addEventListener('click', finish, { once: true });
+      // Esc to skip
+      const onKey = (e) => { if (e.key === 'Escape') finish(); };
+      document.addEventListener('keydown', onKey);
+      // Default automatic dismiss
+      setTimeout(finish, 50);
+      setTimeout(() => document.removeEventListener('keydown', onKey), 2000);
     });
   }
 
@@ -81,17 +91,29 @@
     }
     loop();
 
-    // hover states
+    // hover states (rAF-throttled · `mouseover` fires on every element boundary)
+    let currentState = null;
     const setState = (s) => {
+      if (s === currentState) return;
+      currentState = s;
       document.body.classList.remove('cursor-hover','cursor-play','cursor-text');
       if (s) document.body.classList.add('cursor-' + s);
     };
+    let hoverPending = false;
+    let hoverTarget = null;
     document.addEventListener('mouseover', e => {
-      const t = e.target;
-      if (t.closest('.ep-thumb, .hero-cover-img, [data-cursor="play"]')) setState('play');
-      else if (t.closest('a, button, [data-cursor="hover"], .ep-card, .blog-card, .quote-card, .host')) setState('hover');
-      else if (t.closest('input, textarea')) setState('text');
-      else setState(null);
+      hoverTarget = e.target;
+      if (hoverPending) return;
+      hoverPending = true;
+      requestAnimationFrame(() => {
+        hoverPending = false;
+        const t = hoverTarget;
+        if (!t || !t.closest) return;
+        if (t.closest('.ep-thumb, .hero-cover-img, [data-cursor="play"]')) setState('play');
+        else if (t.closest('a, button, [data-cursor="hover"], .ep-card, .blog-card, .quote-card, .host')) setState('hover');
+        else if (t.closest('input, textarea')) setState('text');
+        else setState(null);
+      });
     });
   }
 
@@ -124,26 +146,27 @@
     tick();
   }
 
-  // ─── SPLIT TEXT ───
+  // ─── SPLIT TEXT (preserves all attributes on inner elements) ───
   function splitText(el) {
     if (!el || el.dataset.split) return;
     el.dataset.split = '1';
     el.classList.add('split');
-    const html = el.innerHTML;
     const tmp = document.createElement('div');
-    tmp.innerHTML = html;
+    tmp.innerHTML = el.innerHTML;
+    const escAttrVal = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const escText = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     const out = [];
     function walk(node) {
       if (node.nodeType === 3) {
         const words = node.textContent.split(/(\s+)/);
         words.forEach(w => {
           if (/^\s+$/.test(w)) out.push(' ');
-          else if (w) out.push(`<span class="word"><span>${w}</span></span>`);
+          else if (w) out.push(`<span class="word"><span>${escText(w)}</span></span>`);
         });
       } else if (node.nodeType === 1) {
         const tag = node.tagName.toLowerCase();
-        const cls = node.className ? ` class="${node.className}"` : '';
-        out.push(`<${tag}${cls}>`);
+        const attrs = [...node.attributes].map(a => `${a.name}="${escAttrVal(a.value)}"`).join(' ');
+        out.push(`<${tag}${attrs ? ' ' + attrs : ''}>`);
         node.childNodes.forEach(walk);
         out.push(`</${tag}>`);
       }
@@ -151,6 +174,8 @@
     tmp.childNodes.forEach(walk);
     el.innerHTML = out.join('');
   }
+  // Expose for app.js to re-split dynamic headings if needed
+  window.splitText = splitText;
 
   // ─── SCROLL REVEAL ───
   function initReveal() {
@@ -181,9 +206,12 @@
     function flush() {
       pending = false;
       if (!lastEvent) return;
-      const card = lastEvent.target.closest('.tilt');
+      const card = lastEvent.target && lastEvent.target.closest && lastEvent.target.closest('.tilt');
       if (!card) return;
+      // Skip if the card has been detached from the DOM mid-rerender
+      if (!card.isConnected) return;
       const r = card.getBoundingClientRect();
+      if (r.width === 0 || r.height === 0) return;
       const px = (lastEvent.clientX - r.left) / r.width  - 0.5;
       const py = (lastEvent.clientY - r.top)  / r.height - 0.5;
       card.style.transform = `perspective(1100px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg) translateY(-6px)`;

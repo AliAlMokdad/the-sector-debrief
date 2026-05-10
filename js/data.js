@@ -8,7 +8,7 @@ const PLATFORMS = {
   youtube:  'https://www.youtube.com/@TheSectorDebrief',
   playlist: 'https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L',
   spotify:  'https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW',
-  apple:    'https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994',
+  apple:    'https://podcasts.apple.com/podcast/id1861790994',
   rss:      'https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L'
 };
 

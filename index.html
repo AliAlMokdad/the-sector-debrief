@@ -14,11 +14,11 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <link rel="apple-touch-icon" href="/assets/cover.jpg"/>
+  <link rel="apple-touch-icon" href="/favicon.svg"/>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="The Sector Debrief"/>
-  <meta property="og:description" content="The conversations that happen when the microphones are off."/>
+  <meta property="og:title" content="The Sector Debrief · Honest conversations on humanitarian work"/>
+  <meta property="og:description" content="The real conversations that shape the humanitarian and development world. The ones that happen when the microphones are off."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://thesectordebrief.com/"/>
   <meta property="og:site_name" content="The Sector Debrief"/>
@@ -30,8 +30,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="The Sector Debrief"/>
-  <meta name="twitter:description" content="The conversations that happen when the microphones are off."/>
+  <meta name="twitter:title" content="The Sector Debrief · Honest conversations on humanitarian work"/>
+  <meta name="twitter:description" content="The real conversations that shape the humanitarian and development world. The ones that happen when the microphones are off."/>
   <meta name="twitter:image" content="https://thesectordebrief.com/assets/cover.jpg"/>
 
   <!-- Fonts -->
@@ -39,8 +39,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-08d"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-08d"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-09a"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-09a"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -56,9 +56,11 @@
       { "@type": "Person", "name": "Kim Kucinskas" },
       { "@type": "Person", "name": "Thomas Jepson-Lay" }
     ],
-    "inLanguage": "en"
+    "webFeed": "https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L",
+    "inLanguage": "en-GB"
   }
   </script>
+  <script id="ld-episodes" type="application/ld+json"></script>
 </head>
 <body>
 
@@ -70,13 +72,13 @@
     <p>This site uses JavaScript for navigation and animation. Please enable JavaScript, or visit our channel directly:</p>
     <ul>
       <li><a href="https://www.youtube.com/@TheSectorDebrief">YouTube · @TheSectorDebrief</a></li>
-      <li><a href="https://open.spotify.com/show/7p4tWCEhdC5fgFZ7VPp7Wh">Spotify</a></li>
+      <li><a href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW">Spotify</a></li>
       <li><a href="mailto:hello@thesectordebrief.com">hello@thesectordebrief.com</a></li>
     </ul>
   </div>
 </noscript>
 
-<a class="skip-link" href="#main-home">Skip to content</a>
+<a class="skip-link" id="skip-link" href="#main-home">Skip to content</a>
 
 <!-- ═══════ INTRO LOADER ═══════ -->
 <div class="intro" id="intro">
@@ -136,7 +138,7 @@
       <li><a data-nav="about"    href="#about">About</a></li>
       <li><a data-nav="contact"  href="#contact">Contact</a></li>
     </ul>
-    <a class="nav-cta" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" rel="noopener noreferrer">▶ Listen</a>
+    <a class="nav-cta" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" rel="noopener noreferrer"><svg class="nav-cta-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="12" height="12"><path d="M5 3.5v17l15-8.5z"/></svg> Listen</a>
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -176,7 +178,7 @@
           <span class="line"><span>The <span class="accent-blue">Sector</span></span></span>
           <span class="line"><span><span class="underline-mustard">Debrief</span><span class="accent-red">.</span></span></span>
         </h1>
-        <p class="hero-tagline">"The real conversations that shape humanitarian and development work. The ones that happen when the microphones are off."</p>
+        <p class="hero-tagline">&ldquo;The real conversations that shape humanitarian and development work. The ones that happen when the microphones are off.&rdquo;</p>
 
         <div class="platforms">
           <a class="platform-btn primary" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" rel="noopener noreferrer">
@@ -185,7 +187,7 @@
           <a class="platform-btn" href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW" target="_blank" rel="noopener noreferrer">
             <span>♫</span> Spotify
           </a>
-          <a class="platform-btn" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank" rel="noopener noreferrer">
+          <a class="platform-btn" href="https://podcasts.apple.com/podcast/id1861790994" target="_blank" rel="noopener noreferrer">
             <span>♬</span> Apple Podcasts
           </a>
         </div>
@@ -279,7 +281,7 @@
 </main>
 
 <!-- ═══════ EPISODES PAGE ═══════ -->
-<div class="page" data-page="episodes">
+<div class="page" data-page="episodes" id="main-episodes">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5,40 Q50,5 100,40 T195,40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
@@ -309,7 +311,8 @@
     <!-- Search bar -->
     <div class="filter-bar reveal">
       <div class="search-box">
-        <input type="text" id="search-input" placeholder="Search by title, theme, guest, or topic..."/>
+        <label for="search-input" class="visually-hidden">Search episodes</label>
+        <input type="text" id="search-input" name="search" autocomplete="off" aria-label="Search episodes by title, theme, guest, or topic" placeholder="Search by title, theme, guest, or topic..."/>
       </div>
     </div>
 
@@ -318,7 +321,7 @@
 </div>
 
 <!-- ═══════ BLOG PAGE ═══════ -->
-<div class="page" data-page="blog">
+<div class="page" data-page="blog" id="main-blog">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5,40 Q50,5 100,40 T195,40" stroke="#B83A2A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -349,7 +352,7 @@
       </div>
       <div class="pause-hero-card">
         <div class="pause-mark" aria-hidden="true">"</div>
-        <p class="pause-question" id="pause-hero-q" aria-live="off" aria-atomic="true">…</p>
+        <p class="pause-question" id="pause-hero-q" aria-live="polite" aria-atomic="true">…</p>
         <div class="pause-hero-source" id="pause-hero-source"></div>
         <div class="pause-hero-actions">
           <button class="pause-btn pause-next" id="pause-hero-next" type="button">
@@ -373,7 +376,7 @@
 <!-- (Quotes tab removed · quotes still appear on the home page marquee) -->
 
 <!-- ═══════ ABOUT PAGE ═══════ -->
-<div class="page" data-page="about">
+<div class="page" data-page="about" id="main-about">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5 40 Q50 5 100 40 T195 40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -414,7 +417,7 @@
 </div>
 
 <!-- ═══════ CONTACT PAGE ═══════ -->
-<div class="page" data-page="contact">
+<div class="page" data-page="contact" id="main-contact">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5 40 Q50 5 100 40 T195 40" stroke="#2A4530" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -448,7 +451,7 @@
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.4-1.4c4.6-1 8.5-.6 11.7 1.3a.75.75 0 0 1 .3 1zm1.5-3.3a1 1 0 0 1-1.3.3c-3.3-2-8.3-2.6-12.2-1.4a1 1 0 0 1-.6-2c4.4-1.3 9.9-.7 13.7 1.7.5.3.6 1 .4 1.4zm.1-3.4C15.2 8.3 8.4 8 4.5 9.2a1.2 1.2 0 1 1-.7-2.3c4.5-1.4 12-1 16.7 1.8a1.2 1.2 0 0 1-1.4 2z"/></svg>
             <span class="orb-tip">Spotify</span>
           </a>
-          <a class="orb orb-ap" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
+          <a class="orb orb-ap" href="https://podcasts.apple.com/podcast/id1861790994" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm0 4.7a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm-2.2 13c0-.7.6-1.3 1.3-1.3h1.7c.8 0 1.4.6 1.4 1.3l-.7 4.5c-.1.6-.6 1-1.2 1h-.6c-.6 0-1.1-.4-1.2-1l-.7-4.5z"/></svg>
             <span class="orb-tip">Apple Podcasts</span>
           </a>
@@ -553,7 +556,7 @@
           </span>
           <span>The Sector Debrief</span>
         </div>
-        <p class="footer-tagline">"The conversations that happen when the microphones are off."</p>
+        <p class="footer-tagline">&ldquo;The conversations that happen when the microphones are off.&rdquo;</p>
       </div>
       <div>
         <h4>Navigate</h4>
@@ -584,7 +587,7 @@
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.4-1.4c4.6-1 8.5-.6 11.7 1.3a.75.75 0 0 1 .3 1zm1.5-3.3a1 1 0 0 1-1.3.3c-3.3-2-8.3-2.6-12.2-1.4a1 1 0 0 1-.6-2c4.4-1.3 9.9-.7 13.7 1.7.5.3.6 1 .4 1.4zm.1-3.4C15.2 8.3 8.4 8 4.5 9.2a1.2 1.2 0 1 1-.7-2.3c4.5-1.4 12-1 16.7 1.8a1.2 1.2 0 0 1-1.4 2z"/></svg>
             <span class="footer-orb-tip">Spotify</span>
           </a>
-          <a class="footer-orb footer-orb-ap" href="https://podcasts.apple.com/gb/podcast/the-sector-debrief/id1861790994" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
+          <a class="footer-orb footer-orb-ap" href="https://podcasts.apple.com/podcast/id1861790994" target="_blank" rel="noopener noreferrer" aria-label="Apple Podcasts">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.7 0 12 0zm0 4.7a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm-2.2 13c0-.7.6-1.3 1.3-1.3h1.7c.8 0 1.4.6 1.4 1.3l-.7 4.5c-.1.6-.6 1-1.2 1h-.6c-.6 0-1.1-.4-1.2-1l-.7-4.5z"/></svg>
             <span class="footer-orb-tip">Apple Podcasts</span>
           </a>
@@ -631,9 +634,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title"></div>
 </div>
 
-<script src="js/data.js?v=2026-05-08d"></script>
-<script src="js/motion.js?v=2026-05-08d"></script>
-<script src="js/app.js?v=2026-05-08d"></script>
+<script src="js/data.js?v=2026-05-09a"></script>
+<script src="js/motion.js?v=2026-05-09a"></script>
+<script src="js/app.js?v=2026-05-09a"></script>
 
 </body>
 </html>
