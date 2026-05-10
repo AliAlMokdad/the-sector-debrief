@@ -2415,6 +2415,13 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
   .mini-play { width: 44px; height: 44px; }
   .mini-btn { min-width: 40px; min-height: 40px; }
   .pause-btn { min-height: 44px; }
+  .footer-orb { width: 44px; height: 44px; }
+  .orb { min-width: 44px; min-height: 44px; }
+
+  /* Mini-player on mobile: keep CLOSE button visible (was hidden on small screens,
+     leaving users no way to dismiss the player). Hide only the prev/next pair. */
+  .mini-btn:not(.mini-play):not(#mini-close) { display: none; }
+  #mini-close { display: flex !important; min-width: 40px; min-height: 40px; }
 
   /* No mouse · disable cursor-blend tricks fully */
   .cursor-dot, .cursor-ring, .scroll-prog { display: none !important; }
@@ -2426,9 +2433,55 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
   /* Slow / pause battery-burning ambient animations */
   .quotes-track { animation-duration: 90s; }
   .floating-dots span { animation-duration: 26s; }
+  /* Pause continuous "breathing" / drift animations that paint every frame */
+  .quote-card { animation: none !important; }
+  .footer::after, .manifesto-blob { animation: none !important; }
+  /* Slow the cover rotor/orbit so it isn't burning GPU continuously */
+  .hero-cover-rotor { animation-duration: 90s !important; }
+  .hero-cover-google span { animation-duration: 22s !important; }
+  /* Body grain SVG: skip on touch (expensive compositor layer) */
+  body::after { display: none !important; }
 
   /* Smoother native momentum scrolling on legacy iOS */
   html, body { -webkit-overflow-scrolling: touch; }
+
+  /* Decorative rotating/marquee text shouldn't be selectable on long-press */
+  .hero-cover-text, .intro, .google-strip, .floating-dots,
+  .quotes-marquee-head, .intro-title { user-select: none; -webkit-user-select: none; }
+}
+
+/* Modern viewport units: avoid layout jump when iOS Safari URL bar collapses */
+@supports (height: 100dvh) {
+  body { min-height: 100dvh; }
+}
+
+/* Block pull-to-refresh / overflow chaining inside modals so opening a video
+   inside an episode modal cannot trigger Android Chrome page reload. */
+.modal-backdrop, .modal { overscroll-behavior: contain; }
+
+/* Safe-area aware padding for the body when the mini-player is active.
+   The mini-player itself pads with env(safe-area-inset-bottom); the body
+   reservation must match so the page's bottom content isn't hidden. */
+body:has(.mini-player.active) {
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
+}
+
+/* Skip-link must clear the iOS notch when focused */
+.skip-link:focus {
+  top: max(16px, env(safe-area-inset-top)) !important;
+}
+
+/* Quote cards on narrow phones: don't exceed viewport width */
+@media (max-width: 360px) {
+  .quote-card { width: min(280px, calc(100vw - 56px)); }
+  .hero h1 { font-size: clamp(40px, 12vw, 56px); letter-spacing: -1px; }
+  .hero { padding: 100px 16px 56px; }
+}
+
+/* Robot-check brand block: wrap cleanly at narrow widths instead of overlapping */
+@media (max-width: 480px) {
+  .robot-check { flex-wrap: wrap; gap: 10px; }
+  .robot-check-brand { margin-left: auto; }
 }
 
 /* ═══════════════════════════════════════════
@@ -2437,6 +2490,8 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
 .hidden { display: none !important; }
 .text-center { text-align: center; }
 .scroll-lock { overflow: hidden; }
+/* Lock body scroll while the mobile-nav drawer is open */
+body.nav-open { overflow: hidden; }
 
 /* Screen-reader-only label class · used by accessible form fields */
 .visually-hidden {

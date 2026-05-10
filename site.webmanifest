@@ -1,0 +1,16 @@
+{
+  "name": "The Sector Debrief",
+  "short_name": "Sector Debrief",
+  "description": "Honest conversations on humanitarian work.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFE8D6",
+  "theme_color": "#1A1614",
+  "lang": "en-GB",
+  "scope": "/",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/assets/cover.jpg", "sizes": "1280x1280", "type": "image/jpeg", "purpose": "any" }
+  ]
+}

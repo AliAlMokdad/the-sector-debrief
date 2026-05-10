@@ -231,6 +231,11 @@ body.cursor-text .cursor-dot { opacity: 0; }
 /* curtain that wipes up to reveal site */
 .intro.exit { animation: introExit 1.1s 2.6s cubic-bezier(.7,0,.3,1) forwards; }
 .intro.exit .intro-inner { animation: introInnerOut 0.6s 2.5s cubic-bezier(.5,0,.5,1) forwards; }
+/* Mobile / touch: shorten the intro · users on phones expect content fast */
+@media (hover: none) and (pointer: coarse) {
+  .intro.exit { animation: introExit 0.6s 0.9s cubic-bezier(.7,0,.3,1) forwards; }
+  .intro.exit .intro-inner { animation: introInnerOut 0.4s 0.8s cubic-bezier(.5,0,.5,1) forwards; }
+}
 @keyframes introMark {
   0%   { transform: scale(0) rotate(-90deg); }
   100% { transform: scale(1) rotate(0deg); }

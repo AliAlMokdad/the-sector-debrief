@@ -12,9 +12,20 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://thesectordebrief.com/"/>
 
-  <!-- Favicon -->
+  <!-- Mobile theme color (Chrome Android address bar, iOS PWA status bar) -->
+  <meta name="theme-color" content="#EFE8D6" media="(prefers-color-scheme: light)"/>
+  <meta name="theme-color" content="#1A1614" media="(prefers-color-scheme: dark)"/>
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
+  <meta name="apple-mobile-web-app-title" content="Sector Debrief"/>
+
+  <!-- Favicon + PWA manifest -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="apple-touch-icon" href="/favicon.svg"/>
+  <link rel="manifest" href="/site.webmanifest"/>
+
+  <!-- Preload the LCP cover image so it starts decoding as soon as HTML arrives -->
+  <link rel="preload" as="image" href="/assets/cover.jpg" fetchpriority="high"/>
 
   <!-- Open Graph -->
   <meta property="og:title" content="The Sector Debrief · Honest conversations on humanitarian work"/>
@@ -39,8 +50,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-09e"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-09e"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-09f"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-09f"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -210,7 +221,7 @@
           </svg>
         </div>
         <a class="hero-cover-img" href="https://youtube.com/playlist?list=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L" target="_blank" rel="noopener noreferrer" aria-label="Watch on YouTube">
-          <img src="assets/cover.jpg" alt="The Sector Debrief · featuring Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay" fetchpriority="high"/>
+          <img src="assets/cover.jpg" alt="The Sector Debrief · featuring Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay" width="1280" height="1280" fetchpriority="high" decoding="async"/>
           <div class="hero-cover-badge">
             <span class="badge-dot"></span>
             <span>NEW EPISODE OUT</span>
@@ -312,7 +323,7 @@
     <div class="filter-bar reveal">
       <div class="search-box">
         <label for="search-input" class="visually-hidden">Search episodes</label>
-        <input type="text" id="search-input" name="search" autocomplete="off" aria-label="Search episodes by title, theme, guest, or topic" placeholder="Search by title, theme, guest, or topic..."/>
+        <input type="search" id="search-input" name="search" autocomplete="off" autocorrect="off" autocapitalize="off" inputmode="search" enterkeyhint="search" aria-label="Search episodes by title, theme, guest, or topic" placeholder="Search by title, theme, guest, or topic..."/>
       </div>
     </div>
 
@@ -482,16 +493,16 @@
         <div class="form-row">
           <div class="form-field">
             <label for="cf-name">Full name</label>
-            <input id="cf-name" type="text" name="name" required autocomplete="name"/>
+            <input id="cf-name" type="text" name="name" required autocomplete="name" autocorrect="off" autocapitalize="words" spellcheck="false" enterkeyhint="next"/>
           </div>
           <div class="form-field">
             <label for="cf-email">Your email</label>
-            <input id="cf-email" type="email" name="email" required autocomplete="email"/>
+            <input id="cf-email" type="email" name="email" required autocomplete="email" autocorrect="off" autocapitalize="off" spellcheck="false" inputmode="email" enterkeyhint="next"/>
           </div>
         </div>
         <div class="form-field">
           <label for="cf-org">Organization</label>
-          <input id="cf-org" type="text" name="organization" autocomplete="organization"/>
+          <input id="cf-org" type="text" name="organization" autocomplete="organization" autocorrect="off" autocapitalize="words" spellcheck="false" enterkeyhint="next"/>
         </div>
         <div class="form-field">
           <label for="cf-type">What's this about?</label>
@@ -634,9 +645,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title"></div>
 </div>
 
-<script src="js/data.js?v=2026-05-09e"></script>
-<script src="js/motion.js?v=2026-05-09e"></script>
-<script src="js/app.js?v=2026-05-09e"></script>
+<script src="js/data.js?v=2026-05-09f"></script>
+<script src="js/motion.js?v=2026-05-09f"></script>
+<script src="js/app.js?v=2026-05-09f"></script>
 
 </body>
 </html>

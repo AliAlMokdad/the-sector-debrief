@@ -445,10 +445,6 @@ function bindQuoteShare(scope) {
       const text = b.dataset.text;
       const url  = encodeURIComponent('https://thesectordebrief.com');
       const n = b.dataset.net;
-      let target = '';
-      if (n === 'x')  target = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-      if (n === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-      if (n === 'wa') target = `https://wa.me/?text=${text}%20${url}`;
       const r = b.getBoundingClientRect();
       if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
       if (n === 'copy') {
@@ -457,6 +453,23 @@ function bindQuoteShare(scope) {
         flash(b, '✓');
         return;
       }
+      // On mobile devices that support the native share sheet, prefer it
+      // for X/LinkedIn/WhatsApp · the OS picker is one tap and offers
+      // every messaging app the user has installed.
+      const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      const decoded = decodeURIComponent(text);
+      if (isCoarse && navigator.share) {
+        navigator.share({
+          title: 'The Sector Debrief',
+          text: `"${decoded}" · The Sector Debrief`,
+          url: 'https://thesectordebrief.com'
+        }).catch(() => {});
+        return;
+      }
+      let target = '';
+      if (n === 'x')  target = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+      if (n === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+      if (n === 'wa') target = `https://wa.me/?text=${text}%20${url}`;
       window.open(target, '_blank', 'width=600,height=500');
     });
   });
@@ -854,6 +867,26 @@ function bindMobileNav() {
   toggle.addEventListener('click', () => {
     const open = links.classList.toggle('mobile-open');
     toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    // Lock body scroll behind the open drawer (mirror of modal behavior)
+    if (open) {
+      document.body.classList.add('nav-open');
+    } else {
+      document.body.classList.remove('nav-open');
+    }
+  });
+  // Tap anywhere outside the drawer to close it
+  document.addEventListener('click', (e) => {
+    if (!links.classList.contains('mobile-open')) return;
+    if (toggle.contains(e.target) || links.contains(e.target)) return;
+    closeMobileNav();
+  });
+  // Esc closes the drawer too
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && links.classList.contains('mobile-open')) {
+      closeMobileNav();
+      toggle.focus();
+    }
   });
 }
 function closeMobileNav() {
@@ -861,7 +894,9 @@ function closeMobileNav() {
   const links = $('.nav-links');
   const wasOpen = links?.classList.contains('mobile-open');
   links?.classList.remove('mobile-open');
+  document.body.classList.remove('nav-open');
   toggle?.setAttribute('aria-expanded', 'false');
+  toggle?.setAttribute('aria-label', 'Open menu');
   // If menu was open and focus is somewhere inside it, return focus to the toggle button
   if (wasOpen && links && links.contains(document.activeElement)) {
     toggle?.focus();
