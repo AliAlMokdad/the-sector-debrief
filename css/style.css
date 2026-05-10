@@ -1618,7 +1618,8 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   background: var(--cream);
   border: 1.5px solid var(--ink-mute);
   border-radius: var(--rad);
-  font-size: 14px; color: var(--ink);
+  /* 16px prevents iOS Safari from auto-zooming on focus */
+  font-size: 16px; color: var(--ink);
   outline: none; transition: border 0.15s;
 }
 .form-field input:focus,
@@ -2194,7 +2195,8 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   background: var(--paper);
   border: 1.5px solid var(--ink-mute);
   border-radius: var(--rad);
-  font-size: 14px; outline: none;
+  /* 16px prevents iOS Safari from auto-zooming on focus */
+  font-size: 16px; outline: none;
 }
 .search-box input:focus { border-color: var(--cobalt); }
 .search-box::before {
@@ -2373,6 +2375,60 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   .ep-feat-num { font-size: 36px; }
   .ep-feat-play { width: 48px; height: 48px; }
   .ep-feat-play::before { border-left-width: 12px; border-top-width: 8px; border-bottom-width: 8px; }
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE POLISH · touch targets, tap highlight, smoothness
+   Applied globally so iOS / Android / hybrid devices all benefit.
+   ═══════════════════════════════════════════ */
+html {
+  /* Prevent iOS rotation-induced text auto-zoom */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  /* Kill the default grey/blue tap flash on iOS · we have our own :active styles */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hover-only effects: only fire on devices that actually have hover.
+   On touch devices, :hover often "sticks" after a tap, so isolating it. */
+@media (hover: hover) and (pointer: fine) {
+  /* (existing :hover rules already work here · this is a marker rule) */
+}
+
+/* Touch-friendly defaults for tappable elements */
+a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
+.mini-btn, .mini-play, .modal-close, .nav-toggle, .footer-orb, .orb,
+.pause-next, .pause-share, .nav-cta, .yt-sub-btn, .footer-yt-cta,
+.section-link, .form-submit, .ep-empty-btn {
+  /* Removes 300ms double-tap delay on older Android browsers */
+  touch-action: manipulation;
+}
+
+/* Touch-only refinements (phones + tablets) */
+@media (hover: none) and (pointer: coarse) {
+  /* Bigger, more comfortable touch targets */
+  .quote-share button { width: 40px; height: 40px; font-size: 14px; opacity: 0.85; }
+  .nav-toggle { width: 44px; height: 44px; }
+  .modal-close { width: 44px; height: 44px; }
+  .mini-play { width: 44px; height: 44px; }
+  .mini-btn { min-width: 40px; min-height: 40px; }
+  .pause-btn { min-height: 44px; }
+
+  /* No mouse · disable cursor-blend tricks fully */
+  .cursor-dot, .cursor-ring, .scroll-prog { display: none !important; }
+
+  /* Sticky :hover bug · avoid lingering "pressed" look after tap */
+  .ep-card:hover, .blog-card:hover, .host:hover { transform: none; }
+  .platform-btn:hover, .ep-link:hover { transform: none; }
+
+  /* Slow / pause battery-burning ambient animations */
+  .quotes-track { animation-duration: 90s; }
+  .floating-dots span { animation-duration: 26s; }
+
+  /* Smoother native momentum scrolling on legacy iOS */
+  html, body { -webkit-overflow-scrolling: touch; }
 }
 
 /* ═══════════════════════════════════════════

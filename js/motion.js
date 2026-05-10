@@ -273,7 +273,9 @@
 
   // ─── PARALLAX BRUSHES (rAF-throttled, skip hidden) ───
   function initParallax() {
-    if (reducedMotion) return;
+    // Skip parallax on touch devices · saves battery, prevents jank, and the
+    // brushes are already hidden via @media (max-width: 640px) anyway.
+    if (reducedMotion || isTouch) return;
     const els = document.querySelectorAll('.brush');
     if (!els.length) return;
     let pending = false;
