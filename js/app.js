@@ -593,7 +593,7 @@ function openBlog(slug) {
         <span>${post.readTime} read</span>
         ${dateLine}
       </div>
-      <h1 id="modal-blog-title">${post.title}</h1>
+      <h2 id="modal-blog-title" class="blog-modal-h1">${post.title}</h2>
       ${post.body}
       ${pauseSection}
       ${footer}
