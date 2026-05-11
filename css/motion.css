@@ -287,12 +287,21 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 
 /* ── HERO COVER image scale-in reveal ── */
+/* Cover image gentle zoom-out as it enters.
+   Note: we do NOT set an outer transform: scale(1.08) declaration here ·
+   the @keyframes provides both the start (1.08) and end (1.0) states,
+   so style.css's `transition: transform 4s ease` cannot drag the element
+   back to a stale "declared" value after the animation finishes. */
 .hero-cover-img img {
-  transform: scale(1.08);
-  animation: heroImg 1.4s 3.2s cubic-bezier(.2,.8,.2,1) both;
+  animation: heroImg 1.2s 0.5s cubic-bezier(.2,.8,.2,1) both;
 }
 @keyframes heroImg {
-  to { transform: scale(1); }
+  from { transform: scale(1.08); }
+  to   { transform: scale(1); }
+}
+@media (hover: none) and (pointer: coarse) {
+  /* On phones the intro is shorter and users want the cover front-and-centre fast */
+  .hero-cover-img img { animation-delay: 0.2s; animation-duration: 0.8s; }
 }
 
 /* ── SCROLL REVEAL ── */
