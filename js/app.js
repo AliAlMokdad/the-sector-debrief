@@ -413,27 +413,30 @@ function renderBlog() {
 function renderQuotes() {
   const track = $('#quotes-track');
   if (track) {
-    const dup = [...QUOTES, ...QUOTES];
-    track.innerHTML = dup.map(quoteCard).join('');
+    const originals = QUOTES.map(q => quoteCard(q, false)).join('');
+    const clones    = QUOTES.map(q => quoteCard(q, true)).join('');
+    track.innerHTML = originals + clones;
     bindQuoteShare(track);
   }
   const grid = $('#quotes-grid');
   if (grid) {
-    grid.innerHTML = QUOTES.map(quoteCard).join('');
+    grid.innerHTML = QUOTES.map(q => quoteCard(q, false)).join('');
     bindQuoteShare(grid);
   }
 }
-function quoteCard(q) {
+function quoteCard(q, isClone = false) {
+  const hidden = isClone ? ' aria-hidden="true"' : '';
+  const tab    = isClone ? ' tabindex="-1"' : '';
   return `
-    <div class="quote-card ${q.color}">
+    <div class="quote-card ${q.color}"${hidden}>
       <div class="quote-mark-big">"</div>
       <p class="quote-text">${q.text}</p>
       <div class="quote-source">${q.source}</div>
       <div class="quote-share">
-        <button data-net="x" data-text="${encodeURIComponent(q.text)}" title="Share on X">𝕏</button>
-        <button data-net="li" data-text="${encodeURIComponent(q.text)}" title="LinkedIn">in</button>
-        <button data-net="wa" data-text="${encodeURIComponent(q.text)}" title="WhatsApp">💬</button>
-        <button data-net="copy" data-text="${q.text.replace(/"/g,'&quot;')}" title="Copy">⧉</button>
+        <button${tab} data-net="x" data-text="${encodeURIComponent(q.text)}" title="Share on X">𝕏</button>
+        <button${tab} data-net="li" data-text="${encodeURIComponent(q.text)}" title="LinkedIn">in</button>
+        <button${tab} data-net="wa" data-text="${encodeURIComponent(q.text)}" title="WhatsApp">💬</button>
+        <button${tab} data-net="copy" data-text="${q.text.replace(/"/g,'&quot;')}" title="Copy">⧉</button>
       </div>
     </div>
   `;
