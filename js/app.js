@@ -121,6 +121,7 @@ function navigate(page) {
 // ─── HERO / HOME ───
 function renderHome() {
   const latest = $('#home-episodes');
+  if (!latest) return;
   latest.innerHTML = EPISODES.slice(0, 3).map(epCard).join('');
   bindEpCards(latest);
 
@@ -176,6 +177,7 @@ function bindEpCards(scope) {
 function renderEpisodes() {
   const featured = $('#ep-featured');
   const grid = $('#episodes-grid');
+  if (!grid) return;
 
   const filtered = EPISODES.filter(ep => {
     if (!state.search) return true;
@@ -429,6 +431,7 @@ function renderPauseHero() {
 // ─── BLOG ───
 function renderBlog() {
   const grid = $('#blog-grid');
+  if (!grid) return;
   grid.innerHTML = BLOG_POSTS.map(post => {
     const cover = blogCoverSVG(post.epN);
     const tag = post.pinned
@@ -547,6 +550,7 @@ function flash(el, text) {
 // ─── ABOUT ───
 function renderAbout() {
   const grid = $('#hosts-grid');
+  if (!grid) return;
   grid.innerHTML = HOSTS.map(h => `
     <article class="host" data-accent="${escAttr(h.accent)}">
       <div class="host-avatar host-avatar-photo">
@@ -898,15 +902,30 @@ function bindContactForm() {
       return;
     }
 
+    // Resolve these up-front so the robot-check error path can announce through
+    // the same live region used for AJAX success / error.
+    const btn     = form.querySelector('.form-submit');
+    const success = $('#form-success');
+
     // Must tick the robot check first
     if (robotInput && !robotInput.checked) {
       robotBox?.classList.add('robot-check-error');
+      robotInput.setAttribute('aria-invalid', 'true');
+      if (success) {
+        success.style.display = 'block';
+        success.classList.add('is-error');
+        success.textContent = '✗ Please confirm you\'re not a robot before sending.';
+        setTimeout(() => {
+          success.style.display = 'none';
+          success.classList.remove('is-error');
+        }, 5000);
+      }
       robotInput.focus();
       return;
     }
+    // Clear any prior validation state once the user submits with the box ticked.
+    robotInput?.removeAttribute('aria-invalid');
 
-    const btn     = form.querySelector('.form-submit');
-    const success = $('#form-success');
     const original = btn.textContent;
     btn.textContent = 'Sending…';
     btn.disabled = true;
@@ -1076,7 +1095,11 @@ function injectEpisodeSchema() {
       'contentUrl': `https://www.youtube.com/watch?v=${ep.id}`
     }
   }));
-  try { slot.textContent = JSON.stringify(items); } catch (_) {}
+  try {
+    slot.textContent = JSON.stringify(items);
+  } catch (e) {
+    console.warn('Episode schema injection failed (PodcastEpisode JSON-LD will be missing for crawlers):', e);
+  }
 }
 
 // ─── INIT ───

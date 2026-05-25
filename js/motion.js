@@ -42,8 +42,12 @@
   }
 
   // ─── CUSTOM CURSOR ───
+  // Skip the JS-managed cursor entirely for users with prefers-reduced-motion —
+  // they should keep their native system cursor. Custom cursors are a vestibular
+  // / cognitive accessibility friction-point even when the cursor itself doesn't
+  // animate (it still hides the system pointer the OS provides).
   function initCursor() {
-    if (isTouch) return;
+    if (isTouch || reducedMotion) return;
     document.body.classList.add('has-cursor');
     const dot = document.createElement('div');
     const ring = document.createElement('div');
@@ -69,17 +73,6 @@
     document.addEventListener('mouseenter', () => {
       if (cursorReady) { dot.style.opacity = 1; ring.style.opacity = 1; }
     });
-
-    // Reduced motion: just pin the cursor to the pointer with no easing/rAF loop
-    if (reducedMotion) {
-      document.addEventListener('mousemove', e => {
-        dot.style.setProperty('--cur-x', e.clientX + 'px');
-        dot.style.setProperty('--cur-y', e.clientY + 'px');
-        ring.style.setProperty('--cur-x', e.clientX + 'px');
-        ring.style.setProperty('--cur-y', e.clientY + 'px');
-      });
-      return;
-    }
 
     // Spring-smoothed ring + lightly eased dot for buttery motion.
     // Idles the rAF loop when the spring has converged (mouse held still) so the

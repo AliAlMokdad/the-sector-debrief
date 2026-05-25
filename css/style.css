@@ -2226,8 +2226,12 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   .form-row { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .nav-inner { padding: 14px 20px; }
-  .nav-links, .nav-cta { display: none; }
+  .nav-inner { padding: 14px 20px; gap: 8px; }
+  .nav-links { display: none; }
+  /* Keep the Listen CTA visible in the mobile top bar — it's the primary call to
+     action and was disappearing entirely on phones. */
+  .nav-cta { padding: 8px 10px; font-size: 13px; }
+  .nav-cta-icon { width: 10px; height: 10px; }
   /* ── mobile nav drawer ── */
   .nav-links.mobile-open {
     display: flex;
