@@ -994,6 +994,14 @@ body::after {
 .footer-strip span,
 .quote-card,
 .pause-mark::after,
-.footer-yt-cta::after {
+.footer-yt-cta::after,
+/* Round 2 of cull: 8 simultaneous .ep-thumb-play pulses (one per episode card)
+   + YT shimmer gradients that redraw constantly. The big home-climax pulse on
+   .yt-sub-btn itself is kept — that's the one signature attention element. */
+.ep-thumb-play,
+.yt-sub-btn .yt-icon,
+.yt-meta-num,
+.yt-kicker::after,
+.hero-cover-glow {
   animation: none !important;
 }
