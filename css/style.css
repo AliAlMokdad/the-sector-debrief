@@ -112,9 +112,7 @@ body > * { position: relative; z-index: 1; }
    ═══════════════════════════════════════════ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(239,232,214,0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(239,232,214,0.96);
   border-bottom: 1px solid rgba(26,22,20,0.08);
   transition: padding 0.3s, background 0.3s;
 }
@@ -2237,8 +2235,6 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
     position: absolute;
     top: 100%; left: 0; right: 0;
     background: rgba(239,232,214,0.98);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     border-top: 1px solid rgba(26,22,20,0.1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.12);
     padding: 8px 0 20px;
