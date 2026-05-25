@@ -4,7 +4,15 @@
 
 (() => {
   const isTouch = matchMedia('(hover: none)').matches;
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Track prefers-reduced-motion live: if the user toggles the OS setting while
+  // the page is open, in-flight rAF loops (cursor, waveform) check this value on
+  // each tick and bail out. Note: re-enabling motion after toggle-off requires a
+  // page reload to re-arm the disabled effects.
+  const _rmQuery = matchMedia('(prefers-reduced-motion: reduce)');
+  let reducedMotion = _rmQuery.matches;
+  const _rmListener = e => { reducedMotion = e.matches; };
+  if (typeof _rmQuery.addEventListener === 'function') _rmQuery.addEventListener('change', _rmListener);
+  else if (typeof _rmQuery.addListener === 'function') _rmQuery.addListener(_rmListener);  // Safari < 14
 
   // ─── INTRO LOADER ───
   function startIntro() {
@@ -83,6 +91,15 @@
     const IDLE_EPS  = 0.05;
     let rafId = null;
     function loop() {
+      // Bail out if reduced-motion was toggled on mid-session — snap to pointer.
+      if (reducedMotion) {
+        dot.style.setProperty('--cur-x', mx + 'px');
+        dot.style.setProperty('--cur-y', my + 'px');
+        ring.style.setProperty('--cur-x', mx + 'px');
+        ring.style.setProperty('--cur-y', my + 'px');
+        rafId = null;
+        return;
+      }
       dx += (mx - dx) * DOT_EASE;
       dy += (my - dy) * DOT_EASE;
       vx = (vx + (mx - rx) * STIFFNESS) * DAMPING;
@@ -348,7 +365,7 @@
     }).observe(c);
     function draw() {
       rafId = null;
-      if (!visible) return;
+      if (!visible || reducedMotion) return;
       t += 0.04;
       ctx.clearRect(0, 0, c.width, c.height);
       const w = c.width, h = c.height;

@@ -2410,7 +2410,7 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
   .nav-toggle { width: 44px; height: 44px; }
   .modal-close { width: 44px; height: 44px; }
   .mini-play { width: 44px; height: 44px; }
-  .mini-btn { min-width: 40px; min-height: 40px; }
+  .mini-btn { min-width: 44px; min-height: 44px; }
   .pause-btn { min-height: 44px; }
   .footer-orb { width: 44px; height: 44px; }
   .orb { min-width: 44px; min-height: 44px; }
@@ -2418,7 +2418,7 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
   /* Mini-player on mobile: keep CLOSE button visible (was hidden on small screens,
      leaving users no way to dismiss the player). Hide only the prev/next pair. */
   .mini-btn:not(.mini-play):not(#mini-close) { display: none; }
-  #mini-close { display: flex !important; min-width: 40px; min-height: 40px; }
+  #mini-close { display: flex !important; min-width: 44px; min-height: 44px; }
 
   /* No mouse · disable cursor-blend tricks fully */
   .cursor-dot, .cursor-ring, .scroll-prog { display: none !important; }

@@ -4,8 +4,14 @@
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-const fmtDate = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-const fmtMonthYear = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+// Safari 13 and earlier return Invalid Date for date-only ISO strings ('YYYY-MM-DD').
+// Append a time component so all engines parse as local midnight.
+const _parseDate = (d) => {
+  if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) return new Date(d + 'T00:00:00');
+  return new Date(d);
+};
+const fmtDate = (d) => _parseDate(d).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const fmtMonthYear = (d) => _parseDate(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 
 // Escape user-facing strings before interpolating into HTML attributes (alt, title, etc.)
 // Also safe for text-content positions — overcautious but harmless there.
@@ -55,6 +61,15 @@ function _showRevealsIn(scope) {
     el.classList.add('in');
   });
 }
+// Per-route document.title so each SPA "page" is distinct in browser tabs, bookmarks,
+// and screen-reader page-load announcements.
+const PAGE_TITLES = {
+  home:     'The Sector Debrief · Honest conversations on humanitarian work',
+  episodes: 'Episodes · The Sector Debrief',
+  blog:     'Essays · The Sector Debrief',
+  about:    'About · The Sector Debrief',
+  contact:  'Contact · The Sector Debrief',
+};
 function _doNavigate(page, opts) {
   opts = opts || {};
   // Reset the episode search when leaving the Episodes page so the input value
@@ -66,6 +81,7 @@ function _doNavigate(page, opts) {
     if (searchInput) searchInput.value = '';
   }
   state.page = page;
+  document.title = PAGE_TITLES[page] || PAGE_TITLES.home;
   $$('.page').forEach(p => p.classList.toggle('active', p.dataset.page === page));
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
   if (!opts.preserveScroll) {
@@ -464,13 +480,13 @@ function quoteCard(q, isClone = false) {
   return `
     <div class="quote-card ${q.color}"${hidden}>
       <div class="quote-mark-big">"</div>
-      <p class="quote-text">${q.text}</p>
-      <div class="quote-source">${q.source}</div>
+      <p class="quote-text">${escAttr(q.text)}</p>
+      <div class="quote-source">${escAttr(q.source)}</div>
       <div class="quote-share">
-        <button${tab} data-net="x" data-text="${encodeURIComponent(q.text)}" title="Share on X">𝕏</button>
-        <button${tab} data-net="li" data-text="${encodeURIComponent(q.text)}" title="LinkedIn">in</button>
-        <button${tab} data-net="wa" data-text="${encodeURIComponent(q.text)}" title="WhatsApp">💬</button>
-        <button${tab} data-net="copy" data-text="${q.text.replace(/"/g,'&quot;')}" title="Copy">⧉</button>
+        <button${tab} type="button" data-net="x"    data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on X"        title="Share on X"><span aria-hidden="true">𝕏</span></button>
+        <button${tab} type="button" data-net="li"   data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on LinkedIn" title="LinkedIn"><span aria-hidden="true">in</span></button>
+        <button${tab} type="button" data-net="wa"   data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on WhatsApp" title="WhatsApp"><span aria-hidden="true">💬</span></button>
+        <button${tab} type="button" data-net="copy" data-text="${escAttr(q.text)}" aria-label="Copy quote to clipboard"  title="Copy"><span aria-hidden="true">⧉</span></button>
       </div>
     </div>
   `;
@@ -608,7 +624,7 @@ function openBlog(slug) {
       </div>
       <div class="pause-card">
         <div class="pause-mark" aria-hidden="true">"</div>
-        <p class="pause-question" id="pause-q-${post.slug}" aria-live="polite" aria-atomic="true">${reflections[initialIdx]}</p>
+        <p class="pause-question" id="pause-q-${post.slug}" aria-live="polite" aria-atomic="true">${escAttr(reflections[initialIdx])}</p>
         <div class="pause-actions">
           <button class="pause-btn pause-next" type="button" data-action="next" aria-label="Show another question">
             <span class="pause-icon" aria-hidden="true">↻</span>
@@ -808,7 +824,8 @@ function showMini(ep) {
 }
 function bindMini() {
   const mp = $('#mini-player');
-  if (!mp) return;
+  if (!mp || mp.dataset.bound) return;
+  mp.dataset.bound = '1';
   $('#mini-close')?.addEventListener('click', () => {
     mp.classList.remove('active');
     state.player = { active: false, ep: null };
@@ -837,7 +854,8 @@ function bindMini() {
 // ─── CONTACT FORM ───
 function bindContactForm() {
   const form = $('#contact-form');
-  if (!form) return;
+  if (!form || form.dataset.bound) return;
+  form.dataset.bound = '1';
 
   // Make _next dynamic so staging / preview environments don't bounce users to production.
   const nextInput = form.querySelector('input[name="_next"]');
@@ -934,7 +952,8 @@ function bindContactForm() {
 // ─── SEARCH (120ms debounce so we don't re-render on every keystroke) ───
 function bindSearch() {
   const input = $('#search-input');
-  if (!input) return;
+  if (!input || input.dataset.bound) return;
+  input.dataset.bound = '1';
   let t = null;
   input.addEventListener('input', () => {
     state.search = input.value;
@@ -947,7 +966,8 @@ function bindSearch() {
 function bindMobileNav() {
   const toggle = $('#nav-toggle');
   const links  = $('.nav-links');
-  if (!toggle || !links) return;
+  if (!toggle || !links || toggle.dataset.bound) return;
+  toggle.dataset.bound = '1';
   toggle.addEventListener('click', () => {
     const open = links.classList.toggle('mobile-open');
     toggle.setAttribute('aria-expanded', String(open));
