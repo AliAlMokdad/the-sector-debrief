@@ -73,10 +73,15 @@
       return;
     }
 
-    // Spring-smoothed ring + lightly eased dot for buttery motion
+    // Spring-smoothed ring + lightly eased dot for buttery motion.
+    // Idles the rAF loop when the spring has converged (mouse held still) so the
+    // browser isn't doing 60fps style-recalc on a stationary cursor. Re-arms on
+    // the next mousemove.
     const STIFFNESS = 0.18;
     const DAMPING   = 0.84;
     const DOT_EASE  = 0.35;
+    const IDLE_EPS  = 0.05;
+    let rafId = null;
     function loop() {
       dx += (mx - dx) * DOT_EASE;
       dy += (my - dy) * DOT_EASE;
@@ -87,9 +92,15 @@
       dot.style.setProperty('--cur-y', dy + 'px');
       ring.style.setProperty('--cur-x', rx + 'px');
       ring.style.setProperty('--cur-y', ry + 'px');
-      requestAnimationFrame(loop);
+      const settled = Math.abs(mx - dx) + Math.abs(my - dy)
+                    + Math.abs(mx - rx) + Math.abs(my - ry)
+                    + Math.abs(vx) + Math.abs(vy) < IDLE_EPS;
+      if (settled) { rafId = null; return; }
+      rafId = requestAnimationFrame(loop);
     }
-    loop();
+    function wake() { if (rafId == null) rafId = requestAnimationFrame(loop); }
+    document.addEventListener('mousemove', wake, { passive: true });
+    wake();
 
     // hover states (rAF-throttled · `mouseover` fires on every element boundary)
     let currentState = null;
@@ -198,39 +209,52 @@
     initReveal();
   };
 
-  // ─── 3D TILT + CURSOR-AWARE GLOW (rAF-throttled) ───
+  // ─── 3D TILT + CURSOR-AWARE GLOW (rAF-throttled, hover-gated) ───
+  // Only listens to mousemove while the pointer is actually inside a .tilt card.
+  // Previously this attached a global mousemove that ran closest('.tilt') on
+  // every event, queuing rAF + a getBoundingClientRect even when the pointer
+  // was nowhere near a card.
   function initTilt() {
     if (isTouch || reducedMotion) return;
+    let activeCard = null;
     let lastEvent = null;
     let pending = false;
     function flush() {
       pending = false;
-      if (!lastEvent) return;
-      const card = lastEvent.target && lastEvent.target.closest && lastEvent.target.closest('.tilt');
-      if (!card) return;
-      // Skip if the card has been detached from the DOM mid-rerender
-      if (!card.isConnected) return;
-      const r = card.getBoundingClientRect();
+      if (!activeCard || !lastEvent) return;
+      if (!activeCard.isConnected) { activeCard = null; return; }
+      const r = activeCard.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) return;
       const px = (lastEvent.clientX - r.left) / r.width  - 0.5;
       const py = (lastEvent.clientY - r.top)  / r.height - 0.5;
-      card.style.transform = `perspective(1100px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg) translateY(-6px)`;
-      card.style.setProperty('--mx', ((lastEvent.clientX - r.left) / r.width)  * 100 + '%');
-      card.style.setProperty('--my', ((lastEvent.clientY - r.top)  / r.height) * 100 + '%');
+      activeCard.style.transform = `perspective(1100px) rotateY(${px * 5}deg) rotateX(${-py * 5}deg) translateY(-6px)`;
+      activeCard.style.setProperty('--mx', ((lastEvent.clientX - r.left) / r.width)  * 100 + '%');
+      activeCard.style.setProperty('--my', ((lastEvent.clientY - r.top)  / r.height) * 100 + '%');
     }
-    document.addEventListener('mousemove', e => {
+    function onCardMove(e) {
       lastEvent = e;
       if (pending) return;
       pending = true;
       requestAnimationFrame(flush);
-    });
+    }
     function reset(card) {
       card.style.transform = 'perspective(1100px) rotateX(0deg) rotateY(0deg) translateY(0)';
       setTimeout(() => { if (card.matches(':hover')) return; card.style.transform = ''; }, 450);
     }
+    // Delegate via mouseover/mouseout (bubble) so this works for dynamically added cards.
+    document.addEventListener('mouseover', e => {
+      const card = e.target.closest && e.target.closest('.tilt');
+      if (!card || card === activeCard) return;
+      activeCard = card;
+      card.addEventListener('mousemove', onCardMove);
+    });
     document.addEventListener('mouseout', e => {
       const card = e.target.closest && e.target.closest('.tilt');
-      if (card && !card.contains(e.relatedTarget)) reset(card);
+      if (card && !card.contains(e.relatedTarget)) {
+        card.removeEventListener('mousemove', onCardMove);
+        if (activeCard === card) activeCard = null;
+        reset(card);
+      }
     }, true);
   }
   // Attach tilt to dynamically created cards (episode + blog + host only · not round cover image)
