@@ -189,19 +189,24 @@
   window.splitText = splitText;
 
   // ─── SCROLL REVEAL ───
+  // app.js calls window.refreshReveal() on every SPA navigation, which calls this
+  // function. We must disconnect the previous observer before creating a new one,
+  // otherwise observers accumulate across navigations (memory + perf leak).
+  let revealObs = null;
   function initReveal() {
-    const obs = new IntersectionObserver(entries => {
+    if (revealObs) { revealObs.disconnect(); revealObs = null; }
+    revealObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('in');
-          obs.unobserve(e.target);
+          revealObs.unobserve(e.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
 
     document.querySelectorAll('.reveal, .reveal-stagger, .split, .blog-card').forEach(el => {
       if (el.classList.contains('in')) return;
-      obs.observe(el);
+      revealObs.observe(el);
     });
   }
 

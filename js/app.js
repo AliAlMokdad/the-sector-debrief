@@ -8,12 +8,33 @@ const fmtDate = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric'
 const fmtMonthYear = (d) => new Date(d).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 
 // Escape user-facing strings before interpolating into HTML attributes (alt, title, etc.)
+// Also safe for text-content positions — overcautious but harmless there.
 const escAttr = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;')
   .replace(/"/g, '&quot;')
   .replace(/'/g, '&#39;')
   .replace(/</g, '&lt;')
   .replace(/>/g, '&gt;');
+
+// Try to copy text to the system clipboard. Resolves true on success, false otherwise.
+// Never throws — clipboard.writeText rejects on non-HTTPS, no focus, permission-denied.
+async function safeCopy(text) {
+  try {
+    if (!navigator.clipboard?.writeText) return false;
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch (e) {
+    console.warn('Clipboard copy failed:', e);
+    return false;
+  }
+}
+
+// Only let http(s) / mailto / internal links through. Prevents javascript: in href.
+function safeUrl(u) {
+  const s = String(u == null ? '' : u).trim();
+  if (/^(https?:\/\/|mailto:|\/|#)/i.test(s)) return s;
+  return '#';
+}
 
 const state = {
   page: 'home',
@@ -36,6 +57,14 @@ function _showRevealsIn(scope) {
 }
 function _doNavigate(page, opts) {
   opts = opts || {};
+  // Reset the episode search when leaving the Episodes page so the input value
+  // and `state.search` don't desync — returning to Episodes would otherwise show
+  // a blank input but a filtered grid.
+  if (state.page === 'episodes' && page !== 'episodes' && state.search) {
+    state.search = '';
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = '';
+  }
   state.page = page;
   $$('.page').forEach(p => p.classList.toggle('active', p.dataset.page === page));
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
@@ -99,11 +128,11 @@ function epCard(ep) {
       <div class="ep-body">
         <div class="ep-meta">
           <span>${fmtMonthYear(ep.date)}</span>
-          ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
-          ${ep.guest ? `<span class="ep-meta-tag">w/ ${ep.guest.split(' ')[0]}</span>` : ''}
+          ${ep.duration ? `<span>·</span><span>${escAttr(ep.duration)}</span>` : ''}
+          ${ep.guest ? `<span class="ep-meta-tag">w/ ${escAttr(ep.guest.split(' ')[0])}</span>` : ''}
         </div>
-        <h3 class="ep-title" data-ep="${ep.id}">${ep.title}</h3>
-        <p class="ep-desc">${ep.description}</p>
+        <h3 class="ep-title" data-ep="${ep.id}">${escAttr(ep.title)}</h3>
+        <p class="ep-desc">${escAttr(ep.description)}</p>
         <div class="ep-actions">
           <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ YouTube</a>
           <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Spotify</a>
@@ -181,7 +210,7 @@ function renderEpisodes() {
 }
 
 function renderFeaturedEpisode(ep) {
-  const themeChips = ep.themes.map(t => `<span class="theme-chip">${t}</span>`).join('');
+  const themeChips = ep.themes.map(t => `<span class="theme-chip">${escAttr(t)}</span>`).join('');
   const altTitle = escAttr(ep.title);
   return `
     <div class="ep-feat-thumb" data-ep="${ep.id}">
@@ -193,14 +222,14 @@ function renderFeaturedEpisode(ep) {
     </div>
     <div class="ep-feat-body">
       <div class="ep-feat-tag">★ Latest Episode</div>
-      <h3 class="ep-feat-title" data-ep="${ep.id}">${ep.title}</h3>
+      <h3 class="ep-feat-title" data-ep="${ep.id}">${escAttr(ep.title)}</h3>
       <div class="ep-feat-meta">
         <span>${fmtDate(ep.date)}</span>
-        ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
-        ${ep.guest ? `<span>·</span><span>w/ ${ep.guest}</span>` : ''}
+        ${ep.duration ? `<span>·</span><span>${escAttr(ep.duration)}</span>` : ''}
+        ${ep.guest ? `<span>·</span><span>w/ ${escAttr(ep.guest)}</span>` : ''}
       </div>
       <div class="ep-feat-themes">${themeChips}</div>
-      <p class="ep-feat-desc">${ep.description}</p>
+      <p class="ep-feat-desc">${escAttr(ep.description)}</p>
       <div class="ep-actions">
         <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Watch on YouTube</a>
         <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Spotify</a>
@@ -355,13 +384,18 @@ function renderPauseHero() {
     const slug = root.dataset.activeSlug;
     if (slug) openBlog(slug);
   });
-  copyBtn?.addEventListener('click', () => {
+  copyBtn?.addEventListener('click', async () => {
     const text = pool[idx].q;
-    navigator.clipboard?.writeText(`"${text}" · The Sector Debrief`);
-    const r = copyBtn.getBoundingClientRect();
-    if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
+    const ok = await safeCopy(`"${text}" · The Sector Debrief`);
     const original = copyBtn.innerHTML;
-    copyBtn.innerHTML = '<span aria-hidden="true">✓</span>';
+    if (ok) {
+      const r = copyBtn.getBoundingClientRect();
+      if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
+      copyBtn.innerHTML = '<span aria-hidden="true">✓</span>';
+    } else {
+      copyBtn.innerHTML = '<span aria-hidden="true">!</span>';
+      copyBtn.title = 'Copy not available in this browser';
+    }
     setTimeout(() => { copyBtn.innerHTML = original; }, 1100);
   });
 
@@ -385,18 +419,18 @@ function renderBlog() {
       ? `<span class="blog-tag blog-tag-pinned">★ Editorial</span>`
       : `<span>Episode ${post.epN}</span>`;
     return `
-      <article class="blog-card${post.pinned ? ' is-pinned' : ''}" data-slug="${post.slug}">
+      <article class="blog-card${post.pinned ? ' is-pinned' : ''}" data-slug="${escAttr(post.slug)}">
         <div class="blog-card-img" style="background:#000;">
-          <img src="${cover}" alt="${post.title}"/>
+          <img src="${cover}" alt="${escAttr(post.title)}"/>
         </div>
         <div class="blog-card-body">
           <div class="blog-card-meta">
             ${tag}
             <span>·</span>
-            <span>${post.readTime} read</span>
+            <span>${escAttr(post.readTime)} read</span>
           </div>
-          <h3 class="blog-card-title">${post.title}</h3>
-          <p class="blog-card-excerpt">${post.excerpt}</p>
+          <h3 class="blog-card-title">${escAttr(post.title)}</h3>
+          <p class="blog-card-excerpt">${escAttr(post.excerpt)}</p>
           <div class="blog-card-foot">
             <span class="blog-read">Read essay →</span>
           </div>
@@ -443,36 +477,47 @@ function quoteCard(q, isClone = false) {
 }
 function bindQuoteShare(scope) {
   $$('.quote-share button', scope).forEach(b => {
-    b.addEventListener('click', e => {
+    b.addEventListener('click', async e => {
       e.stopPropagation();
       const text = b.dataset.text;
       const url  = encodeURIComponent('https://thesectordebrief.com');
       const n = b.dataset.net;
       const r = b.getBoundingClientRect();
-      if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
       if (n === 'copy') {
-        // dataset.text for copy button is plain text (HTML-entity-decoded by browser); write it directly
-        navigator.clipboard.writeText(b.dataset.text);
-        flash(b, '✓');
+        // dataset.text for copy button is plain text (HTML-entity-decoded by browser).
+        const ok = await safeCopy(b.dataset.text);
+        if (ok) {
+          if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
+          flash(b, '✓');
+        } else {
+          flash(b, '!');
+          b.title = 'Copy not available';
+        }
         return;
       }
-      // On mobile devices that support the native share sheet, prefer it
-      // for X/LinkedIn/WhatsApp · the OS picker is one tap and offers
-      // every messaging app the user has installed.
-      const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
+      // Build the web-intent URL up front so we can fall back to it from any share failure.
       const decoded = decodeURIComponent(text);
-      if (isCoarse && navigator.share) {
-        navigator.share({
-          title: 'The Sector Debrief',
-          text: `"${decoded}" · The Sector Debrief`,
-          url: 'https://thesectordebrief.com'
-        }).catch(() => {});
-        return;
-      }
       let target = '';
       if (n === 'x')  target = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
       if (n === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
       if (n === 'wa') target = `https://wa.me/?text=${text}%20${url}`;
+      // On mobile devices that support the native share sheet, prefer it.
+      // Fall through to the web intent if anything other than user-dismiss happens.
+      const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+      if (isCoarse && navigator.share) {
+        try {
+          await navigator.share({
+            title: 'The Sector Debrief',
+            text: `"${decoded}" · The Sector Debrief`,
+            url: 'https://thesectordebrief.com'
+          });
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;  // user dismissed the sheet
+          // fall through to web intent
+        }
+      }
       window.open(target, '_blank', 'width=600,height=500');
     });
   });
@@ -491,10 +536,10 @@ function renderAbout() {
       <div class="host-avatar host-avatar-photo">
         <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="600" height="600" decoding="async"/>
       </div>
-      <h3 class="host-name">${h.name}</h3>
-      <div class="host-role">${h.role}</div>
-      <p class="host-bio">${h.bio}</p>
-      <a class="host-linkedin" href="${h.linkedin}" target="_blank" rel="noopener noreferrer">
+      <h3 class="host-name">${escAttr(h.name)}</h3>
+      <div class="host-role">${escAttr(h.role)}</div>
+      <p class="host-bio">${escAttr(h.bio)}</p>
+      <a class="host-linkedin" href="${escAttr(safeUrl(h.linkedin))}" target="_blank" rel="noopener noreferrer">
         <span class="li-mark">in</span>
         <span>Connect on LinkedIn</span>
         <span class="li-arrow">→</span>
@@ -509,18 +554,18 @@ function openEpisode(ep) {
   m.innerHTML = `
     <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
     <div class="modal-video">
-      <iframe src="https://www.youtube.com/embed/${ep.id}?rel=0" loading="lazy" title="Episode ${ep.n}: ${ep.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/${ep.id}?rel=0" loading="lazy" title="Episode ${ep.n}: ${escAttr(ep.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="modal-body">
       <div class="modal-meta">
         <span>Episode ${ep.n}</span>
         <span>·</span>
         <span>${fmtDate(ep.date)}</span>
-        ${ep.duration ? `<span>·</span><span>${ep.duration}</span>` : ''}
-        ${ep.guest ? `<span>· w/ ${ep.guest}</span>` : ''}
+        ${ep.duration ? `<span>·</span><span>${escAttr(ep.duration)}</span>` : ''}
+        ${ep.guest ? `<span>· w/ ${escAttr(ep.guest)}</span>` : ''}
       </div>
-      <h2 class="modal-title" id="modal-episode-title">${ep.title}</h2>
-      <p class="modal-desc">${ep.description}</p>
+      <h2 class="modal-title" id="modal-episode-title">${escAttr(ep.title)}</h2>
+      <p class="modal-desc">${escAttr(ep.description)}</p>
       <div class="modal-actions">
         <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
         <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">🎵 Spotify</a>
@@ -533,9 +578,12 @@ function openEpisode(ep) {
   const backdrop = $('#modal-backdrop');
   backdrop.classList.add('active', 'is-top');
   lockBodyScroll();
-  state.lastTrigger = document.activeElement;
+  // Only capture the trigger if no modal is already open — nested modals must NOT
+  // overwrite the outer modal's trigger, or focus restoration ends up on a
+  // detached node (the inner modal's button) when both close.
+  rememberTrigger();
   setTimeout(() => $('#modal-episode .modal-close')?.focus(), 50);
-  trapFocus($('#modal-episode'));
+  attachTrap(m);
   showMini(ep);
 }
 
@@ -587,16 +635,16 @@ function openBlog(slug) {
   m.innerHTML = `
     <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
     <div class="blog-hero" style="background:#000;">
-      <img src="${cover}" alt="${post.title}"/>
+      <img src="${cover}" alt="${escAttr(post.title)}"/>
     </div>
     <div class="blog-modal-body">
       <div class="blog-card-meta">
         ${metaTag}
         <span>·</span>
-        <span>${post.readTime} read</span>
+        <span>${escAttr(post.readTime)} read</span>
         ${dateLine}
       </div>
-      <h2 id="modal-blog-title" class="blog-modal-h1">${post.title}</h2>
+      <h2 id="modal-blog-title" class="blog-modal-h1">${escAttr(post.title)}</h2>
       ${post.body}
       ${pauseSection}
       ${footer}
@@ -606,9 +654,9 @@ function openBlog(slug) {
   const blogBack = $('#modal-blog-backdrop');
   blogBack.classList.add('active', 'is-top');
   lockBodyScroll();
-  state.lastTrigger = document.activeElement;
+  rememberTrigger();
   setTimeout(() => $('#modal-blog .modal-close')?.focus(), 50);
-  trapFocus($('#modal-blog'));
+  attachTrap(m);
   bindPause(m, post);
 }
 
@@ -654,10 +702,12 @@ function bindPause(scope, post) {
         if (action === 'share-li') window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'share-wa') window.open(`https://wa.me/?text=${t}%20${url}`, '_blank', 'width=600,height=500');
         if (action === 'copy') {
-          navigator.clipboard.writeText(`"${text}" · The Sector Debrief`);
           const original = btn.innerHTML;
-          btn.innerHTML = '✓';
-          setTimeout(() => { btn.innerHTML = original; }, 1100);
+          safeCopy(`"${text}" · The Sector Debrief`).then(ok => {
+            btn.innerHTML = ok ? '✓' : '!';
+            if (!ok) btn.title = 'Copy not available';
+            setTimeout(() => { btn.innerHTML = original; }, 1100);
+          });
         }
       }
     });
@@ -671,6 +721,11 @@ window.closeModal = function() {
   const open = $$('.modal-backdrop.active');
   if (!open.length) return;
   const top = open[open.length - 1];
+  // Tear down the Tab-trap on the inner .modal so we don't leak keydown listeners
+  // across repeated open/close cycles.
+  top.querySelectorAll('.modal').forEach(m => {
+    if (m._trapCleanup) { m._trapCleanup(); m._trapCleanup = null; }
+  });
   top.classList.remove('active', 'is-top');
   top.querySelectorAll('iframe').forEach(f => f.remove());
   if (!$$('.modal-backdrop.active').length) {
@@ -706,9 +761,25 @@ function lockBodyScroll() {
   document.body.classList.add('scroll-lock');
 }
 
-// Simple focus trap: tab-cycle inside the modal until it closes.
-function trapFocus(modal) {
-  if (!modal) return () => {};
+// Capture the element that opened the modal — but only if we don't already have one
+// tracked. Nested modal-opens must NOT clobber the outermost trigger, or restoration
+// focuses a now-detached element when both close.
+function rememberTrigger() {
+  if (state.lastTrigger && document.body.contains(state.lastTrigger)) return;
+  const active = document.activeElement;
+  if (!active || active === document.body) { state.lastTrigger = null; return; }
+  // Skip if the currently-focused element is itself inside an open modal (we want
+  // to track the page-level trigger, not an inner modal button).
+  if (active.closest && active.closest('.modal-backdrop.active')) return;
+  state.lastTrigger = active;
+}
+
+// Attach a Tab-trap to the modal. Stores the cleanup on the modal node so closeModal
+// can remove the listener and prevent leaks across repeated open/close cycles.
+function attachTrap(modal) {
+  if (!modal) return;
+  // Detach a previous trap on this same modal element if one is still attached.
+  if (modal._trapCleanup) { modal._trapCleanup(); modal._trapCleanup = null; }
   const sel = 'a[href], area[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), textarea:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
   function onKey(e) {
     if (e.key !== 'Tab') return;
@@ -723,7 +794,7 @@ function trapFocus(modal) {
     }
   }
   modal.addEventListener('keydown', onKey);
-  return () => modal.removeEventListener('keydown', onKey);
+  modal._trapCleanup = () => modal.removeEventListener('keydown', onKey);
 }
 
 // ─── MINI PLAYER ───
@@ -830,7 +901,7 @@ function bindContactForm() {
         body: data
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === 'false') throw new Error('failed');
+      if (!res.ok || json.success === 'false') throw new Error('FormSubmit returned failure: ' + res.status);
 
       success.style.display = 'block';
       success.classList.remove('is-error');
@@ -840,12 +911,22 @@ function bindContactForm() {
       btn.textContent = original;
       btn.disabled = false;
       setTimeout(() => { success.style.display = 'none'; }, 7000);
-    } catch {
-      // AJAX failed · fall back to native form POST (triggers FormSubmit activation email
-      // on first use, then redirects back to the site via _next)
+    } catch (err) {
+      // Surface the real error so it's debuggable. Show the user an honest failure
+      // message instead of silently triggering form.submit(), which would redirect
+      // via _next and display a fake "✓ Message sent" banner on return.
+      console.warn('Contact form AJAX submission failed:', err);
       btn.textContent = original;
       btn.disabled = false;
-      form.submit();
+      if (success) {
+        success.style.display = 'block';
+        success.classList.add('is-error');
+        success.textContent = '✗ Couldn\'t send the message right now. Please email ali_moukdad@hotmail.com directly.';
+        setTimeout(() => {
+          success.style.display = 'none';
+          success.classList.remove('is-error');
+        }, 9000);
+      }
     }
   });
 }
