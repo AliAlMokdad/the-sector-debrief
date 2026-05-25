@@ -457,9 +457,16 @@ function renderBlog() {
       </article>
     `;
   }).join('');
-  $$('.blog-card', grid).forEach(card => {
-    card.addEventListener('click', () => openBlog(card.dataset.slug));
-  });
+  // Bind-once delegation pattern (matches bindEpCards). renderBlog() only runs
+  // at init today, but if a future filter / re-render calls it again, we'd
+  // otherwise stack click handlers and open the modal twice per click.
+  if (!grid.dataset.blogDelegated) {
+    grid.dataset.blogDelegated = '1';
+    grid.addEventListener('click', e => {
+      const card = e.target.closest('.blog-card');
+      if (card && grid.contains(card)) openBlog(card.dataset.slug);
+    });
+  }
 }
 
 // ─── QUOTES ───
@@ -938,7 +945,9 @@ function bindContactForm() {
         body: data
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === 'false') throw new Error('FormSubmit returned failure: ' + res.status);
+      // Positively assert success — checking `=== 'false'` would treat any missing
+      // / unexpected response shape (e.g. proxy 2xx with empty body) as success.
+      if (!res.ok || json.success !== 'true') throw new Error('FormSubmit returned failure: ' + res.status);
 
       success.style.display = 'block';
       success.classList.remove('is-error');

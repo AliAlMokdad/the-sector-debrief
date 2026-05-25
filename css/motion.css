@@ -369,8 +369,12 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 .ep-card .ep-thumb img,
 .ep-card .ep-body { transform: translateZ(0); transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
-.ep-card:hover .ep-thumb img { transform: translateZ(40px) scale(1.04); }
-.ep-card:hover .ep-body { transform: translateZ(20px); }
+/* translateZ requires preserve-3d on the parent. Tilt is now a no-op so cards
+   never get the .tilt class (and never get preserve-3d). Z-translations collapsed
+   to the 2D plane and did nothing visually. Replaced with a small scale + lift
+   that actually fires. */
+.ep-card:hover .ep-thumb img { transform: scale(1.04); }
+.ep-card:hover .ep-body { transform: translateY(-2px); }
 
 /* ── MAGNETIC BUTTON ── */
 .magnetic {
@@ -521,7 +525,9 @@ body.cursor-text .cursor-dot { opacity: 0; }
   box-shadow: 0 0 0 0 rgba(232,184,44,0.7);
   animation: pulseGlow 2.4s ease-out infinite;
 }
-.ep-card:hover .ep-thumb-play { animation-play-state: running; }
+/* (was: .ep-card:hover .ep-thumb-play { animation-play-state: running; }
+    inert after the ambient cull set animation: none !important on
+    .ep-thumb-play. Removed as dead CSS.) */
 @keyframes pulseGlow {
   0%   { box-shadow: 0 0 0 0 rgba(232,184,44,0.7); }
   60%  { box-shadow: 0 0 0 24px rgba(232,184,44,0); }
@@ -1002,6 +1008,10 @@ body::after {
 .yt-sub-btn .yt-icon,
 .yt-meta-num,
 .yt-kicker::after,
-.hero-cover-glow {
+.hero-cover-glow,
+/* Round 3: caught by final-QA preview probe — .manifesto-blob still had its
+   drift animation declared in motion.css:917 even though I'd commented the A/B/C
+   variants out of style.css. */
+.manifesto-blob {
   animation: none !important;
 }
