@@ -41,12 +41,29 @@
     });
   }
 
-  // ─── CUSTOM CURSOR ───
-  // Skip the JS-managed cursor entirely for users with prefers-reduced-motion —
-  // they should keep their native system cursor. Custom cursors are a vestibular
-  // / cognitive accessibility friction-point even when the cursor itself doesn't
-  // animate (it still hides the system pointer the OS provides).
+  // ─── CUSTOM CURSOR (disabled 2026-05-25) ───
+  // The custom cursor was the actual source of "bad mouse movement" complaints.
+  // Spring physics on the ring intentionally trails the OS pointer — that lag
+  // IS what users feel as "heavy." The OS-rendered native cursor is by definition
+  // the smoothest possible cursor experience: it runs in the compositor process,
+  // not on the main JS thread, and has zero coupling to page rendering work.
+  //
+  // Replacing the JS cursor with the native one also removes:
+  //   - 1500+ elements with `cursor: none !important` cascade
+  //   - Per-frame --cur-x / --cur-y CSS variable writes
+  //   - body class swaps (cursor-hover / cursor-play / cursor-text) that
+  //     triggered style recalc against the whole document
+  //   - Cursor mousemove + mouseover delegation
+  //
+  // Standard `cursor: pointer` on links and buttons (browser default) plus
+  // `cursor: text` on inputs (browser default) handles the hover-state signaling
+  // the custom cursor was conveying. No visual regression that matters.
   function initCursor() {
+    return;  // intentionally a no-op
+    // The legacy implementation is kept below as dead code so the previous
+    // behaviour is recoverable if Ali ever wants it back. The early return
+    // means none of this runs.
+    /* eslint-disable */
     if (isTouch || reducedMotion) return;
     document.body.classList.add('has-cursor');
     const dot = document.createElement('div');
@@ -281,8 +298,15 @@
     });
   };
 
-  // ─── MAGNETIC BUTTONS (rAF-throttled) ───
+  // ─── MAGNETIC BUTTONS (disabled 2026-05-25) ───
+  // 16 magnetic buttons on the page, each with its own mousemove listener.
+  // Even rAF-throttled, hovering ANY button triggered a per-frame translate3d
+  // update that re-promoted the button to its own composite layer and contributed
+  // to the "mouse feels weird" experience. Standard CSS :hover effects already
+  // signal interactivity; the magnetic pull was decorative noise.
   function initMagnetic() {
+    return;  // intentionally a no-op
+    /* eslint-disable */
     if (isTouch || reducedMotion) return;
     document.querySelectorAll('.platform-btn, .nav-cta, .form-submit, .ep-link.primary, .section-link').forEach(btn => {
       if (btn.dataset.magnetic) return;

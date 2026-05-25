@@ -11,9 +11,20 @@
 }
 
 /* ── kill cursor only after JS-managed custom cursor is ready ── */
+/* Disabled 2026-05-25 alongside the JS cursor removal. The native OS cursor is
+   now used everywhere. Rule kept (gated by .has-cursor which is no longer added)
+   so the original behaviour is recoverable if needed. */
 @media (hover: hover) and (pointer: fine) {
   body.has-cursor, body.has-cursor * { cursor: none !important; }
   body.has-cursor input, body.has-cursor textarea, body.has-cursor select { cursor: text !important; }
+}
+
+/* Explicit pointer cursor for elements that open modals on click but aren't
+   semantically links/buttons (divs/articles get the default arrow otherwise). */
+.ep-card, .ep-thumb, .ep-feat-thumb, .ep-title, .ep-feat-title,
+.blog-card, .quote-card, .host,
+[data-cursor="play"], [data-cursor="hover"] {
+  cursor: pointer;
 }
 
 /* ── CUSTOM CURSOR (transform-only sizing for GPU smoothness) ── */
