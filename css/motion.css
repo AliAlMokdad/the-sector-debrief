@@ -19,11 +19,23 @@
   body.has-cursor input, body.has-cursor textarea, body.has-cursor select { cursor: text !important; }
 }
 
-/* Explicit pointer cursor for elements that open modals on click but aren't
-   semantically links/buttons (divs/articles get the default arrow otherwise). */
-.ep-card, .ep-thumb, .ep-feat-thumb, .ep-title, .ep-feat-title,
-.blog-card, .quote-card, .host,
-[data-cursor="play"], [data-cursor="hover"] {
+/* Simple branded cursor on watchable / clickable items — a small play-triangle
+   inside a dark circle. Pure CSS via cursor:url() with an inline SVG, so the OS
+   compositor draws it directly (no JS, no rAF, no lag). Browser falls back to
+   `pointer` if SVG cursors aren't supported (mostly old browsers). Hotspot is at
+   the center of the icon (14,14). */
+.ep-card, .ep-thumb, .ep-feat-thumb, .ep-feat-title, .ep-title,
+.hero-cover-img,
+[data-cursor="play"] {
+  cursor:
+    url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2228%22%20viewBox%3D%220%200%2028%2028%22%3E%3Ccircle%20cx%3D%2214%22%20cy%3D%2214%22%20r%3D%2213%22%20fill%3D%22%231A1614%22%20stroke%3D%22%23E8B82C%22%20stroke-width%3D%221.5%22%2F%3E%3Cpolygon%20points%3D%2211%2C9%2011%2C19%2019%2C14%22%20fill%3D%22%23E8B82C%22%2F%3E%3C%2Fsvg%3E") 14 14,
+    pointer;
+}
+
+/* Non-watchable interactive items keep the standard system pointer. Cards,
+   quotes, hosts open modals — `pointer` signals clickability without conflating
+   them with episodes. */
+.blog-card, .quote-card, .host, [data-cursor="hover"] {
   cursor: pointer;
 }
 
@@ -958,4 +970,30 @@ body::after {
     transition-duration: 0.001ms !important;
   }
   .intro { display: none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════
+   AMBIENT MOTION CULL (2026-05-25)
+   ═══════════════════════════════════════════════════════
+   The page had ~30 infinite CSS animations running continuously: brush drifts,
+   blob drifts, floating dots, breathing quote cards, dashed-ring spinners,
+   pulse halos. Each one was GPU-accelerated and cheap individually, but the
+   sum kept the compositor process constantly busy regardless of user input —
+   contributing to the "feels heavy" sensation even while sitting still.
+
+   This block disables the decorative ambient animations. Hover transitions,
+   one-shot reveal animations, the marquee (signature element), the intro
+   loader, and the YouTube subscribe pulse on the home climax CTA are all
+   preserved. The originals are kept in place — this override just stops them
+   from running, so any one can be brought back by removing it here.
+   ═══════════════════════════════════════════════════════ */
+.brush-1, .brush-2, .brush-3, .brush-4, .brush-5, .brush-6,
+.floating-dots-mid span, .floating-dots-footer span,
+.footer::before, .footer::after,
+.footer-brand .nav-logo-mark,
+.footer-strip span,
+.quote-card,
+.pause-mark::after,
+.footer-yt-cta::after {
+  animation: none !important;
 }

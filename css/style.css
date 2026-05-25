@@ -1213,10 +1213,12 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   z-index: 0;
   filter: blur(0.4px);
 }
-.page-brush-a { top: 60px; right: 2%;  width: 200px; opacity: 0.4; animation: pgBrushA 12s ease-in-out infinite alternate; }
-.page-brush-b { top: 280px; left: -40px; width: 200px;  animation: pgBrushB 14s ease-in-out infinite alternate; }
-.page-brush-c { bottom: 8%; right: 8%;  width: 240px;  animation: pgBrushC 11s ease-in-out infinite alternate; }
-.page-brush-d { top: 55%;   left: 6%;   width: 220px;  animation: pgBrushD 16s ease-in-out infinite alternate; }
+/* Page-brush ambient drifts disabled in the ambient-motion cull (motion.css).
+   Static positioning preserved — visuals identical, no per-frame transform work. */
+.page-brush-a { top: 60px; right: 2%;  width: 200px; opacity: 0.4; }
+.page-brush-b { top: 280px; left: -40px; width: 200px; }
+.page-brush-c { bottom: 8%; right: 8%;  width: 240px; }
+.page-brush-d { top: 55%;   left: 6%;   width: 220px; }
 @keyframes pgBrushA {
   0%   { transform: translate(0,0) rotate(-2deg); }
   100% { transform: translate(14px,-12px) rotate(2deg); }
@@ -1432,7 +1434,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   width: 280px; height: 280px;
   background: radial-gradient(circle, var(--cobalt) 0%, transparent 70%);
   opacity: 0.55;
-  animation: manifestoBlobA 14s var(--ease-standard) infinite alternate;
+  /* manifesto blob A drift disabled in ambient-motion cull */
 }
 .manifesto::after {
   content: ''; position: absolute;
@@ -1440,7 +1442,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   width: 360px; height: 360px;
   background: radial-gradient(circle, var(--crimson) 0%, transparent 70%);
   opacity: 0.45;
-  animation: manifestoBlobB 18s var(--ease-standard) infinite alternate;
+  /* manifesto blob B drift disabled in ambient-motion cull */
 }
 .manifesto-blob {
   position: absolute; bottom: 30px; right: 8%;
@@ -1448,7 +1450,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
   background: var(--mustard);
   opacity: 0.85;
-  animation: manifestoBlobC 11s var(--ease-standard) infinite alternate;
+  /* manifesto blob C drift disabled in ambient-motion cull */
 }
 @keyframes manifestoBlobA {
   0%   { transform: translate(0,0) scale(1); }
@@ -1942,7 +1944,7 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   background: radial-gradient(circle, var(--cobalt) 0%, transparent 65%);
   opacity: 0.65;
   pointer-events: none;
-  animation: pauseHeroBlobA 16s ease-in-out infinite alternate;
+  /* pause-hero blob A drift disabled in ambient-motion cull */
 }
 .pause-hero-card::after {
   content: '';
@@ -1953,7 +1955,7 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   background: radial-gradient(circle, var(--crimson) 0%, transparent 65%);
   opacity: 0.55;
   pointer-events: none;
-  animation: pauseHeroBlobB 19s ease-in-out infinite alternate;
+  /* pause-hero blob B drift disabled in ambient-motion cull */
 }
 @keyframes pauseHeroBlobA {
   0%   { transform: translate(0,0) scale(1); }

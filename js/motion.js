@@ -241,12 +241,19 @@
     initReveal();
   };
 
-  // ─── 3D TILT + CURSOR-AWARE GLOW (rAF-throttled, hover-gated) ───
-  // Only listens to mousemove while the pointer is actually inside a .tilt card.
-  // Previously this attached a global mousemove that ran closest('.tilt') on
-  // every event, queuing rAF + a getBoundingClientRect even when the pointer
-  // was nowhere near a card.
+  // ─── 3D TILT (disabled 2026-05-25) ───
+  // Tilt rotated .ep-card / .blog-card / .host elements on mouse hover via a
+  // perspective transform tied to pointer position. Even with hover-gating, it
+  // added another mouse-coupled motion source — every mouseover across the card
+  // grid fired closest('.tilt') checks and a rAF tick on hovered cards. Combined
+  // with 18 .tilt elements promoted to composite layers via `will-change:
+  // transform`, this was net-negative for the "feels heavy" complaint.
+  //
+  // Standard :hover styles on .ep-card (shadow lift, title color, glow ::after)
+  // already signal interactivity. The 3D perspective rotation was decorative.
   function initTilt() {
+    return;  // intentionally a no-op
+    /* eslint-disable */
     if (isTouch || reducedMotion) return;
     let activeCard = null;
     let lastEvent = null;
@@ -289,13 +296,11 @@
       }
     }, true);
   }
-  // Attach tilt to dynamically created cards (episode + blog + host only · not round cover image)
+  // Attach tilt to dynamically created cards — now a no-op alongside initTilt.
+  // Keeping the function existing so callers in app.js don't throw; just doesn't
+  // add the .tilt class anymore, so no composite-layer promotion either.
   window.applyTilt = function(scope = document) {
-    if (isTouch || reducedMotion) return;
-    scope.querySelectorAll('.ep-card, .blog-card, .host').forEach(c => {
-      if (c.classList.contains('tilt')) return;
-      c.classList.add('tilt');
-    });
+    return;
   };
 
   // ─── MAGNETIC BUTTONS (disabled 2026-05-25) ───
@@ -434,17 +439,13 @@
     document.body.appendChild(c);
     return c;
   }
+  // Page-transition curtain (disabled 2026-05-25). The 750ms curtain wipe before
+  // every nav click made the site feel laggy — clicking Episodes shouldn't take
+  // three quarters of a second to start showing Episodes. Now navigates instantly.
+  // The curtain DOM helper makeCurtain() is still defined above in case future
+  // work wants to bring it back.
   window.navigateWithCurtain = function(page, navigateFn) {
-    if (reducedMotion) { navigateFn(page); return; }
-    const c = makeCurtain();
-    c.classList.remove('exit');
-    c.classList.add('enter');
-    setTimeout(() => {
-      navigateFn(page);
-      c.classList.remove('enter');
-      c.classList.add('exit');
-      setTimeout(() => { c.classList.remove('exit'); }, 700);
-    }, 750);
+    navigateFn(page);
   };
 
   // ─── SHARE SPARKLE ───
