@@ -744,10 +744,15 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   font-weight: 400;
 }
 .ep-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+/* All .ep-link buttons read as filled affordances. Non-primary used to be
+   border-only on a cream card, which made Spotify and Apple look like outlined
+   text rather than buttons. Now they sit on --cream-deep so the visual cue
+   "this is clickable" matches the ink-filled primary YouTube button. */
 .ep-link {
-  font-size: 11px; font-weight: 700;
+  font-size: 12px; font-weight: 700;
   letter-spacing: 1px; text-transform: uppercase;
-  padding: 7px 12px;
+  padding: 8px 14px;
+  background: var(--cream-deep);
   border: 1.5px solid var(--ink);
   color: var(--ink);
   border-radius: 2px;

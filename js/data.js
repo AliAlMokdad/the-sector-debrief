@@ -126,8 +126,81 @@ const QUOTES = [
   { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" }
 ];
 
-// AI-generated long-form blog posts · one per episode + one pinned editorial
+// AI-generated long-form blog posts · one per episode + two pinned editorials
 const BLOG_POSTS = [
+  {
+    epId: null,
+    epN: 9,
+    pinned: true,
+    slug: 'pause-button-and-ai',
+    title: 'Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting',
+    excerpt: 'Every essay on this site ends with five reflection prompts. They rotate through the Pause and Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.',
+    readTime: '6 min',
+    reflections: [
+      "What is one tool in your work that you use because it saves time, and one you use because it changes how you think? How do you keep the two from collapsing into each other?",
+      "When was the last time you reached for AI to do a task, and the answer it gave was technically correct but ended a conversation you needed to keep having?",
+      "Pick a reflection prompt you have asked someone else to sit with this year. Have you sat with it yourself? Be honest.",
+      "What part of your thinking would you not outsource to a tool, even one you trust? Why that part specifically?",
+      "If you removed every AI assistant from your workflow for a week, which decisions would still be just as good, and which would suddenly take longer? What does that tell you about where you were really using it?"
+    ],
+    body: `<p>There is a quiet button on this site. Open the Blog page and the first thing you see, above the essays, is a tile that says Pause and Reflect. It rotates through questions. Click "Ask me another" and the question changes. There is no algorithm guessing what to show you. The questions came from the essays. Each essay ends with five of them. The tile cycles through all of them.</p>
+
+<p>This essay is about how those questions get there, and where AI fits.</p>
+
+<h2>Where the Prompts Come From</h2>
+
+<p>Every episode of The Sector Debrief is a conversation between Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay, sometimes with a guest. We record. We talk. The talk gets transcribed. Then someone has to figure out what is actually worth taking from the conversation into the rest of the work.</p>
+
+<p>For each essay on this site, we ask one simple thing: what are the five questions a listener could sit with this week and find different ground under their feet?</p>
+
+<p>That is a hard thing to do well. Most of the sector's "key takeaways" sections produce takeaways nobody takes. They produce summaries that close conversations rather than open them. They turn the messiness of a real conversation into a checklist.</p>
+
+<p>We try not to do that. The prompts are designed to leave you slightly less settled than when you started. That is the work.</p>
+
+<h2>Where AI Fits</h2>
+
+<p>The essays on this site are AI-assisted. So are the prompts. We do not hide that. The note at the top of the data file literally says "AI-generated long-form blog posts." It would be strange not to acknowledge it.</p>
+
+<p>What AI is doing: helping turn a fifty-minute conversation into structured long-form text, extracting the underlying questions, suggesting a frame, drafting the prose. It is fast at this. It is a useful tool.</p>
+
+<p>What AI is not doing: the conversation, the listening, the choosing of what matters, the willingness to be wrong on the record, the personal stake the three of us carry into each recording. None of that is generated. None of that can be.</p>
+
+<blockquote>The AI is a tool. The thinking is ours. We are not embarrassed about either part.</blockquote>
+
+<p>There is a temptation in this moment, especially in the humanitarian sector, to either dismiss AI as a corner-cutting trick or to embrace it as a replacement for thinking. We think both moves are wrong. The first is nostalgia. The second is the thing Thomas Jepson-Lay warned about in Episode 7 when he talked about pilots and the autopilot. If you outsource the part of the work that builds the skill, the skill atrophies. You do not notice until the autopilot fails.</p>
+
+<p>So we use AI as a tool. The prompts are not generated live every time someone clicks "Ask me another." They are written, reviewed, and committed to the site once. The button is a rotation through pre-written questions. The AI helped write them. The AI is not asking them. We are asking them. The button is just a way of putting one of them in front of you at a moment when you might let it land.</p>
+
+<h2>What the Tool Is Actually For</h2>
+
+<p>The Pause Button is not a feature. It is not a content strategy. It is a small invitation, repeated.</p>
+
+<p>Most of the things in this sector that ask for your attention assume you are going to read them, nod, and move on. The whole architecture of the work is built on volume: more updates, more reports, more meetings, more decks. The Pause Button is the opposite move. It asks you to slow down on one question.</p>
+
+<p>If you click the button five times in a row, you will see five different prompts. That is fine. It is also fine to click it once and stay with the question for ten minutes. The tool does not care. The tool is on your side either way.</p>
+
+<h2>The Sector's AI Problem in Miniature</h2>
+
+<p>Ali Al Mokdad keeps coming back to a story from Episode 7. He generated twenty-two annexes for a local partner using AI, because the prime applicant requested twenty-two annexes that would never be implemented. AI request, AI response. Documents flowing in both directions. None of them attached to the real work. He called it building an alternative reality.</p>
+
+<p>That is what AI as a default tool looks like in this sector right now. It is not the AI's fault. It is what you get when you point a tool that produces content at a system that demands content for its own sake.</p>
+
+<p>The Pause Button is a small attempt to point the same tool in the other direction. Less content. More questions. Slower. Not because the question takes more time to read, but because the question takes more time to honestly answer.</p>
+
+<h2>What This Is Not</h2>
+
+<p>It is not a wellness moment. It is not a "take a deep breath" intervention. It is not coaching. The prompts are not nice. Some of them are intentionally uncomfortable. If you find one that does not bother you at all, that is information. Maybe you have done the work on it already. Maybe you have not let it land yet.</p>
+
+<p>It is also not the only thing the AI on this site does. The essays themselves are AI-assisted long-form. The episode summaries are AI-assisted. The blog covers are generated by a small JavaScript function rather than by a designer. There is a layer of structural assistance running underneath the whole site. We are not pretending otherwise.</p>
+
+<p>The thing the AI is not doing is the conversation, the choice of which question matters, or the work of actually sitting with the answer. That is yours.</p>
+
+<h2>The Last Thing</h2>
+
+<p>If you got this far and you have not clicked the Pause Button yet, scroll back up and try it. Read the question that comes up. Sit with it for one minute before you do anything else.</p>
+
+<p>That minute is the actual product on this site. Everything else is wrapping.</p>`
+  },
   {
     epId: 'vPJAWTb2dPI',
     epN: 7,
@@ -656,7 +729,7 @@ const HOSTS = [
     name: 'Ali Al Mokdad',
     slug: 'ali-al-mokdad',
     role: 'Co-Host',
-    bio: 'Builds and unbuilds operations for a living. Spent the last decade inside the humanitarian response, moving between field offices and headquarters in some of the hardest displacement contexts of the era. Writes openly about the operational pressure most leaders feel but rarely say out loud, and about the distance between what the sector announces and what it actually does.',
+    bio: 'Humanitarian operations and leadership practitioner. Founder of the AI Literacy Foundation. Author of Quantum Humanitarian. Currently advising on international finance standard operating procedures with the Danish Red Cross. Builds and unbuilds operations for a living. Spent the last decade inside the humanitarian response, moving between field offices and headquarters in some of the hardest displacement contexts of the era. Writes openly about the operational pressure most leaders feel but rarely say out loud, and about the distance between what the sector announces and what it actually does.',
     linkedin: 'https://www.linkedin.com/in/ali-al-mokdad/',
     accent: 'cobalt'
   },
@@ -666,7 +739,7 @@ const HOSTS = [
     name: 'Kim Kucinskas',
     slug: 'kim-kucinskas',
     role: 'Co-Host',
-    bio: 'Spends her time in the messy middle of organisational change. Interested in the difference between strategy on paper and strategy that actually moves a building. Cares about what equitable, locally-led work looks like once the slides are turned off and someone has to choose. A systems thinker who keeps asking who the system is currently designed for.',
+    bio: 'Systems thinker connecting strategy and implementation. Based at Humentum in Washington, working on operational change in international development. Spends her time in the messy middle of organisational change. Interested in the difference between strategy on paper and strategy that actually moves a building. Cares about what equitable, locally-led work looks like once the slides are turned off and someone has to choose. A practitioner who keeps asking who the system is currently designed for.',
     linkedin: 'https://www.linkedin.com/in/kim-kucinskas/',
     accent: 'crimson'
   },
@@ -676,7 +749,7 @@ const HOSTS = [
     name: 'Thomas Jepson-Lay',
     slug: 'thomas-jepson-lay',
     role: 'Co-Host',
-    bio: 'Eighteen years of senior leadership across some of the most demanding humanitarian environments on earth. Now coaches the people who carry that kind of weight. Brings a calm, irreverent, and structural read on what leadership under pressure actually costs, and what it can still do when most of the certainty has left the room.',
+    bio: 'Independent leadership coach for the humanitarian sector. Former senior operational lead across multiple international NGOs. Eighteen years of senior leadership across some of the most demanding humanitarian environments on earth. Now coaches the people who carry that kind of weight. Brings a calm, irreverent, and structural read on what leadership under pressure actually costs, and what it can still do when most of the certainty has left the room.',
     linkedin: 'https://www.linkedin.com/in/thomas-jepson-lay-1588211b4/',
     accent: 'mustard'
   }

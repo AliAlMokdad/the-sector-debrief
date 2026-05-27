@@ -273,6 +273,7 @@ function renderFeaturedEpisode(ep) {
 // ─── BLOG COVER GENERATOR ─────────────────────────────────
 const BLOG_COVER_THEMES = {
   0: { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
+  9: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',     shape: 'lines' },
   7: { bg: '#1A1614', fg: '#FAF6EA', accent: '#E8B82C', word: 'CONTRACT',  shape: 'circle' },
   6: { bg: '#2A4530', fg: '#F5F0E2', accent: '#E8B82C', word: 'CHANGING',  shape: 'arc'    },
   5: { bg: '#0D1B2A', fg: '#E8B82C', accent: '#B83A2A', word: 'IDENTITY',  shape: 'circle' },
@@ -282,11 +283,18 @@ const BLOG_COVER_THEMES = {
   1: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ORIGINS',   shape: 'sun'    },
 };
 
-function blogCoverSVG(epN) {
+// Accepts either a post object or a bare epN (backward compatible).
+// Any post with epId === null OR pinned === true gets the "EDITORIAL" label
+// regardless of its epN, so we can have multiple editorials with distinct cover
+// themes (e.g. epN 0 for the original NOTES editorial, epN 9 for the PAUSE one).
+function blogCoverSVG(post) {
+  const epN = (post && typeof post === 'object') ? post.epN : post;
+  const isEditorial = (post && typeof post === 'object')
+    && (post.pinned === true || post.epId === null);
   const n = Number.isFinite(Number(epN)) ? Number(epN) : 1;
   const t = BLOG_COVER_THEMES[n] || BLOG_COVER_THEMES[1];
   const W = 800, H = 500;
-  const labelText = n === 0
+  const labelText = isEditorial || n === 0
     ? 'EDITORIAL  ·  THE SECTOR DEBRIEF'
     : `EPISODE ${String(n).padStart(2,'0')}  ·  THE SECTOR DEBRIEF`;
   let motif = '';
@@ -447,7 +455,7 @@ function renderBlog() {
   const grid = $('#blog-grid');
   if (!grid) return;
   grid.innerHTML = BLOG_POSTS.map(post => {
-    const cover = blogCoverSVG(post.epN);
+    const cover = blogCoverSVG(post);
     const tag = post.pinned
       ? `<span class="blog-tag blog-tag-pinned">★ Editorial</span>`
       : `<span>Episode ${post.epN}</span>`;
@@ -654,7 +662,7 @@ function openBlog(slug) {
   if (!post) return;
   const ep = post.epId ? EPISODES.find(e => e.id === post.epId) : null;
   const m = $('#modal-blog');
-  const cover = blogCoverSVG(post.epN);
+  const cover = blogCoverSVG(post);
   const metaTag = post.pinned
     ? `<span style="color:var(--crimson);font-weight:700">★ EDITORIAL</span>`
     : `<span>Episode ${post.epN}</span>`;
