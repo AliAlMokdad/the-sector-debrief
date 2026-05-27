@@ -21,7 +21,7 @@ const EPISODES = [
     guest: null,
     date: '2026-05-27',
     duration: '54 min',
-    description: 'Ali Al Mokdad opens with a Sunday morning at his door. A family with two children, collecting donations for an NGO, and his trained brain immediately runs through overhead, restricted funds, disallowed costs. Then it stops. Kim Kucinskas, Thomas Jepson-Lay, and Ali sit with what just happened: this is not only a funding problem, it is a social contract problem. The conversation widens into AI in the workplace (productivity gains that get clawed back, atrophy, agents that do not collaborate with each other) and collaboration as a discipline rather than a slogan.',
+    description: 'Ali Al Mokdad opens with a Sunday morning at his door. A family with two children, collecting donations for an NGO, and his trained brain immediately runs through overhead, restricted funds, disallowed costs. Then it stops. Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad sit with what just happened: this is not only a funding problem, it is a social contract problem. The conversation widens into AI in the workplace (productivity gains that get clawed back, atrophy, agents that do not collaborate with each other) and collaboration as a discipline rather than a slogan.',
     themes: ['Donations', 'Collaboration', 'AI']
   },
   {
@@ -133,7 +133,7 @@ const BLOG_POSTS = [
     epN: 7,
     slug: 'sunday-knock',
     title: 'Not Just a Funding Problem: A Sunday Knock and What Came After',
-    excerpt: 'Ali opened the door on a Sunday morning. A family with two children, holding an NGO flyer. His trained brain went straight to overhead and disallowed costs. Then it stopped.',
+    excerpt: 'Ali Al Mokdad opened the door on a Sunday morning. A family with two children, holding an NGO flyer. His trained brain went straight to overhead and disallowed costs. Then it stopped.',
     readTime: '6 min',
     reflections: [
       "What was the last moment in your work when the systems view obscured the human view standing in front of you? What do you remember about the pause?",
@@ -142,9 +142,9 @@ const BLOG_POSTS = [
       "Name a skill you used to have that you now reach for AI to perform. If you were forced to do it without AI tomorrow, how much of it would still work?",
       "Identify someone in your organisation who quietly holds collaboration together. If they left next month, what would actually fall apart? What does that tell you about how the work is really structured?"
     ],
-    body: `<p>It was a Sunday. Ali was at home with coffee. There was a knock at the door.</p>
+    body: `<p>It was a Sunday. Ali Al Mokdad was at home with coffee. There was a knock at the door.</p>
 
-<p>A family was standing there, a mother and two children, holding a small flyer. The pitch started right away. The campaign was familiar; Ali recognised the NGO and the format immediately. He had been on the other side of campaigns just like it not long ago.</p>
+<p>A family was standing there, a mother and two children, holding a small flyer. The pitch started right away. The campaign was familiar; Ali Al Mokdad recognised the NGO and the format immediately. He had been on the other side of campaigns just like it not long ago.</p>
 
 <p>He reached for his phone to send the money. While the transfer was processing, his brain was already doing the thing trained operators' brains do. Where will this actually land. How much will get absorbed at headquarters before it leaves the building. Is this going to cover a loss account. Is this going to a summit. He had spent years inside the machinery that turns donations into restricted and unrestricted lines, and the machinery does not stop running just because there is a family at your door.</p>
 
@@ -154,7 +154,7 @@ const BLOG_POSTS = [
 
 <p>The family on the step had no idea about loss accounts. They did not need to. They had chosen to spend their Sunday going door to door, building to building, repeating the same short pitch about why people here should give money to people elsewhere. The children were tired. They had clearly knocked on a lot of doors already.</p>
 
-<p>The campaign collected over a million dollars that weekend. Ali learned that later in a thank-you message on his phone. By then he had spent two days thinking less about where the million dollars would actually go and more about what those families had been doing that day. Practicing values. Showing their children what solidarity looks like outside the slide deck. Stepping into the institution from the public side.</p>
+<p>The campaign collected over a million dollars that weekend. Ali Al Mokdad learned that later in a thank-you message on his phone. By then he had spent two days thinking less about where the million dollars would actually go and more about what those families had been doing that day. Practicing values. Showing their children what solidarity looks like outside the slide deck. Stepping into the institution from the public side.</p>
 
 <blockquote>For a few hours on a Sunday, the sector's most powerful resource was not its grants office. It was a family standing on a step.</blockquote>
 
@@ -170,7 +170,7 @@ const BLOG_POSTS = [
 
 <h2>The Alternative Reality</h2>
 
-<p>The conversation shifted to AI, and Ali brought a different story. He had been supporting a local NGO through a proposal cycle. The international NGO that was the prime applicant requested twenty-two annexes from the local partner two days before deadline. Policies. Processes. Frameworks. Most of them were not applicable in the country office's context. The executive director did not have the capacity to write twenty-two annexes that would, in any case, never be implemented. So Ali generated them with AI.</p>
+<p>The conversation shifted to AI, and Ali Al Mokdad brought a different story. He had been supporting a local NGO through a proposal cycle. The international NGO that was the prime applicant requested twenty-two annexes from the local partner two days before deadline. Policies. Processes. Frameworks. Most of them were not applicable in the country office's context. The executive director did not have the capacity to write twenty-two annexes that would, in any case, never be implemented. So Ali Al Mokdad generated them with AI.</p>
 
 <p>One side using AI to request things that will never be implemented. The other side using AI to produce things that will never be implemented. Documents flowing in both directions, none of them attached to the real work.</p>
 
@@ -180,7 +180,7 @@ const BLOG_POSTS = [
 
 <h2>The Productivity Trap</h2>
 
-<p>About three years ago, Ali ran a small experiment inside an international NGO. He was using AI tools and automation in his grants role and his workload had measurably dropped. He went to his line manager with a documented case. He had about thirty percent of his time back. He proposed reinvesting half of it in HR work on diversity and inclusion, and the other half on raising organisational awareness about AI.</p>
+<p>About three years ago, Ali Al Mokdad ran a small experiment inside an international NGO. He was using AI tools and automation in his grants role and his workload had measurably dropped. He went to his line manager with a documented case. He had about thirty percent of his time back. He proposed reinvesting half of it in HR work on diversity and inclusion, and the other half on raising organisational awareness about AI.</p>
 
 <p>HR said yes. IT said yes. The line manager said yes. Everyone was excited.</p>
 
@@ -262,7 +262,7 @@ const BLOG_POSTS = [
 
 <p>Making peace is passive. It's what happens when you're too tired to make sense. When you absorb the reality and decide not to fight it. When the strategy document quietly shifts from "here's how we change things" to "here's how we survive things."</p>
 
-<p>The sector is doing a lot of making peace right now and calling it strategic adaptation. Kim, Thomas, and Ali don't pretend there's a clean answer. But they name the distinction. That's a start.</p>
+<p>The sector is doing a lot of making peace right now and calling it strategic adaptation. Kim, Thomas, and Ali Al Mokdad don't pretend there's a clean answer. But they name the distinction. That's a start.</p>
 
 <h2>What the Conversation Was Actually About</h2>
 
@@ -448,7 +448,7 @@ const BLOG_POSTS = [
 
 <h2>Urgent Patience</h2>
 
-<p>The phrase that titles this episode came organically. Ali was asking how she stayed in the role for so long without burning out. Sofia paused, then said: <em>urgent patience</em>.</p>
+<p>The phrase that titles this episode came organically. Ali Al Mokdad was asking how she stayed in the role for so long without burning out. Sofia paused, then said: <em>urgent patience</em>.</p>
 
 <p>The urgency is non-negotiable. People are dying. Systems are failing. The cost of slow is high. But patience is also non-negotiable, because the changes worth making are the ones that take longer than a single tenure, a single grant cycle, a single news cycle. If you are only urgent, you burn out. If you are only patient, you become part of the problem.</p>
 
@@ -490,7 +490,7 @@ const BLOG_POSTS = [
 
 <p>The first is the institutional sector. The large UN agencies, the international NGOs, the legacy networks. This sector is in survival mode. Its leaders are spending most of their cognitive energy on cash flow, restructuring, and political positioning. The work is real. The constraints are also real. And the leadership culture inside these organisations is shaped less by mission and more by the slow defensive logic of trying to preserve as much as possible while losing as little as possible.</p>
 
-<p>The second is what Ali calls the grassroots sector. Smaller, mostly national, often newer, frequently informal. This sector is in a different mode entirely. The leaders aren't asking how to preserve. They're asking how to build. The constraints are different. The cost structure is different. The relationship with risk is different.</p>
+<p>The second is what Ali Al Mokdad calls the grassroots sector. Smaller, mostly national, often newer, frequently informal. This sector is in a different mode entirely. The leaders aren't asking how to preserve. They're asking how to build. The constraints are different. The cost structure is different. The relationship with risk is different.</p>
 
 <blockquote>The institutional sector keeps writing the future of the humanitarian system. The grassroots sector keeps building it. These are no longer the same conversation.</blockquote>
 
