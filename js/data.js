@@ -729,7 +729,7 @@ const HOSTS = [
     name: 'Ali Al Mokdad',
     slug: 'ali-al-mokdad',
     role: 'Co-Host',
-    bio: 'Senior Strategic Leader in Global Impact Operations, Governance Reform, and Humanitarian Diplomacy. Author of Quantum Humanitarian. Builds and unbuilds operations for a living. Spent the last decade inside the humanitarian response, moving between field offices and headquarters in some of the hardest displacement contexts of the era. Writes openly about the operational pressure most leaders feel but rarely say out loud, and about the distance between what the sector announces and what it actually does.',
+    bio: 'Senior Strategic Leader in Global Impact Operations, Governance Reform, and Humanitarian Diplomacy. Author of Quantum Humanitarian. Held multiple senior leadership roles in country operations across some of the hardest displacement contexts of the last decade, moving between field offices and headquarters. Writes openly about the operational pressure most leaders feel but rarely say out loud, and about the distance between what the sector announces and what it actually does.',
     linkedin: 'https://www.linkedin.com/in/ali-al-mokdad/',
     accent: 'cobalt'
   },

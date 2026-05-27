@@ -999,6 +999,24 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .host:hover { transform: translate(-5px, -5px); }
 .host:hover::before { transform: translate(13px, 13px); }
 
+/* Trademark superscript next to "The Sector Debrief" wherever the brand
+   displays (hero h1, nav logo, footer brand, footer copyright). Small but
+   visible. Inherits text color so it adapts to dark footer / light hero. */
+.brand-tm {
+  font-size: 0.45em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.08em;
+  font-weight: 500;
+  letter-spacing: 0;
+  font-family: var(--font-body);
+  opacity: 0.78;
+}
+.hero h1 .brand-tm { font-size: 0.18em; opacity: 0.72; vertical-align: top; margin-top: 0.4em; display: inline-block; }
+.nav-logo .brand-tm { font-size: 0.55em; opacity: 0.7; }
+.footer-brand .brand-tm { font-size: 0.5em; opacity: 0.65; }
+.footer-copy .brand-tm { font-size: 0.7em; opacity: 0.85; }
+
 /* When a visitor arrives via a host-anchor URL (e.g. /#ali-al-mokdad), the
    router calls scrollIntoView on the matching .host card and adds this class
    for a brief gold glow so the visitor knows where they landed. The class
