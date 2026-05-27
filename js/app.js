@@ -82,7 +82,14 @@ function _doNavigate(page, opts) {
   }
   state.page = page;
   document.title = PAGE_TITLES[page] || PAGE_TITLES.home;
-  $$('.page').forEach(p => p.classList.toggle('active', p.dataset.page === page));
+  // Toggle both .active AND aria-hidden so screen readers don't expose the
+  // hidden pages' h1s + landmarks. Without aria-hidden on inactive pages,
+  // SR users would hear the Home hero h1 announced even when on #episodes.
+  $$('.page').forEach(p => {
+    const isActive = p.dataset.page === page;
+    p.classList.toggle('active', isActive);
+    p.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+  });
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
   if (!opts.preserveScroll) {
     window.scrollTo(0, 0);
@@ -605,8 +612,10 @@ function openHostAnchor(slug, opts) {
   opts = opts || {};
   if (state.page !== 'about') {
     // fromHashChange:true preserves the host slug in the URL (otherwise
-    // _doNavigate would rewrite the hash to #about).
-    _doNavigate('about', { fromHashChange: true });
+    // _doNavigate would rewrite the hash to #about). Also pass through
+    // preserveScroll so back/forward (popstate) doesn't jolt the scroll
+    // to 0 just before our smooth scrollIntoView fires.
+    _doNavigate('about', { fromHashChange: true, preserveScroll: !!opts.preserveScroll });
   }
   setTimeout(() => {
     const el = document.getElementById(slug);
@@ -1198,7 +1207,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const hostSlugs = HOSTS.map(h => h.slug);
     const raw = (location.hash || '#home').slice(1);
     if (hostSlugs.includes(raw)) {
-      openHostAnchor(raw);
+      // Pass opts through so popstate-driven host-anchor navigations preserve
+      // the browser's restored scroll position (no jolt-to-top before scroll).
+      openHostAnchor(raw, opts);
       lastHashHandled = location.hash;
       return;
     }
