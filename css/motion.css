@@ -19,12 +19,15 @@
   body.has-cursor input, body.has-cursor textarea, body.has-cursor select { cursor: text !important; }
 }
 
-/* Simple branded cursor on watchable / clickable items — a small play-triangle
-   inside a dark circle. Pure CSS via cursor:url() with an inline SVG, so the OS
-   compositor draws it directly (no JS, no rAF, no lag). Browser falls back to
-   `pointer` if SVG cursors aren't supported (mostly old browsers). Hotspot is at
-   the center of the icon (14,14). */
-.ep-card, .ep-thumb, .ep-feat-thumb, .ep-feat-title, .ep-title,
+/* Simple branded cursor on the actual click-targets that open an episode —
+   the thumbnail image and the title. The full .ep-card was previously in this
+   list but covers the description / meta tags / button padding which DON'T
+   open the episode (click handler in app.js only fires on .ep-thumb and
+   .ep-title). Showing the play-icon there falsely promised the body was
+   clickable. Pure CSS via cursor:url() with an inline SVG; the OS compositor
+   draws it directly (no JS, no rAF, no lag). Browser falls back to `pointer`
+   if SVG cursors aren't supported. Hotspot at icon center (14,14). */
+.ep-thumb, .ep-feat-thumb, .ep-feat-title, .ep-title,
 .hero-cover-img,
 [data-cursor="play"] {
   cursor:
@@ -32,10 +35,11 @@
     pointer;
 }
 
-/* Non-watchable interactive items keep the standard system pointer. Cards,
-   quotes, hosts open modals — `pointer` signals clickability without conflating
-   them with episodes. */
-.blog-card, .quote-card, .host, [data-cursor="hover"] {
+/* Blog cards genuinely open a modal on full-card click. Quote cards and host
+   cards do NOT — they expose their own buttons (share / LinkedIn). Bare
+   `cursor: pointer` on the whole card body would falsely signal clickability,
+   so they keep the native default arrow. */
+.blog-card, [data-cursor="hover"] {
   cursor: pointer;
 }
 
@@ -452,20 +456,25 @@ body.cursor-text .cursor-dot { opacity: 0; }
   100% { stroke-dashoffset: 0; }
 }
 
-/* additional brush positioning */
+/* additional brush positioning. Rotation values copied out of the 0% keyframes
+   of brushDrift4/5/6 below so brushes 4-6 keep their painterly tilt even with
+   the drift animation culled. */
 .brush-4 {
   bottom: 12%; right: 6%;
   width: 260px; opacity: 0.5;
+  transform: rotate(8deg);
   animation: brushDrift4 11s ease-in-out infinite alternate;
 }
 .brush-5 {
   top: 8%; left: 56%;
   width: 200px; opacity: 0.4;
+  transform: rotate(-5deg);
   animation: brushDrift5 13s ease-in-out infinite alternate;
 }
 .brush-6 {
   bottom: 8%; left: 4%;
   width: 240px; opacity: 0.4;
+  transform: rotate(3deg);
   animation: brushDrift6 16s ease-in-out infinite alternate;
 }
 
