@@ -123,12 +123,93 @@ const QUOTES = [
   { text: "The answer isn't more busyness. The answer is to slow down. Stop. Pause. Reflect.",                                              source: "Thomas Jepson-Lay",           color: "q-mustard" },
   { text: "The pause. The discernment. The moment of honest reflection before jumping back into what has always been done. That is exactly what leadership requires right now.", source: "Thomas Jepson-Lay", color: "q-crimson" },
   { text: "This is not only a funding problem. It is also a social contract problem.",                                                                                            source: "Kim Kucinskas",               color: "q-forest" },
-  { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" },
-  { text: "If we use AI to draft documents for us, maybe one in five times we should say: I am not going to use AI for this one. It might take half a day instead of twenty minutes.", source: "Thomas Jepson-Lay",       color: "q-rust" }
+  { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" }
 ];
 
 // AI-generated long-form blog posts · one per episode + one pinned editorial
 const BLOG_POSTS = [
+  {
+    epId: 'vPJAWTb2dPI',
+    epN: 7,
+    slug: 'sunday-knock',
+    title: 'Not Just a Funding Problem: A Sunday Knock and What Came After',
+    excerpt: 'Ali opened the door on a Sunday morning. A family with two children, holding an NGO flyer. His trained brain went straight to overhead and disallowed costs. Then it stopped.',
+    readTime: '6 min',
+    reflections: [
+      "What was the last moment in your work when the systems view obscured the human view standing in front of you? What do you remember about the pause?",
+      "Pick one cause your organisation claims as its work. Are you in social contract with the people you serve, or in a transaction with the funders who pay you? Which one would they say?",
+      "Where in your week is AI helping you do more, and where is the time it saved getting quietly clawed back into more workload, not more humanity?",
+      "Name a skill you used to have that you now reach for AI to perform. If you were forced to do it without AI tomorrow, how much of it would still work?",
+      "Identify someone in your organisation who quietly holds collaboration together. If they left next month, what would actually fall apart? What does that tell you about how the work is really structured?"
+    ],
+    body: `<p>It was a Sunday. Ali was at home with coffee. There was a knock at the door.</p>
+
+<p>A family was standing there, a mother and two children, holding a small flyer. The pitch started right away. The campaign was familiar; Ali recognised the NGO and the format immediately. He had been on the other side of campaigns just like it not long ago.</p>
+
+<p>He reached for his phone to send the money. While the transfer was processing, his brain was already doing the thing trained operators' brains do. Where will this actually land. How much will get absorbed at headquarters before it leaves the building. Is this going to cover a loss account. Is this going to a summit. He had spent years inside the machinery that turns donations into restricted and unrestricted lines, and the machinery does not stop running just because there is a family at your door.</p>
+
+<p>Then he stopped.</p>
+
+<h2>What He Actually Saw</h2>
+
+<p>The family on the step had no idea about loss accounts. They did not need to. They had chosen to spend their Sunday going door to door, building to building, repeating the same short pitch about why people here should give money to people elsewhere. The children were tired. They had clearly knocked on a lot of doors already.</p>
+
+<p>The campaign collected over a million dollars that weekend. Ali learned that later in a thank-you message on his phone. By then he had spent two days thinking less about where the million dollars would actually go and more about what those families had been doing that day. Practicing values. Showing their children what solidarity looks like outside the slide deck. Stepping into the institution from the public side.</p>
+
+<blockquote>For a few hours on a Sunday, the sector's most powerful resource was not its grants office. It was a family standing on a step.</blockquote>
+
+<h2>Not Just a Funding Problem</h2>
+
+<p>Kim has been carrying around a framing that became the spine of this episode. <em>The problem in the sector is not only a funding problem. It is also a social contract problem.</em></p>
+
+<p>The distinction matters. A funding problem has a funding solution. Find new donors. Diversify revenue. Cut costs. Pivot. The sector is very good at framing everything as a funding problem because funding problems are, in theory, solvable.</p>
+
+<p>Social contract problems are harder. They ask whether the people the work is supposed to serve still believe the arrangement is working. Whether the implicit bargain between civil society and the public still holds. Whether anyone is in the contract on the other side at all.</p>
+
+<p>When a family knocks on your door on a Sunday, they are not waiting for the strategic review. They are renewing the contract in person. The funding crisis you read about in the board paper is the signal that the contract was already in trouble. The Sunday knock is one of the few places it is still being practiced.</p>
+
+<h2>The Alternative Reality</h2>
+
+<p>The conversation shifted to AI, and Ali brought a different story. He had been supporting a local NGO through a proposal cycle. The international NGO that was the prime applicant requested twenty-two annexes from the local partner two days before deadline. Policies. Processes. Frameworks. Most of them were not applicable in the country office's context. The executive director did not have the capacity to write twenty-two annexes that would, in any case, never be implemented. So Ali generated them with AI.</p>
+
+<p>One side using AI to request things that will never be implemented. The other side using AI to produce things that will never be implemented. Documents flowing in both directions, none of them attached to the real work.</p>
+
+<blockquote>It felt like something was broken. We were building an alternative reality.</blockquote>
+
+<p>This is the part of the AI conversation the sector keeps not having. Not whether AI will steal jobs. Not whether it will lift productivity. Whether it is being used to absorb the cost of bureaucracy that nobody believes in, on both sides of a relationship that used to be about something else.</p>
+
+<h2>The Productivity Trap</h2>
+
+<p>About three years ago, Ali ran a small experiment inside an international NGO. He was using AI tools and automation in his grants role and his workload had measurably dropped. He went to his line manager with a documented case. He had about thirty percent of his time back. He proposed reinvesting half of it in HR work on diversity and inclusion, and the other half on raising organisational awareness about AI.</p>
+
+<p>HR said yes. IT said yes. The line manager said yes. Everyone was excited.</p>
+
+<p>Then NGO culture did what NGO culture does. Within months, the freed time had been filled with three additional roles. Compliance work here. Document review there. The thirty percent that was supposed to go into thoughtful new work was repurposed into "we need someone to cover this." The productivity gain showed up on the org chart as more responsibilities for the same person, not as space.</p>
+
+<p>If AI helps the sector do more with less, the honest question is what happens to the savings. So far, the answer in too many places is the same: the savings get clawed back into workload, and the original case for AI quietly dissolves.</p>
+
+<h2>Collaboration as a Discipline</h2>
+
+<p>Then Kim turned the conversation toward something she has been working on. Collaboration as a word is becoming what trust and equity already became, a term that means everything and nothing. Nobody is against it. Nobody agrees what it actually requires. Most strategies invoke it and most workshops list it as a value.</p>
+
+<p>The reframe Kim brought from an article she had read recently: <em>collaboration is a discipline, not just a value.</em></p>
+
+<p>That is a different proposition. A value is something you affirm. A discipline is something you train. Collaboration as a value sits in the principles document and waits to be cited. Collaboration as a discipline shows up in how meetings are designed, who gets to decide, when to push someone and when to give them space, how to hold competing motivations in the same room without papering over them.</p>
+
+<p>The sector is full of platforms named after collaboration. Clusters. Working groups. NGO forums. Coordination meetings. Whether any of them are actually building collaboration is a question for the people who have sat in those rooms. The honest answer is usually: sometimes, mostly no, and almost never in the way the strategy document claims.</p>
+
+<h2>What This Episode Was Actually About</h2>
+
+<p>Donations, AI, collaboration. The three threads ended up in the same conversation because they are all asking the same underlying question. <em>What is the relational infrastructure of this sector, and who is still maintaining it?</em></p>
+
+<p>A family on a step on a Sunday is maintaining it from the outside. A local NGO handed twenty-two annexes two days before deadline is being asked to maintain it on terms that do not match its reality. A hybrid leader trying to lead an organisation she can no longer see in person is trying to maintain it with half the instrumentation gone.</p>
+
+<p>Civil society for most of the last two decades has assumed the relational infrastructure was a background condition. It was something everyone shared. It did not need explaining. The work of the sector could focus on programmes, results, reporting, scale.</p>
+
+<p>That background condition no longer holds. The publics have noticed. The local partners have noticed. The frontline staff have noticed. The infrastructure is the work now. Anything else done on top of it is borrowed time.</p>
+
+<p>The Sunday knock was not nostalgia. It was a reminder. There are still people doing the work that everyone else takes for granted. The question is whether the rest of the sector is going to learn from them, or keep building alternative realities that pretend they are not there.</p>`
+  },
   {
     epId: '7w_FXEcBzs4',
     epN: 6,
