@@ -573,7 +573,7 @@ function renderAbout() {
   const grid = $('#hosts-grid');
   if (!grid) return;
   grid.innerHTML = HOSTS.map(h => `
-    <article class="host" data-accent="${escAttr(h.accent)}">
+    <article class="host" id="${escAttr(h.slug)}" data-accent="${escAttr(h.accent)}">
       <div class="host-avatar host-avatar-photo">
         <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="600" height="600" decoding="async"/>
       </div>
@@ -587,6 +587,26 @@ function renderAbout() {
       </a>
     </article>
   `).join('');
+}
+
+// Host anchor: when the URL hash matches a host slug (e.g. #ali-al-mokdad),
+// switch to the About page and smoothly scroll to that host card. Briefly
+// highlight the card so the visitor knows where they landed. Used by the
+// hash-route handler and the initial-load logic.
+function openHostAnchor(slug, opts) {
+  opts = opts || {};
+  if (state.page !== 'about') {
+    // fromHashChange:true preserves the host slug in the URL (otherwise
+    // _doNavigate would rewrite the hash to #about).
+    _doNavigate('about', { fromHashChange: true });
+  }
+  setTimeout(() => {
+    const el = document.getElementById(slug);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.classList.add('host-anchor-highlight');
+    setTimeout(() => el.classList.remove('host-anchor-highlight'), 2400);
+  }, opts.coldLoad ? 600 : 120);
 }
 
 // ─── EPISODE MODAL ───
@@ -1136,7 +1156,16 @@ document.addEventListener('DOMContentLoaded', () => {
   renderAbout();
 
   const initial = (location.hash || '#home').slice(1);
-  navigate(['home','episodes','blog','about','contact'].includes(initial) ? initial : 'home');
+  const hostSlugs = HOSTS.map(h => h.slug);
+  if (hostSlugs.includes(initial)) {
+    // Cold-load on a host anchor URL. openHostAnchor handles both the page
+    // switch (with fromHashChange:true so the URL stays as #ali-al-mokdad)
+    // and the scroll-to + highlight. Do NOT also call navigate('about'),
+    // that path doesn't pass fromHashChange and would rewrite the hash.
+    openHostAnchor(initial, { coldLoad: true });
+  } else {
+    navigate(['home','episodes','blog','about','contact'].includes(initial) ? initial : 'home');
+  }
 
   $$('[data-nav]').forEach(el => {
     el.addEventListener('click', e => {
@@ -1158,7 +1187,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastHashHandled = location.hash;
   function handleHashRoute(opts) {
     const valid = ['home','episodes','blog','about','contact'];
+    const hostSlugs = HOSTS.map(h => h.slug);
     const raw = (location.hash || '#home').slice(1);
+    if (hostSlugs.includes(raw)) {
+      openHostAnchor(raw);
+      lastHashHandled = location.hash;
+      return;
+    }
     if (valid.includes(raw)) {
       if (raw !== state.page) _doNavigate(raw, opts);
     } else {

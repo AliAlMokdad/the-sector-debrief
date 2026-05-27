@@ -994,6 +994,20 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .host:hover { transform: translate(-5px, -5px); }
 .host:hover::before { transform: translate(13px, 13px); }
 
+/* When a visitor arrives via a host-anchor URL (e.g. /#ali-al-mokdad), the
+   router calls scrollIntoView on the matching .host card and adds this class
+   for a brief gold glow so the visitor knows where they landed. The class
+   self-removes after 2.4s. Reduced-motion users get the glow without the
+   pulse, see @media block at the bottom of motion.css for the global
+   animation cull rule. */
+.host-anchor-highlight {
+  animation: hostAnchorGlow 2.4s ease-out;
+}
+@keyframes hostAnchorGlow {
+  0%   { box-shadow: 0 0 0 4px var(--mustard), 0 0 40px 8px rgba(232,184,44,0.45); }
+  100% { box-shadow: 0 0 0 0   transparent,    0 0 0    0  transparent; }
+}
+
 .host-avatar {
   width: 120px; height: 120px;
   border-radius: 50%;
