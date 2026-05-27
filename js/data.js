@@ -12,8 +12,18 @@ const PLATFORMS = {
   rss:      'https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L'
 };
 
-// All 6 episodes from the playlist (newest first)
+// All 7 episodes from the playlist (newest first)
 const EPISODES = [
+  {
+    n: 7,
+    id: 'vPJAWTb2dPI',
+    title: 'Donations, Collaboration, and AI in the Room',
+    guest: null,
+    date: '2026-05-27',
+    duration: '54 min',
+    description: 'Ali Al Mokdad opens with a Sunday morning at his door. A family with two children, collecting donations for an NGO, and his trained brain immediately runs through overhead, restricted funds, disallowed costs. Then it stops. Kim Kucinskas, Thomas Jepson-Lay, and Ali sit with what just happened: this is not only a funding problem, it is a social contract problem. The conversation widens into AI in the workplace (productivity gains that get clawed back, atrophy, agents that do not collaborate with each other) and collaboration as a discipline rather than a slogan.',
+    themes: ['Donations', 'Collaboration', 'AI']
+  },
   {
     n: 6,
     id: '7w_FXEcBzs4',
@@ -586,10 +596,10 @@ const HOSTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync: 75,951
+// Total Views as of latest sync (2026-05-27): 76,760
 const STATS = {
   episodes: EPISODES.length,
-  views: '75,951'
+  views: '76,760'
 };
 
 // ─── Node export shim ────────────────────────────────────────
