@@ -135,8 +135,8 @@ function epCard(ep) {
   const altTitle = escAttr(ep.title);
   return `
     <article class="ep-card" data-ep="${ep.id}">
-      <div class="ep-thumb" data-ep="${ep.id}">
-        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="${altTitle}" loading="lazy"/>
+      <div class="ep-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open episode: ${altTitle}">
+        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="" loading="lazy"/>
         <div class="ep-thumb-overlay">
           <span class="ep-thumb-num">Ep ${String(ep.n).padStart(2,'0')}</span>
         </div>
@@ -160,6 +160,10 @@ function epCard(ep) {
   `;
 }
 // Event delegation: attach ONCE per scope container, even if children re-render.
+// Mouse: click on .ep-thumb/.ep-title (or featured equivalents) opens modal.
+// Keyboard: only .ep-thumb / .ep-feat-thumb carry role=button + tabindex (one
+// tab stop per card; the h3 titles stay semantic headings). Enter/Space on the
+// focused thumb fires the same openEpisode handler.
 function bindEpCards(scope) {
   if (!scope || scope.dataset.epDelegated) return;
   scope.dataset.epDelegated = '1';
@@ -168,6 +172,15 @@ function bindEpCards(scope) {
     if (!trigger || !scope.contains(trigger)) return;
     // Don't intercept clicks on inner buttons/links inside the action row
     if (e.target.closest('.ep-actions, .ep-link')) return;
+    const ep = EPISODES.find(x => x.id === trigger.dataset.ep);
+    if (ep) openEpisode(ep);
+  });
+  scope.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const trigger = e.target.closest('.ep-thumb, .ep-feat-thumb');
+    if (!trigger || !scope.contains(trigger)) return;
+    if (e.target.closest('.ep-actions, .ep-link')) return;
+    e.preventDefault();
     const ep = EPISODES.find(x => x.id === trigger.dataset.ep);
     if (ep) openEpisode(ep);
   });
@@ -231,8 +244,8 @@ function renderFeaturedEpisode(ep) {
   const themeChips = ep.themes.map(t => `<span class="theme-chip">${escAttr(t)}</span>`).join('');
   const altTitle = escAttr(ep.title);
   return `
-    <div class="ep-feat-thumb" data-ep="${ep.id}">
-      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="${altTitle}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
+    <div class="ep-feat-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open featured episode: ${altTitle}">
+      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
       <div class="ep-feat-overlay">
         <div class="ep-feat-num">E${String(ep.n).padStart(2,'0')}</div>
         <div class="ep-feat-play"></div>

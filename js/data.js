@@ -121,7 +121,10 @@ const QUOTES = [
   { text: "Challenges plus reflection equals success. Not difficulty alone. Not reflection alone. The combination.",                        source: "Ali Al Mokdad",               color: "q-cream" },
   { text: "In 1994 I knocked on the doors of NGOs in Cambodia. The notebook I started that year documented what I saw long before the sector had language for it.", source: "Sofia Sprechmann Sineiro", color: "q-cobalt" },
   { text: "The answer isn't more busyness. The answer is to slow down. Stop. Pause. Reflect.",                                              source: "Thomas Jepson-Lay",           color: "q-mustard" },
-  { text: "The pause. The discernment. The moment of honest reflection before jumping back into what has always been done. That is exactly what leadership requires right now.", source: "Thomas Jepson-Lay", color: "q-crimson" }
+  { text: "The pause. The discernment. The moment of honest reflection before jumping back into what has always been done. That is exactly what leadership requires right now.", source: "Thomas Jepson-Lay", color: "q-crimson" },
+  { text: "This is not only a funding problem. It is also a social contract problem.",                                                                                            source: "Kim Kucinskas",               color: "q-forest" },
+  { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" },
+  { text: "If we use AI to draft documents for us, maybe one in five times we should say: I am not going to use AI for this one. It might take half a day instead of twenty minutes.", source: "Thomas Jepson-Lay",       color: "q-rust" }
 ];
 
 // AI-generated long-form blog posts · one per episode + one pinned editorial
