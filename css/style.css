@@ -2463,6 +2463,16 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   .ep-feat-play::before { border-left-width: 12px; border-top-width: 8px; border-bottom-width: 8px; }
 }
 
+/* Desktop only · let the thumb stretch to fill the entire left column so
+   the soft-slate ::before accent doesn't leak below it as a blue gap.
+   16/10 aspect still governs the mobile (single-column) layout above. */
+@media (min-width: 961px) {
+  .ep-feat-thumb {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+}
+
 /* ═══════════════════════════════════════════
    MOBILE POLISH · touch targets, tap highlight, smoothness
    Applied globally so iOS / Android / hybrid devices all benefit.
