@@ -53,8 +53,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-28s"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-28s"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-28t"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-28t"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -542,7 +542,7 @@
 </nav>
 
 <!-- ═══════ HOME PAGE ═══════ -->
-<main class="page" data-page="home" id="main-home">
+<main class="page" data-page="home" id="main-home" tabindex="-1">
 
   <!-- HERO -->
   <section class="hero">
@@ -682,7 +682,7 @@
 </main>
 
 <!-- ═══════ EPISODES PAGE ═══════ -->
-<div class="page" data-page="episodes" id="main-episodes">
+<div class="page" data-page="episodes" id="main-episodes" tabindex="-1">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5,40 Q50,5 100,40 T195,40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
@@ -723,7 +723,7 @@
 </div>
 
 <!-- ═══════ BLOG PAGE ═══════ -->
-<div class="page" data-page="blog" id="main-blog">
+<div class="page" data-page="blog" id="main-blog" tabindex="-1">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5,40 Q50,5 100,40 T195,40" stroke="#B83A2A" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -784,7 +784,7 @@
 <!-- (Quotes tab removed · quotes still appear on the home page marquee) -->
 
 <!-- ═══════ ABOUT PAGE ═══════ -->
-<div class="page" data-page="about" id="main-about">
+<div class="page" data-page="about" id="main-about" tabindex="-1">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5 40 Q50 5 100 40 T195 40" stroke="#1E3D7A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -826,7 +826,7 @@
 </div>
 
 <!-- ═══════ CONTACT PAGE ═══════ -->
-<div class="page" data-page="contact" id="main-contact">
+<div class="page" data-page="contact" id="main-contact" tabindex="-1">
   <!-- decorative page brushes -->
   <svg class="page-brush page-brush-a" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M5 40 Q50 5 100 40 T195 40" stroke="#2A4530" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.55"/>
@@ -972,7 +972,7 @@
         <p class="footer-tagline">&ldquo;The conversations that happen when the microphones are off.&rdquo;</p>
       </div>
       <div>
-        <h4>Navigate</h4>
+        <h2 class="footer-heading">Navigate</h2>
         <ul class="footer-links">
           <li><a data-nav="home"     href="#home">Home</a></li>
           <li><a data-nav="episodes" href="#episodes">Episodes</a></li>
@@ -982,7 +982,7 @@
         </ul>
       </div>
       <div>
-        <h4>The Hosts</h4>
+        <h2 class="footer-heading">The Hosts</h2>
         <ul class="footer-links">
           <!-- Deep-link to each host's card via the host-anchor URLs so visitors
                land directly on the right bio with the gold-glow highlight. -->
@@ -992,7 +992,7 @@
         </ul>
       </div>
       <div>
-        <h4>Listen on</h4>
+        <h2 class="footer-heading">Listen on</h2>
         <div class="footer-platforms">
           <a class="footer-orb footer-orb-yt" href="https://www.youtube.com/@TheSectorDebrief" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
@@ -1057,9 +1057,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-05-28s"></script>
-<script src="js/motion.js?v=2026-05-28s"></script>
-<script src="js/app.js?v=2026-05-28s"></script>
+<script src="js/data.js?v=2026-05-28t"></script>
+<script src="js/motion.js?v=2026-05-28t"></script>
+<script src="js/app.js?v=2026-05-28t"></script>
 
 </body>
 </html>

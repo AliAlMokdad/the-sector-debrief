@@ -89,6 +89,11 @@ function _doNavigate(page, opts) {
     const isActive = p.dataset.page === page;
     p.classList.toggle('active', isActive);
     p.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    // inert (modern browsers) takes the entire subtree out of the tab order,
+    // focus, and accessibility tree. Defense-in-depth alongside aria-hidden:
+    // even if CSS or JS accidentally exposes the inactive page, inert prevents
+    // its focusable elements from being reached.
+    p.toggleAttribute('inert', !isActive);
   });
   $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
   if (!opts.preserveScroll) {
