@@ -629,6 +629,11 @@ function openHostAnchor(slug, opts) {
 // ─── EPISODE MODAL ───
 function openEpisode(ep) {
   const m = $('#modal-episode');
+  // The modal carries the `hidden` attribute by default for a11y (keeps it
+  // out of the SR tree until populated). Remove it now that we're injecting
+  // content — without this the .modal-backdrop.active CSS can't override the
+  // display:none !important that browsers apply to [hidden].
+  m.removeAttribute('hidden');
   m.innerHTML = `
     <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
     <div class="modal-video">
@@ -671,6 +676,8 @@ function openBlog(slug) {
   if (!post) return;
   const ep = post.epId ? EPISODES.find(e => e.id === post.epId) : null;
   const m = $('#modal-blog');
+  // See openEpisode comment — modal needs `hidden` removed when populating.
+  m.removeAttribute('hidden');
   const cover = blogCoverSVG(post);
   const metaTag = post.pinned
     ? `<span style="color:var(--crimson);font-weight:700">★ EDITORIAL</span>`
@@ -806,6 +813,8 @@ window.closeModal = function() {
   });
   top.classList.remove('active', 'is-top');
   top.querySelectorAll('iframe').forEach(f => f.remove());
+  // Restore `hidden` on the inner modal so it leaves the a11y tree until next open.
+  top.querySelectorAll('.modal').forEach(m => m.setAttribute('hidden', ''));
   if (!$$('.modal-backdrop.active').length) {
     document.body.classList.remove('scroll-lock');
     // Release iOS scroll-lock and restore scroll position
