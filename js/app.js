@@ -1017,9 +1017,18 @@ function bindContactForm() {
         body: data
       });
       const json = await res.json().catch(() => ({}));
-      // Positively assert success — checking `=== 'false'` would treat any missing
-      // / unexpected response shape (e.g. proxy 2xx with empty body) as success.
-      if (!res.ok || json.success !== 'true') throw new Error('FormSubmit returned failure: ' + res.status);
+      // Positively assert success. checking `=== 'false'` would treat any missing
+      // or unexpected response shape (e.g. proxy 2xx with empty body) as success.
+      if (!res.ok || json.success !== 'true') {
+        // FormSubmit activates per origin. If the origin is unactivated the AJAX
+        // path returns success:false with an activation message. Fall through to
+        // native form submission (form.action posts to the path endpoint, which
+        // also triggers an activation email if needed AND delivers once active).
+        // form.submit() bypasses this 'submit' event listener so no infinite loop.
+        console.warn('Contact form AJAX returned non-success, falling back to native submit:', json);
+        form.submit();
+        return;
+      }
 
       success.style.display = 'block';
       success.classList.remove('is-error');
@@ -1030,20 +1039,25 @@ function bindContactForm() {
       btn.disabled = false;
       setTimeout(() => { success.style.display = 'none'; }, 7000);
     } catch (err) {
-      // Surface the real error so it's debuggable. Show the user an honest failure
-      // message instead of silently triggering form.submit(), which would redirect
-      // via _next and display a fake "✓ Message sent" banner on return.
-      console.warn('Contact form AJAX submission failed:', err);
-      btn.textContent = original;
-      btn.disabled = false;
-      if (success) {
-        success.style.display = 'block';
-        success.classList.add('is-error');
-        success.textContent = '✗ Couldn\'t send the message right now. Please try again in a moment, or reach us on YouTube / Spotify / Apple Podcasts.';
-        setTimeout(() => {
-          success.style.display = 'none';
-          success.classList.remove('is-error');
-        }, 9000);
+      // Network failure or thrown error. Same fallback: try native submission so
+      // the message at least reaches FormSubmit. The user gets redirected to the
+      // FormSubmit success page and then back to /?sent=1#contact via _next.
+      console.warn('Contact form AJAX submission failed, falling back to native submit:', err);
+      try {
+        form.submit();
+        return;
+      } catch (_) {
+        btn.textContent = original;
+        btn.disabled = false;
+        if (success) {
+          success.style.display = 'block';
+          success.classList.add('is-error');
+          success.textContent = '✗ Couldn\'t send the message right now. Please try again in a moment, or reach us on YouTube / Spotify / Apple Podcasts.';
+          setTimeout(() => {
+            success.style.display = 'none';
+            success.classList.remove('is-error');
+          }, 9000);
+        }
       }
     }
   });
