@@ -375,8 +375,10 @@
     addEventListener('resize', resize);
 
     const bars = 64;
-    const phases = Array.from({length: bars}, () => Math.random() * Math.PI * 2);
-    const speeds = Array.from({length: bars}, () => 0.04 + Math.random() * 0.06);
+    // Per-bar mini "voice noise" jitter so the waveform feels alive, not
+    // mechanical. Small amplitude · the dominant motion is the travelling wave.
+    const jitter = Array.from({length: bars}, () => Math.random() * Math.PI * 2);
+    const jitterSpeed = Array.from({length: bars}, () => 0.08 + Math.random() * 0.06);
 
     let t = 0;
     let visible = true;
@@ -388,7 +390,7 @@
     function draw() {
       rafId = null;
       if (!visible || reducedMotion) return;
-      t += 0.04;
+      t += 0.06;
       ctx.clearRect(0, 0, c.width, c.height);
       const w = c.width, h = c.height;
       const bw = w / bars;
@@ -397,11 +399,15 @@
       const baseColor3 = '#E8B82C';
 
       for (let i = 0; i < bars; i++) {
-        phases[i] += speeds[i];
-        const a = Math.sin(phases[i]) * 0.5
-                + Math.sin(t * 0.6 + i * 0.2) * 0.3
-                + Math.sin(t * 1.4 + i * 0.5) * 0.2;
-        const amp = (Math.abs(a) * 0.6 + 0.2) * h * 0.85;
+        jitter[i] += jitterSpeed[i];
+        // Dominant travelling wave (reads as "audio flowing through") + a
+        // slower envelope for natural breathing + small per-bar jitter so it
+        // feels organic rather than mechanical.
+        const travel = Math.sin(t * 1.1 - i * 0.25) * 0.55;
+        const breath = Math.sin(t * 0.35 + i * 0.08) * 0.30;
+        const noise  = Math.sin(jitter[i]) * 0.15;
+        const a = travel + breath + noise;
+        const amp = (Math.abs(a) * 0.7 + 0.15) * h * 0.85;
         const y = (h - amp) / 2;
 
         let color = baseColor1;
