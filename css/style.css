@@ -17,9 +17,11 @@
 
   --cobalt:       #2C5BAA;   /* slightly brighter · original #1E3D7A felt muddy under dark text */
   --cobalt-deep:  #1A3866;   /* original #102447 was almost-black */
+  --cobalt-soft:  #95B6D8;   /* Risograph powder-blue paper · sibling to mustard for cards under dark text */
 
   --crimson:      #B83A2A;
   --crimson-deep: #8B2818;
+  --crimson-soft: #D58B6F;   /* warm sienna-coral paper · sibling to mustard for cards under dark text */
 
   --mustard:      #E8B82C;
   --mustard-deep: #C99A14;
@@ -667,8 +669,11 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   border-radius: var(--rad);
   transition: transform 0.4s var(--ease-emphasis), background 0.3s var(--ease-standard);
 }
-.ep-card:nth-child(3n+1)::before { background: var(--cobalt); }
-.ep-card:nth-child(3n+2)::before { background: var(--crimson); }
+/* Card-body accents use the SOFT tints (paper register) so dark text reads
+   naturally. The deep brand cobalt/crimson stay reserved for surfaces where
+   the text is cream (quote carousel, featured strip). */
+.ep-card:nth-child(3n+1)::before { background: var(--cobalt-soft); }
+.ep-card:nth-child(3n+2)::before { background: var(--crimson-soft); }
 .ep-card:nth-child(3n+3)::before { background: var(--mustard); }
 .ep-card:hover { transform: translate(-3px, -3px); box-shadow: 0 14px 30px -12px rgba(26,22,20,0.18); }
 .ep-card:hover::before { transform: translate(9px, 9px); }
@@ -1015,8 +1020,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   transform: translate(8px, 8px);
   transition: transform 0.4s var(--ease-emphasis);
 }
-.host:nth-child(1)::before { background: var(--cobalt); }
-.host:nth-child(2)::before { background: var(--crimson); }
+/* Same soft-tint logic as .ep-card · Ali on soft blue, Kim on warm coral,
+   Thomas on mustard. Dark bio text reads at ~7-9:1 contrast on all three. */
+.host:nth-child(1)::before { background: var(--cobalt-soft); }
+.host:nth-child(2)::before { background: var(--crimson-soft); }
 .host:nth-child(3)::before { background: var(--mustard); }
 .host:hover { transform: translate(-5px, -5px); }
 .host:hover::before { transform: translate(13px, 13px); }
@@ -1481,6 +1488,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 
 /* clearer text on episode cards */
 .ep-card .ep-title { color: var(--ink); }
+
+/* Theme chips on the featured EP card don't add user-facing value.
+   Hide visually; data stays in data.js + JSON-LD for SEO. */
+.ep-feat-themes { display: none; }
 
 /* ═══════════════════════════════════════════
    MANIFESTO BLOCK (about page)
