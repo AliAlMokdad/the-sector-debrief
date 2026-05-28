@@ -64,7 +64,7 @@ function _showRevealsIn(scope) {
 // Per-route document.title so each SPA "page" is distinct in browser tabs, bookmarks,
 // and screen-reader page-load announcements.
 const PAGE_TITLES = {
-  home:     'The Sector Debrief · Honest conversations on humanitarian work',
+  home:     'The Sector Debrief · Honest Humanitarian & Development Podcast',
   episodes: 'Episodes · The Sector Debrief',
   blog:     'Essays · The Sector Debrief',
   about:    'About · The Sector Debrief',
