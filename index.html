@@ -50,8 +50,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-28e"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-28e"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-28f"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-28f"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -337,7 +337,7 @@
         "name": "Where can I listen to The Sector Debrief?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Sector Debrief is available on YouTube (@TheSectorDebrief), Spotify, and Apple Podcasts. New episodes drop every three to four weeks. The full archive is at thesectordebrief.com."
+          "text": "The Sector Debrief is available on YouTube (@TheSectorDebrief), Spotify, Apple Podcasts, and iHeart Radio. New episodes drop every three to four weeks. The full archive is at thesectordebrief.com."
         }
       },
       {
@@ -879,7 +879,11 @@
           </div>
         </div>
         <button class="form-submit" type="submit">Send Message →</button>
-        <div class="form-success" id="form-success" role="status" aria-live="polite" aria-atomic="true">✓ Message sent. We'll get back to you within a few days.</div>
+        <!-- Live region intentionally empty at parse time. The contact-form
+             handler in app.js populates this with the actual success/error
+             message; preloading text here would cause some screen readers
+             (NVDA + Firefox) to announce "Message sent" on first page load. -->
+        <div class="form-success" id="form-success" role="status" aria-live="polite" aria-atomic="true"></div>
       </form>
     </div>
   </section>
@@ -982,9 +986,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-05-28e"></script>
-<script src="js/motion.js?v=2026-05-28e"></script>
-<script src="js/app.js?v=2026-05-28e"></script>
+<script src="js/data.js?v=2026-05-28f"></script>
+<script src="js/motion.js?v=2026-05-28f"></script>
+<script src="js/app.js?v=2026-05-28f"></script>
 
 </body>
 </html>

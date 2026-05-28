@@ -116,6 +116,11 @@ function _doNavigate(page, opts) {
 }
 function navigate(page) {
   closeMobileNav();
+  // If a modal is closing as part of this navigation, suppress closeModal's
+  // focus-restoration: it would otherwise put focus back on the trigger that
+  // sits inside the OLD page, which _doNavigate is about to mark
+  // aria-hidden="true". Focus on an aria-hidden element is invalid for SR.
+  state.lastTrigger = null;
   // Bounded close to prevent any pathological infinite loop
   for (let i = 0; i < 5 && $$('.modal-backdrop.active').length; i++) closeModal();
   if (window.navigateWithCurtain && state.page !== page) {
@@ -143,7 +148,7 @@ function epCard(ep) {
   return `
     <article class="ep-card" data-ep="${ep.id}">
       <div class="ep-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open episode: ${altTitle}">
-        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="" loading="lazy"/>
+        <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="The Sector Debrief Episode ${ep.n}: ${altTitle}" loading="lazy"/>
         <div class="ep-thumb-overlay">
           <span class="ep-thumb-num">Ep ${String(ep.n).padStart(2,'0')}</span>
         </div>
@@ -252,7 +257,7 @@ function renderFeaturedEpisode(ep) {
   const altTitle = escAttr(ep.title);
   return `
     <div class="ep-feat-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open featured episode: ${altTitle}">
-      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
+      <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="The Sector Debrief Episode ${ep.n}: ${altTitle}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
       <div class="ep-feat-overlay">
         <div class="ep-feat-num">E${String(ep.n).padStart(2,'0')}</div>
         <div class="ep-feat-play"></div>
@@ -631,7 +636,7 @@ function openEpisode(ep) {
   const m = $('#modal-episode');
   // The modal carries the `hidden` attribute by default for a11y (keeps it
   // out of the SR tree until populated). Remove it now that we're injecting
-  // content — without this the .modal-backdrop.active CSS can't override the
+  // content; without this the .modal-backdrop.active CSS can't override the
   // display:none !important that browsers apply to [hidden].
   m.removeAttribute('hidden');
   m.innerHTML = `
@@ -676,7 +681,7 @@ function openBlog(slug) {
   if (!post) return;
   const ep = post.epId ? EPISODES.find(e => e.id === post.epId) : null;
   const m = $('#modal-blog');
-  // See openEpisode comment — modal needs `hidden` removed when populating.
+  // See openEpisode comment; modal needs `hidden` removed when populating.
   m.removeAttribute('hidden');
   const cover = blogCoverSVG(post);
   const metaTag = post.pinned
@@ -889,7 +894,9 @@ function showMini(ep) {
   const mp = $('#mini-player');
   $('#mini-title').textContent = ep.title;
   $('#mini-sub').textContent   = `Episode ${ep.n} · The Sector Debrief`;
-  $('#mini-thumb-img').src     = `https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg`;
+  const miniImg = $('#mini-thumb-img');
+  miniImg.src = `https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg`;
+  miniImg.alt = `Episode ${ep.n} thumbnail: ${ep.title}`;
   mp.classList.add('active');
   state.player = { active: true, ep };
 }
@@ -999,7 +1006,7 @@ function bindContactForm() {
 
     try {
       const data = new FormData(form);
-      const res = await fetch('https://formsubmit.co/ajax/ali_moukdad@hotmail.com', {
+      const res = await fetch('https://formsubmit.co/ajax/almokdadali1@gmail.com', {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: data
@@ -1027,7 +1034,7 @@ function bindContactForm() {
       if (success) {
         success.style.display = 'block';
         success.classList.add('is-error');
-        success.textContent = '✗ Couldn\'t send the message right now. Please email ali_moukdad@hotmail.com directly.';
+        success.textContent = '✗ Couldn\'t send the message right now. Please email almokdadali1@gmail.com directly.';
         setTimeout(() => {
           success.style.display = 'none';
           success.classList.remove('is-error');
