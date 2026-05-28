@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Sector Debrief · Honest conversations on humanitarian work</title>
-  <meta name="description" content="The real conversations that shape the humanitarian and development world. Honest talk about political shifts, shrinking budgets, power dynamics, localization, and the future of crisis response."/>
+  <title>The Sector Debrief · Honest Humanitarian &amp; Development Podcast</title>
+  <meta name="description" content="Podcast on humanitarian leadership and reform. The real conversations that shape humanitarian and development work: political shifts, shrinking budgets, power dynamics, localization, and the future of crisis response."/>
 
   <!-- Google Search Console -->
   <meta name="google-site-verification" content="PfRjFa0DDrkHrX0P_e2LiSsfX0is3GmuXYpY9CTD6BI"/>
@@ -28,7 +28,7 @@
   <link rel="preload" as="image" href="/assets/cover.jpg" fetchpriority="high"/>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="The Sector Debrief · Honest conversations on humanitarian work"/>
+  <meta property="og:title" content="The Sector Debrief · Honest Humanitarian &amp; Development Podcast"/>
   <meta property="og:description" content="The real conversations that shape the humanitarian and development world. The ones that happen when the microphones are off."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://thesectordebrief.com/"/>
@@ -41,17 +41,20 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="The Sector Debrief · Honest conversations on humanitarian work"/>
+  <meta name="twitter:title" content="The Sector Debrief · Honest Humanitarian &amp; Development Podcast"/>
   <meta name="twitter:description" content="The real conversations that shape the humanitarian and development world. The ones that happen when the microphones are off."/>
   <meta name="twitter:image" content="https://thesectordebrief.com/assets/cover.jpg"/>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Non-blocking font load · media=print swap pattern saves ~200ms FCP on slow networks.
+       The print stylesheet doesn't block first paint; once loaded it swaps to media="all". -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-28r"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-28r"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-28s"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-28s"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -71,6 +74,7 @@
     ],
     "webFeed": "https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L",
     "inLanguage": "en-GB",
+    "datePublished": "2025-12-13",
     "numberOfEpisodes": 7,
     "sameAs": [
       "https://www.youtube.com/@TheSectorDebrief",
@@ -342,6 +346,7 @@
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "inLanguage": "en-GB",
     "mainEntity": [
       {
         "@type": "Question",
@@ -1052,9 +1057,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-05-28r"></script>
-<script src="js/motion.js?v=2026-05-28r"></script>
-<script src="js/app.js?v=2026-05-28r"></script>
+<script src="js/data.js?v=2026-05-28s"></script>
+<script src="js/motion.js?v=2026-05-28s"></script>
+<script src="js/app.js?v=2026-05-28s"></script>
 
 </body>
 </html>

@@ -1145,12 +1145,17 @@ function animateCounters() {
         return dec ? `${withCommas}.${dec}` : withCommas;
       };
 
-      const duration = 1400;
+      // Animate the LAST 15% only · starting at 0 made intermediate values
+      // like "8,469" briefly visible for the 76,766 total-views stat, which
+      // reads as "wrong number" to a glancing visitor. Start at 85% of the
+      // target so the worst-case mid-flight value is still close to truth,
+      // and shorten the duration so the wrong-number window is minimised.
+      const duration = 900;
       const start = performance.now();
       const easeOut = (t) => 1 - Math.pow(1 - t, 3);
       function tick(now) {
         const t = Math.min(1, (now - start) / duration);
-        const v = num * easeOut(t);
+        const v = num * (0.85 + 0.15 * easeOut(t));
         target.textContent = formatNum(v) + suffix;
         if (t < 1) requestAnimationFrame(tick);
         else target.textContent = formatNum(num) + suffix;
@@ -1158,7 +1163,7 @@ function animateCounters() {
       requestAnimationFrame(tick);
       obs.unobserve(target);
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.55 });
   els.forEach(el => obs.observe(el));
 }
 

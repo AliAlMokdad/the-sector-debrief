@@ -1342,7 +1342,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .ep-featured::before {
   content: ''; position: absolute;
   inset: 0; z-index: -1;
-  background: var(--cobalt);
+  /* Soft slate-blue paper accent · matches the .ep-card list below for a
+     coherent palette. Featured tier still pops via the asymmetric thumb-
+     + body layout and the LATEST EPISODE label, not via raw saturation. */
+  background: var(--cobalt-soft);
   transform: translate(10px, 10px);
   border-radius: var(--rad);
 }
