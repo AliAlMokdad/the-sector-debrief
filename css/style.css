@@ -795,9 +795,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
    ═══════════════════════════════════════════ */
 .quotes-marquee {
   background: var(--ink); color: var(--cream);
-  /* Bottom margin tightened (was 80px) so the new sparkle-field decoration
-     below sits closer to the marquee and the footer wraps the flow neatly. */
-  padding: 80px 0 100px; margin: 80px 0 32px; position: relative;
+  /* Zero bottom margin so the marquee sits right against the sparkle field
+     and the footer below. The sparkle-field's own padding provides all the
+     breathing room needed. */
+  padding: 80px 0 100px; margin: 80px 0 0; position: relative;
   overflow: hidden;
 }
 .quotes-marquee::before, .quotes-marquee::after {

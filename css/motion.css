@@ -826,10 +826,10 @@ body::after {
    via the universal rule lower in this file. */
 .sparkle-field {
   position: relative;
-  height: 96px;
+  height: 56px;
   max-width: 720px;
-  margin: 0 auto 32px;
-  padding: 12px 24px;
+  margin: 0 auto;
+  padding: 6px 24px;
   pointer-events: none;
 }
 .sparkle-field span {
@@ -860,7 +860,7 @@ body::after {
 }
 
 @media (max-width: 640px) {
-  .sparkle-field { height: 64px; max-width: 92%; }
+  .sparkle-field { height: 44px; max-width: 92%; padding: 4px 16px; }
   .sparkle-field span { width: 6px; height: 6px; }
 }
 
