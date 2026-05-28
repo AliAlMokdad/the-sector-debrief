@@ -388,8 +388,13 @@ function renderPauseHero() {
   function paint() {
     const item = pool[idx];
     qEl.textContent = item.q;
+    // Editorial attribution uses the part of the title BEFORE the colon
+    // ("Notes from the Editing Room" / "Notes on the Pause Button") so the
+    // source line stays compact. The "→" button still navigates by slug,
+    // so the full title surfaces on the essay page.
+    const titleShort = (item.post.title || '').split(':')[0].trim();
     const label = item.post.pinned
-      ? 'From: Notes from the Editing Room'
+      ? `From: ${titleShort}`
       : `From: Episode ${item.post.epN} · ${item.post.title}`;
     srcEl.textContent = label;
     root.dataset.activeSlug = item.post.slug;
@@ -1219,6 +1224,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // We handle popstate (richer event) and skip hashchange when popstate just ran.
   let lastHashHandled = location.hash;
   function handleHashRoute(opts) {
+    // Browser back/forward should also close any open modal. Otherwise a
+    // visitor who opens an episode modal then hits Back keeps the modal
+    // up, only the underlying page changes. Mirrors navigate()'s pattern.
+    state.lastTrigger = null;
+    for (let i = 0; i < 5 && $$('.modal-backdrop.active').length; i++) closeModal();
     const valid = ['home','episodes','blog','about','contact'];
     const hostSlugs = HOSTS.map(h => h.slug);
     const raw = (location.hash || '#home').slice(1);
