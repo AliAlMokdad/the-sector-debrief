@@ -53,8 +53,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-28w"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-28w"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-28x"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-28x"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -661,10 +661,15 @@
     <div class="quotes-track" id="quotes-track"></div>
   </div>
 
-  <!-- (Home Subscribe-on-YouTube CTA removed · the footer Subscribe button
-       carries the same call-to-action without repeating it on the home flow.
-       Dead CSS for .sub-cta / .yt-sub-btn / .yt-kicker / .newsletter is left
-       in style.css + motion.css and can be stripped in a dedicated cleanup.) -->
+  <!-- Sparkle field · twinkling Google-color dots fill the transition between
+       the dark quote marquee and the dark footer. Pure decoration; the
+       prefers-reduced-motion media query in motion.css will freeze it for
+       visitors who request reduced motion. -->
+  <div class="sparkle-field" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
 
 </main>
 
@@ -1008,7 +1013,7 @@
     <div class="footer-copy">
       <span>&copy; 2026 The Sector Debrief<sup class="brand-tm" aria-hidden="true">&trade;</sup>. All rights reserved.</span>
       <span class="google-strip footer-strip" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
-      <span>Conversations that travel</span>
+      <span>Conversations that shape the future</span>
     </div>
   </div>
 </footer>
@@ -1044,9 +1049,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-05-28w"></script>
-<script src="js/motion.js?v=2026-05-28w"></script>
-<script src="js/app.js?v=2026-05-28w"></script>
+<script src="js/data.js?v=2026-05-28x"></script>
+<script src="js/motion.js?v=2026-05-28x"></script>
+<script src="js/app.js?v=2026-05-28x"></script>
 
 </body>
 </html>
