@@ -1483,6 +1483,39 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 .ep-card .ep-title { color: var(--ink); }
 
 /* ═══════════════════════════════════════════
+   CONTRAST FIX · light text on cobalt + crimson card variants
+   ═══════════════════════════════════════════
+   The ::before accent ends up painted on top of the card body because
+   .ep-body { transform: translateZ(0) } in motion.css creates a stacking
+   context that pins the z-index:-1 pseudo above .ep-card's bg. Cobalt
+   and crimson card faces need cream text for legibility. Mustard cards
+   keep dark text (yellow + dark = ~6.8:1, passes WCAG AA). */
+
+.ep-card:nth-child(3n+1) .ep-title,
+.ep-card:nth-child(3n+1) .ep-desc,
+.ep-card:nth-child(3n+1) .ep-meta,
+.ep-card:nth-child(3n+2) .ep-title,
+.ep-card:nth-child(3n+2) .ep-desc,
+.ep-card:nth-child(3n+2) .ep-meta { color: var(--cream); }
+
+.ep-card:nth-child(3n+1):hover .ep-title,
+.ep-card:nth-child(3n+2):hover .ep-title { color: var(--mustard); }
+
+/* .ep-featured intentionally NOT overridden · its .ep-feat-body is on cream,
+   the cobalt ::before only peeks below the thumb in the LEFT column. Dark
+   text on the cream body already has correct contrast. */
+
+.host:nth-child(1) .host-name,
+.host:nth-child(1) .host-bio,
+.host:nth-child(1) .host-role,
+.host:nth-child(2) .host-name,
+.host:nth-child(2) .host-bio,
+.host:nth-child(2) .host-role { color: var(--cream); }
+
+.host:nth-child(1) .host-role::before,
+.host:nth-child(2) .host-role::before { background: var(--cream); }
+
+/* ═══════════════════════════════════════════
    MANIFESTO BLOCK (about page)
    ═══════════════════════════════════════════ */
 .manifesto {
