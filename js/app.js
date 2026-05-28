@@ -1034,7 +1034,7 @@ function bindContactForm() {
       if (success) {
         success.style.display = 'block';
         success.classList.add('is-error');
-        success.textContent = '✗ Couldn\'t send the message right now. Please email almokdadali1@gmail.com directly.';
+        success.textContent = '✗ Couldn\'t send the message right now. Please try again in a moment, or reach us on YouTube / Spotify / Apple Podcasts.';
         setTimeout(() => {
           success.style.display = 'none';
           success.classList.remove('is-error');

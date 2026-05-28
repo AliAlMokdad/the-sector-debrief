@@ -757,22 +757,6 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   text-decoration-color: var(--mustard);
 }
 
-/* Direct-email fallback for visitors who would rather skip the form
-   (also covers any FormSubmit activation-pending window). */
-.contact-direct-email {
-  margin-top: 14px;
-  font-size: 14.5px;
-  color: var(--ink-soft);
-}
-.contact-direct-email a {
-  color: var(--cobalt);
-  font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: var(--mustard);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-.contact-direct-email a:hover { color: var(--crimson); }
 .ep-desc {
   font-size: 14.5px; line-height: 1.7;
   color: #2E2823;  /* slightly darker than --ink-soft for clearer reading */
