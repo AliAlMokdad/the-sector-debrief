@@ -1740,6 +1740,15 @@ body:has(.mini-player.active) { padding-bottom: 80px; }
   padding: 80px 32px 32px;
   margin-top: 100px;
 }
+/* On the home page, the sparkle-field below the voices marquee already
+   provides the visual transition into the footer. Drop the footer's
+   100px top margin in that case so the marquee + sparkles + footer
+   read as one continuous closing flourish. Other pages keep the
+   default breathing room. Falls back gracefully (keeps the 100px) on
+   browsers without :has() support. */
+body:has(.page[data-page="home"].active) .footer {
+  margin-top: 0;
+}
 .footer-inner {
   max-width: var(--max-w); margin: 0 auto;
 }
