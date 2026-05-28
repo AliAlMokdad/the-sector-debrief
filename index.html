@@ -50,8 +50,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-05-28m"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-05-28m"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-05-28n"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-05-28n"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -961,7 +961,11 @@
 
 <!-- ═══════ MINI PLAYER ═══════ -->
 <div class="mini-player" id="mini-player" role="region" aria-label="Now playing">
-  <div class="mini-thumb"><img id="mini-thumb-img" src="" alt="" loading="lazy"/></div>
+  <!-- Default src is a transparent 1x1 GIF (data URI) so SEO crawlers don't
+       flag an empty src="" as a broken image (the browser resolves "" to the
+       page URL). aria-hidden hides the placeholder from screen readers until
+       showMini() populates the real episode thumbnail + clears aria-hidden. -->
+  <div class="mini-thumb"><img id="mini-thumb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" aria-hidden="true" loading="lazy"/></div>
   <div class="mini-info">
     <div class="mini-info-title" id="mini-title"></div>
     <div class="mini-info-sub" id="mini-sub"></div>
@@ -986,9 +990,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-05-28m"></script>
-<script src="js/motion.js?v=2026-05-28m"></script>
-<script src="js/app.js?v=2026-05-28m"></script>
+<script src="js/data.js?v=2026-05-28n"></script>
+<script src="js/motion.js?v=2026-05-28n"></script>
+<script src="js/app.js?v=2026-05-28n"></script>
 
 </body>
 </html>

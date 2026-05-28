@@ -902,6 +902,7 @@ function showMini(ep) {
   const miniImg = $('#mini-thumb-img');
   miniImg.src = `https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg`;
   miniImg.alt = `Episode ${ep.n} thumbnail: ${ep.title}`;
+  miniImg.removeAttribute('aria-hidden');
   mp.classList.add('active');
   state.player = { active: true, ep };
 }
