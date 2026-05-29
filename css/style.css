@@ -1591,6 +1591,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   pointer-events: none;
 }
 .quiet-inner { position: relative; z-index: 1; max-width: 760px; }
+.quiet-strip {
+  display: inline-flex; margin-bottom: 14px;
+}
+.quiet-strip span { width: 8px; height: 8px; }
 .quiet-eyebrow {
   font-size: 11px; font-weight: 700;
   letter-spacing: 2.5px; text-transform: uppercase;
