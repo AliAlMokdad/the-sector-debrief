@@ -756,10 +756,10 @@ const HOSTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-05-28): 76,766
+// Total Views as of latest sync (2026-05-29): 76,828
 const STATS = {
   episodes: EPISODES.length,
-  views: '76,766'
+  views: '76,828'
 };
 
 // ─── Node export shim ────────────────────────────────────────
