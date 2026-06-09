@@ -133,7 +133,9 @@ const QUOTES = [
   { text: "The answer isn't more busyness. The answer is to slow down. Stop. Pause. Reflect.",                                              source: "Thomas Jepson-Lay",           color: "q-mustard" },
   { text: "The pause. The discernment. The moment of honest reflection before jumping back into what has always been done. That is exactly what leadership requires right now.", source: "Thomas Jepson-Lay", color: "q-crimson" },
   { text: "This is not only a funding problem. It is also a social contract problem.",                                                                                            source: "Kim Kucinskas",               color: "q-forest" },
-  { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" }
+  { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" },
+  { text: "Shift the power is a great slogan. I don't think it happens in reality. But balancing the power, that we can actually do.",                                          source: "Sabrina Segal",              color: "q-cobalt" },
+  { text: "Those who came before us set the foundation. Our job is to clear out the outdated governance and the nonsense, so the people who come after us can focus on the real problems. This is our generational fight.", source: "Ali Al Mokdad",   color: "q-crimson" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
