@@ -12,8 +12,18 @@ const PLATFORMS = {
   rss:      'https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L'
 };
 
-// All 7 episodes from the playlist (newest first)
+// All 8 episodes from the playlist (newest first)
 const EPISODES = [
+  {
+    n: 8,
+    id: 'm8wvagMeDQs',
+    title: 'Risk in the Round, From Compliance to Strategy, and the Generational Fight',
+    guest: 'Sabrina Segal',
+    date: '2026-06-09',
+    duration: '55 min',
+    description: 'A conversation with Sabrina Segal, Director of The Risk Collaborative, on what risk actually is once you stop treating it as compliance. Sabrina, Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad work through risk as the effect of uncertainty on objectives, which means threats and opportunities, not a register of bad things that gets dusted off once a quarter for the trustees. The conversation moves from why so much of the sector still does risk as a tick-box exercise, to risk sharing instead of risk transfer (a woven rope, not a chain where the weakest, least-resourced link is the one expected to break), to using the language of risk as a Trojan horse to get localization and power-balancing into the rooms where funders actually sit. It closes on what Ali Al Mokdad and Sabrina both call the generational fight: clearing out the outdated governance and process so the sector can focus on the problems that matter.',
+    themes: ['Risk', 'Risk Sharing', 'Localization']
+  },
   {
     n: 7,
     id: 'vPJAWTb2dPI',
@@ -200,6 +210,70 @@ const BLOG_POSTS = [
 <p>If you got this far and you have not clicked the Pause Button yet, scroll back up and try it. Read the question that comes up. Sit with it for one minute before you do anything else.</p>
 
 <p>That minute is the actual product on this site. Everything else is wrapping.</p>`
+  },
+  {
+    epId: 'm8wvagMeDQs',
+    epN: 8,
+    slug: 'risk-in-the-round',
+    title: 'Risk in the Round: From Compliance to Strategy, and the Generational Fight',
+    excerpt: 'Sabrina Segal, Director of The Risk Collaborative, makes a simple case with large consequences. Risk is not a compliance checklist. It is the effect of uncertainty on objectives, which makes it the place where the sector quietly transfers its power, and the place it could choose to share it instead.',
+    readTime: '7 min',
+    reflections: [
+      "Pull up your organisation's risk register. Is it only a list of things that might go wrong, or does it also name the opportunities you would lose by playing it safe? What does the imbalance tell you about how the place actually thinks?",
+      "Sabrina defines risk as the effect of uncertainty on objectives. Pick one objective your team is chasing right now. Did anyone do the risk thinking while you were setting it, or only afterwards, when the register was due?",
+      "Where in your work does risk get transferred down to the partner with the least power to carry it, and called due diligence? If you named that out loud in the next meeting, what would happen?",
+      "Find the fragile part of your organisation, the one everyone knows about but nobody writes down. Is it fragile because it has to be, or because no one has been willing to redesign it? Be honest about which.",
+      "Ali and Sabrina call this the generational fight. Name one piece of outdated process or governance in your own work that you could actually retire this year, instead of waiting for permission to question it."
+    ],
+    body: `<p>Sabrina Segal got accused of being too strategic. A prospective client told her, in so many words, that her approach to risk was a bit much for what they had in mind. She posted about it on LinkedIn, and the community helped her think it through. But first she laughed, and meant it, because the accusation was a clean snapshot of how most of the sector still thinks about risk.</p>
+
+<p>They think about it as compliance. A list of bad things that might happen, scored with some impact-times-likelihood arithmetic, producing a document eighty-three lines long that gets dusted off once a quarter and handed to the trustees. Sabrina Segal is the Director of The Risk Collaborative, and she spends her days trying to get organisations to do almost the opposite.</p>
+
+<h2>Six Words</h2>
+
+<p>The definition she uses is not hers. It belongs to the International Organization for Standardization, ISO 31000, and it is six words long. <em>Risk is the effect of uncertainty on objectives.</em></p>
+
+<p>Read it slowly, because two things fall out of it that the compliance version hides. The first is that risk starts with an objective, not with a threat. You begin with what the organisation is actually trying to achieve, and you do the analysis outward from there. The second is that uncertainty cuts both ways. Risk is a two-sided coin. One side is threats. The other side is opportunities. If you only ever ask staff to list what could go wrong, you throw away half of their creativity, half of their judgement, and half of the actual picture.</p>
+
+<blockquote>If you work in this sector, you cannot be a pessimist. So why do we keep building risk processes that only ask people to look at the downside?</blockquote>
+
+<h2>The Tick-Box and the Map</h2>
+
+<p>The conversation kept circling the difference between a register and a map. The traditional register is linear. It lists, it scores, it files. The work Sabrina does with organisations ends up closer to a systems map, though she is careful not to call it that in the room, because the phrase systems thinking tends to make everyone freeze. So they use colours and a board, and they start with the objective. What will prevent us from reaching it. What will accelerate it. Who needs to be in the conversation before it is set.</p>
+
+<p>Ali Al Mokdad added a layer from the operational side. Risk means different things depending on where you sit. At field level it is access, safety, security. At country level it becomes compliance and positioning and how you treat your local partners. At headquarters it is enterprise risk, reputational risk, the flashing Excel sheet. Same word, different worlds. He also named the quieter truth: at country level you sometimes brand something as a risk precisely because that is the word that gets headquarters to pay attention. The register is not only a control. It is a political instrument.</p>
+
+<h2>The Chain and the Rope</h2>
+
+<p>Here is where the episode turned from interesting to important. The dominant way the sector handles risk is to transfer it. The highest-power, best-resourced player passes the risk down to the lowest-power, least-resourced one, and calls the paperwork due diligence. Picture delivery as a chain, and the weakest link is the one that breaks.</p>
+
+<p>Sabrina wants to replace the chain with a woven rope. Risk sharing instead of risk transfer. The funder's concerns woven toward the frontline, the frontline's concerns woven back toward the funder, and the risk absorbed by whoever is actually positioned to carry it rather than dumped on whoever has the least power to refuse it.</p>
+
+<p>She gave it a structure she calls the three P framework: Project, Partner, Patron. Everyone agrees on the project objective. Reduce maternal and child mortality, protect the forest, check on the elderly through winter. But the funder, the intermediary, and the local partner each see the risk of that objective differently. So you ask the partner not whether they are high, medium or low risk against a Western checklist, but what their risk capacity is inside their own operating environment. A women's organisation in Sudan that cannot buy insurance because there is no insurance market to buy it from is not high risk. It is operating in a context the checklist was never written for. And you ask the patron, the funder, to plot themselves honestly on a line from command-and-control to trust. Most of them say trust and land on control. Now you have data and a shared language, instead of a power imbalance dressed up as assurance.</p>
+
+<blockquote>The people holding the power are not at the table. We have gotten very good at talking to ourselves until we are blue in the face.</blockquote>
+
+<h2>Coffee Without Cream</h2>
+
+<p>Ali Al Mokdad offered a story that reframed the whole thing. A man walks into a cafe and orders a coffee without cream. The waitress says, sorry, we have no cream, but we can do you a coffee without milk. Chemically the cup is identical. Black coffee either way. But the moment you look at what is missing, you stop talking about materials and start talking about ideology, about class, about how a place sees itself.</p>
+
+<p>His point: risk management without the Excel sheet is not the same thing as risk management with it, even when the thinking is identical, because for a large part of the sector the register is not a tool. It is a culture, an ideology about what serious operations are supposed to look like. The first thing people notice about a new approach is not what it delivers. It is what it leaves out. And when you start pulling on what it leaves out, you find the problem was never the tool or the technique. It was the philosophy underneath.</p>
+
+<h2>Don't Predict, Prepare</h2>
+
+<p>On threats, Sabrina has a line she repeats to organisations: do not predict, prepare. The sector pours enormous effort into predicting the next shock and very little into knowing where it is already fragile. Over-reliance on one large funder sat on everyone's risk register for years. How much good did the register do when the funding actually disappeared? Most organisations found out where they were fragile in real time, with no luxury to buffer or redesign first.</p>
+
+<p>That is the work now, in the quieter aftermath. Stand back and ask which fragilities are inherent, so they need buffering, and which exist only because nobody was willing to redesign them. Then have the hard conversation about scope. What is the mission, where did scope creep in, what are we going to double down on. The organisations Sabrina sees coming through this in one piece are the ones being brutally honest about that, with their boards and with their staff, rather than the ones still doing something for the seventh year because they once promised the board they would.</p>
+
+<h2>The Generational Fight</h2>
+
+<p>Near the end, the conversation stopped being about risk at all. Ali Al Mokdad named it directly. The nonsense of outdated governance, the process fetish, the structures that exist because they have always existed, this is the thing his generation has to clear out. The people before set the foundation. The job now is to retire what no longer serves, so the people who come next can spend their energy on climate, on hunger, on health, instead of on annexes nobody will ever implement.</p>
+
+<p>Sabrina is willing to use risk as a Trojan horse to get there. If branding it as risk is what gets risk sharing and localization onto the agenda in a room full of funders, she will brand it as risk. Kim Kucinskas had her own name for the same move: a crack of opportunity. People in power understand the language of risk. They glaze over at psychology and run from systems change, but they lean in when you say risk. Use the entry point you actually have.</p>
+
+<blockquote>This is our generational fight. I am going to pick up the flag with Ali. This is what we have to do.</blockquote>
+
+<p>Thomas Jepson-Lay closed by reducing the whole hour to one shift. Stop managing risk as a compliance strategy. Start managing the risk of not meeting your objectives. Kim called it risk in the round. It is a small reframe with a large door behind it, and the people holding that door open are, for now, mostly talking to each other. The episode is an argument for getting upstream before that stops being enough.</p>`
   },
   {
     epId: 'vPJAWTb2dPI',
@@ -756,10 +830,10 @@ const HOSTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-05-29): 76,828
+// Total Views as of latest sync (2026-06-09): 79,609
 const STATS = {
   episodes: EPISODES.length,
-  views: '76,828'
+  views: '79,609'
 };
 
 // ─── Node export shim ────────────────────────────────────────
