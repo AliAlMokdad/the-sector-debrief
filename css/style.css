@@ -1448,6 +1448,14 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   font-weight: 400;
   margin-bottom: 28px;
 }
+/* Clamp the featured teaser so a long description can't blow out the card
+   height and stretch the 16:9 thumbnail (full text remains in the modal). */
+.ep-feat-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 /* Episodes search empty-state */
 .ep-empty {
@@ -2539,6 +2547,16 @@ body:has(.page[data-page="home"].active) .footer {
   .ep-feat-thumb {
     aspect-ratio: auto;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Letterbox the thumbnail at its true 16:9 inside the dark panel, so a tall
+     text column can never stretch-crop the image into garbage. */
+  .ep-feat-thumb img {
+    height: auto;
+    aspect-ratio: 16 / 9;
+    flex: 0 0 auto;
   }
 }
 

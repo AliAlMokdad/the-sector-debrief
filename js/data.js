@@ -17,7 +17,7 @@ const EPISODES = [
   {
     n: 8,
     id: 'm8wvagMeDQs',
-    title: 'Risk in the Round, From Compliance to Strategy, and the Generational Fight',
+    title: 'Rethinking Risk Management in the Humanitarian and Development Sector',
     guest: 'Sabrina Segal',
     date: '2026-06-09',
     duration: '55 min',
