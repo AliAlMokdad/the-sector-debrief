@@ -995,6 +995,12 @@ function bindContactForm() {
       return;
     }
 
+    // Native field validation. The form carries novalidate (so the no-JS POST
+    // path isn't blocked), which also suppresses the browser's auto-check on
+    // JS submits — fire it manually so empty required fields get the native
+    // per-field bubble instead of a doomed POST and a misleading retry error.
+    if (!form.reportValidity()) return;
+
     // Resolve these up-front so the robot-check error path can announce through
     // the same live region used for AJAX success / error.
     const btn     = form.querySelector('.form-submit');
@@ -1057,7 +1063,7 @@ function bindContactForm() {
       if (success) {
         success.style.display = 'block';
         success.classList.add('is-error');
-        success.textContent = '✗ Couldn\'t send the message right now. Please try again in a moment, or reach us on YouTube / Spotify / Apple Podcasts.';
+        success.textContent = '✗ Couldn\'t send the message right now. Please try again in a moment, or leave us a comment on YouTube.';
         setTimeout(() => {
           success.style.display = 'none';
           success.classList.remove('is-error');

@@ -61,7 +61,7 @@ const EPISODES = [
     guest: 'Sofia Sprechmann Sineiro',
     date: '2026-03-07',
     duration: '58 min',
-    description: 'Featuring Sofia Sprechmann Sineiro, former Secretary General of CARE International and locally led development advocate. Three decades of conversation on balancing authenticity with institutional survival. Topics include pragmatic optimism, values integrity during crises, and what locally led development truly means beyond terminology. Ali Al Mokdad shares personal crisis management techniques.',
+    description: 'Featuring Sofia Sprechmann Sineiro, former Secretary General of CARE International and locally led development advocate. Three decades of experience distilled into a conversation on balancing authenticity with institutional survival. Topics include pragmatic optimism, values integrity during crises, and what locally led development truly means beyond terminology. Ali Al Mokdad shares personal crisis management techniques.',
     themes: ['CEO Insight', 'Localization', 'Idealism']
   },
   {
@@ -151,7 +151,7 @@ const BLOG_POSTS = [
     reflections: [
       "What is one tool in your work that you use because it saves time, and one you use because it changes how you think? How do you keep the two from collapsing into each other?",
       "When was the last time you reached for AI to do a task, and the answer it gave was technically correct but ended a conversation you needed to keep having?",
-      "Pick a reflection prompt you have asked someone else to sit with this year. Have you sat with it yourself? Be honest.",
+      "Pick a reflection prompt you have asked someone else to sit with this year. Have you sat with it yourself?",
       "What part of your thinking would you not outsource to a tool, even one you trust? Why that part specifically?",
       "If you removed every AI assistant from your workflow for a week, which decisions would still be just as good, and which would suddenly take longer? What does that tell you about where you were really using it?"
     ],
@@ -218,13 +218,13 @@ const BLOG_POSTS = [
     epN: 8,
     slug: 'risk-in-the-round',
     title: 'Risk in the Round: From Compliance to Strategy, and the Generational Fight',
-    excerpt: 'Sabrina Segal, Director of The Risk Collaborative, makes a simple case with large consequences. Risk is not a compliance checklist. It is the effect of uncertainty on objectives, which makes it the place where the sector quietly transfers its power, and the place it could choose to share it instead.',
+    excerpt: 'Sabrina Segal, Director of The Risk Collaborative, makes a simple case with large consequences. Risk is not a compliance checklist. It is the effect of uncertainty on objectives, and it is where the sector decides who carries the power.',
     readTime: '7 min',
     reflections: [
       "Pull up your organisation's risk register. Is it only a list of things that might go wrong, or does it also name the opportunities you would lose by playing it safe? What does the imbalance tell you about how the place actually thinks?",
       "Sabrina defines risk as the effect of uncertainty on objectives. Pick one objective your team is chasing right now. Did anyone do the risk thinking while you were setting it, or only afterwards, when the register was due?",
       "Where in your work does risk get transferred down to the partner with the least power to carry it, and called due diligence? If you named that out loud in the next meeting, what would happen?",
-      "Find the fragile part of your organisation, the one everyone knows about but nobody writes down. Is it fragile because it has to be, or because no one has been willing to redesign it? Be honest about which.",
+      "Find the fragile part of your organisation, the one everyone knows about but nobody writes down. Is it fragile because it has to be, or because no one has been willing to redesign it?",
       "Ali and Sabrina call this the generational fight. Name one piece of outdated process or governance in your own work that you could actually retire this year, instead of waiting for permission to question it."
     ],
     body: `<p>Sabrina Segal got accused of being too strategic. A prospective client told her, in so many words, that her approach to risk was a bit much for what they had in mind. She posted about it on LinkedIn, and the community helped her think it through. But first she laughed, and meant it, because the accusation was a clean snapshot of how most of the sector still thinks about risk.</p>
@@ -303,7 +303,7 @@ const BLOG_POSTS = [
 
 <p>The family on the step had no idea about loss accounts. They did not need to. They had chosen to spend their Sunday going door to door, building to building, repeating the same short pitch about why people here should give money to people elsewhere. The children were tired. They had clearly knocked on a lot of doors already.</p>
 
-<p>The campaign collected over a million dollars that weekend. Ali Al Mokdad learned that later in a thank-you message on his phone. By then he had spent two days thinking less about where the million dollars would actually go and more about what those families had been doing that day. Practicing values. Showing their children what solidarity looks like outside the slide deck. Stepping into the institution from the public side.</p>
+<p>The campaign collected over a million dollars that weekend. Ali Al Mokdad learned that later in a thank-you message on his phone. By then he had spent two days thinking less about where the million dollars would actually go and more about what those families had been doing that day. Practising values. Showing their children what solidarity looks like outside the slide deck. Stepping into the institution from the public side.</p>
 
 <blockquote>For a few hours on a Sunday, the sector's most powerful resource was not its grants office. It was a family standing on a step.</blockquote>
 
@@ -311,11 +311,9 @@ const BLOG_POSTS = [
 
 <p>Kim has been carrying around a framing that became the spine of this episode. <em>The problem in the sector is not only a funding problem. It is also a social contract problem.</em></p>
 
-<p>The distinction matters. A funding problem has a funding solution. Find new donors. Diversify revenue. Cut costs. Pivot. The sector is very good at framing everything as a funding problem because funding problems are, in theory, solvable.</p>
+<p>Kim made the full argument after Episode 6: a funding problem has a funding solution, and the sector loves funding problems because they are, in theory, solvable. A social contract problem asks something harder, whether anyone on the other side still believes the arrangement is working. This episode is what that looks like at the door.</p>
 
-<p>Social contract problems are harder. They ask whether the people the work is supposed to serve still believe the arrangement is working. Whether the implicit bargain between civil society and the public still holds. Whether anyone is in the contract on the other side at all.</p>
-
-<p>When a family knocks on your door on a Sunday, they are not waiting for the strategic review. They are renewing the contract in person. The funding crisis you read about in the board paper is the signal that the contract was already in trouble. The Sunday knock is one of the few places it is still being practiced.</p>
+<p>When a family knocks on your door on a Sunday, they are not waiting for the strategic review. They are renewing the contract in person. The funding crisis you read about in the board paper is the signal that the contract was already in trouble. The Sunday knock is one of the few places it is still being practised.</p>
 
 <h2>The Alternative Reality</h2>
 
@@ -329,7 +327,7 @@ const BLOG_POSTS = [
 
 <h2>The Productivity Trap</h2>
 
-<p>About three years ago, Ali Al Mokdad ran a small experiment inside an international NGO. He was using AI tools and automation in his grants role and his workload had measurably dropped. He went to his line manager with a documented case. He had about thirty percent of his time back. He proposed reinvesting half of it in HR work on diversity and inclusion, and the other half on raising organisational awareness about AI.</p>
+<p>About three years ago, Ali Al Mokdad ran a small experiment inside an international NGO. He was using AI tools and automation in his grants role and his workload had measurably dropped. He went to his line manager with a documented case. He had about thirty percent of his time back. He proposed reinvesting half of it in HR work on diversity and inclusion, and the other half in raising organisational awareness about AI.</p>
 
 <p>HR said yes. IT said yes. The line manager said yes. Everyone was excited.</p>
 
@@ -351,7 +349,7 @@ const BLOG_POSTS = [
 
 <p>Donations, AI, collaboration. The three threads ended up in the same conversation because they are all asking the same underlying question. <em>What is the relational infrastructure of this sector, and who is still maintaining it?</em></p>
 
-<p>A family on a step on a Sunday is maintaining it from the outside. A local NGO handed twenty-two annexes two days before deadline is being asked to maintain it on terms that do not match its reality. A leader holding a hybrid organisation together, one she can no longer see in person, is trying to maintain it with half the instrumentation gone.</p>
+<p>A family on a step on a Sunday is maintaining it from the outside. A local NGO that was handed twenty-two annexes two days before deadline is being asked to maintain it on terms that do not match its reality.</p>
 
 <p>Civil society for most of the last two decades has assumed the relational infrastructure was a background condition. It was something everyone shared. It did not need explaining. The work of the sector could focus on programmes, results, reporting, scale.</p>
 
@@ -365,9 +363,9 @@ const BLOG_POSTS = [
     slug: 'sector-is-changing',
     title: 'The Sector Is Changing. How Do You Make Sense Of It?',
     excerpt: 'Kim Kucinskas came back from a month on the road, Buenos Aires then Oxford, and needed to think out loud. This episode is that conversation. About civil society, public goods, and what it actually means to make sense of a sector in transition.',
-    readTime: '6 min',
+    readTime: '4 min',
     reflections: [
-      "What does 'civil society' mean to the people you serve? Not to your org's theory of change. To the actual humans. When did you last check?",
+      "What does \"civil society\" mean to the people you serve? Not to your org's theory of change. To the actual humans. When did you last check?",
       "Pick one thing your sector does that the public experiences as a burden rather than a benefit. What would it take to change that?",
       "Kim says this isn't just a funding problem. It's a social contract problem. Which contracts in your work have quietly expired without anyone saying so?",
       "If your organisation disappeared tomorrow, what gap would the public actually notice? What wouldn't they notice?",
@@ -403,7 +401,7 @@ const BLOG_POSTS = [
 
 <p>Thomas names the thing nobody wants to say: <em>the sector has gotten very comfortable with being in transition.</em> Transition is a safe state. It implies change is coming. It excuses the present. The harder question is what happens when transition becomes the permanent condition. When the work of preparing for change substitutes for change itself.</p>
 
-<h2>Making Sense vs. Making Peace</h2>
+<h2>Making Sense vs Making Peace</h2>
 
 <p>One of the most useful distinctions in this episode is the difference between <em>making sense</em> of what's happening and <em>making peace</em> with it.</p>
 
@@ -411,7 +409,7 @@ const BLOG_POSTS = [
 
 <p>Making peace is passive. It's what happens when you're too tired to make sense. When you absorb the reality and decide not to fight it. When the strategy document quietly shifts from "here's how we change things" to "here's how we survive things."</p>
 
-<p>The sector is doing a lot of making peace right now and calling it strategic adaptation. Kim, Thomas, and Ali Al Mokdad don't pretend there's a clean answer. But they name the distinction. That's a start.</p>
+<p>The sector is doing a lot of making peace right now and calling it strategic adaptation. The three hosts don't pretend there's a clean answer. But they name the distinction. That's a start.</p>
 
 <h2>What the Conversation Was Actually About</h2>
 
@@ -433,7 +431,7 @@ const BLOG_POSTS = [
     slug: 'notes-from-the-editing-room',
     title: 'Notes from the Editing Room: How This Podcast Actually Works',
     excerpt: 'How we choose guests. Why we publish irregularly. What we are listening for in 2026. The editorial logic behind the conversations.',
-    readTime: '6 min',
+    readTime: '3 min',
     reflections: [
       "Pick one room you sit in this month. Are the people there the ones who can actually answer the question, or just the ones who happened to be available?",
       "What's a conversation you're having privately with colleagues that you'd never have in public? What would it cost to put it on the record?",
@@ -449,7 +447,7 @@ const BLOG_POSTS = [
 
 <p>We do not have a guest pipeline. We do not have a sponsor pitching us names. We do not have a producer with a roster. We have a short list of people we deeply respect, a longer list of people we want to learn from, and a third list of people we keep being told we should talk to but probably will not.</p>
 
-<p>The criteria we actually use: Has this person said something we could not get from a panel? Are they willing to be wrong on the record? Will the conversation be different than the version they have already given on every other podcast in the sector?</p>
+<p>The criteria we actually use: Has this person said something we could not get from a panel? Are they willing to be wrong on the record? Will the conversation be different from the version they have already given on every other podcast in the sector?</p>
 
 <blockquote>When the answer to all three is yes, we record. When the answer is no, we do not. The episodes you do not hear are part of the editorial decision too.</blockquote>
 
@@ -495,13 +493,13 @@ const BLOG_POSTS = [
     slug: 'who-are-you-in-the-room',
     title: 'Who Are You in the Room? Identity, Positionality, and the Quiet Politics of Showing Up',
     excerpt: 'When Aisha Tambajang sat down with us, she didn\'t reach for talking points. She reached for a question. One most of the sector keeps avoiding.',
-    readTime: '7 min',
+    readTime: '4 min',
     reflections: [
       "Think about a room you'll be in this week. Who decided you'd be there, and what would change if you brought your full identity into it instead?",
       "Identify someone in your work whose positionality is doing more talking than their identity. What would it take for that to flip?",
       "Where in your work are you rushing to fix versus curious enough to solve? Be honest about which mode is louder.",
       "Whose names live in your inheritance? What do they expect of the work you're choosing to do this week?",
-      "Who in your immediate team has a stronger identity than their positionality currently permits? What part of that is your job to fix?"
+      "Think of the last room where you softened your answer to fit the power in it. What would the unsoftened version have cost, and who pays for the softened one?"
     ],
     body: `<p>There's a particular silence that happens when someone in the humanitarian sector is asked who they are in the room. Not what they do. Not which agency they represent. Who they <em>are</em>.</p>
 
@@ -509,7 +507,7 @@ const BLOG_POSTS = [
 
 <p>Aisha Tambajang came to this conversation prepared to take it off.</p>
 
-<h2>Identity vs. Positionality</h2>
+<h2>Identity vs Positionality</h2>
 
 <p>The distinction that anchors this episode is one the sector talks around but rarely talks <em>about</em>. Identity is what you bring into the room. Your background, your history, the people whose names live in your inheritance. Positionality is what the room does with you. Where it places you. What it permits you to say. What it expects you to be.</p>
 
@@ -525,7 +523,7 @@ const BLOG_POSTS = [
 
 <p>That's not a rejection of accountability. It's a deeper one.</p>
 
-<h2>Rushing to Fix vs. Curiosity to Solve</h2>
+<h2>Rushing to Fix vs Curiosity to Solve</h2>
 
 <p>The sector loves a fix. A pilot. A pivot. A new framework. The annual report is full of them. But Aisha draws a line between rushing to fix something and being curious enough to actually solve it. She argues most of what we call innovation is the former.</p>
 
@@ -535,7 +533,7 @@ const BLOG_POSTS = [
 
 <p>And then the conversation turns, as conversations on this podcast tend to, to leadership. Specifically, leadership when the ground is moving.</p>
 
-<p>The sector is in a disruption phase that nobody wanted and nobody planned for. Funding contraction. Donor consolidation. Geopolitical realignment. The infrastructure of the last twenty years is shedding faster than the infrastructure of the next twenty is forming. People in leadership positions are trying to hold organisations together while the organisations themselves are quietly asking whether they should.</p>
+<p>The sector is in a disruption phase that nobody wanted and nobody planned for. Funding contraction. Donor consolidation. Geopolitical realignment. The infrastructure of the last twenty years is shrinking faster than the infrastructure of the next twenty is forming. People in leadership positions are trying to hold organisations together while the organisations themselves are quietly asking whether they should.</p>
 
 <p>Aisha doesn't offer a recipe. She offers a question: <em>what does it mean to lead with values when the values cost something?</em></p>
 
@@ -555,7 +553,7 @@ const BLOG_POSTS = [
     slug: 'urgent-patience',
     title: 'Urgent Patience: Why Idealism Is Not Naivety, and Other Lessons from a CEO Who Lasted',
     excerpt: 'Sofia Sprechmann Sineiro spent thirty years inside one of the largest humanitarian organisations in the world. She left with her values intact. That alone is worth a podcast episode.',
-    readTime: '8 min',
+    readTime: '4 min',
     reflections: [
       "What does it cost you to keep your values in your work right now? If the answer is nothing, you probably haven't tested them yet.",
       "Name a decision you made fast this quarter that needed slowness, and one you slow-walked that people are paying for. Which one would you defend in public?",
@@ -563,7 +561,7 @@ const BLOG_POSTS = [
       "If your work is locally led, who actually decides? Not who consults. Not who is consulted. Who decides.",
       "What's a value of yours that someone else in your organisation pays the cost for, while you don't?"
     ],
-    body: `<p>It's rare to interview someone who has spent three decades in this sector and still talks about it with conviction. The math usually doesn't work. The cynicism accumulates. The compromises stack. The original reason you came in becomes a story you tell new hires at the welcome drinks.</p>
+    body: `<p>It's rare to interview someone who has spent three decades in this sector and still talks about it with conviction. The maths usually doesn't work. The cynicism accumulates. The compromises stack. The original reason you came in becomes a story you tell new hires at the welcome drinks.</p>
 
 <p>Sofia Sprechmann Sineiro is the rare exception, and this episode is essentially a long-form attempt to figure out why.</p>
 
@@ -607,7 +605,7 @@ const BLOG_POSTS = [
 
 <p>Near the end of the conversation, Sofia turned the question back: <em>what does it cost you to keep your values?</em></p>
 
-<p>Not "do you have values." Everyone says yes. The harder question. The cost. Because if there is no cost, you haven't tested them. And if you can't name the cost, they probably aren't there.</p>
+<p>Not "do you have values?" Everyone says yes. The harder question. The cost. Because if there is no cost, you haven't tested them. And if you can't name the cost, they probably aren't there.</p>
 
 <p>Three decades in, she could name it. Most people can't.</p>
 
@@ -619,7 +617,7 @@ const BLOG_POSTS = [
     slug: 'leadership-under-pressure',
     title: 'Leadership Under Pressure: When the System Stops Working and No One Wants to Say It',
     excerpt: 'There\'s a moment in every sector reform conversation when someone says "we need to be honest." Then everyone leans in. Then no one is.',
-    readTime: '6 min',
+    readTime: '4 min',
     reflections: [
       "Is your organisation in survival mode or build mode? Be honest about which one is driving the decisions you're making this week.",
       "When was the last time your organisation took a position that carried real reputational cost? What did it actually cost?",
@@ -647,11 +645,11 @@ const BLOG_POSTS = [
 
 <p>One thing this episode names that few others do: in many large organisations, reputational risk has quietly become the dominant decision-making logic.</p>
 
-<p>What looks like strategy is often risk management. What looks like principles are often legal. What looks like cautious leadership is often communications worried about the next news cycle. None of this is unreasonable on its own. Together, it produces a kind of paralysis that nobody chose but everyone enacts.</p>
+<p>What looks like strategy is often risk management. What looks like principles is often legal. What looks like cautious leadership is often communications worried about the next news cycle. None of this is unreasonable on its own. Together, it produces a kind of paralysis that nobody chose but everyone enacts.</p>
 
 <p>The most interesting question in this episode is whether the sector still has space for leaders who are willing to take principled positions that carry reputational cost. The honest answer the hosts arrive at is: yes, but mostly in organisations small enough that the cost stays containable.</p>
 
-<h2>Identity vs. Strategy</h2>
+<h2>Identity vs Strategy</h2>
 
 <p>Another thread runs through the conversation: the distinction between identity and strategy.</p>
 
@@ -675,7 +673,7 @@ const BLOG_POSTS = [
     slug: 'what-does-sector-mean',
     title: 'What Does "Sector" Even Mean Anymore?',
     excerpt: 'A listener wrote in. They wanted to know if we actually believed in the word in our own podcast title. It was the right question.',
-    readTime: '5 min',
+    readTime: '3 min',
     reflections: [
       "Are you in the sector, or are you in an industry trying to hold its identity together? What's your honest answer?",
       "If the word sector fragments tomorrow, which conversation would you most want to keep being part of?",
@@ -737,7 +735,7 @@ const BLOG_POSTS = [
     slug: 'what-this-space-is-about',
     title: 'What This Space Is About: Why We Started The Sector Debrief',
     excerpt: 'There are enough polished podcasts in this sector. There are enough panels. There are enough frameworks. We started this for the conversations that don\'t fit those formats.',
-    readTime: '5 min',
+    readTime: '3 min',
     reflections: [
       "What's the conversation you'd be having anyway, the one that would happen without a microphone? Have you ever made it visible to anyone outside the room?",
       "Where in your week is the official version of the conversation furthest from the real one? What's the smallest move that closes 10% of that gap?",

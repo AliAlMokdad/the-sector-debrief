@@ -69,6 +69,9 @@ select:focus-visible,
   outline-offset: 3px;
   border-radius: 4px;
 }
+/* Round controls keep their shape when focused — the 4px above suits
+   rectangular controls, but it visibly squares off the circular orbs. */
+.orb:focus-visible, .footer-orb:focus-visible, .mini-play:focus-visible { border-radius: 50%; }
 
 /* Honeypot · visually hidden but still fillable by naive bots */
 .honeypot {
@@ -960,6 +963,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   background: var(--ink);
   flex-shrink: 0;
 }
+/* Tint each host's role-dash with their card accent (matches avatar + shadow) */
+.host:nth-child(1) .host-role::before { background: var(--cobalt); }
+.host:nth-child(2) .host-role::before { background: var(--crimson); }
+.host:nth-child(3) .host-role::before { background: var(--mustard-deep); }
 .host-bio {
   font-size: 15px; line-height: 1.75;
   color: var(--ink);
@@ -1058,7 +1065,8 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   border: 5px solid transparent;
   border-top-color: var(--ink);
 }
-.orb:hover .orb-tip {
+.orb:hover .orb-tip,
+.orb:focus-visible .orb-tip {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
@@ -2422,12 +2430,12 @@ body.nav-open { overflow: hidden; }
   transition: background 0.15s, border-color 0.15s;
 }
 .robot-check-input:checked + .robot-check-box {
-  background: #4285F4;
-  border-color: #4285F4;
+  background: var(--cobalt);
+  border-color: var(--cobalt);
   color: #fff;
 }
 .robot-check-input:focus-visible + .robot-check-box {
-  outline: 2px solid #4285F4;
+  outline: 2px solid var(--cobalt);
   outline-offset: 2px;
 }
 .robot-check-tick {
