@@ -293,7 +293,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
 /* fade-up everything in hero (delayed until intro is gone) */
 .hero-eyebrow,
 .hero-tagline,
-.hero-meta,
 .platforms,
 .hero-cover {
   opacity: 0; transform: translateY(24px);
@@ -301,7 +300,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 .hero-eyebrow  { animation-delay: 2.55s; }
 .hero-tagline  { animation-delay: 3.0s; }
-.hero-meta     { animation-delay: 3.15s; }
 .platforms     { animation-delay: 3.25s; }
 .hero-cover    { animation-delay: 3.0s; transform: translateY(40px) scale(0.96); }
 @keyframes heroFadeUp {
@@ -366,10 +364,6 @@ body.cursor-text .cursor-dot { opacity: 0; }
   transform-style: preserve-3d;
   transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
   will-change: transform;
-}
-.tilt-inner {
-  transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
 }
 .ep-card .ep-thumb img,
 .ep-card .ep-body { transform: translateZ(0); transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
@@ -930,36 +924,6 @@ body::after {
   100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
 }
 
-/* ── SUBSCRIBE CTA (home climax): ambient pulse halo ── */
-.yt-sub-btn {
-  animation: ytClimaxPulse 2.6s ease-out infinite;
-}
-.yt-sub-btn:hover { animation-play-state: paused; }
-@keyframes ytClimaxPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(255,0,0,0.55), 0 8px 24px -10px rgba(255,0,0,0.5); }
-  70%  { box-shadow: 0 0 0 22px rgba(255,0,0,0), 0 8px 24px -10px rgba(255,0,0,0.2); }
-  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0), 0 8px 24px -10px rgba(255,0,0,0.5); }
-}
-.yt-sub-btn .yt-icon {
-  animation: ytIconBeat 2.6s ease-in-out infinite;
-}
-@keyframes ytIconBeat {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.1); }
-}
-.yt-meta-num {
-  background: linear-gradient(90deg, var(--mustard), var(--crimson), var(--mustard));
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: ytMetaShine 6s linear infinite;
-}
-@keyframes ytMetaShine {
-  from { background-position: 0% 50%; }
-  to   { background-position: 220% 50%; }
-}
-
 /* ── QUOTES MARQUEE: soft breath ── */
 .quotes-marquee { position: relative; }
 .quote-card {
@@ -1064,14 +1028,8 @@ body::after {
 .quote-card,
 .pause-mark::after,
 .footer-yt-cta::after,
-/* Round 2 of cull: 8 simultaneous .ep-thumb-play pulses (one per episode card)
-   + YT shimmer gradients that redraw constantly. The big home-climax pulse on
-   .yt-sub-btn itself is kept — that's the one signature attention element. */
+/* Round 2 of cull: 8 simultaneous .ep-thumb-play pulses (one per episode card). */
 .ep-thumb-play,
-.yt-sub-btn .yt-icon,
-.yt-meta-num,
-.yt-kicker::after,
-.hero-cover-glow,
 /* Round 3: caught by final-QA preview probe — .manifesto-blob still had its
    drift animation declared in motion.css:917 even though I'd commented the A/B/C
    variants out of style.css. */
