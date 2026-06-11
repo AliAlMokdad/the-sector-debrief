@@ -71,7 +71,7 @@ const EPISODES = [
     guest: null,
     date: '2026-02-07',
     duration: '46 min',
-    description: 'Leadership within pressurized humanitarian systems. The hosts contrast grassroots innovation with large institutional survival modes. Discussion addresses values under stress, reputational risks, and organizational sustainability during transformation. A focus on systems breaking down and emerging alternatives, and the uncomfortable but necessary changes the sector keeps deferring.',
+    description: 'Leadership within pressurised humanitarian systems. The hosts contrast grassroots innovation with large institutional survival modes. Discussion addresses values under stress, reputational risks, and organisational sustainability during transformation. A focus on systems breaking down and emerging alternatives, and the uncomfortable but necessary changes the sector keeps deferring.',
     themes: ['Pressure', 'Strategy', 'Transformation']
   },
   {
@@ -91,7 +91,7 @@ const EPISODES = [
     guest: null,
     date: '2025-12-13',
     duration: '38 min',
-    description: 'The inaugural episode introduces the program\'s purpose. Hosts Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad introduce their leadership perspectives and the personal reflection methodologies they use to think systematically about sector challenges. The opening note: this won\'t be a polished podcast. It will be honest.',
+    description: 'The inaugural episode introduces the programme\'s purpose. Hosts Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad introduce their leadership perspectives and the personal reflection methodologies they use to think systematically about sector challenges. The opening note: this won\'t be a polished podcast. It will be honest.',
     themes: ['Origins', 'Reflection', 'Leadership']
   }
 ];
@@ -146,7 +146,7 @@ const BLOG_POSTS = [
     pinned: true,
     slug: 'pause-button-and-ai',
     title: 'Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting',
-    excerpt: 'Every essay on this site ends with five reflection prompts. They rotate through the Pause and Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.',
+    excerpt: 'Every essay on this site ends with five reflection prompts. They rotate through the Pause & Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.',
     readTime: '6 min',
     reflections: [
       "What is one tool in your work that you use because it saves time, and one you use because it changes how you think? How do you keep the two from collapsing into each other?",
@@ -155,7 +155,7 @@ const BLOG_POSTS = [
       "What part of your thinking would you not outsource to a tool, even one you trust? Why that part specifically?",
       "If you removed every AI assistant from your workflow for a week, which decisions would still be just as good, and which would suddenly take longer? What does that tell you about where you were really using it?"
     ],
-    body: `<p>There is a quiet button on this site. Open the Blog page and the first thing you see, above the essays, is a tile that says Pause and Reflect. It rotates through questions. Click "Ask me another" and the question changes. There is no algorithm guessing what to show you. The questions came from the essays. Each essay ends with five of them. The tile cycles through all of them.</p>
+    body: `<p>There is a quiet button on this site. Open the Blog page and the first thing you see, above the essays, is a tile that says Pause &amp; Reflect. It rotates through questions. Click "Ask me another" and the question changes. There is no algorithm guessing what to show you. The questions came from the essays. Each essay ends with five of them. The tile cycles through all of them.</p>
 
 <p>This essay is about how those questions get there, and where AI fits.</p>
 
@@ -233,7 +233,7 @@ const BLOG_POSTS = [
 
 <h2>Six Words</h2>
 
-<p>The definition she uses is not hers. It belongs to the International Organization for Standardization, ISO 31000, and it is six words long. <em>Risk is the effect of uncertainty on objectives.</em></p>
+<p>The definition she uses is not hers. It belongs to the International Organization for Standardization, ISO 31000, and it is six words long: <em>the effect of uncertainty on objectives</em>.</p>
 
 <p>Read it slowly, because two things fall out of it that the compliance version hides. The first is that risk starts with an objective, not with a threat. You begin with what the organisation is actually trying to achieve, and you do the analysis outward from there. The second is that uncertainty cuts both ways. Risk is a two-sided coin. One side is threats. The other side is opportunities. If you only ever ask staff to list what could go wrong, you throw away half of their creativity, half of their judgement, and half of the actual picture.</p>
 
@@ -351,7 +351,7 @@ const BLOG_POSTS = [
 
 <p>Donations, AI, collaboration. The three threads ended up in the same conversation because they are all asking the same underlying question. <em>What is the relational infrastructure of this sector, and who is still maintaining it?</em></p>
 
-<p>A family on a step on a Sunday is maintaining it from the outside. A local NGO handed twenty-two annexes two days before deadline is being asked to maintain it on terms that do not match its reality. A hybrid leader trying to lead an organisation she can no longer see in person is trying to maintain it with half the instrumentation gone.</p>
+<p>A family on a step on a Sunday is maintaining it from the outside. A local NGO handed twenty-two annexes two days before deadline is being asked to maintain it on terms that do not match its reality. A leader holding a hybrid organisation together, one she can no longer see in person, is trying to maintain it with half the instrumentation gone.</p>
 
 <p>Civil society for most of the last two decades has assumed the relational infrastructure was a background condition. It was something everyone shared. It did not need explaining. The work of the sector could focus on programmes, results, reporting, scale.</p>
 
@@ -719,7 +719,7 @@ const BLOG_POSTS = [
 
 <p><strong>One:</strong> The word holds, but its centre of gravity moves. The "sector" survives, but the legitimate actors inside it shift dramatically. More local, more federated, less London-Geneva-New York. The institutional language stays; the institutional power moves.</p>
 
-<p><strong>Two:</strong> The word fragments. We stop talking about "the sector" because there is no longer one. We get a humanitarian field, a development field, a localisation field, a climate-adjacent field, each with its own identity, donor base, and professional logic. The cluster model dies quietly. New coordination forms emerge.</p>
+<p><strong>Two:</strong> The word fragments. We stop talking about "the sector" because there is no longer one. We get a humanitarian field, a development field, a localization field, a climate-adjacent field, each with its own identity, donor base, and professional logic. The cluster model dies quietly. New coordination forms emerge.</p>
 
 <p><strong>Three:</strong> The word becomes a brand. "The sector" becomes shorthand for the legacy institutions that survived consolidation. Everyone outside that label does similar work but doesn't claim the title. The word narrows. So does its political weight.</p>
 
@@ -765,7 +765,7 @@ const BLOG_POSTS = [
 
 <h2>What We're Going to Talk About</h2>
 
-<p>Political shifts. Shrinking budgets. Power dynamics. Localisation. Operational pressure. Leadership that survives versus leadership that lasts. The future of crisis response. The futures, plural. There isn't one.</p>
+<p>Political shifts. Shrinking budgets. Power dynamics. Localization. Operational pressure. Leadership that survives versus leadership that lasts. The future of crisis response. The futures, plural. There isn't one.</p>
 
 <p>We'll bring guests on. Some of them you'll know. Some you won't. The rule is the same for all of them: come honest, or don't come.</p>
 
@@ -801,6 +801,7 @@ const TRANSLATIONS = {
 const HOSTS = [
   {
     photo: 'assets/host-ali.jpg',
+    photoW: 600, photoH: 421,
     initial: 'A',
     name: 'Ali Al Mokdad',
     slug: 'ali-al-mokdad',
@@ -811,6 +812,7 @@ const HOSTS = [
   },
   {
     photo: 'assets/host-kim.jpg',
+    photoW: 469, photoH: 555,
     initial: 'K',
     name: 'Kim Kucinskas',
     slug: 'kim-kucinskas',
@@ -821,6 +823,7 @@ const HOSTS = [
   },
   {
     photo: 'assets/host-thomas.jpg',
+    photoW: 437, photoH: 472,
     initial: 'T',
     name: 'Thomas Jepson-Lay',
     slug: 'thomas-jepson-lay',

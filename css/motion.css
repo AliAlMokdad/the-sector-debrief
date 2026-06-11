@@ -572,7 +572,7 @@ body.cursor-text .cursor-dot { opacity: 0; }
 }
 .ep-card:hover::after { opacity: 1; }
 .ep-card:hover .ep-title { color: var(--cobalt); }
-.ep-title { transition: color 0.3s var(--ease-standard); }
+.ep-title { transition: color 0.3s var(--ease-standard), text-decoration-color 0.3s var(--ease-standard); }
 
 /* color-rotation underline on title */
 .ep-title { position: relative; }
@@ -616,7 +616,7 @@ body.cursor-text .cursor-dot { opacity: 0; }
 .host:hover .host-avatar { transform: scale(1.08) rotate(-4deg); }
 
 /* ── PLATFORM BUTTON FX ── */
-.platform-btn { transition: transform 0.25s cubic-bezier(.2,.8,.2,1); }
+.platform-btn { transition: transform 0.25s cubic-bezier(.2,.8,.2,1), background 0.15s, color 0.15s, border-color 0.15s; }
 
 /* ── STAT NUMBER COUNTER ── */
 .stat-num {
@@ -960,10 +960,8 @@ body::after {
   to   { background-position: 220% 50%; }
 }
 
-/* ── QUOTES MARQUEE: soft glow + breath ── */
+/* ── QUOTES MARQUEE: soft breath ── */
 .quotes-marquee { position: relative; }
-.quotes-marquee::after { transition: opacity 0.4s; }
-.quotes-marquee:hover::after { opacity: 0.4; }
 .quote-card {
   animation: quoteBreath 7s ease-in-out infinite;
 }
@@ -1029,8 +1027,17 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
+    /* Delays must be zeroed too: the hero entrance delays (up to ~3.3s) were
+       calibrated to wait out the intro loader, which reduced-motion removes
+       instantly — without this, RM visitors stared at a blank hero. */
+    animation-delay: 0s !important;
+    /* Freeze infinite animations at a deterministic frame instead of letting
+       the 0.001ms duration resample a random phase every frame (flicker). */
+    animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
   }
+  html { scroll-behavior: auto !important; }
   .intro { display: none !important; }
 }
 

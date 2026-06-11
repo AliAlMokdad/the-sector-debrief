@@ -70,6 +70,10 @@ const PAGE_TITLES = {
   about:    'About · The Sector Debrief',
   contact:  'Contact · The Sector Debrief',
 };
+// Search debounce handle · module-level so _doNavigate can cancel a pending
+// renderEpisodes when the user navigates away mid-debounce (otherwise the
+// stale timer re-renders the now-hidden grid 120ms after leaving the page).
+let searchDebounce = null;
 function _doNavigate(page, opts) {
   opts = opts || {};
   // Reset the episode search when leaving the Episodes page so the input value
@@ -79,6 +83,7 @@ function _doNavigate(page, opts) {
     state.search = '';
     const searchInput = document.getElementById('search-input');
     if (searchInput) searchInput.value = '';
+    if (searchDebounce) { clearTimeout(searchDebounce); searchDebounce = null; }
   }
   state.page = page;
   document.title = PAGE_TITLES[page] || PAGE_TITLES.home;
@@ -594,7 +599,9 @@ function bindQuoteShare(scope) {
 }
 function flash(el, text) {
   const original = el.innerHTML;
-  el.innerHTML = text;
+  // textContent, not innerHTML: callers only pass glyph literals today, but
+  // this keeps the helper safe if any future caller passes dynamic text.
+  el.textContent = text;
   setTimeout(() => { el.innerHTML = original; }, 1100);
 }
 
@@ -605,7 +612,7 @@ function renderAbout() {
   grid.innerHTML = HOSTS.map(h => `
     <article class="host" id="${escAttr(h.slug)}" data-accent="${escAttr(h.accent)}">
       <div class="host-avatar host-avatar-photo">
-        <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="600" height="600" decoding="async"/>
+        <img src="${escAttr(h.photo)}" alt="${escAttr(h.name)}" width="${h.photoW || 600}" height="${h.photoH || 600}" decoding="async"/>
       </div>
       <h3 class="host-name">${escAttr(h.name)}</h3>
       <div class="host-role">${escAttr(h.role)}</div>
@@ -635,7 +642,8 @@ function openHostAnchor(slug, opts) {
   setTimeout(() => {
     const el = document.getElementById(slug);
     if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     el.classList.add('host-anchor-highlight');
     setTimeout(() => el.classList.remove('host-anchor-highlight'), 2400);
   }, opts.coldLoad ? 600 : 120);
@@ -1064,11 +1072,10 @@ function bindSearch() {
   const input = $('#search-input');
   if (!input || input.dataset.bound) return;
   input.dataset.bound = '1';
-  let t = null;
   input.addEventListener('input', () => {
     state.search = input.value;
-    if (t) clearTimeout(t);
-    t = setTimeout(renderEpisodes, 120);
+    if (searchDebounce) clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(renderEpisodes, 120);
   });
 }
 
@@ -1273,6 +1280,17 @@ document.addEventListener('DOMContentLoaded', () => {
   bindMobileNav();
   bindMini();
   animateCounters();
+
+  // Deep-link search: the PodcastSeries SearchAction in the head advertises
+  // /?search={term}#episodes — honour it so the markup stays truthful and
+  // agents following it land on a working, pre-filtered episode list.
+  const deepSearch = new URLSearchParams(location.search).get('search');
+  if (deepSearch) {
+    state.search = deepSearch;
+    const dsInput = $('#search-input');
+    if (dsInput) dsInput.value = deepSearch;
+    if (state.page === 'episodes') renderEpisodes();
+  }
 
   setTimeout(() => {
     if (window.applyTilt)     window.applyTilt(document);

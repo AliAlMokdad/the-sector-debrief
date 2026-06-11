@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,6 +12,9 @@
   <!-- Canonical -->
   <link rel="canonical" href="https://thesectordebrief.com/"/>
 
+  <!-- Canonical podcast RSS feed (the Apple Podcasts source feed) -->
+  <link rel="alternate" type="application/rss+xml" title="The Sector Debrief" href="https://anchor.fm/s/10c257648/podcast/rss"/>
+
   <!-- Mobile theme color (Chrome Android address bar, iOS PWA status bar) -->
   <meta name="theme-color" content="#EFE8D6" media="(prefers-color-scheme: light)"/>
   <meta name="theme-color" content="#1A1614" media="(prefers-color-scheme: dark)"/>
@@ -19,9 +22,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
   <meta name="apple-mobile-web-app-title" content="Sector Debrief"/>
 
-  <!-- Favicon + PWA manifest -->
+  <!-- Favicon + PWA manifest. iOS ignores SVG touch icons (it substitutes a
+       page screenshot), so the touch icon must be a real PNG. -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
-  <link rel="apple-touch-icon" href="/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
   <link rel="manifest" href="/site.webmanifest"/>
 
   <!-- Preload the LCP cover image so it starts decoding as soon as HTML arrives -->
@@ -37,6 +41,7 @@
   <meta property="og:image:width" content="1280"/>
   <meta property="og:image:height" content="1280"/>
   <meta property="og:image:alt" content="The Sector Debrief podcast cover"/>
+  <meta property="og:image:type" content="image/jpeg"/>
   <meta property="og:locale" content="en_GB"/>
 
   <!-- Twitter Card -->
@@ -44,17 +49,20 @@
   <meta name="twitter:title" content="The Sector Debrief · Honest Humanitarian &amp; Development Podcast"/>
   <meta name="twitter:description" content="The real conversations that shape the humanitarian and development world. The ones that happen when the microphones are off."/>
   <meta name="twitter:image" content="https://thesectordebrief.com/assets/cover.jpg"/>
+  <meta name="twitter:image:alt" content="The Sector Debrief podcast cover"/>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <!-- Episode thumbnails all come from YouTube's image CDN · warm the connection early -->
+  <link rel="preconnect" href="https://i.ytimg.com"/>
   <!-- Non-blocking font load · media=print swap pattern saves ~200ms FCP on slow networks.
        The print stylesheet doesn't block first paint; once loaded it swaps to media="all". -->
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-06-09c"/>
-  <link rel="stylesheet" href="css/motion.css?v=2026-06-09c"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-06-11a"/>
+  <link rel="stylesheet" href="css/motion.css?v=2026-06-11a"/>
 
   <!-- Schema.org PodcastSeries -->
   <script type="application/ld+json">
@@ -68,9 +76,9 @@
     "url": "https://thesectordebrief.com",
     "image": "https://thesectordebrief.com/assets/cover.jpg",
     "author": [
-      { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-      { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-      { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+      { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+      { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+      { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
     ],
     "webFeed": "https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L",
     "inLanguage": "en-GB",
@@ -219,13 +227,14 @@
       "episodeNumber": 8,
       "duration": "PT55M",
       "url": "https://www.youtube.com/watch?v=m8wvagMeDQs",
+      "image": "https://i.ytimg.com/vi/m8wvagMeDQs/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=m8wvagMeDQs", "encodingFormat": "video/mp4" },
       "actor": [
         { "@type": "Person", "name": "Sabrina Segal" },
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "risk management, risk sharing, risk transfer, localization, compliance, ISO 31000, humanitarian sector"
     },
@@ -238,12 +247,13 @@
       "episodeNumber": 7,
       "duration": "PT54M",
       "url": "https://www.youtube.com/watch?v=vPJAWTb2dPI",
+      "image": "https://i.ytimg.com/vi/vPJAWTb2dPI/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=vPJAWTb2dPI", "encodingFormat": "video/mp4" },
       "actor": [
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "donations, collaboration, AI, social contract, humanitarian sector"
     },
@@ -256,12 +266,13 @@
       "episodeNumber": 6,
       "duration": "PT51M",
       "url": "https://www.youtube.com/watch?v=7w_FXEcBzs4",
+      "image": "https://i.ytimg.com/vi/7w_FXEcBzs4/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=7w_FXEcBzs4", "encodingFormat": "video/mp4" },
       "actor": [
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "civil society, transition, sense-making, humanitarian sector"
     },
@@ -274,13 +285,14 @@
       "episodeNumber": 5,
       "duration": "PT52M",
       "url": "https://www.youtube.com/watch?v=bv47XLE50hw",
+      "image": "https://i.ytimg.com/vi/bv47XLE50hw/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=bv47XLE50hw", "encodingFormat": "video/mp4" },
       "actor": [
         { "@type": "Person", "name": "Aisha Tambajang" },
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "identity, leadership, power, positionality, humanitarian"
     },
@@ -293,13 +305,14 @@
       "episodeNumber": 4,
       "duration": "PT58M",
       "url": "https://www.youtube.com/watch?v=qNM0NWeZ4fA",
+      "image": "https://i.ytimg.com/vi/qNM0NWeZ4fA/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=qNM0NWeZ4fA", "encodingFormat": "video/mp4" },
       "actor": [
         { "@type": "Person", "name": "Sofia Sprechmann Sineiro" },
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "CEO, localization, idealism, CARE International, locally led development"
     },
@@ -307,17 +320,18 @@
       "@context": "https://schema.org",
       "@type": "PodcastEpisode",
       "name": "Humanitarian Leadership Under Pressure, Identity vs Strategy, and What Comes Next",
-      "description": "Leadership within pressurized humanitarian systems. The hosts contrast grassroots innovation with large institutional survival modes. Discussion addresses values under stress, reputational risks, and organizational sustainability during transformation.",
+      "description": "Leadership within pressurised humanitarian systems. The hosts contrast grassroots innovation with large institutional survival modes. Discussion addresses values under stress, reputational risks, and organisational sustainability during transformation.",
       "datePublished": "2026-02-07",
       "episodeNumber": 3,
       "duration": "PT46M",
       "url": "https://www.youtube.com/watch?v=nQpnWvOoEio",
+      "image": "https://i.ytimg.com/vi/nQpnWvOoEio/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=nQpnWvOoEio", "encodingFormat": "video/mp4" },
       "actor": [
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "pressure, strategy, transformation, humanitarian leadership"
     },
@@ -330,12 +344,13 @@
       "episodeNumber": 2,
       "duration": "PT49M",
       "url": "https://www.youtube.com/watch?v=VVe2TM2z5UI",
+      "image": "https://i.ytimg.com/vi/VVe2TM2z5UI/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=VVe2TM2z5UI", "encodingFormat": "video/mp4" },
       "actor": [
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "terminology, diplomacy, change, humanitarian sector"
     },
@@ -343,21 +358,297 @@
       "@context": "https://schema.org",
       "@type": "PodcastEpisode",
       "name": "What This Space Is About, Leadership and Reflections",
-      "description": "The inaugural episode introduces the program's purpose. Hosts Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad introduce their leadership perspectives and the personal reflection methodologies they use to think systematically about sector challenges. The opening note: this won't be a polished podcast. It will be honest.",
+      "description": "The inaugural episode introduces the programme's purpose. Hosts Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad introduce their leadership perspectives and the personal reflection methodologies they use to think systematically about sector challenges. The opening note: this won't be a polished podcast. It will be honest.",
       "datePublished": "2025-12-13",
       "episodeNumber": 1,
       "duration": "PT38M",
       "url": "https://www.youtube.com/watch?v=FqxeBin5bbQ",
+      "image": "https://i.ytimg.com/vi/FqxeBin5bbQ/hqdefault.jpg",
       "partOfSeries": { "@type": "PodcastSeries", "name": "The Sector Debrief", "@id": "https://thesectordebrief.com/#series" },
       "associatedMedia": { "@type": "VideoObject", "contentUrl": "https://www.youtube.com/watch?v=FqxeBin5bbQ", "encodingFormat": "video/mp4" },
       "actor": [
-        { "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
-        { "@id": "https://thesectordebrief.com/#kim-kucinskas" },
-        { "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#ali-al-mokdad" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#kim-kucinskas" },
+        { "@type": "Person", "@id": "https://thesectordebrief.com/#thomas-jepson-lay" }
       ],
       "keywords": "origins, reflection, leadership"
     }
   ]
+  </script>
+
+  <!-- Schema.org Blog + BlogPosting entries (hard-coded, mirroring the ld-episodes
+       pattern, so the essays are visible to crawlers and AI assistants without JS.
+       Generated from js/data.js BLOG_POSTS — regenerate when essays ship. -->
+  <script id="ld-blog" type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": "https://thesectordebrief.com/#blog",
+    "name": "The Sector Debrief · Essays",
+    "description": "Long-form essays from each episode of The Sector Debrief, plus occasional editorials from the hosts.",
+    "url": "https://thesectordebrief.com/#blog",
+    "inLanguage": "en-GB",
+    "blogPost": [
+      {
+        "@type": "BlogPosting",
+        "headline": "Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting",
+        "description": "Every essay on this site ends with five reflection prompts. They rotate through the Pause & Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ]
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Risk in the Round: From Compliance to Strategy, and the Generational Fight",
+        "description": "Sabrina Segal, Director of The Risk Collaborative, makes a simple case with large consequences. Risk is not a compliance checklist. It is the effect of uncertainty on objectives, which makes it the place where the sector quietly transfers its power, and the place it could choose to share it instead.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-06-09",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "Rethinking Risk Management in the Humanitarian and Development Sector",
+          "url": "https://www.youtube.com/watch?v=m8wvagMeDQs"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Not Just a Funding Problem: A Sunday Knock and What Came After",
+        "description": "Ali Al Mokdad opened the door on a Sunday morning. A family with two children, holding an NGO flyer. His trained brain went straight to overhead and disallowed costs. Then it stopped.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-05-27",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "Donations, Collaboration, and AI in the Room",
+          "url": "https://www.youtube.com/watch?v=vPJAWTb2dPI"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "The Sector Is Changing. How Do You Make Sense Of It?",
+        "description": "Kim Kucinskas came back from a month on the road, Buenos Aires then Oxford, and needed to think out loud. This episode is that conversation. About civil society, public goods, and what it actually means to make sense of a sector in transition.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-05-07",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "The Sector Is Changing. How Do You Make Sense Of It?",
+          "url": "https://www.youtube.com/watch?v=7w_FXEcBzs4"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Notes from the Editing Room: How This Podcast Actually Works",
+        "description": "How we choose guests. Why we publish irregularly. What we are listening for in 2026. The editorial logic behind the conversations.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ]
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Who Are You in the Room? Identity, Positionality, and the Quiet Politics of Showing Up",
+        "description": "When Aisha Tambajang sat down with us, she didn't reach for talking points. She reached for a question. One most of the sector keeps avoiding.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-03-29",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "Who Are You in the Room, Identity vs Positionality, and Leadership in Times of Disruption",
+          "url": "https://www.youtube.com/watch?v=bv47XLE50hw"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Urgent Patience: Why Idealism Is Not Naivety, and Other Lessons from a CEO Who Lasted",
+        "description": "Sofia Sprechmann Sineiro spent thirty years inside one of the largest humanitarian organisations in the world. She left with her values intact. That alone is worth a podcast episode.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-03-07",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "The CEO Perspective, Urgent Patience, and Why Idealism Is Not Naivety",
+          "url": "https://www.youtube.com/watch?v=qNM0NWeZ4fA"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "Leadership Under Pressure: When the System Stops Working and No One Wants to Say It",
+        "description": "There's a moment in every sector reform conversation when someone says \"we need to be honest.\" Then everyone leans in. Then no one is.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-02-07",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "Humanitarian Leadership Under Pressure, Identity vs Strategy, and What Comes Next",
+          "url": "https://www.youtube.com/watch?v=nQpnWvOoEio"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "What Does \"Sector\" Even Mean Anymore?",
+        "description": "A listener wrote in. They wanted to know if we actually believed in the word in our own podcast title. It was the right question.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2026-01-19",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "What Does Sector Mean, Leadership Tension, and Change",
+          "url": "https://www.youtube.com/watch?v=VVe2TM2z5UI"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "headline": "What This Space Is About: Why We Started The Sector Debrief",
+        "description": "There are enough polished podcasts in this sector. There are enough panels. There are enough frameworks. We started this for the conversations that don't fit those formats.",
+        "url": "https://thesectordebrief.com/#blog",
+        "inLanguage": "en-GB",
+        "author": [
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#ali-al-mokdad"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#kim-kucinskas"
+          },
+          {
+            "@type": "Person",
+            "@id": "https://thesectordebrief.com/#thomas-jepson-lay"
+          }
+        ],
+        "datePublished": "2025-12-13",
+        "about": {
+          "@type": "PodcastEpisode",
+          "name": "What This Space Is About, Leadership and Reflections",
+          "url": "https://www.youtube.com/watch?v=FqxeBin5bbQ"
+        }
+      }
+    ]
+  }
   </script>
 
   <!-- Schema.org FAQPage (helps AI assistants answer questions about the show) -->
@@ -420,7 +711,7 @@
         "name": "What does The Sector Debrief cover about humanitarian leadership?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Sector Debrief examines humanitarian leadership under pressure: identity versus strategy, values during institutional crisis, the distinction between rushing to fix and curiosity to solve, and what leadership looks like when the funding environment contracts. Recurring threads include CEO perspective from former CARE International Secretary General Sofia Sprechmann Sineiro, the gap between organizational identity and working strategy, and what locally led development requires beyond terminology."
+          "text": "The Sector Debrief examines humanitarian leadership under pressure: identity versus strategy, values during institutional crisis, the distinction between rushing to fix and curiosity to solve, and what leadership looks like when the funding environment contracts. Recurring threads include CEO perspective from former CARE International Secretary General Sofia Sprechmann Sineiro, the gap between organisational identity and working strategy, and what locally led development requires beyond terminology."
         }
       },
       {
@@ -462,6 +753,10 @@
     <h2 style="font-size:20px;margin:24px 0 12px;">Episodes</h2>
     <ol style="margin:0 0 24px;padding-left:20px;">
       <li style="margin-bottom:16px;">
+        <strong>Ep 8 · Rethinking Risk Management in the Humanitarian and Development Sector</strong> with Sabrina Segal (9 Jun 2026, 55 min)<br/>
+        Sabrina Segal, Director of The Risk Collaborative, on risk as the effect of uncertainty on objectives rather than a compliance checklist: threats and opportunities, risk sharing instead of risk transfer, and the language of risk as an entry point for localization. <a href="https://www.youtube.com/watch?v=m8wvagMeDQs">Watch</a>
+      </li>
+      <li style="margin-bottom:16px;">
         <strong>Ep 7 · Donations, Collaboration, and AI in the Room</strong> (27 May 2026, 54 min)<br/>
         Ali Al Mokdad's Sunday-door donation story opens into a wider conversation with Kim Kucinskas and Thomas Jepson-Lay on social contract, AI in the workplace, and collaboration as a discipline rather than a slogan. <a href="https://www.youtube.com/watch?v=vPJAWTb2dPI">Watch</a>
       </li>
@@ -479,7 +774,7 @@
       </li>
       <li style="margin-bottom:16px;">
         <strong>Ep 3 · Humanitarian Leadership Under Pressure, Identity vs Strategy, and What Comes Next</strong> (7 Feb 2026, 46 min)<br/>
-        Leadership within pressurized humanitarian systems. Grassroots innovation versus large institutional survival modes. <a href="https://www.youtube.com/watch?v=nQpnWvOoEio">Watch</a>
+        Leadership within pressurised humanitarian systems. Grassroots innovation versus large institutional survival modes. <a href="https://www.youtube.com/watch?v=nQpnWvOoEio">Watch</a>
       </li>
       <li style="margin-bottom:16px;">
         <strong>Ep 2 · What Does Sector Mean, Leadership Tension, and Change</strong> (19 Jan 2026, 49 min)<br/>
@@ -649,11 +944,11 @@
   <div class="stats">
     <div class="stats-grid stats-grid-2 reveal-stagger">
       <div class="stat">
-        <div class="stat-num" id="stat-episodes">7</div>
+        <div class="stat-num" id="stat-episodes">8</div>
         <div class="stat-label">Episodes Released</div>
       </div>
       <div class="stat">
-        <div class="stat-num" id="stat-views">76,760</div>
+        <div class="stat-num" id="stat-views">79,609</div>
         <div class="stat-label">Total Views on YouTube</div>
       </div>
     </div>
@@ -930,7 +1225,7 @@
           </div>
         </div>
         <div class="form-field">
-          <label for="cf-org">Organization</label>
+          <label for="cf-org">Organisation</label>
           <input id="cf-org" type="text" name="organization" autocomplete="organization" autocorrect="off" autocapitalize="words" spellcheck="false" enterkeyhint="next"/>
         </div>
         <div class="form-field">
@@ -1042,7 +1337,7 @@
             <span class="footer-orb-tip">iHeart</span>
           </a>
         </div>
-        <h4 style="margin-top: 28px;">Subscribe</h4>
+        <h3 style="margin-top: 28px; font-size: 16px;">Subscribe</h3>
         <a class="footer-yt-cta" href="https://www.youtube.com/channel/UCUrZ0l2uqp2zgJ5WrjcRXDg?sub_confirmation=1" target="_blank" rel="noopener noreferrer">
           <span class="yt-icon">▶</span>
           <span>Subscribe on YouTube</span>
@@ -1088,9 +1383,9 @@
   <div class="modal" id="modal-blog" role="dialog" aria-modal="true" aria-labelledby="modal-blog-title" hidden></div>
 </div>
 
-<script src="js/data.js?v=2026-06-09c"></script>
-<script src="js/motion.js?v=2026-06-09c"></script>
-<script src="js/app.js?v=2026-06-09c"></script>
+<script src="js/data.js?v=2026-06-11a"></script>
+<script src="js/motion.js?v=2026-06-11a"></script>
+<script src="js/app.js?v=2026-06-11a"></script>
 
 </body>
 </html>

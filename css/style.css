@@ -854,6 +854,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   letter-spacing: 1.5px; text-transform: uppercase;
   margin-top: 24px; opacity: 0.85;
 }
+/* The 0.85 opacity drops the 11px source line below WCAG AA on the three
+   darker card colours (cobalt 4.38:1, crimson/rust 3.79:1). Full opacity
+   brings all three back over 4.5:1; mustard + forest pass either way. */
+.q-cobalt .quote-source, .q-crimson .quote-source, .q-rust .quote-source { opacity: 1; }
 .quote-share {
   display: flex; gap: 8px; margin-top: 20px;
 }
@@ -2481,12 +2485,19 @@ body:has(.page[data-page="home"].active) .footer {
   .mini-info-sub { display: none; }
   .mini-controls { gap: 10px; }
   .mini-btn { width: 32px; height: 32px; }
-  .mini-btn:not(.mini-play) { display: none; }
+  /* Hide prev/next on narrow screens but NEVER the close button — without it
+     a narrow fine-pointer viewport (resized desktop window) gets a player bar
+     it cannot dismiss. The touch-device block below re-sizes #mini-close. */
+  .mini-btn:not(.mini-play):not(#mini-close) { display: none; }
   .mini-play { width: 38px; height: 38px; }
 
   .ep-card .ep-body { padding: 18px; }
   .ep-title { font-size: 19px; }
   .blog-card-body { padding: 22px; }
+  /* The desktop grid's minmax(360px, 1fr) floor exceeds the available width
+     on 360-390px phones (container = vw - 40px padding), silently clipping
+     the cards' right edge. Single column on phones. */
+  .blog-grid { grid-template-columns: 1fr; }
   .blog-card-title { font-size: 22px; }
 
   .host { padding: 26px; }
@@ -2543,7 +2554,7 @@ body:has(.page[data-page="home"].active) .footer {
 /* Desktop only · let the thumb stretch to fill the entire left column so
    the soft-slate ::before accent doesn't leak below it as a blue gap.
    16/10 aspect still governs the mobile (single-column) layout above. */
-@media (min-width: 961px) {
+@media (min-width: 960.02px) {
   .ep-feat-thumb {
     aspect-ratio: auto;
     height: 100%;
@@ -2557,6 +2568,15 @@ body:has(.page[data-page="home"].active) .footer {
     height: auto;
     aspect-ratio: 16 / 9;
     flex: 0 0 auto;
+  }
+  /* Pin the overlay (episode number + play button) to the image box rather
+     than the full panel, so they sit ON the artwork instead of floating in
+     the letterbox band when the text column is taller than the image. */
+  .ep-feat-overlay {
+    inset: auto 0;
+    top: 50%;
+    transform: translateY(-50%);
+    aspect-ratio: 16 / 9;
   }
 }
 
