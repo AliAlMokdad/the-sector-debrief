@@ -707,7 +707,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 }
 /* Pause-on-hover is a mouse courtesy ONLY. On touch screens :hover sticks
    after a tap, which froze the marquee for good (phones get a swipe
-   carousel instead — see VOICES TOUCH CAROUSEL near the end of this file). */
+   carousel instead: see VOICES TOUCH CAROUSEL near the end of this file). */
 @media (hover: hover) {
   .quotes-marquee:hover .quotes-track { animation-play-state: paused; }
 }
@@ -2492,7 +2492,7 @@ body.nav-open { overflow: hidden; }
    (any width) and on phone widths the strip becomes a native swipe
    carousel: scroll-snap, momentum, one quote at a time, reader in
    control. The clone cards exist only for the desktop loop, so they are
-   hidden here — 36 real cards is plenty to swipe through.
+   hidden here, and 36 real cards is plenty to swipe through.
    ═══════════════════════════════════════════ */
 @media (hover: none) and (pointer: coarse), (max-width: 640px) {
   .quotes-track {
@@ -2516,6 +2516,16 @@ body.nav-open { overflow: hidden; }
   .quotes-track .quote-text { font-size: 19px; }
   /* Narrower edge fades: a hint of more, not a curtain over the next card */
   .quotes-marquee::before, .quotes-marquee::after { width: 28px; }
+}
+
+/* A mouse user in a narrow window reaches the carousel through the width
+   arm above but cannot swipe, so give that case (and only that case) a
+   slim visible scrollbar. Touch devices keep the clean edge-to-edge look. */
+@media (hover: hover) and (pointer: fine) and (max-width: 640px) {
+  .quotes-track { scrollbar-width: thin; scrollbar-color: rgba(243, 239, 230, 0.35) transparent; }
+  .quotes-track::-webkit-scrollbar { display: block; height: 6px; }
+  .quotes-track::-webkit-scrollbar-thumb { background: rgba(243, 239, 230, 0.35); border-radius: 99px; }
+  .quotes-track::-webkit-scrollbar-track { background: transparent; }
 }
 
 /* ═══════════════════════════════════════════
