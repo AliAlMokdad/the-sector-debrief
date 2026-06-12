@@ -1211,6 +1211,60 @@ function injectEpisodeSchema() {
   }
 }
 
+// ─── ESSAY ROTOR (blog header) ───
+// "Every episode becomes an essay." The closing phrase cycles through what an
+// episode actually turns into here. The <em> is aria-hidden (a visually-hidden
+// "an essay" carries the sentence for screen readers), no-JS keeps the static
+// word, and reduced-motion users get no rotation at all.
+function initEssayRotor() {
+  const rotor = $('#essay-rotor');
+  if (!rotor || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const word = rotor.querySelector('.rotor-word');
+  if (!word) return;
+  const WORDS = ['an essay', 'a thought', 'a reflection', 'a roadmap', 'an idea', 'an action'];
+  const INKS  = ['var(--mustard)', 'var(--cobalt)', 'var(--crimson)', 'var(--forest)', 'var(--rust)'];
+  const measure = document.createElement('span');
+  measure.className = 'rotor-measure';
+  measure.setAttribute('aria-hidden', 'true');
+  rotor.appendChild(measure);
+  let i = 0, ink = 0;
+  // The width is animated via CSS transition; +1px absorbs the italic overhang
+  // of Fraunces so the last glyph never clips against the following period.
+  const fit = txt => {
+    measure.textContent = txt;
+    rotor.style.width = (Math.ceil(measure.getBoundingClientRect().width) + 1) + 'px';
+  };
+  const sizeNow = () => fit(WORDS[i]);
+  sizeNow();
+  // Re-measure once webfonts land and whenever the fluid font-size changes.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeNow);
+  let rotorResizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(rotorResizeT);
+    rotorResizeT = setTimeout(sizeNow, 150);
+  });
+  setInterval(() => {
+    // No churn while the tab is hidden or the blog page is off-screen.
+    const pg = rotor.closest('.page');
+    if (document.hidden || (pg && !pg.classList.contains('active'))) return;
+    i = (i + 1) % WORDS.length;
+    ink = (ink + 1) % INKS.length;
+    const out = document.createElement('span');
+    out.className = 'rotor-word out';
+    out.textContent = word.textContent;
+    rotor.appendChild(out);
+    setTimeout(() => out.remove(), 450);
+    word.textContent = WORDS[i];
+    rotor.style.setProperty('--rotor-ink', INKS[ink]);
+    word.classList.remove('in');
+    rotor.classList.remove('inked');
+    void rotor.offsetWidth; // reflow so both keyframes restart cleanly
+    word.classList.add('in');
+    rotor.classList.add('inked');
+    fit(WORDS[i]);
+  }, 2800);
+}
+
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
   injectEpisodeSchema();
@@ -1220,6 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPauseHero();
   renderQuotes();
   renderAbout();
+  initEssayRotor();
 
   const initial = (location.hash || '#home').slice(1);
   const hostSlugs = HOSTS.map(h => h.slug);

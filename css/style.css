@@ -705,7 +705,12 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-.quotes-marquee:hover .quotes-track { animation-play-state: paused; }
+/* Pause-on-hover is a mouse courtesy ONLY. On touch screens :hover sticks
+   after a tap, which froze the marquee for good (phones get a swipe
+   carousel instead — see VOICES TOUCH CAROUSEL near the end of this file). */
+@media (hover: hover) {
+  .quotes-marquee:hover .quotes-track { animation-play-state: paused; }
+}
 
 /* ═══════════════════════════════════════════
    STATS BAR
@@ -2294,8 +2299,9 @@ a, button, .pause-btn, .platform-btn, .ep-link, .quote-share button,
   .ep-card:hover, .blog-card:hover, .host:hover { transform: none; }
   .platform-btn:hover, .ep-link:hover { transform: none; }
 
-  /* Slow / pause battery-burning ambient animations */
-  .quotes-track { animation-duration: 90s; }
+  /* Slow / pause battery-burning ambient animations
+     (.quotes-track needs no slowing here: coarse-pointer devices get the
+     swipe carousel, which disables the marquee animation entirely) */
   .floating-dots span { animation-duration: 26s; }
   /* Pause continuous "breathing" / drift animations that paint every frame */
   .quote-card { animation: none !important; }
@@ -2476,4 +2482,94 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 640px) {
   .robot-check { padding: 12px 14px; }
   .robot-check-label { font-size: 13px; }
+}
+
+/* ═══════════════════════════════════════════
+   VOICES · TOUCH / PHONE SWIPE CAROUSEL
+   The desktop marquee pauses on :hover. On a touchscreen the first tap
+   makes that hover state stick, freezing the strip for good, and a 280px
+   auto-scrolling card was a cramped read anyway. So on coarse pointers
+   (any width) and on phone widths the strip becomes a native swipe
+   carousel: scroll-snap, momentum, one quote at a time, reader in
+   control. The clone cards exist only for the desktop loop, so they are
+   hidden here — 36 real cards is plenty to swipe through.
+   ═══════════════════════════════════════════ */
+@media (hover: none) and (pointer: coarse), (max-width: 640px) {
+  .quotes-track {
+    animation: none !important;
+    width: auto;
+    overflow-x: auto;
+    gap: 16px;
+    padding: 6px 24px 20px;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+  .quotes-track::-webkit-scrollbar { display: none; }
+  .quotes-track > .quote-card[aria-hidden="true"] { display: none; }
+  .quotes-track > .quote-card {
+    width: min(330px, 84vw);
+    scroll-snap-align: center;
+    padding: 30px 26px 26px;
+    animation: none !important;
+  }
+  .quotes-track .quote-text { font-size: 19px; }
+  /* Narrower edge fades: a hint of more, not a curtain over the next card */
+  .quotes-marquee::before, .quotes-marquee::after { width: 28px; }
+}
+
+/* ═══════════════════════════════════════════
+   ESSAY ROTOR · "Every episode becomes ..."
+   The blog header's closing phrase cycles through what an episode turns
+   into on this site: an essay, a thought, a reflection, a roadmap, an
+   idea, an action. Ink-dissolve word swap, width eases to fit, and the
+   underline is redrawn in a fresh colour for each word (same family as
+   the four-dot strip). Reduced-motion and no-JS readers keep the static
+   "an essay"; the rotor is aria-hidden with a visually-hidden twin
+   carrying the sentence for screen readers.
+   ═══════════════════════════════════════════ */
+.essay-rotor {
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  padding-bottom: 0.1em;
+  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  --rotor-ink: var(--mustard);
+}
+.essay-rotor::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 3px;
+  border-radius: 99px;
+  background: var(--rotor-ink);
+  opacity: 0.65;
+  transform-origin: left center;
+}
+.essay-rotor.inked::after { animation: rotorInk 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.essay-rotor .rotor-word { display: inline-block; }
+.essay-rotor .rotor-word.in { animation: rotorIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.essay-rotor .rotor-word.out {
+  position: absolute;
+  left: 0; top: 0;
+  animation: rotorOut 0.4s ease both;
+  pointer-events: none;
+}
+.essay-rotor .rotor-measure {
+  position: absolute;
+  visibility: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+}
+@keyframes rotorIn {
+  from { opacity: 0; transform: translateY(0.45em); filter: blur(5px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes rotorOut {
+  from { opacity: 1; transform: translateY(0); filter: blur(0); }
+  to   { opacity: 0; transform: translateY(-0.5em); filter: blur(5px); }
+}
+@keyframes rotorInk {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
 }
