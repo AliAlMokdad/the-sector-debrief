@@ -294,9 +294,11 @@ function renderFeaturedEpisode(ep) {
 
 // ─── BLOG COVER GENERATOR ─────────────────────────────────
 const BLOG_COVER_THEMES = {
-  0: { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
-  9: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',     shape: 'lines' },
-  7: { bg: '#1A1614', fg: '#FAF6EA', accent: '#E8B82C', word: 'CONTRACT',  shape: 'circle' },
+  0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
+  90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',     shape: 'editorial' },
+  9:  { bg: '#0D1B2A', fg: '#F5F0E2', accent: '#E8B82C', word: 'PURPOSE',   shape: 'arc'    },
+  8:  { bg: '#2A4530', fg: '#F5F0E2', accent: '#B83A2A', word: 'RISK',      shape: 'split'  },
+  7:  { bg: '#1A1614', fg: '#FAF6EA', accent: '#E8B82C', word: 'CONTRACT',  shape: 'circle' },
   6: { bg: '#2A4530', fg: '#F5F0E2', accent: '#E8B82C', word: 'CHANGING',  shape: 'arc'    },
   5: { bg: '#0D1B2A', fg: '#E8B82C', accent: '#B83A2A', word: 'IDENTITY',  shape: 'circle' },
   4: { bg: '#FAF6EA', fg: '#1E3D7A', accent: '#C9963F', word: 'PATIENCE',  shape: 'arc'    },
@@ -308,7 +310,8 @@ const BLOG_COVER_THEMES = {
 // Accepts either a post object or a bare epN (backward compatible).
 // Any post with epId === null OR pinned === true gets the "EDITORIAL" label
 // regardless of its epN, so we can have multiple editorials with distinct cover
-// themes (e.g. epN 0 for the original NOTES editorial, epN 9 for the PAUSE one).
+// themes (e.g. epN 0 for the original NOTES editorial, epN 90 for the PAUSE one,
+// kept out of the 1-9 episode range so real episode covers never collide).
 function blogCoverSVG(post) {
   const epN = (post && typeof post === 'object') ? post.epN : post;
   const isEditorial = (post && typeof post === 'object')

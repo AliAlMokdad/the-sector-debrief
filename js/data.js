@@ -15,6 +15,16 @@ const PLATFORMS = {
 // All 8 episodes from the playlist (newest first)
 const EPISODES = [
   {
+    n: 9,
+    id: 'KPgZ2FhQpb4',
+    title: 'What Do You Tell the Next Generation?',
+    guest: null,
+    date: '2026-07-10',
+    duration: '50 min',
+    description: 'Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad work through a question all three keep getting asked, from students, emerging leaders, and colleagues who lost their jobs: what do you tell someone about a career in humanitarian and development work now that the old pathway in has broken? The conversation moves from motivation versus identity, the job is only the vehicle for the values you enact, to Ali Al Mokdad\'s distinction between purpose and task, the task is disappearing into AI while the purpose of a role, building judgement and learning how an organisation actually works, must not. Kim Kucinskas presses on where the next generation earns hard-won judgement if the entry-level work is automated away. It gets honest about private truths and public lies, the sector fracturing, and humanitarian diplomacy as the work of keeping the door open, and closes on the strange advantage emerging leaders have: they do not need to unlearn a version of leadership built for a world that no longer exists.',
+    themes: ['Next Generation', 'AI', 'Leadership']
+  },
+  {
     n: 8,
     id: 'm8wvagMeDQs',
     title: 'Rethinking Risk Management in the Humanitarian and Development Sector',
@@ -135,14 +145,17 @@ const QUOTES = [
   { text: "This is not only a funding problem. It is also a social contract problem.",                                                                                            source: "Kim Kucinskas",               color: "q-forest" },
   { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" },
   { text: "Shift the power is a great slogan. I don't think it happens in reality. But balancing the power, that we can actually do.",                                          source: "Sabrina Segal",              color: "q-cobalt" },
-  { text: "Those who came before us set the foundation. Our job is to clear out the outdated governance and the nonsense, so the people who come after us can focus on the real problems. This is our generational fight.", source: "Ali Al Mokdad",   color: "q-crimson" }
+  { text: "Those who came before us set the foundation. Our job is to clear out the outdated governance and the nonsense, so the people who come after us can focus on the real problems. This is our generational fight.", source: "Ali Al Mokdad",   color: "q-crimson" },
+  { text: "We need to distinguish between purpose and task.",                                                                     source: "Ali Al Mokdad",               color: "q-mustard" },
+  { text: "I'd much rather someone who asks a good question, or admits they don't know what they're doing, than someone who arrives with a five-point plan.", source: "Kim Kucinskas",           color: "q-forest" },
+  { text: "The guise of familiarity gets put forward as certainty, and that's just managed decline.",                            source: "Thomas Jepson-Lay",           color: "q-rust" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
 const BLOG_POSTS = [
   {
     epId: null,
-    epN: 9,
+    epN: 90,
     pinned: true,
     slug: 'pause-button-and-ai',
     title: 'Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting',
@@ -212,6 +225,82 @@ const BLOG_POSTS = [
 <p>If you got this far and you have not clicked the Pause Button yet, scroll back up and try it. Read the question that comes up. Sit with it for one minute before you do anything else.</p>
 
 <p>That minute is the actual product on this site. Everything else is wrapping.</p>`
+  },
+  {
+    epId: 'KPgZ2FhQpb4',
+    epN: 9,
+    slug: 'what-do-you-tell-the-next-generation',
+    title: 'Purpose and Task: What Do You Tell the Next Generation?',
+    excerpt: 'Hosts-only. The question all three keep getting asked, from students, emerging leaders, and colleagues who lost their jobs. What survives when the old pathway breaks, when AI takes the task, and when the sector cannot agree what it stands for?',
+    readTime: '8 min',
+    reflections: [
+      "Look at one entry-level role you influence. If AI can now do its tasks, what is the purpose that role still exists to build, and are you protecting that purpose or quietly cutting it along with the tasks?",
+      "Separate motivation from identity in your own case. What values first drew you to this work, and how much of what you now call your identity is really the job title, the organisation, and the architecture around it? Which part would survive if the vehicle disappeared tomorrow?",
+      "Find the place in your team where someone junior needs to make a real decision, and be allowed to get it wrong, to build judgement. Is that still happening, or has efficiency quietly removed the room to practise?",
+      "Name one private truth you hold in the corridor but would not say in the public session. What would it cost you to close the gap between the two by even one sentence?",
+      "Think of the most junior person in your last big meeting. Were they there to take notes, or to build judgement, and which did your own behaviour actually invite? What would you change in the next one?"
+    ],
+    body: `<p>Three people who have spent their careers in this sector keep getting the same question, from three different directions. Students who have just spent thousands on a degree. Emerging leaders who signed up for one kind of impact and are no longer sure it exists. Colleagues who came home from country operations, or lost the assignment, and are working out what a normal life is supposed to feel like. Underneath all of them sits the same question. What do you tell someone about a career in humanitarian and development work now that the old way in has broken?</p>
+
+<p>This episode is the three of us sitting with that question without pretending to have a clean answer. Kim Kucinskas put the honest frame on it early. Getting into this work never had a clear trajectory, but the old pathways are broken now, and even people with established careers are struggling. To say anything useful to a newcomer, you have to make a bet about where the sector is going. So we made a few.</p>
+
+<h2>Motivation Is Not Identity</h2>
+
+<p>The first bet is that people have been confusing two things that were never the same. Kim named it as motivation versus identity. Most of us say I work in this, and this is who I am, and when the job goes, the identity goes with it. The people struggling most right now, the ones who came back from the field and the ones who were made redundant, are wrestling with identity in both directions.</p>
+
+<p>Thomas Jepson-Lay pushed it further with a story about a colleague, Gareth Owen, being interviewed after a response. He introduces himself as having been a humanitarian for the last twenty years, and the reporter asks, what were you before, a bastard? The joke lands because it exposes the trick. The identity gets so wrapped up in the job title and the architecture around it that it strips out the thing underneath. Thomas put the challenge plainly.</p>
+
+<blockquote>Isn't identity associated with the values you enact, and the job is just the vehicle for exercising that identity?</blockquote>
+
+<p>If that is true, the honest advice to a newcomer is not here is how you get the job. It is go back to first principles: what impact do you actually want, and what values are you trying to enact? The demand for people who want to exercise humanity is not going away. It is going to increase. The jobs will still exist. They will just look different, sit in different places, and be more competitive. The scaffolding moved. The reason to do the work did not.</p>
+
+<h2>Purpose and Task</h2>
+
+<p>The second bet is the sharpest idea in the episode, and it is where AI comes in. Ali Al Mokdad told a small story that stayed with all three of us. He was assigned an assistant on a project, started collaborating, and then realised he preferred not having one. A friend had reached the same conclusion independently. The reason was uncomfortable. The effort it takes to orient, train, engage, coordinate and supervise an assistant is now greater than the effort it takes to prompt an AI agent to do the same tasks, faster.</p>
+
+<p>That could be read as a case for cutting entry-level roles. Ali argued the opposite, and the distinction is the one to hold onto.</p>
+
+<blockquote>We need to distinguish between purpose and task.</blockquote>
+
+<p>The task, taking the minutes, drafting the email, setting up the calendar invite, following up, is changing, and he is in favour of it changing. The purpose, overseeing the flow of a project cycle, learning while engaging with different people, building judgement about how an organisation actually works, should remain and be built on further. The role should not disappear. The reason the role exists should get stronger. The busywork that used to fill it can go.</p>
+
+<p>Kim Kucinskas put the hard question to that optimism. The old logic said the value of an intern taking notes was being in the room, absorbing the culture and the language, getting inducted into the work just by being present. If AI takes the note-taking, was that presence ever really valuable, or was it a story we told ourselves? And even if the seat survives, are they just being taught the same power structures everyone says need to change? The answer the three of us landed on was not to remove the seat. It was to change what the person in it spends their time on. Keep them in the room. Point their hours at judgement, not administration.</p>
+
+<h2>The Pipeline Problem</h2>
+
+<p>Underneath the optimism sits a real risk, and Kim named it most clearly. If the lower-level work is handed to AI for the sake of efficiency, where does a young workforce get the hard-won judgement that a manager or a leader actually needs? If they never get to exercise judgement and make mistakes, what happens to the pipeline five, ten, fifteen years out?</p>
+
+<p>Thomas Jepson-Lay called the danger by its name: short-termism. The leaders who get this right will make a decision that looks less efficient today, investing in people, and more effective later, because those people will have gone through the slower, harder journey that builds judgement. The glass-half-full version is that this happens partly by accident, because leaders are not ready to hand full control to AI and keep people around out of caution. Either way, the honest part remains. There will be fewer formal jobs, and a smaller structured architecture, than the sector used to offer. Pretending otherwise does the next generation no favours.</p>
+
+<h2>Private Truths and Public Lies</h2>
+
+<p>Then the conversation turned, and it got more personal than we usually get. Ali said something he does not often say in public. He is worried the sector is fracturing into movements that no longer sit under the same idea of humanity, some drifting in directions he cannot quite name, some tearing at each other in public while the whole sector gets branded as one thing from the outside. He gets pressure to use his platform for specific positions he does not always agree with, and he has made a deliberate choice to stay measured, because the role he tries to play depends on it.</p>
+
+<p>He calls that role humanitarian diplomacy. Some people keep the door open, some are fine closing it. Keeping it open means engaging with people who are not fans of the sector, and with armed groups and de facto authorities, on questions like access and participation, even without full agreement on principles, because someone has to. You cannot build a bridge while going in on full attack. And he named the quieter cost of the sector's caution directly.</p>
+
+<blockquote>There are private truths and public lies.</blockquote>
+
+<p>The corridor conversations at headquarters and country level, on localisation, on effectiveness, on what is really working, are often not the ones held in public. Kim Kucinskas offered the constructive version. We do not all have to agree in order to coordinate and reinforce each other. You can disagree on the how and still hold the same underlying belief that civil society is a public good. What undermines everyone is tripping over each other in the same rooms, contradicting each other, and calling it principle.</p>
+
+<h2>The Truck That Beat Us to It</h2>
+
+<p>Thomas told the story that made the point impossible to dodge. Mozambique, 2019, after Cyclone Idai. His team got into a flooded settlement and did what the sector does. They walked around, talked to community leaders, gathered an understanding of the needs, waited for permission, waited to raise the money for helicopters. While they were doing that, a truck arrived. By the time they had finished their conversations, the people from the truck had set up a health facility, started treating patients, put a drone in the air and had a comms team filming. On the side of the truck it said China Aid.</p>
+
+<p>Thomas was careful, and so are we. He cannot speak to the motivations, and this is not a verdict on any government. His point was about us. If the outcome is saving lives, and the standard of the response is good, where does the sector get to hold a moral high ground that says you cannot be in the club? He named the alternative for what it is.</p>
+
+<blockquote>The guise of familiarity gets put forward as certainty, and that's just managed decline.</blockquote>
+
+<h2>The Advantage of Not Having to Unlearn</h2>
+
+<p>The episode ends somewhere hopeful, which surprised us given where it travelled. Thomas ran the same leadership programme for two groups in parallel, one of chief executives, one of emerging leaders. He rewrote the manual for the younger cohort and showed the new introduction to his wife, a senior leader at a large international NGO. She read it and said she was jealous. The emerging leaders, she said, do not need to unlearn anything. They get to learn it straight off the bat.</p>
+
+<p>That is the advantage. The leaders currently at the top built their identity around an environment that no longer exists. The people coming in do not carry that weight. What they need is not a five-point plan. Kim said it best.</p>
+
+<blockquote>I'd much rather someone who asks a good question, or admits they don't know what they're doing, than someone who arrives with a five-point plan.</blockquote>
+
+<p>Which puts the responsibility back on the people already inside. The task is not to keep an intern in the room to learn the old language. It is to hold space for them to bring the new and uncomfortable ideas, and to be secure enough not to treat that as a threat. Ali put the generational frame on it. Maybe the emerging leaders are the ones who get to define what it even means to be a humanitarian now. The job of everyone already here is to clear the space for them to do it.</p>
+
+<p>A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and the episode itself is the place to hear the three of us think it through in full.</p>`
   },
   {
     epId: 'm8wvagMeDQs',
@@ -833,10 +922,10 @@ const HOSTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-06-14): 80,918
+// Total Views as of latest sync (2026-07-10): 83,338
 const STATS = {
   episodes: EPISODES.length,
-  views: '80,918'
+  views: '83,338'
 };
 
 // ─── Node export shim ────────────────────────────────────────
