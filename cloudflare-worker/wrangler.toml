@@ -1,0 +1,17 @@
+name = "fourth-chair"
+main = "src/index.js"
+compatibility_date = "2026-07-10"
+
+# Cloudflare Workers AI (primary generation)
+[ai]
+binding = "AI"
+
+# KV for per-IP rate limiting (fail-open if absent). Create with:
+#   wrangler kv namespace create RL
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "RL"
+id = "6202bd9863f0460a9e0444128e637572"
+
+# Groq fallback key is a secret, never committed. Set it with:
+#   wrangler secret put GROQ_API_KEY
