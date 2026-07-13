@@ -77,6 +77,47 @@ const HOST_ID = {
 };
 const hostRefs = () => HOSTS.map(h => ({ '@type': 'Person', '@id': HOST_ID[h.name] || undefined, name: h.name }));
 
+// Rich, accurate identity data so Google can resolve each host as a real person
+// and tie them to the show. Ali carries his full senior leadership title, his
+// authority-site url, and a leadership-focused knowsAbout so a search for the
+// show surfaces him as a senior humanitarian-leadership voice behind it. This is
+// his REAL title and profile, not inflated copy, and it lives in the structured
+// data layer (invisible to readers, authoritative to search engines).
+const HOST_PROFILES = {
+  'Ali Al Mokdad': {
+    id: SITE + '/#ali-al-mokdad',
+    jobTitle: 'Senior Strategic Leader in Global Impact Operations, Governance Reform, and Humanitarian Diplomacy',
+    url: 'https://alialmokdadleadership.com',
+    sameAs: [
+      'https://www.linkedin.com/in/ali-al-mokdad/',
+      'https://alialmokdadleadership.com',
+      'https://alialmokdad.com',
+      'https://alialmokdadinarabic.com',
+    ],
+    knowsAbout: [
+      'Humanitarian Leadership', 'Humanitarian Diplomacy', 'Executive Leadership',
+      'Next-Generation Leadership', 'Leadership Development', 'Governance Reform',
+      'Humanitarian Reform', 'United Nations Reform', 'International Development',
+      'Localization of Aid', 'Locally Led Development', 'Crisis Response',
+      'NGO Leadership', 'Civil Society', 'Sector Reform',
+    ],
+  },
+  'Kim Kucinskas': {
+    id: SITE + '/#kim-kucinskas',
+    jobTitle: 'Operational change and systems practitioner in international development',
+    url: 'https://www.linkedin.com/in/kim-kucinskas/',
+    sameAs: ['https://www.linkedin.com/in/kim-kucinskas/'],
+    knowsAbout: ['International Development', 'Organisational Change', 'Localization of Aid', 'Systems Thinking', 'Humanitarian Leadership'],
+  },
+  'Thomas Jepson-Lay': {
+    id: SITE + '/#thomas-jepson-lay',
+    jobTitle: 'Independent leadership coach for the humanitarian sector',
+    url: 'https://www.linkedin.com/in/thomas-jepson-lay-1588211b4/',
+    sameAs: ['https://www.linkedin.com/in/thomas-jepson-lay-1588211b4/'],
+    knowsAbout: ['Humanitarian Leadership', 'Leadership Coaching', 'Leadership Development', 'Crisis Response'],
+  },
+};
+
 // ─── blog cover art (ported verbatim in spirit from js/app.js blogCoverSVG) ──
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',    shape: 'editorial' },
@@ -268,6 +309,9 @@ const DOC_CSS = `
 .doc-h1{font-family:var(--fd);font-weight:700;font-size:clamp(30px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
 .doc-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--ink-mute);margin-bottom:26px}
 .doc-meta .dot{opacity:.4}
+.doc-byline{font-size:14.5px;color:var(--ink-mute);margin:-12px 0 26px}
+.doc-byline a{color:var(--cobalt-deep);font-weight:500;text-decoration:none}
+.doc-byline a:hover{text-decoration:underline}
 .doc-lede{font-size:20px;line-height:1.55;color:var(--ink-soft);margin:0 0 30px}
 /* video */
 .doc-video{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;margin:0 0 26px;box-shadow:0 20px 50px -24px rgba(26,22,20,.5)}
@@ -459,10 +503,10 @@ function buildBlogPage(post) {
     headline: post.title, description: post.excerpt ? stripTags(post.excerpt) : desc,
     url, mainEntityOfPage: url, image: ogImage,
     datePublished: ep ? ep.date : '2026-01-01',
-    dateModified: TODAY,
+    dateModified: ep ? ep.date : '2026-01-01',
     wordCount: wordCount(post.body),
     author: hostRefs(),
-    publisher: { '@type': 'Organization', name: 'The Sector Debrief', '@id': SITE + '/#series',
+    publisher: { '@type': 'Organization', name: 'The Sector Debrief', '@id': SITE + '/#organization',
       logo: { '@type': 'ImageObject', url: SITE + '/assets/apple-touch-icon.png' } },
     isPartOf: { '@type': 'Blog', '@id': SITE + '/blog/#blog', name: 'The Sector Debrief Blog' },
     ...(ep ? { about: { '@type': 'PodcastEpisode', name: ep.title, url: episodeUrl(ep) } } : {}),
@@ -489,6 +533,7 @@ function buildBlogPage(post) {
   <div class="doc-eyebrow">${isEditorial ? 'Editorial' : `Episode ${post.epN} &middot; Essay`}</div>
   <h1 class="doc-h1">${esc(post.title)}</h1>
   <div class="doc-meta"><span>${esc(post.readTime)} read</span>${ep ? `<span class="dot">&middot;</span><span>${fmtDate(ep.date)}</span>` : ''}<span class="dot">&middot;</span><span>The Sector Debrief</span></div>
+  <div class="doc-byline">By <a href="/about/#ali-al-mokdad">Ali Al Mokdad</a>, <a href="/about/#kim-kucinskas">Kim Kucinskas</a> and <a href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a></div>
   <div class="doc-prose">${post.body}</div>
   ${reflections}
   ${ep ? `<div class="doc-next"><div><div class="lbl">Listen to the full episode</div><div class="ttl">Episode ${ep.n}: ${esc(ep.title)}</div></div><a class="doc-btn primary" href="/episodes/${ep.slug}/">Go to the episode</a></div>`
@@ -583,12 +628,24 @@ function buildAboutPage() {
         <a href="${esc(h.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn &rarr;</a>
       </div>
     </article>`).join('');
+  // Full Person records (senior, accurate) so the About page is the canonical
+  // entity page Google uses to understand who is behind the show.
+  const persons = HOSTS.map(h => {
+    const p = HOST_PROFILES[h.name] || {};
+    return {
+      '@context': 'https://schema.org', '@type': 'Person',
+      '@id': p.id || HOST_ID[h.name], name: h.name,
+      jobTitle: p.jobTitle || h.role, description: h.bio,
+      image: SITE + '/' + h.photo, url: p.url || h.linkedin,
+      sameAs: p.sameAs || [h.linkedin], knowsAbout: p.knowsAbout,
+      mainEntityOfPage: SITE + '/about/',
+    };
+  });
   const aboutLD = {
     '@context': 'https://schema.org', '@type': 'AboutPage', url,
     name: 'About | The Sector Debrief',
     about: { '@type': 'PodcastSeries', name: 'The Sector Debrief', '@id': SITE + '/#series' },
-    mainEntity: HOSTS.map(h => ({ '@type': 'Person', '@id': HOST_ID[h.name], name: h.name,
-      jobTitle: h.role, description: h.bio, sameAs: [h.linkedin] })),
+    mainEntity: persons.map(p => ({ '@type': 'Person', '@id': p['@id'], name: p.name })),
   };
   const body = `${crumbHtml(crumbs)}
 <div class="doc-hub-head"><div class="doc-eyebrow">About</div><h1>Three people who ran out of patience with the official version</h1>
@@ -597,7 +654,7 @@ function buildAboutPage() {
   return shell({
     title: 'About the hosts | The Sector Debrief',
     desc: 'Meet the hosts of The Sector Debrief: Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay. Honest conversations on humanitarian and development leadership.',
-    canonical: url, ogType: 'website', active: 'about', jsonld: [aboutLD, crumbLD(crumbs)], body,
+    canonical: url, ogType: 'website', active: 'about', jsonld: [aboutLD, ...persons, crumbLD(crumbs)], body,
   });
 }
 
