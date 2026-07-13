@@ -17,6 +17,7 @@ const EPISODES = [
   {
     n: 9,
     id: 'KPgZ2FhQpb4',
+    slug: 'what-do-you-tell-the-next-generation',
     title: 'What Do You Tell the Next Generation?',
     guest: null,
     date: '2026-07-10',
@@ -27,6 +28,7 @@ const EPISODES = [
   {
     n: 8,
     id: 'm8wvagMeDQs',
+    slug: 'rethinking-risk-management',
     title: 'Rethinking Risk Management in the Humanitarian and Development Sector',
     guest: 'Sabrina Segal',
     date: '2026-06-09',
@@ -37,6 +39,7 @@ const EPISODES = [
   {
     n: 7,
     id: 'vPJAWTb2dPI',
+    slug: 'donations-collaboration-and-ai',
     title: 'Donations, Collaboration, and AI in the Room',
     guest: null,
     date: '2026-05-27',
@@ -47,6 +50,7 @@ const EPISODES = [
   {
     n: 6,
     id: '7w_FXEcBzs4',
+    slug: 'making-sense-of-the-sector',
     title: 'The Sector Is Changing. How Do You Make Sense Of It?',
     guest: null,
     date: '2026-05-07',
@@ -57,6 +61,7 @@ const EPISODES = [
   {
     n: 5,
     id: 'bv47XLE50hw',
+    slug: 'identity-and-positionality',
     title: 'Who Are You in the Room, Identity vs Positionality, and Leadership in Times of Disruption',
     guest: 'Aisha Tambajang',
     date: '2026-03-29',
@@ -67,6 +72,7 @@ const EPISODES = [
   {
     n: 4,
     id: 'qNM0NWeZ4fA',
+    slug: 'ceo-perspective-urgent-patience',
     title: 'The CEO Perspective, Urgent Patience, and Why Idealism Is Not Naivety',
     guest: 'Sofia Sprechmann Sineiro',
     date: '2026-03-07',
@@ -77,6 +83,7 @@ const EPISODES = [
   {
     n: 3,
     id: 'nQpnWvOoEio',
+    slug: 'leadership-under-pressure',
     title: 'Humanitarian Leadership Under Pressure, Identity vs Strategy, and What Comes Next',
     guest: null,
     date: '2026-02-07',
@@ -87,6 +94,7 @@ const EPISODES = [
   {
     n: 2,
     id: 'VVe2TM2z5UI',
+    slug: 'what-does-sector-mean',
     title: 'What Does Sector Mean, Leadership Tension, and Change',
     guest: null,
     date: '2026-01-19',
@@ -97,6 +105,7 @@ const EPISODES = [
   {
     n: 1,
     id: 'FqxeBin5bbQ',
+    slug: 'what-this-space-is-about',
     title: 'What This Space Is About, Leadership and Reflections',
     guest: null,
     date: '2025-12-13',
