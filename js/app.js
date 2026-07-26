@@ -1188,31 +1188,18 @@ function animateCounters() {
   els.forEach(el => obs.observe(el));
 }
 
-// ─── SEO: inject PodcastEpisode JSON-LD from EPISODES data ───
-function injectEpisodeSchema() {
-  const slot = document.getElementById('ld-episodes');
-  if (!slot || typeof EPISODES === 'undefined') return;
-  const series = 'https://thesectordebrief.com/#series';
-  const items = EPISODES.map((ep, i) => ({
-    '@context': 'https://schema.org',
-    '@type': 'PodcastEpisode',
-    'name': ep.title,
-    'description': (ep.description || '').slice(0, 280),
-    'datePublished': ep.date,
-    'episodeNumber': ep.n,
-    'url': `https://www.youtube.com/watch?v=${ep.id}`,
-    'partOfSeries': { '@type': 'PodcastSeries', 'name': 'The Sector Debrief', '@id': series },
-    'associatedMedia': {
-      '@type': 'MediaObject',
-      'contentUrl': `https://www.youtube.com/watch?v=${ep.id}`
-    }
-  }));
-  try {
-    slot.textContent = JSON.stringify(items);
-  } catch (e) {
-    console.warn('Episode schema injection failed (PodcastEpisode JSON-LD will be missing for crawlers):', e);
-  }
-}
+// ─── SEO: PodcastEpisode JSON-LD ───
+// Deliberately NOT injected at runtime any more. The #ld-episodes block in
+// index.html is hand-curated and is the single source of truth: it carries the
+// full descriptions, the canonical /episodes/<slug>/ urls, image, duration,
+// actor and keywords. An older injectEpisodeSchema() used to overwrite that
+// block on every load with a thinner version (280-char descriptions, YouTube
+// watch urls instead of the canonical pages, no image/duration/actor/keywords,
+// plus a bare associatedMedia MediaObject that had none of the fields Google
+// requires). Google can read JSON-LD injected after render, so the degraded
+// version was likely what it processed. Do not reintroduce a runtime writer to
+// #ld-episodes. If this ever needs automating, generate the static block at
+// build time (see scripts/build-pages.js) rather than rewriting it in the page.
 
 // ─── ESSAY ROTOR (blog header) ───
 // "Every episode becomes an essay." The closing phrase cycles through what an
@@ -1270,7 +1257,6 @@ function initEssayRotor() {
 
 // ─── INIT ───
 document.addEventListener('DOMContentLoaded', () => {
-  injectEpisodeSchema();
   renderHome();
   renderEpisodes();
   renderBlog();
