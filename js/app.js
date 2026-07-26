@@ -1198,8 +1198,11 @@ function animateCounters() {
 // plus a bare associatedMedia MediaObject that had none of the fields Google
 // requires). Google can read JSON-LD injected after render, so the degraded
 // version was likely what it processed. Do not reintroduce a runtime writer to
-// #ld-episodes. If this ever needs automating, generate the static block at
-// build time (see scripts/build-pages.js) rather than rewriting it in the page.
+// #ld-episodes. Adding an episode therefore means hand-editing that block, which
+// is already one of the seven surfaces an episode release touches. If it ever
+// needs automating, do it at build time rather than in the page: note that
+// scripts/build-pages.js is deliberately additive and does not write index.html
+// today, so it would have to be extended for that.
 
 // ─── ESSAY ROTOR (blog header) ───
 // "Every episode becomes an essay." The closing phrase cycles through what an
