@@ -113,7 +113,10 @@
     ],
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://thesectordebrief.com/?search={search_term_string}#episodes",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://thesectordebrief.com/?search={search_term_string}#episodes"
+      },
       "query-input": "required name=search_term_string"
     }
   }
