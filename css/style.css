@@ -2630,20 +2630,30 @@ body.nav-open { overflow: hidden; }
    The icons and links are generated from the contact-section orbs, so the two
    surfaces cannot drift apart; Grokipedia and the full playlist are excluded there
    because neither is a place you listen. */
-.listen-colophon { margin: 108px auto 0; max-width: 760px; text-align: center; }
-.listen-label {
-  font-family: var(--font-body); font-size: 11px; font-weight: 700;
-  letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-mute);
-  margin: 0 0 30px;
-  /* flanked by two hairlines: the house press-sheet device, and it gives the field
-     below a top edge so ten icons read as one unit rather than loose furniture.
-     Tracking and weight match .contact-platforms-label exactly, so the same block
-     on the contact section and here are visibly the same thing. */
-  display: flex; align-items: center; justify-content: center; gap: 15px;
+.listen-colophon {
+  position: relative;
+  margin: 108px auto 0; max-width: 760px; text-align: center;
 }
-.listen-label::before, .listen-label::after {
-  content: ''; height: 1px; width: clamp(26px, 7vw, 78px);
-  background: rgba(26, 22, 20, .18);
+.listen-colophon::before {
+  content: ''; position: absolute; inset: -30px -8% -24px; z-index: 0;
+  background: radial-gradient(58% 68% at 50% 46%, rgba(232, 184, 44, .10), transparent 72%);
+  pointer-events: none;
+}
+.listen-label, .listen-row { position: relative; z-index: 1; }
+/* the headline, in the house display voice. See the reasoning above the HTML for why
+   Fraunces + an italic cobalt em + the 32x2 bar, and why not mustard. */
+.listen-label {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.05; letter-spacing: -1px;
+  color: var(--ink); margin: 0 0 34px;
+  text-transform: none;
+}
+.listen-label em { color: var(--cobalt); font-style: italic; }
+/* the site's own eyebrow marker, .hero-eyebrow::before, recentred above the headline */
+.listen-label::before {
+  content: ''; display: block; width: 32px; height: 2px;
+  background: var(--crimson); margin: 0 auto 20px;
 }
 .listen-row {
   display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -2656,36 +2666,50 @@ body.nav-open { overflow: hidden; }
 /* The drift sits on the DISC so the label below it stays set and the anchor box stays
    still. Spread across the columns, with the second row on a longer period, so the
    field breathes unevenly rather than pulsing together as one block. */
-.listen-tile:nth-child(5n+2) .listen-disc { animation-delay: -1.8s; }
-.listen-tile:nth-child(5n+3) .listen-disc { animation-delay: -3.6s; }
-.listen-tile:nth-child(5n+4) .listen-disc { animation-delay: -5.4s; }
-.listen-tile:nth-child(5n)   .listen-disc { animation-delay: -7.2s; }
-.listen-tile:nth-child(n+6)  .listen-disc { animation-duration: 10.5s; }
+.listen-tile:nth-child(5n+2) .listen-disc { animation-delay: -2.4s; }
+.listen-tile:nth-child(5n+3) .listen-disc { animation-delay: -4.8s; }
+.listen-tile:nth-child(5n+4) .listen-disc { animation-delay: -7.2s; }
+.listen-tile:nth-child(5n)   .listen-disc { animation-delay: -9.6s; }
+.listen-tile:nth-child(n+6)  .listen-disc { animation-duration: 14s; }
 /* animates `translate`, NOT `transform`, so the hover scale below cannot collide with it */
 @keyframes listenDrift {
   0%, 100% { translate: 0 0; }
-  50%      { translate: 0 -3px; }
+  50%      { translate: 0 -6px; }
 }
 .listen-disc {
-  width: 52px; height: 52px; border-radius: 50%;
+  width: 64px; height: 64px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--cream); flex-shrink: 0;
   box-shadow: 0 5px 12px -5px rgba(74, 56, 38, .38);
-  animation: listenDrift 9s ease-in-out infinite;
+  animation: listenDrift 12s ease-in-out infinite;
   transition: scale .35s var(--ease-spring), box-shadow .35s var(--ease-emphasis);
 }
-.listen-disc svg { width: 24px; height: 24px; }
+.listen-disc svg { width: 29px; height: 29px; position: relative; z-index: 1; }
+.listen-disc { position: relative; }
+.listen-disc::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  border: 1px solid currentColor; opacity: 0;
+  transition: inset .4s var(--ease-spring), opacity .4s var(--ease-standard);
+  pointer-events: none;
+}
 .listen-name {
+  position: relative;
   font-family: var(--font-body); font-size: 11px; font-weight: 600;
   letter-spacing: .045em; text-transform: uppercase; line-height: 1.45;
   color: var(--ink-soft); transition: color .25s var(--ease-standard);
+}
+.listen-name::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -3px; height: 1px;
+  background: var(--crimson); transform: scaleX(0);
+  transition: transform .3s var(--ease-emphasis);
 }
 /* Focus first, and deliberately OUTSIDE the hover query below, so a keyboard user on a
    touch-capable laptop keeps the affordance. */
 .listen-tile:focus-visible .listen-disc {
   scale: 1.09;
-  box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
+  box-shadow: 0 16px 30px -8px rgba(74, 56, 38, .5);
 }
+.listen-tile:focus-visible .listen-disc::after { inset: -7px; opacity: .32; }
 .listen-tile:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 5px; border-radius: 8px; }
 /* Hover is a mouse courtesy ONLY, gated exactly as the quotes marquee is at line ~711 of
    this file. On touch, :hover sticks after a tap, so an ungated rule would leave the tapped
@@ -2695,33 +2719,41 @@ body.nav-open { overflow: hidden; }
   .listen-tile:hover .listen-disc {
     animation-play-state: paused;
     scale: 1.09;
-    box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
+    box-shadow: 0 16px 30px -8px rgba(74, 56, 38, .5);
   }
+  .listen-tile:hover .listen-disc::after { inset: -7px; opacity: .32; }
+  /* the name picks up a rule as it colours, so the whole tile answers the cursor */
   .listen-tile:hover .listen-name { color: var(--crimson); }
+  .listen-tile:hover .listen-name::after { transform: scaleX(1); }
 }
 /* the column count never changes, so the two-row shape holds everywhere; only the disc
    and the type scale, and a longer label takes a second line inside its own cell, which
    the grid row absorbs without breaking the disc alignment */
 @media (max-width: 860px) {
-  .listen-row { gap: 30px 8px; }
-  .listen-disc { width: 48px; height: 48px; }
-  .listen-disc svg { width: 22px; height: 22px; }
+  .listen-row { gap: 32px 8px; }
+  .listen-disc { width: 56px; height: 56px; }
+  .listen-disc svg { width: 26px; height: 26px; }
   .listen-name { font-size: 10.5px; letter-spacing: .03em; }
 }
 @media (max-width: 620px) {
-  .listen-colophon { margin-top: 58px; }
-  .listen-label { gap: 11px; margin-bottom: 26px; }
-  .listen-row { gap: 26px 5px; }
-  .listen-disc { width: 44px; height: 44px; }
-  .listen-disc svg { width: 20px; height: 20px; }
+  .listen-colophon { margin-top: 62px; }
+  .listen-label { margin-bottom: 26px; }
+  .listen-label::before { margin-bottom: 16px; }
+  .listen-row { gap: 28px 5px; }
+  .listen-disc { width: 50px; height: 50px; }
+  .listen-disc svg { width: 23px; height: 23px; }
+  /* the drift scales back with the disc so the movement stays proportional to the
+     mark instead of looking twice as large on a small screen */
+  .listen-disc { animation-name: listenDriftSm; }
   /* 9px, not 9.5px: it is what makes the longest label fit inside an equal grid
      track, which is what keeps the discs evenly spaced. See minmax(0,1fr) above.
      min-height reserves the second line that "Apple Podcasts" and "Listen Notes"
      need, so the label band stays level instead of going ragged under align-start. */
   .listen-name { font-size: 9px; letter-spacing: 0; min-height: 2.9em; }
-  /* the eyebrow must not shout louder than the names it introduces, which it did at
-     11px/2.5px tracking over 9px names */
-  .listen-label { font-size: 10px; letter-spacing: 1.8px; }
+}
+@keyframes listenDriftSm {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -4px; }
 }
 /* below the realistic phone floor five columns cannot hold a legible label, so it folds
    to two; ten divides by two as well, so still no stranded tile */
@@ -2729,4 +2761,7 @@ body.nav-open { overflow: hidden; }
   .listen-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 10px; }
   .listen-name { font-size: 10.5px; }
 }
-@media (prefers-reduced-motion: reduce) { .listen-disc { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .listen-disc { animation: none; }
+  .listen-disc::after, .listen-name::after { transition: none; }
+}
