@@ -139,7 +139,10 @@ function transcriptHtml(ep, tr) {
       ? (anchor
           ? `<a class="tr-name" href="/about/#${anchor}">${esc(who)}</a>`
           : `<span class="tr-name">${esc(who)}</span>`)
-      : `<span class="tr-name tr-anon">Speaker not established</span>`;
+      : '';   // no label at all rather than a placeholder, per Ali: do not print it
+              // A turn whose speaker is not established now shows only its timestamp. That is
+              // the honest rendering: it asserts nothing, invents nobody, and does not repeat a
+              // phrase that told a reader nothing they could use.
     // The seek offset is coerced to a non-negative integer rather than interpolated as it
     // arrives. It comes from a file this pipeline writes, so it is trusted today, but an
     // unvalidated value reaching an href is the kind of thing that stays wrong once the data
