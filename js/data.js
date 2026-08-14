@@ -129,7 +129,7 @@ const EPISODES = [
 // who said it on camera.
 const QUOTES = [
   { text: "When this crisis is over, there will just be a new one. The leaders who will navigate that are the ones committed to being authentically themselves.", source: "Kim Kucinskas",                color: "q-cobalt" },
-  { text: "I spent my time explaining HQ to the field, and the field to HQ.",                                                              source: "Ali Al Mokdad",               color: "q-crimson" },
+  { text: "I spent three years explaining HQ to the field, and the field to HQ. That was my job.",                                                              source: "Ali Al Mokdad",               color: "q-crimson" },
   { text: "The positionality of too many humanitarian leaders right now is based on an identity built for a world that ended in 2025.",    source: "Thomas Jepson-Lay",           color: "q-mustard" },
   { text: "Humanity does not live inside an institution. It never did. You don't need a job title to be a humanitarian. You just need to show up.", source: "Thomas Jepson-Lay",  color: "q-forest" },
   { text: "We all know what is wrong. The harder question is: what are you going to do about it?",                                          source: "Kim Kucinskas",               color: "q-rust" },
@@ -144,7 +144,7 @@ const QUOTES = [
   { text: "Humanitarian comes from humanity. It belongs to everyone. Not just NGOs or the UN. The public should claim it back.",            source: "Thomas Jepson-Lay",           color: "q-mustard" },
   { text: "The pressure isn't only coming from the public. The way many organisations approach transformation is creating toxic cultures from within.", source: "Ali Al Mokdad",     color: "q-rust" },
   { text: "Real systems change starts with people. We cannot begin changing systems without first recognising the humans inside them.",     source: "Kim Kucinskas",               color: "q-forest" },
-  { text: "If I had to choose one word for the most powerful tool I saw leaders using this year, it would be reflection.",                  source: "Ali Al Mokdad",               color: "q-cream" },
+  { text: "More people are seeing examples of people who managed to break those glass ceilings, and those people are telling their stories. Storytelling is becoming one of the most powerful tools right now.",                  source: "Ali Al Mokdad",               color: "q-cream" },
   { text: "Across every sector, people are asking for the same thing. Realness. Vulnerability. Real humans behind the calls and the panels.", source: "Kim Kucinskas",             color: "q-cobalt" },
   { text: "Humanitarianism is a principle and a value. Not something defined by working for an organisation. Humanity belongs to people.",   source: "Ali Al Mokdad",               color: "q-crimson" },
   { text: "If we do not take time to reflect, we risk snapping back to old ways. Stay with the discomfort. That is how we build something new.", source: "Kim Kucinskas",            color: "q-mustard" },
@@ -164,7 +164,7 @@ const QUOTES = [
   { text: "One side is using AI to request things, and the other side is using AI to respond to those requests. We were building an alternative reality.",                       source: "Ali Al Mokdad",               color: "q-cream" },
   { text: "Shift the power is a great slogan. I don't think it happens in reality. But balancing the power, that we can actually do.",                                          source: "Sabrina Segal",              color: "q-cobalt" },
   { text: "Those who came before us set the foundation. Our job is to clear out the outdated governance and the nonsense, so the people who come after us can focus on the real problems. This is our generational fight.", source: "Ali Al Mokdad",   color: "q-crimson" },
-  { text: "We need to distinguish between purpose and task.",                                                                     source: "Ali Al Mokdad",               color: "q-mustard" },
+  { text: "We need to distinguish between purpose and task. The role should not disappear. The purpose should remain. Some tasks, yes, they have to disappear.",                                                                     source: "Ali Al Mokdad",               color: "q-mustard" },
   { text: "I'd much rather someone who asks a good question, or admits they don't know what they're doing, than someone who arrives with a five-point plan.", source: "Kim Kucinskas",           color: "q-forest" },
   { text: "The guise of familiarity gets put forward as certainty, and that's just managed decline.",                            source: "Thomas Jepson-Lay",           color: "q-rust" }
 ];
