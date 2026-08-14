@@ -210,6 +210,9 @@ const HOST_PROFILES = {
     jobTitle: 'Senior Strategic Leader in Global Impact Operations, Governance Reform, and Humanitarian Diplomacy',
     url: 'https://alialmokdadleadership.com',
     sameAs: [
+      // authority files first: these are what a knowledge graph resolves an identity against
+      'https://www.wikidata.org/wiki/Q139658827',
+      'https://orcid.org/0009-0000-2825-5855',
       'https://www.linkedin.com/in/ali-al-mokdad/',
       'https://alialmokdadleadership.com',
       'https://alialmokdad.com',
