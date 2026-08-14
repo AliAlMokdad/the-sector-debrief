@@ -674,12 +674,13 @@ function openEpisode(ep) {
         ${ep.guest ? `<span>· w/ ${escAttr(ep.guest)}</span>` : ''}
       </div>
       <h2 class="modal-title" id="modal-episode-title">${escAttr(ep.title)}</h2>
-      <p class="modal-desc">${escAttr(ep.description)}</p>
       <div class="modal-actions">
-        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
+        <a class="ep-link primary" href="/episodes/${escAttr(ep.slug)}/">Episode page: ${ep.transcript ? 'transcript, essay, links' : 'essay, links'}</a>
+        <a class="ep-link" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
         <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">🎵 Spotify</a>
         <a class="ep-link" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">🎧 Apple Podcasts</a>
       </div>
+      <p class="modal-desc">${escAttr(ep.description)}</p>
     </div>
   `;
   // De-mark any existing top modal, then mark this one as topmost

@@ -868,6 +868,27 @@ function buildSitemap() {
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${rows.join('\n')}\n</urlset>\n`;
 }
 
+// The SPA's episode modal promises "transcript, essay, links" only for episodes whose data.js
+// entry carries `transcript: true`, because four episodes have no on-screen speaker label and so
+// no transcript at all. That flag lives in hand-maintained data while the transcripts live on
+// disk, which is exactly the pair that drifts. So the build refuses to run if they disagree: a
+// flag claiming a transcript that is not there would advertise a link to nothing, and a missing
+// flag would hide a transcript that exists.
+(function validateTranscriptFlags() {
+  const wrong = [];
+  EPISODES.forEach((ep) => {
+    const onDisk = !!loadTranscript(ep.slug);
+    const claimed = !!ep.transcript;
+    if (onDisk !== claimed) {
+      wrong.push(`${ep.slug}: data.js says ${claimed}, on disk ${onDisk}`);
+    }
+  });
+  if (wrong.length) {
+    throw new Error('transcript flags out of sync with transcripts/: ' + wrong.join(' | '));
+  }
+  console.log(`transcript flags agree with disk for all ${EPISODES.length} episodes`);
+})();
+
 // ─── write everything ──────────────────────────────────────────
 function writeFile(rel, content) {
   const full = path.join(ROOT, rel);
