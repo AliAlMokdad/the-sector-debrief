@@ -144,10 +144,28 @@
   letter-spacing:.02em;color:var(--ink-mute);text-decoration:none;
   border-bottom:1px dotted rgba(26,22,20,.28)}
 .tr-ts:hover,.tr-ts:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
+/* topic headings inside the transcript, and the jump list built from them. The heading is a
+   real h3 under the transcript h2, so the page has a correct outline rather than one flat block.
+   scroll-margin-top matches the sticky nav so following a jump link does not park the heading
+   underneath it, the same fix the transcript section itself needed. */
+.tr-sec{font-family:var(--fd,Georgia,serif);font-weight:600;font-size:22px;line-height:1.2;
+  letter-spacing:-.01em;color:var(--ink);margin:54px 0 6px;padding-top:18px;
+  border-top:1px solid rgba(26,22,20,.16);scroll-margin-top:96px}
+.tr-sec:first-of-type{border-top:none;padding-top:0;margin-top:34px}
+.tr-jump{margin:22px 0 34px;padding:18px 20px;background:rgba(26,22,20,.035);
+  border-left:2px solid var(--crimson);border-radius:2px}
+.tr-jump-h{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-mute);margin:0 0 10px}
+.tr-jump ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.tr-jump li{margin:0 0 6px;font-size:14.5px;line-height:1.4;break-inside:avoid}
+.tr-jump a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent}
+.tr-jump a:hover,.tr-jump a:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
 @media(max-width:640px){
   .tr-body{font-size:16.5px}
   .tr-turn{margin-top:32px}
   .doc-transcript{scroll-margin-top:205px}
+  .tr-sec{font-size:19px;margin-top:44px;scroll-margin-top:205px}
+  .tr-jump ol{columns:1}
 }
 /* prev / next episode */
 .doc-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 0}
@@ -252,6 +270,10 @@
     <h2 id="transcript-h">Transcript</h2>
     <p class="tr-note">Every timestamp opens that moment in the video, which is the record.
       Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
+    <nav class="tr-jump" aria-label="Sections of this transcript">
+      <p class="tr-jump-h">In this transcript</p>
+      <ol><li><a href="#s-idealism-treated-as-naivety">Idealism treated as naivety</a></li><li><a href="#s-where-sofia-started">Where Sofia started</a></li><li><a href="#s-knocking-on-doors">Knocking on doors</a></li><li><a href="#s-eloquence-in-english-as-power">Eloquence in English as power</a></li><li><a href="#s-you-may-even-have-to-wear-a-blazer">You may even have to wear a blazer</a></li><li><a href="#s-pledge-for-change-and-decolonising-aid">Pledge for Change and decolonising aid</a></li><li><a href="#s-pressure-squeezing-creativity">Pressure squeezing creativity</a></li><li><a href="#s-listening-to-global-south-movements">Listening to global south movements</a></li><li><a href="#s-looking-back-from-the-future">Looking back from the future</a></li><li><a href="#s-sofia-responds">Sofia responds</a></li></ol>
+    </nav>
     <div class="tr-body">
       <div class="tr-cold">
         <p class="tr-cold-h">Cold open, clips from later in the conversation</p>
@@ -264,6 +286,7 @@
         <p>for several days. Yes. And I do believe we actually do need progressive civil society in the north and south, not only in the global south. We need allies.</p>
       </article>
       </div>
+      <h3 class="tr-sec" id="s-idealism-treated-as-naivety">Idealism treated as naivety</h3>
       <article class="tr-turn" style="--sp:#2A4530">
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=25s" target="_blank" rel="noopener noreferrer" aria-label="Play from 0:25 on YouTube">0:25</a></header>
         <p>We need all hands on deck. This is a moment of all hands on deck. you know, the ideology and being idealistic has kind of been attributed to naivity and an immaturity almost, right? Because I they&#39;re too idealistic. They can&#39;t possibly succeed or that&#39;s got to get rubbed out of them before they can actually get there. and that but I think I think to your question Sophia the headline is we&#39;ve been talking a lot about sector changes leadership how individuals are reacting responding um and what that means for the broader change and I think getting an executive level perspective not that you are the only executive level but you know getting an executive level perspect perspective and that&#39;s why your journey is important like how has that informed what is happening right now and how you&#39;re you&#39;re viewing it I think would be the headline is that right guys</p>
@@ -272,6 +295,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=83s" target="_blank" rel="noopener noreferrer" aria-label="Play from 1:23 on YouTube">1:23</a></header>
         <p>yeah okay but I but maybe let&#39;s start with um with your story because like for me when we spoke the first time I was super inspired um and it left me in a mood of thinking and reflecting I like your journey in the sector and I felt it speaks to many of us so it would be good to tell us and maybe the people who will listen later to this about your journey.</p>
       </article>
+      <h3 class="tr-sec" id="s-where-sofia-started">Where Sofia started</h3>
       <article class="tr-turn" style="--sp:var(--ink-soft)">
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=108s" target="_blank" rel="noopener noreferrer" aria-label="Play from 1:48 on YouTube">1:48</a></header>
         <p>Well, thank you Ali. Um, and so great to join this dialogues. I&#39;ve been listening to your three episodes several times actually. Several times because and every time I listen to one of your three episodes so far I get new insights. So these are phenomenal, fantastic and spontaneous conversations and we need more of that rather than that panel talking point style which somehow doesn&#39;t nourish our let me say souls. Um but uh it doesn&#39;t so thrilled to be here. So I&#39;m I&#39;m from Uruguay. Um that&#39;s my home country. I live in Ecuador. Um I am 57 years old. I grew up in my childhood in the 70s. um as a refugee during Uruguay&#39;s military regime and many of those regimes at the time in the southern cone of South America.</p>
@@ -289,6 +313,7 @@
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=199s" target="_blank" rel="noopener noreferrer" aria-label="Play from 3:19 on YouTube">3:19</a></header>
         <p>I wanted to join um an NGO inspired by you know all the um great leaders we have had in the world that want to do good. You know I was reading Gandhi and Martin Luther King and all of the above and I felt this</p>
       </article>
+      <h3 class="tr-sec" id="s-knocking-on-doors">Knocking on doors</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=215s" target="_blank" rel="noopener noreferrer" aria-label="Play from 3:35 on YouTube">3:35</a></header>
         <p>passion for social change. So I knocked doors. I knocked doors and I knocked the door of Save the Children and Oxfam and Care and I was doing my rounds in Cambodia and I knocked the door of care and they said, &quot;Yeah, why not? You&#39;re here.&quot; You know, um, so it was in 94. It was actually not very common to have someone from Latin America working in Cambodia in a country office of an international NGO, let alone as a volunteer or as a very junior staff. I was 25 at the time, so I&#39;m revealing my age here. I already have. Why am I saying that? But anyway, um I joined and um it was from day one very odd to me the world that I encountered because at that time 94 in Cambodia there was there were many NOS&#39;s in Cambodia after everything that happened there in the 70s in the 80s and um care had probably 10 15 expatriate staff immediately the difference between the expatriate staff and the Cambodian stuff and their conditions was to me impossible to understand and register from that very moment of time.</p>
@@ -304,6 +329,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=440s" target="_blank" rel="noopener noreferrer" aria-label="Play from 7:20 on YouTube">7:20</a></header>
         <p>packaged in a different way which may not have fit that norm were not even listened to. Well, forget about if for example translation was involved. Then everyone</p>
       </article>
+      <h3 class="tr-sec" id="s-eloquence-in-english-as-power">Eloquence in English as power</h3>
       <article class="tr-turn" style="--sp:var(--ink-soft)">
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=450s" target="_blank" rel="noopener noreferrer" aria-label="Play from 7:30 on YouTube">7:30</a></header>
         <p>who expected ideas only to be clearly expressed in English would not even attempt to listen carefully. So I found um there a world well what I did was start making annotations of how for example that really happened and I couldn&#39;t believe it that a C Cambodian colleague would present an idea in broken English or via translation and I thought oh wow that&#39;s a good idea but the colleague that spoke English very well would just take that idea and run with it and then present exactly the same idea and get all the credit for it. There was a lot of even taking knowledge and what I did was like make those specific observations of what happened every day of our lives. So this is not about a big abstract analysis of decoloniality.</p>
@@ -313,6 +339,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=555s" target="_blank" rel="noopener noreferrer" aria-label="Play from 9:15 on YouTube">9:15</a></header>
         <p>make it. So I had to kind of adapt but at the same time I wanted to be able to be part of it to transform it then from inside and it&#39;s walking that tight rope you know like okay let me be part of this but then make space for something different and new and I want to shape it from inside and how do you do it when and have I forgotten enough of about my original intent? Have I been too quickly absorbed by kind of the logic and kind of checking in every day of my life whether I was not being kind of shaped by the system or whether I could still attempt to change the system if that makes sense. So that has been that tight rope which by the way many women walk on you know same thing you know like in order to be accepted by</p>
       </article>
+      <h3 class="tr-sec" id="s-you-may-even-have-to-wear-a-blazer">You may even have to wear a blazer</h3>
       <article class="tr-turn" style="--sp:var(--ink-soft)">
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=609s" target="_blank" rel="noopener noreferrer" aria-label="Play from 10:09 on YouTube">10:09</a></header>
         <p>the sector you may even have to wear a blazer you know you see in a meeting in a world bank meeting or UN meeting that resembles more a male suit you know and um but then when you&#39;re in there you know you want to provide a more feminist perspective and influence it and but if you don&#39;t wear that suit, you may never be invited to the meeting. And I&#39;m just saying suit in the in a just to illustrate, but I mean much more than that, right? Like and um and it&#39;s so hard to continue to walking that tight rope every day of your life and I must say after 30 years and given the sliding bag that we are seeing in the world, I just got very tired.</p>
@@ -333,6 +360,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=716s" target="_blank" rel="noopener noreferrer" aria-label="Play from 11:56 on YouTube">11:56</a></header>
         <p>maybe one end of that tight rope, I needed to be able to quickly uh re-energize myself and be drawn back to what truly matters. However, um it also had a huge disadvantage because all the influencing, the advocacy happened in DC, in London, in Geneva and I had to get on a plane and I missed many critical meetings and fora in which it felt always baked and decided and then I couldn&#39;t add my voice easily and</p>
       </article>
+      <h3 class="tr-sec" id="s-pledge-for-change-and-decolonising-aid">Pledge for Change and decolonising aid</h3>
       <article class="tr-turn" style="--sp:var(--ink-soft)">
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=748s" target="_blank" rel="noopener noreferrer" aria-label="Play from 12:28 on YouTube">12:28</a></header>
         <p>that was hard that was really hard that um that made it very complex. Um but Ali what I think and I think we all connected via the pledge for change and decolonizing aid and I&#39;m um I was a founder of it together with other CEOs and secretary generals of some of the larger NOS&#39;s and that felt like true excitement that we could come up with a promise a pledge is a promise of transforming these deeply and um and that meant that we could hopefully be more impactful and more aligned with the values that I honestly always believed in and I didn&#39;t always see them sector manifesting.</p>
@@ -342,6 +370,7 @@
         <p>Yeah, Sophia, thank you. What some inspiration there. I&#39;m I&#39;m I&#39;m blown away by the way you&#39;ve narrated that. Um, I particularly love the relationship that the way you depicted eloquence equal power and eloquence equal them privilege and career progression. It&#39;s such a simple way of framing something that I think everyone in the aid world would resonate with and be able to understand very clearly. And I love the tension you talked about between that becoming absorbed in a system versus trying to remain resistant to it and not and that con it sounded like a very constant um dilemma, challenge, concern around becoming complicit or not, right? And navigating an incredibly fine line there. But I particularly enjoyed reference you said to um sort of the early stages of when you joined and you described being relatively idealistic in your ambitions trying to change the world and have those motivations for joining and I was thinking recently earlier this week in fact ideology and being idealistic has kind of been attributed to naivity and an immaturity almost right because they&#39;re too idealistic, they can&#39;t possibly succeed or that&#39;s got to get rubbed out of them before they can actually get there.</p>
         <p>And that pressure of pragmatism and operational discipline almost kind of erodess that. And so I just wondered with the promise of the pledge that you were able to be an incredibly influential instigator of that&#39;s an example of maintaining an ideological idealbased decision-m at that most senior level. It&#39;s a demonstration in my mind of being creative, right? Of being curious in the space that you&#39;ve got. Back in when was the pledge? Five, six years ago, maybe a bit longer. Um when that started the sector was not facing anywhere near the degree of pressure that we&#39;re currently experiencing and so there was a bit more freedom and a bit more what bandwidth to think in those more creative ways.</p>
       </article>
+      <h3 class="tr-sec" id="s-pressure-squeezing-creativity">Pressure squeezing creativity</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=935s" target="_blank" rel="noopener noreferrer" aria-label="Play from 15:35 on YouTube">15:35</a></header>
         <p>The pressures that we&#39;re facing now seem to be squeezing that creativity. So wondered if you would, this might be a bit unfair of a question in terms of putting you on the spot and I certainly not asking you to speak on behalf of other people, but for executive level senior leaders, the CEOs and the sector generals in those positions today, how are they how are they able to maintain that creativity? How are they able to stay thinking a bit more proactively and with an idealistic lens rather than the sort of pragmatism and stopping at that point. That&#39;s such a good point. Um you&#39;re right when we came up with the pledge. I mean it was a deep moment of reckoning with racism in this sector with white supremacy in the sector.</p>
@@ -368,6 +397,7 @@
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=1175s" target="_blank" rel="noopener noreferrer" aria-label="Play from 19:35 on YouTube">19:35</a></header>
         <p>urgent patience</p>
       </article>
+      <h3 class="tr-sec" id="s-listening-to-global-south-movements">Listening to global south movements</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=1177s" target="_blank" rel="noopener noreferrer" aria-label="Play from 19:37 on YouTube">19:37</a></header>
         <p>listen to precisely that what global south movements what global south mutual aid networks are saying then the whole construct simply serves no purpose. And I do believe we actually do need progressive civil society in the north and south not only in the global south. We need allies. We need all hands on deck. This is a moment of all hands on deck. You know, the world as we know it is literally falling apart. Wars, genocides, um oppression, and uh we can&#39;t afford to not be in solidarity with each other. But that requires um connecting deeply and respecting each other and bringing the mainstream of values rather than the survival mode and urgency urgently and patiently into um our dialogues. But another way of saying what you&#39;re what you were mentioning, Thomas, is pragmatic optimism.</p>
@@ -385,6 +415,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=1517s" target="_blank" rel="noopener noreferrer" aria-label="Play from 25:17 on YouTube">25:17</a></header>
         <p>thing that is happening. And the third version is the future me</p>
       </article>
+      <h3 class="tr-sec" id="s-looking-back-from-the-future">Looking back from the future</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=1523s" target="_blank" rel="noopener noreferrer" aria-label="Play from 25:23 on YouTube">25:23</a></header>
         <p>who is living in the future, went through this current crisis and looking at okay, what could possibly go well? what could go wrong like imagining all the different scenarios and remember I am in that apartment isolated and my other colleague is also in the stress panic mood. So technically I had to speak to myself in those three versions. And because of that technique that I did and later life tested me again and again in similar situations where I had to speak to those three versions became like the</p>
@@ -419,6 +450,7 @@
         <p>I think the leaders that made it in the dominant system, as you said, had to be really good at code switching, had to be good at the eloquent talk, had to be good at not asking for help, at making quick decisions, at doing that kind of hero leadership in the new way. What are the capabilities that we need? I think it&#39;s going to be the ability to do self-regulation and co-regulation. I think it&#39;s going to be the ability to bring your whole self and be vulnerable and tell stories and try and live those values under pressure because there&#39;s going to be more pressure when this crisis is over. There&#39;s just going to be a new one. So, we&#39;re going to have to get good at doing this and when we mess up and fail repairing and building trust.</p>
         <p>What resonate what my first question in your story ollie was what kind of trust was lost in others reactions not just what your reaction was and how you managed yourself but how the system fails you is just the loss of trust there is incredible I don&#39;t know Sophia that I mean I don&#39;t want to put words in your mouth you&#39;re the one that has had to had make these decisions in real time</p>
       </article>
+      <h3 class="tr-sec" id="s-sofia-responds">Sofia responds</h3>
       <article class="tr-turn" style="--sp:var(--ink-soft)">
         <header class="tr-who"><span class="tr-name">Sofia Sprechmann Sineiro</span><a class="tr-ts" href="https://www.youtube.com/watch?v=qNM0NWeZ4fA&amp;t=1807s" target="_blank" rel="noopener noreferrer" aria-label="Play from 30:07 on YouTube">30:07</a></header>
         <p>well I&#39;m um well thank you Kim for those reflections and I am of course very moved and thinking about Ali&#39;s um story and trust the word trust also was top of my mind. You know what happens when you&#39;re left alone in that way and your ability Ali to then so clearly kind of segment your former you, your present and the future you want to be is just an incredible insight to um what we all should be doing more of amidst of a crisis. And it&#39;s nothing compared to what you went through. I mean this is the easy stuff what we&#39;re talking about, right? compared to that actual personal experience of being kidnapped. So, um it feels like if you were able to do that at that time, we all should be doing so much better.</p>

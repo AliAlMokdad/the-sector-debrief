@@ -131,7 +131,23 @@ function transcriptHtml(ep, tr) {
   // all rather than "Speaker not established" repeated eighty times, which is noise, or a guess,
   // which is worse. The words are the same words; only the attribution is unavailable.
   const named = tr.speakers !== false;
-  const turns = tr.turns.map((tn) => {
+  // A heading is emitted immediately before the turn it points at. It is skipped inside the
+  // cold-open montage: that region is fenced under its own explanatory heading, and dropping a
+  // topic heading inside it would label a trailer clip as the start of a discussion.
+  const cold0 = Number(tr.coldOpen) || 0;
+  const secList = (TR_SECTIONS[ep.slug] || []).filter(x => x && x.t && x.label);
+  const stampSet = new Set(tr.turns.map(t => t.ts));
+  const seenIds = new Set();
+  const secByStamp = new Map();
+  for (const sec of secList) {
+    if (!stampSet.has(sec.t)) { console.warn(`  ${ep.slug}: section "${sec.label}" points at ${sec.t}, which is not a turn`); continue; }
+    let id = 's-' + sectionSlug(sec.label);
+    while (seenIds.has(id)) id += '-2';
+    seenIds.add(id);
+    secByStamp.set(sec.t, { id, label: sec.label });
+  }
+  const emitted = [];
+  const turns = tr.turns.map((tn, ti) => {
     const who = tn.speaker || '';
     const anchor = HOST_ANCHOR[who];
     const tint = SPEAKER_TINT[who] || 'var(--ink-soft)';
@@ -153,7 +169,14 @@ function transcriptHtml(ep, tr) {
       + ` aria-label="Play from ${esc(tn.ts)} on YouTube">${esc(tn.ts)}</a>`;
     const body = (tn.paras && tn.paras.length ? tn.paras : [tn.text])
       .map((p) => `<p>${esc(p)}</p>`).join('\n        ');
-    return `<article class="tr-turn" style="--sp:${tint}">
+    const sec = ti >= cold0 ? secByStamp.get(tn.ts) : null;
+    let head = '';
+    if (sec) {
+      emitted.push(sec);
+      head = `<h3 class="tr-sec" id="${sec.id}">${esc(sec.label)}</h3>
+      `;
+    }
+    return `${head}<article class="tr-turn" style="--sp:${tint}">
         <header class="tr-who">${named ? label : ''}${stamp}</header>
         ${body}
       </article>`;
@@ -179,12 +202,27 @@ function transcriptHtml(ep, tr) {
     <h2 id="transcript-h">Transcript</h2>
     <p class="tr-note">Every timestamp opens that moment in the video, which is the record.
       Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
+    ${emitted.length ? `<nav class="tr-jump" aria-label="Sections of this transcript">
+      <p class="tr-jump-h">In this transcript</p>
+      <ol>${emitted.map((x) => `<li><a href="#${x.id}">${esc(x.label)}</a></li>`).join('')}</ol>
+    </nav>` : ''}
     <div class="tr-body">
       ${body}
     </div>
   </section>`;
 }
 
+
+// Topic sections for the transcripts, drafted by reading each episode's arc and anchored to the
+// timestamp of a real turn. Every 20,000-word transcript previously sat under one heading, which
+// gave the page a single entry point; these give it ten to fourteen. The labels live in their own
+// file so they can be corrected without touching the renderer, and the build asserts that each one
+// still points at a turn that exists.
+const TR_SECTIONS = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join(__dirname, 'transcript-sections.json'), 'utf8')); }
+  catch (e) { console.warn('  transcript sections unavailable: ' + e.message); return {}; }
+})();
+const sectionSlug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
 
 const episodeUrl = (ep) => `${SITE}/episodes/${ep.slug}/`;
 const blogUrl = (p) => `${SITE}/blog/${p.slug}/`;
@@ -513,10 +551,28 @@ const DOC_CSS = `
   letter-spacing:.02em;color:var(--ink-mute);text-decoration:none;
   border-bottom:1px dotted rgba(26,22,20,.28)}
 .tr-ts:hover,.tr-ts:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
+/* topic headings inside the transcript, and the jump list built from them. The heading is a
+   real h3 under the transcript h2, so the page has a correct outline rather than one flat block.
+   scroll-margin-top matches the sticky nav so following a jump link does not park the heading
+   underneath it, the same fix the transcript section itself needed. */
+.tr-sec{font-family:var(--fd,Georgia,serif);font-weight:600;font-size:22px;line-height:1.2;
+  letter-spacing:-.01em;color:var(--ink);margin:54px 0 6px;padding-top:18px;
+  border-top:1px solid rgba(26,22,20,.16);scroll-margin-top:96px}
+.tr-sec:first-of-type{border-top:none;padding-top:0;margin-top:34px}
+.tr-jump{margin:22px 0 34px;padding:18px 20px;background:rgba(26,22,20,.035);
+  border-left:2px solid var(--crimson);border-radius:2px}
+.tr-jump-h{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-mute);margin:0 0 10px}
+.tr-jump ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.tr-jump li{margin:0 0 6px;font-size:14.5px;line-height:1.4;break-inside:avoid}
+.tr-jump a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent}
+.tr-jump a:hover,.tr-jump a:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
 @media(max-width:640px){
   .tr-body{font-size:16.5px}
   .tr-turn{margin-top:32px}
   .doc-transcript{scroll-margin-top:205px}
+  .tr-sec{font-size:19px;margin-top:44px;scroll-margin-top:205px}
+  .tr-jump ol{columns:1}
 }
 /* prev / next episode */
 .doc-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 0}

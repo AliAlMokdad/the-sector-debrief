@@ -1,0 +1,130 @@
+{
+  "_note": "Topic sections for the published transcripts. Each label was drafted by READING the conversation arc of that episode, then anchored to the exact timestamp of a real turn where that topic starts. Labels describe what is actually discussed and are not generated: an automated attempt produced titles like 'Yes.' and 'Excellent.' because snapping to even time intervals lands on short reaction turns. If a label ever looks wrong, the turn it points at is the record; change the label, not the timestamp.",
+  "_why": "Each episode page carries roughly 20,000 words of transcript under a single heading. Sectioning it gives the page many more topical entry points and anchor targets instead of one undifferentiated block.",
+
+  "what-this-space-is-about": [
+    { "t": "0:20",  "label": "Why this conversation exists" },
+    { "t": "2:51",  "label": "How each of us got into this work" },
+    { "t": "7:40",  "label": "The problem with polished sector podcasts" },
+    { "t": "11:06", "label": "Grief, disillusionment, and what comes next" },
+    { "t": "14:35", "label": "If a system is people, a system can change" },
+    { "t": "20:31", "label": "The room where people struggle to do the right thing" },
+    { "t": "26:42", "label": "Strategic invulnerability" },
+    { "t": "29:24", "label": "Writing and recording without posting" },
+    { "t": "39:01", "label": "Creativity is not the same as being artistic" },
+    { "t": "44:53", "label": "Messages for your future self" }
+  ],
+
+  "what-does-sector-mean": [
+    { "t": "0:15",  "label": "Giving back power you were never asked to hold" },
+    { "t": "2:57",  "label": "Naming it: humanitarian society, human to human" },
+    { "t": "6:33",  "label": "Sector, ecosystem, or industry" },
+    { "t": "10:44", "label": "What actually changes if we rename it" },
+    { "t": "14:38", "label": "A breakdown in community resilience" },
+    { "t": "16:54", "label": "Ecosystems within ecosystems" },
+    { "t": "21:22", "label": "More people are quietly questioning" },
+    { "t": "27:19", "label": "The humanitarian principles already in tension" },
+    { "t": "30:37", "label": "The barriers to any of this" },
+    { "t": "41:45", "label": "Everyone job hunting is unhappy with recruitment" },
+    { "t": "47:27", "label": "Ending on humility" }
+  ],
+
+  "leadership-under-pressure": [
+    { "t": "1:04",  "label": "Still work in progress" },
+    { "t": "5:46",  "label": "Geneva, Brussels, New York" },
+    { "t": "8:58",  "label": "The adults in the room do not have the answers" },
+    { "t": "10:51", "label": "Values under pressure" },
+    { "t": "13:54", "label": "Leading a response, seen in retrospect" },
+    { "t": "17:38", "label": "Optimism and jeopardy at the same time" },
+    { "t": "20:23", "label": "Putting the operational hat on" },
+    { "t": "26:18", "label": "Walking the talk" },
+    { "t": "31:44", "label": "A seven-year journey through the process" },
+    { "t": "41:22", "label": "Living in the future before it happens" }
+  ],
+
+  "ceo-perspective-urgent-patience": [
+    { "t": "0:25",  "label": "Idealism treated as naivety" },
+    { "t": "1:48",  "label": "Where Sofia started" },
+    { "t": "3:35",  "label": "Knocking on doors" },
+    { "t": "7:30",  "label": "Eloquence in English as power" },
+    { "t": "10:09", "label": "You may even have to wear a blazer" },
+    { "t": "12:28", "label": "Pledge for Change and decolonising aid" },
+    { "t": "15:35", "label": "Pressure squeezing creativity" },
+    { "t": "19:37", "label": "Listening to global south movements" },
+    { "t": "25:23", "label": "Looking back from the future" },
+    { "t": "30:07", "label": "Sofia responds" }
+  ],
+
+  "identity-and-positionality": [
+    { "t": "0:04",  "label": "Still a humanitarian without the job title" },
+    { "t": "3:42",  "label": "What positionality actually lets you do" },
+    { "t": "6:48",  "label": "Born in the Gambia, raised in development" },
+    { "t": "8:45",  "label": "Denmark, power, and positionality" },
+    { "t": "10:19", "label": "Code switching without thinking about it" },
+    { "t": "11:07", "label": "Three years explaining HQ to the field" },
+    { "t": "16:53", "label": "They do not want to hear it systematically" },
+    { "t": "23:14", "label": "Identity is what you carry" },
+    { "t": "29:35", "label": "Ego in country operations" },
+    { "t": "36:12", "label": "Selective assimilation" },
+    { "t": "39:34", "label": "What the Gulf is doing differently" },
+    { "t": "50:05", "label": "What went global, and what did not" }
+  ],
+
+  "making-sense-of-the-sector": [
+    { "t": "0:00",  "label": "Coming out of a dark winter" },
+    { "t": "4:35",  "label": "The common thread" },
+    { "t": "8:51",  "label": "The one-size-fits-all structure" },
+    { "t": "11:05", "label": "Sector means different things to different people" },
+    { "t": "14:34", "label": "Bridges versus network weaving" },
+    { "t": "20:57", "label": "The social contract, with funders in the room" },
+    { "t": "23:47", "label": "A conversation in Arabic" },
+    { "t": "28:22", "label": "The pause in the middle" },
+    { "t": "34:04", "label": "Two loops" },
+    { "t": "39:03", "label": "A better environment for challenging assumptions" },
+    { "t": "44:53", "label": "Fungi, and entangled life" }
+  ],
+
+  "donations-collaboration-and-ai": [
+    { "t": "0:00",  "label": "Organisations constricting and downsizing" },
+    { "t": "1:07",  "label": "A knock on the door" },
+    { "t": "5:14",  "label": "Not only a funding problem" },
+    { "t": "9:28",  "label": "Relational infrastructure, put plainly" },
+    { "t": "13:06", "label": "Credit to the Danish NGOs" },
+    { "t": "18:08", "label": "Bridging AI and humanity" },
+    { "t": "21:12", "label": "Two things about AI" },
+    { "t": "30:27", "label": "Flexible Fridays" },
+    { "t": "39:31", "label": "Treating collaboration like a project" },
+    { "t": "44:20", "label": "The shadow systems you cannot see" }
+  ],
+
+  "rethinking-risk-management": [
+    { "t": "0:00",  "label": "Reverting to what worked before" },
+    { "t": "2:34",  "label": "Accused of thinking about risk too strategically" },
+    { "t": "4:19",  "label": "Expanding the definition of risk" },
+    { "t": "7:10",  "label": "What risk oversight means in practice" },
+    { "t": "10:40", "label": "When everyone is meant to share objectives" },
+    { "t": "16:24", "label": "Where the room to get creative is" },
+    { "t": "24:10", "label": "Three things noticed about risk last year" },
+    { "t": "25:33", "label": "Risk as a political tactic" },
+    { "t": "34:09", "label": "The same story, differently heard" },
+    { "t": "42:57", "label": "A funder willing to trust" },
+    { "t": "48:06", "label": "When pragmatic optimism gets hard" }
+  ],
+
+  "what-do-you-tell-the-next-generation": [
+    { "t": "0:00",  "label": "How a young workforce gets judgment" },
+    { "t": "1:33",  "label": "The question students keep asking" },
+    { "t": "4:50",  "label": "Motivation or identity" },
+    { "t": "9:39",  "label": "Coming home from country operations" },
+    { "t": "11:31", "label": "The people who lost their jobs" },
+    { "t": "15:33", "label": "Which roles and tasks actually change" },
+    { "t": "17:57", "label": "The problem for someone entering now" },
+    { "t": "19:43", "label": "Purpose and task are not the same thing" },
+    { "t": "22:44", "label": "Efficiency without a new model" },
+    { "t": "24:29", "label": "What is not usually said in public" },
+    { "t": "34:30", "label": "Personal values against the role you play" },
+    { "t": "41:25", "label": "Going into the deep end" },
+    { "t": "45:11", "label": "The line from the lecturer" },
+    { "t": "49:00", "label": "A settled nervous system" }
+  ]
+}

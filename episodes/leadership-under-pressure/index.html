@@ -144,10 +144,28 @@
   letter-spacing:.02em;color:var(--ink-mute);text-decoration:none;
   border-bottom:1px dotted rgba(26,22,20,.28)}
 .tr-ts:hover,.tr-ts:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
+/* topic headings inside the transcript, and the jump list built from them. The heading is a
+   real h3 under the transcript h2, so the page has a correct outline rather than one flat block.
+   scroll-margin-top matches the sticky nav so following a jump link does not park the heading
+   underneath it, the same fix the transcript section itself needed. */
+.tr-sec{font-family:var(--fd,Georgia,serif);font-weight:600;font-size:22px;line-height:1.2;
+  letter-spacing:-.01em;color:var(--ink);margin:54px 0 6px;padding-top:18px;
+  border-top:1px solid rgba(26,22,20,.16);scroll-margin-top:96px}
+.tr-sec:first-of-type{border-top:none;padding-top:0;margin-top:34px}
+.tr-jump{margin:22px 0 34px;padding:18px 20px;background:rgba(26,22,20,.035);
+  border-left:2px solid var(--crimson);border-radius:2px}
+.tr-jump-h{font-family:var(--fb);font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-mute);margin:0 0 10px}
+.tr-jump ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.tr-jump li{margin:0 0 6px;font-size:14.5px;line-height:1.4;break-inside:avoid}
+.tr-jump a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent}
+.tr-jump a:hover,.tr-jump a:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
 @media(max-width:640px){
   .tr-body{font-size:16.5px}
   .tr-turn{margin-top:32px}
   .doc-transcript{scroll-margin-top:205px}
+  .tr-sec{font-size:19px;margin-top:44px;scroll-margin-top:205px}
+  .tr-jump ol{columns:1}
 }
 /* prev / next episode */
 .doc-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 0}
@@ -252,6 +270,10 @@
     <h2 id="transcript-h">Transcript</h2>
     <p class="tr-note">Every timestamp opens that moment in the video, which is the record.
       Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
+    <nav class="tr-jump" aria-label="Sections of this transcript">
+      <p class="tr-jump-h">In this transcript</p>
+      <ol><li><a href="#s-still-work-in-progress">Still work in progress</a></li><li><a href="#s-geneva-brussels-new-york">Geneva, Brussels, New York</a></li><li><a href="#s-the-adults-in-the-room-do-not-have-the-answers">The adults in the room do not have the answers</a></li><li><a href="#s-values-under-pressure">Values under pressure</a></li><li><a href="#s-leading-a-response-seen-in-retrospect">Leading a response, seen in retrospect</a></li><li><a href="#s-optimism-and-jeopardy-at-the-same-time">Optimism and jeopardy at the same time</a></li><li><a href="#s-putting-the-operational-hat-on">Putting the operational hat on</a></li><li><a href="#s-walking-the-talk">Walking the talk</a></li><li><a href="#s-a-seven-year-journey-through-the-process">A seven-year journey through the process</a></li><li><a href="#s-living-in-the-future-before-it-happens">Living in the future before it happens</a></li></ol>
+    </nav>
     <div class="tr-body">
       <div class="tr-cold">
         <p class="tr-cold-h">Cold open, clips from later in the conversation</p>
@@ -285,6 +307,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=46s" target="_blank" rel="noopener noreferrer" aria-label="Play from 0:46 on YouTube">0:46</a></header>
         <p>Well, I we just before we hit record, Ali, you were very briefly referring to a trip you just had in Geneva. Um and you had some unfinished thoughts. Why don&#39;t you should start by sharing what you&#39;d like to from that trip.</p>
       </article>
+      <h3 class="tr-sec" id="s-still-work-in-progress">Still work in progress</h3>
       <article class="tr-turn" style="--sp:var(--crimson)">
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=64s" target="_blank" rel="noopener noreferrer" aria-label="Play from 1:04 on YouTube">1:04</a></header>
         <p>Um, so it&#39;s still work in progress because I&#39;m still reflecting and thinking about it. But just to give a bit of context, last time I visited Geneva, it was around a year and a half. So it was before this institutional shock, before funding cuts and all that. And just a week ago I visited it again and I had the opportunity to meet several people who are at executive level uh or organization representatives and um and I think I just had this um some kind of like a shock to be honest um and it&#39;s mainly because suddenly I realized that we are moving in this sector we are trying to survive in different totally different ways and maybe we are moving in different directions. Maybe the incentives are not the same and maybe our tactics are maybe clashing or something and the main reason why I&#39;m saying that because you know in the past year and a half something like that I&#39;ve been engaged so much with those local organizations and some international organizations who are rethinking their governance reimagining their program design um building new partnerships um even integrating AI within their processes.</p>
@@ -295,6 +318,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=316s" target="_blank" rel="noopener noreferrer" aria-label="Play from 5:16 on YouTube">5:16</a></header>
         <p>there I was just going to say I feel like you&#39;re trying to be measured and fair. But when you first were telling me about this, it was visceral. It was like real. Like it you can&#39;t divorce the like that this is what&#39;s happening intellectually with the okay this is not what I signed up for and why is this happening and like all of these things. And I don&#39;t know I don&#39;t want you to discount that because it&#39;s real.</p>
       </article>
+      <h3 class="tr-sec" id="s-geneva-brussels-new-york">Geneva, Brussels, New York</h3>
       <article class="tr-turn" style="--sp:var(--crimson)">
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=346s" target="_blank" rel="noopener noreferrer" aria-label="Play from 5:46 on YouTube">5:46</a></header>
         <p>For me, of course, it&#39;s personal. It&#39;s 100% personal.</p>
@@ -310,6 +334,7 @@
         <p>Um I think because you know like sometimes when you try when you because I have hope that we are going to um make a change and do things differently and part of that hope was that we have leaders somewhere working on something while we are working on something else and others working on something else. So when I went there and I found like wait a second that&#39;s not reality that&#39;s an assumption of course like you know large part of my hope comes from those people who I collaborate with at global level grassroot level um and those initiatives they are trying to do things differently um but you know I also had some kind of like hope that maybe there is something different there um and again I want to be fair Maybe I had some high expectations.</p>
         <p>Maybe that&#39;s the that&#39;s the issue because they are working on things, but I just had a bit higher expectations.</p>
       </article>
+      <h3 class="tr-sec" id="s-the-adults-in-the-room-do-not-have-the-answers">The adults in the room do not have the answers</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=538s" target="_blank" rel="noopener noreferrer" aria-label="Play from 8:58 on YouTube">8:58</a></header>
         <p>I think the reality is that yeah, like we always think the adults in the room, those in power have the answers, but I there are no answers. We&#39;re all muddling through this thing together and the more you sit in it and the more you do, you realize that. But what you made me real as you were just saying that out loud I was thinking in real time Ali like I have for the lot for the last year assumed okay the single dominant system is dying multiple systems are coming out and I have been okay with that because for me we&#39;re all moving in the same direction we&#39;re just going to get there in different ways right so some of them are going to be the old dominant system is going to kind of carry through and some of it&#39;s going to be hyper local and some of it&#39;s going to be more businessoriented but I&#39;ve always assumed we&#39;re moving in the same direction but what you just made me think was, &quot;Oh gosh, what if what if the different streams are going in opposite directions or if they&#39;re clashing?&quot; It sounds naive, but I honestly didn&#39;t think then what happens.</p>
@@ -321,6 +346,7 @@
         <p>But maybe that&#39;s okay.</p>
         <p>Why is that not okay?</p>
       </article>
+      <h3 class="tr-sec" id="s-values-under-pressure">Values under pressure</h3>
       <article class="tr-turn" style="--sp:var(--cobalt)">
         <header class="tr-who"><a class="tr-name" href="/about/#kim-kucinskas">Kim Kucinskas</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=651s" target="_blank" rel="noopener noreferrer" aria-label="Play from 10:51 on YouTube">10:51</a></header>
         <p>Yeah. This is why I&#39; I&#39;ve been thinking so much for the last year about values under pressure because we can all say we believe in equality and humanity and all of these things, but under pressure, it&#39;s like, well, you&#39;re getting to it at about survival, Ali. How do different people, different entities make different trade-offs and choices? And there&#39;s no exact there&#39;s no one has the answer. There&#39;s no perfect answer. Sometimes there&#39;s just a bad choice and a worse choice. But how are you making these tradeoffs under pressure and it sounds like to me, Ali, like depending on in the different spaces you&#39;re in, you&#39;re seeing different things.</p>
@@ -346,6 +372,7 @@
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=817s" target="_blank" rel="noopener noreferrer" aria-label="Play from 13:37 on YouTube">13:37</a></header>
         <p>because I know that even right now whatever we are going to do maybe in the future they will realize that we were doing something wrong at this moment or something. So I had all those different thoughts and then I went to into this thinking mode and I&#39;m still now you see like I&#39;m still thinking and reflecting it.</p>
       </article>
+      <h3 class="tr-sec" id="s-leading-a-response-seen-in-retrospect">Leading a response, seen in retrospect</h3>
       <article class="tr-turn" style="--sp:#2A4530">
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=834s" target="_blank" rel="noopener noreferrer" aria-label="Play from 13:54 on YouTube">13:54</a></header>
         <p>Fascinating you say that Hi. I&#39;m one of those, right? I lived that characture expat humanitarian piece, right? A white British male. I flew out from the UK at the drop of a hat and I went in and I was coordinating and leading responses in retrospect and from my own position now I had no right to have such an influential authorative position in and yet the system enabled me and positioned me and invited me to do that. And so I&#39;ve spent a lot of time over the last six or seven years really um reflecting on that and thinking about very minutia encounters and conversations and comments and feedback that I received then that at the time I glossed over and ignored and moved past very quickly.</p>
@@ -357,6 +384,7 @@
         <p>and it&#39;s one thing it&#39;s one thing to be able to kind of have the openness to have those deep honest hard reflective moments within yourself when it&#39;s just you. But when you&#39;re doing it while trying to run a ship and everyone and all eyes are on you, it&#39;s a lot harder to be kind of, you know, vulnerable, open, etc. So I mean it&#39;s so interesting. I think that I we&#39;ve all I think alluded to this in the past. this the sector itself is rupturing but so is broader society is rupturing right now. So it&#39;s like a microcosm within the broader context and in that moment there are many people not all but many people are navigating this complex change individually and within their communities and it&#39;s just it&#39;s it&#39;s it&#39;s so complex.</p>
         <p>There are so many different threads and it feels like a big old tangle right now. And I but I think that&#39;s a good thing because this is the moment where something new can get birthed out of it. Like it needs to be this mess so that something good can come out of it. And I think we&#39;ve all also talked about this. We need to be comfortable sitting in it because if we don&#39;t, we snap back to the old way.</p>
       </article>
+      <h3 class="tr-sec" id="s-optimism-and-jeopardy-at-the-same-time">Optimism and jeopardy at the same time</h3>
       <article class="tr-turn" style="--sp:#2A4530">
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=1058s" target="_blank" rel="noopener noreferrer" aria-label="Play from 17:38 on YouTube">17:38</a></header>
         <p>But that&#39;s emotionally demanding. It carries a lot because you&#39;re grieving a lot. you&#39;re you&#39;re you&#39;re full of tension between optimism, hope, positivity, and jeopardy, anxiety, uncertainty, and they conflict. Um, so it&#39;s it&#39;s really hard work. But there&#39;s two things that you&#39;ve each said that has stayed in my mind so far. One, Kim, was your reference to um how difficult it is to stay true to the values under pressure, right? And to me, the word pressure is doing a hell of a lot of work in that sentence. Mhm. What is the pressure? Where is the pressure coming from? Who is experiencing the pressure? And my assumption, and I&#39;m sure it&#39;s far more complicated and nuanced, but my assumption is the pressure from most organizations at a decision-m seauite leadership level is fiscal and it&#39;s survival, right?</p>
@@ -364,6 +392,7 @@
         <p>Surely actually we&#39;re talking about dismantling the engine and building a dozen engines and that actually those engines get built by very different people. And maybe they&#39;re not engines, right? Maybe they&#39;re other entities and things that get built. I think it&#39;s this mindset this sense that we&#39;ve come from one thing that&#39;s big and it&#39;s the roll out of big and the pressures that exist within that big thing is this tension between financing survivability business model not necessarily profitable but certainly viable and this delivery of need against this sense of that&#39;s ruptured and now lots of things are coming and they&#39;re going to be going in different directions and having different motives with them. This is hard stuff to process and get your head around. And if it&#39;s all wrapped up in was everything I&#39;ve done and is my career legitimate and is my background and experience right and valid and am I being accused of being neoconalist for the last 20 30 years?</p>
         <p>How on earth are we coming up with creative solutions? I don&#39;t know how it&#39;s possible in that mindset.</p>
       </article>
+      <h3 class="tr-sec" id="s-putting-the-operational-hat-on">Putting the operational hat on</h3>
       <article class="tr-turn" style="--sp:var(--crimson)">
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=1223s" target="_blank" rel="noopener noreferrer" aria-label="Play from 20:23 on YouTube">20:23</a></header>
         <p>Yeah. I think from my side and the way I look at it is that if I want to put my operational hat I think what one of the things that I learned in being in country operations and dealing with crisis non-stop is moving on and this is one number two continue building even if you know you are struggling with XY Z you continue moving forward even if you don&#39;t really know exactly which direction but you continue But there are some moments where I like to pause, zoom out and think about the whole system and what I mentioned for example about um Geneva and the other cities and the engine and all that.</p>
@@ -392,6 +421,7 @@
         <p>Yes, I&#39;m also on that journey. you mentioned before um you mentioned before that there&#39;s a lot of you know both within what&#39;s happening within our work world and within the world um there&#39;s so much change and it takes a hit on your nervous system and it and I have been feeling that frankly the last couple weeks really strongly and it&#39;s in it&#39;s in your body and the other day I was so tired and I was just kind of wandering around you know when you&#39;re like in that days and you&#39;re just kind of wandering around and either you&#39;re doom scrolling or you&#39;re staring out the window and I was trying to figure out what was wrong cuz I couldn&#39;t pinpoint. There wasn&#39;t anything one thing that I was reacting to and then I realized my body was processing grief.</p>
         <p>There was no one moment. No one had died. Nothing bad, you know, it was just the collective grief that was trying to be processed in just trying to exist through this moment and do so by while living my values under pressure. And so you talked about values under pressure at the institutional level, Thomas, but I like thinking about it in that way because every micro moment of interaction of relation is an opportunity to live your values under pressure. But it does take a toll and I don&#39;t I think we need we will burn out if we don&#39;t acknowledge that. So sometimes I am proactive and I paint and I exercise and sometimes I get under the covers and I watch a TV show</p>
       </article>
+      <h3 class="tr-sec" id="s-walking-the-talk">Walking the talk</h3>
       <article class="tr-turn" style="--sp:#2A4530">
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=1578s" target="_blank" rel="noopener noreferrer" aria-label="Play from 26:18 on YouTube">26:18</a></header>
         <p>and both are fine. Um there was there was something we spoke about slightly before this about walking the talk in this sense, right? And both of you have got experiences and lived experiences of recognizing this that this requirement to shift mindset and to open up and be reflective to enable you to embrace the change in a more constructive, open, reflective, creative, curious way. I just wondered if either of both of you wanted to say a little bit about how you are going about that as current practitioners within your worlds.</p>
@@ -420,6 +450,7 @@
         <header class="tr-who"><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=1900s" target="_blank" rel="noopener noreferrer" aria-label="Play from 31:40 on YouTube">31:40</a></header>
         <p>What about you? I agreed.</p>
       </article>
+      <h3 class="tr-sec" id="s-a-seven-year-journey-through-the-process">A seven-year journey through the process</h3>
       <article class="tr-turn" style="--sp:#2A4530">
         <header class="tr-who"><a class="tr-name" href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=1904s" target="_blank" rel="noopener noreferrer" aria-label="Play from 31:44 on YouTube">31:44</a></header>
         <p>Well, I it&#39;s interesting. I had a six or sevenyear journey with SAVE in Eastern Southern Africa going through this process and I was helped along that journey by the requirements of operational pivot during COVID and the sort of internal depth reflections that we all went through collectively during Black Lives Matter movement and things like that. I&#39; I&#39;ve I&#39;ve had a I think quite and in retrospect I&#39;ve had a lengthy probably privileged journey through this change that many have had to very abruptly be forced to go through over the last 12 month process. Um and so I&#39;m quite at peace with myself on that journey. Um and I&#39;ve made my career choices to reflect that I think. But I was recently this week having a conversation with someone who is sort of spearheading the strategy refresh of their organization and they as a sort of strategy team had embraced and recognized the fact that ecosically was the direction of travel.</p>
@@ -452,6 +483,7 @@
         <p>And that speaks to I think a topic that we&#39;ll have to pick up on the next episode that you came about navigating nuance, right? Um and how does this come and how does this play out? And I&#39;m also thinking as someone who might be listening to this conversation. I&#39;d imagine I&#39;d like to think that there&#39;s a lot of resonance and understanding and connection with what we&#39;re saying, but I can imagine the question that they&#39;d be screaming at us if they could have a two-way conversation was so what? Right? what do we do about all this? And that&#39;s one that I mean there are ways to talk about that and are things that people can look at and do, but we certainly haven&#39;t touched on that today.</p>
         <p>So maybe that&#39;s something else we should pick up on a future conversation.</p>
       </article>
+      <h3 class="tr-sec" id="s-living-in-the-future-before-it-happens">Living in the future before it happens</h3>
       <article class="tr-turn" style="--sp:var(--crimson)">
         <header class="tr-who"><a class="tr-name" href="/about/#ali-al-mokdad">Ali Al Mokdad</a><a class="tr-ts" href="https://www.youtube.com/watch?v=nQpnWvOoEio&amp;t=2482s" target="_blank" rel="noopener noreferrer" aria-label="Play from 41:22 on YouTube">41:22</a></header>
         <p>What I usually tell my friends and also even the leaders that I work with that in order to create the future, you have to live in the future long enough before it happens. So you have to sit first reflect and think then imagine that future and sit with it like sit with that future that you are imagining and then go back to the present. So I feel like and for me that&#39;s what I learned in also in this sector and especially working at strategic level that sometimes you need to live in the future before it happens and then you go back and build the present. But to be honest and we I think we say this in each episode that as long as we have um more questions and we are approaching them with curiosity, things are okay.</p>
