@@ -2583,3 +2583,7 @@ body.nav-open { overflow: hidden; }
   from { transform: scaleX(0); }
   to   { transform: scaleX(1); }
 }
+
+/* modal: stated absence of a transcript, a note rather than a button */
+.ep-no-transcript{display:inline-flex;align-items:center;font-size:13px;color:var(--ink-mute);
+  font-style:italic;padding:8px 2px;letter-spacing:.01em}
