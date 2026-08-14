@@ -675,7 +675,7 @@ function openEpisode(ep) {
       </div>
       <h2 class="modal-title" id="modal-episode-title">${escAttr(ep.title)}</h2>
       <div class="modal-actions">
-        <a class="ep-link primary" href="/episodes/${escAttr(ep.slug)}/">Episode page: ${ep.transcript ? 'transcript, essay, links' : 'essay, links'}</a>
+        ${ep.transcript ? `<a class="ep-link primary" href="/episodes/${escAttr(ep.slug)}/#transcript">Episode Transcript</a>` : ''}
         <a class="ep-link" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
         <a class="ep-link" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">🎵 Spotify</a>
         <a class="ep-link" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">🎧 Apple Podcasts</a>
