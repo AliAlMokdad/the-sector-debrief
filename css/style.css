@@ -1016,9 +1016,20 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   margin: 8px 0 18px;
 }
 .platform-orbs {
-  display: flex; gap: 16px; flex-wrap: wrap;
+  /* A GRID, not a wrapping flex row. With twelve orbs, free wrapping divides them by whatever
+     space happens to be left over: at 1100px it produced five, five and two, and that orphan
+     pair reads as unfinished. Fixed column counts that step 6 -> 4 -> 3 all divide twelve
+     evenly, so every row is full at every width. */
+  display: grid;
+  grid-template-columns: repeat(6, 56px);
+  gap: 16px;
   margin-top: 8px;
+  justify-content: start;
 }
+@media (max-width: 1180px) { .platform-orbs { grid-template-columns: repeat(4, 56px); } }
+@media (max-width: 900px)  { .platform-orbs { grid-template-columns: repeat(6, 56px); } }
+@media (max-width: 620px)  { .platform-orbs { grid-template-columns: repeat(4, 56px); } }
+@media (max-width: 380px)  { .platform-orbs { grid-template-columns: repeat(3, 56px); } }
 .orb {
   position: relative;
   width: 56px; height: 56px;
@@ -1092,7 +1103,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 @media (max-width: 640px) {
   .orb { width: 44px; height: 44px; }
   .orb svg { width: 20px; height: 20px; }
-  .platform-orbs { gap: 10px; justify-content: flex-start; }
+  .platform-orbs { gap: 10px; }
 }
 
 /* ── GOOGLE-COLORS RIBBON (subtle) ── */
@@ -2587,3 +2598,23 @@ body.nav-open { overflow: hidden; }
 /* modal: stated absence of a transcript, a note rather than a button */
 .ep-no-transcript{display:inline-flex;align-items:center;font-size:13px;color:var(--ink-mute);
   font-style:italic;padding:8px 2px;letter-spacing:.01em}
+
+/* the six directory listings. House earth tones rather than guessed brand colours, which also
+   keeps the main listening apps visually primary. Every one of these is dark enough for the
+   white glyph to clear WCAG AA. */
+/* Hues ALTERNATE cool, warm, cool, warm along the row. The first assignment put rust, clay and
+   deep crimson in positions three, four and five, three warm browns side by side, and the row
+   read as a muddy smear rather than six distinct places. Only the pairing changed; every colour
+   is still from the house palette and still clears AA against the glyph. */
+.orb-gf { background: var(--cobalt-deep); }
+.orb-zn { background: var(--rust); }
+.orb-ln { background: var(--forest); }
+.orb-cs { background: var(--crimson-deep); }
+.orb-pc { background: var(--ink-mute); }
+.orb-pf { background: var(--clay); }
+.orb-gf:hover { background: #24497f; }
+.orb-zn:hover { background: #b85f24; }
+.orb-ln:hover { background: #365a3e; }
+.orb-cs:hover { background: #a52f1c; }
+.orb-pc:hover { background: #635a51; }
+.orb-pf:hover { background: #a04434; }
