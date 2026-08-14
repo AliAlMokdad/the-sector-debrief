@@ -127,6 +127,10 @@ const SPEAKER_TINT = {
 // air between speakers, less between paragraphs of one speaker, so the shape of the
 // conversation is visible before a word is read.
 function transcriptHtml(ep, tr) {
+  // Four episodes carry no burned-in speaker label, so their transcripts ship with no names at
+  // all rather than "Speaker not established" repeated eighty times, which is noise, or a guess,
+  // which is worse. The words are the same words; only the attribution is unavailable.
+  const named = tr.speakers !== false;
   const turns = tr.turns.map((tn) => {
     const who = tn.speaker || '';
     const anchor = HOST_ANCHOR[who];
@@ -147,7 +151,7 @@ function transcriptHtml(ep, tr) {
     const body = (tn.paras && tn.paras.length ? tn.paras : [tn.text])
       .map((p) => `<p>${esc(p)}</p>`).join('\n        ');
     return `<article class="tr-turn" style="--sp:${tint}">
-        <header class="tr-who">${label}${stamp}</header>
+        <header class="tr-who">${named ? label : ''}${stamp}</header>
         ${body}
       </article>`;
   });
@@ -167,15 +171,16 @@ function transcriptHtml(ep, tr) {
   const words = tr.turns.reduce((n, tn) => n
     + (tn.paras && tn.paras.length ? tn.paras.join(' ') : (tn.text || ''))
       .split(/\s+/).filter(Boolean).length, 0);
-  const named = tr.turns.filter((tn) => tn.speaker).length;
+  const namedCount = tr.turns.filter((tn) => tn.speaker).length;
   return `
   <section class="doc-transcript" id="transcript" aria-labelledby="transcript-h">
     <h2 id="transcript-h">Transcript</h2>
     <p class="tr-note">About ${words.toLocaleString('en-GB')} words, from the episode's
       captions, lightly edited: stumbles removed, names corrected, paragraphs added. No spoken
-      word was changed. Speakers are named from the episode video, and ${named} of
-      ${tr.turns.length} turns could be established that way; the rest are left unnamed rather
-      than guessed. Every timestamp opens that moment in the video, which is the record.
+      word was changed. ${named
+        ? `Speakers are named from the episode video, and ${namedCount} of ${tr.turns.length} turns could be established that way; the rest are left unnamed rather than guessed.`
+        : `This episode's recording does not show speaker names on screen, so who is speaking cannot be established from it, and rather than guess, no speaker is named here.`}
+      Every timestamp opens that moment in the video, which is the record.
       Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
     <div class="tr-body">
       ${body}
