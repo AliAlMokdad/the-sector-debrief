@@ -547,7 +547,6 @@ function quoteCard(q, isClone = false) {
       <div class="quote-share">
         <button${tab} type="button" data-net="x"    data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on X"        title="Share on X"><span aria-hidden="true">𝕏</span></button>
         <button${tab} type="button" data-net="li"   data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on LinkedIn" title="LinkedIn"><span aria-hidden="true">in</span></button>
-        <button${tab} type="button" data-net="wa"   data-text="${encodeURIComponent(q.text)}"           aria-label="Share quote on WhatsApp" title="WhatsApp"><span aria-hidden="true">💬</span></button>
         <button${tab} type="button" data-net="copy" data-text="${escAttr(q.text)}" aria-label="Copy quote to clipboard"  title="Copy"><span aria-hidden="true">⧉</span></button>
       </div>
     </div>
@@ -579,7 +578,6 @@ function bindQuoteShare(scope) {
       let target = '';
       if (n === 'x')  target = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
       if (n === 'li') target = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
-      if (n === 'wa') target = `https://wa.me/?text=${text}%20${url}`;
       // On mobile devices that support the native share sheet, prefer it.
       // Fall through to the web intent if anything other than user-dismiss happens.
       const isCoarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
@@ -728,7 +726,6 @@ function openBlog(slug) {
           </button>
           <button class="pause-btn pause-share" type="button" data-action="share-x"  aria-label="Share on X / Twitter"><span aria-hidden="true">𝕏</span></button>
           <button class="pause-btn pause-share" type="button" data-action="share-li" aria-label="Share on LinkedIn"><span aria-hidden="true">in</span></button>
-          <button class="pause-btn pause-share" type="button" data-action="share-wa" aria-label="Share on WhatsApp"><span aria-hidden="true">💬</span></button>
           <button class="pause-btn pause-share" type="button" data-action="copy"     aria-label="Copy question"><span aria-hidden="true">⧉</span></button>
         </div>
         <div class="pause-foot">A reflection prompt drawn from this essay. Take it slow.</div>
@@ -812,7 +809,6 @@ function bindPause(scope, post) {
         if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
         if (action === 'share-x')  window.open(`https://twitter.com/intent/tweet?text=${t}&url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'share-li') window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
-        if (action === 'share-wa') window.open(`https://wa.me/?text=${t}%20${url}`, '_blank', 'width=600,height=500');
         if (action === 'copy') {
           const original = btn.innerHTML;
           safeCopy(`"${text}" · The Sector Debrief`).then(ok => {
