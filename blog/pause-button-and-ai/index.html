@@ -102,6 +102,53 @@
 .doc-reflect ol{margin:0;padding-left:22px;display:grid;gap:14px}
 .doc-reflect li{font-size:16.5px;line-height:1.55;padding-left:4px}
 .doc-reflect li::marker{color:var(--mustard);font-weight:700}
+/* transcript. reads as an interview in a magazine, not a chat log.
+   The speaker's name is the structure, which is what earns the spacing: a wide gap between
+   speakers and a small one between paragraphs of the same speaker, so the shape of the
+   conversation is legible before a word is read. An earlier version set every paragraph the
+   same distance apart behind a hairline, and with nothing grouping them it read as one
+   undifferentiated column.
+   The measure is capped near 68 characters. The doc column is wide enough to run past 90,
+   which is well beyond comfortable reading and was the real reason the block felt heavy.
+   scroll-margin-top clears the fixed header: without it a jump to #transcript hides the
+   heading behind the nav, which a real mobile render made obvious. */
+.doc-transcript{margin:56px 0 0;padding:38px 0 0;border-top:2px solid rgba(26,22,20,.12);
+  scroll-margin-top:83px}
+.doc-transcript h2{font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.01em;color:var(--ink);margin:0 0 12px}
+.tr-note{font-size:13.5px;line-height:1.7;color:var(--ink-mute);margin:0;max-width:44rem}
+.tr-note a{color:var(--crimson)}
+.tr-body{font-size:17px;line-height:1.72;color:var(--ink-soft);max-width:44rem;padding-top:36px}
+.tr-cold{margin:0 0 10px;padding:2px 0 6px 26px;border-left:2px solid var(--cream-deep)}
+.tr-cold-h{font-family:var(--fb);font-size:11.5px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute);margin:0}
+.tr-cold .tr-turn{margin-top:20px}
+.tr-turn{margin:38px 0 0}
+.tr-turn:first-child{margin-top:0}
+.tr-turn p{margin:0 0 13px}
+.tr-turn p:last-child{margin-bottom:0}
+/* the name line: an editorial credit, quiet in size but carrying the speaker's accent so a
+   reader can follow one voice down a fifty-minute page without reading every name */
+.tr-who{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 9px}
+/* Scoped as .tr-who .tr-name rather than .tr-name alone: the transcript sits inside
+   .doc-body, and that shell's link rule (class plus element) outranks a lone class, so the
+   first version lost every speaker tint to the generic link navy and all three names rendered
+   in the same colour. Reading the COMPUTED colour is what exposed it, since both the markup
+   and the rule looked correct. Note also: no backticks in comments inside this template
+   literal, because a backtick ends the string. */
+.tr-who .tr-name{font-family:var(--fb);font-weight:600;font-size:12.5px;
+  letter-spacing:.075em;text-transform:uppercase;color:var(--sp);text-decoration:none;
+  border-bottom:1px solid transparent}
+.tr-who a.tr-name:hover,.tr-who a.tr-name:focus-visible{border-bottom-color:currentColor}
+.tr-who .tr-name.tr-anon{color:var(--ink-mute);font-style:italic;text-transform:none;letter-spacing:.01em;font-weight:500;font-size:13px}
+.tr-ts{font-family:var(--fm,ui-monospace,SFMono-Regular,Menlo,monospace);font-size:11.5px;
+  letter-spacing:.02em;color:var(--ink-mute);text-decoration:none;
+  border-bottom:1px dotted rgba(26,22,20,.28)}
+.tr-ts:hover,.tr-ts:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
+@media(max-width:640px){
+  .tr-body{font-size:16.5px}
+  .tr-turn{margin-top:32px}
+  .doc-transcript{scroll-margin-top:205px}
+}
 /* prev / next episode */
 .doc-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 0}
 .doc-pager a{display:block;padding:18px 20px;background:var(--paper);border:1px solid var(--cream-deep);border-radius:12px;text-decoration:none;color:var(--ink)}
@@ -132,7 +179,18 @@
 .doc-host p{font-size:15.5px;line-height:1.62;color:var(--ink-soft);margin:0 0 14px}
 .doc-host a{font-weight:600;font-size:14px;color:var(--cobalt-deep);text-decoration:none}
 .doc-host a:hover{text-decoration:underline}
-:target{scroll-margin-top:90px}
+:target{scroll-margin-top:83px}
+/* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 189px at 390, where the brand and
+   the links stack, so one flat offset cannot clear it at both. The old single 90px value
+   left any anchored heading buried behind the nav on a phone. This is not only a
+   transcript problem: it applies to every in-page anchor on these generated pages,
+   including the host profiles on the about page that the transcript speaker names now
+   link to, so a reader tapping a name would have landed under the nav. The :target rule is
+   what actually governs an anchor jump, and it sits later in this sheet than the section rule,
+   which is why setting scroll-margin-top on .doc-transcript alone did nothing.
+   (Second time a backtick in a comment inside this template literal broke the build.
+   Plain prose only in here: a backtick ends the string.) */
+@media(max-width:640px){:target{scroll-margin-top:205px}}
 /* footer */
 .doc-foot{background:var(--ink);color:var(--cream-soft);margin-top:20px}
 .doc-foot-in{max-width:1080px;margin:0 auto;padding:52px 24px 30px}
@@ -160,7 +218,7 @@
 }
 @media(prefers-reduced-motion:reduce){.doc-body *{transition:none!important;animation:none!important}}
 </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting","description":"Every essay on this site ends with five reflection prompts. They rotate through the Pause & Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.","url":"https://thesectordebrief.com/blog/pause-button-and-ai/","mainEntityOfPage":"https://thesectordebrief.com/blog/pause-button-and-ai/","image":"https://thesectordebrief.com/assets/cover.jpg","datePublished":"2026-01-01","dateModified":"2026-01-01","wordCount":1005,"author":[{"@type":"Person","@id":"https://thesectordebrief.com/#ali-al-mokdad","name":"Ali Al Mokdad"},{"@type":"Person","@id":"https://thesectordebrief.com/#kim-kucinskas","name":"Kim Kucinskas"},{"@type":"Person","@id":"https://thesectordebrief.com/#thomas-jepson-lay","name":"Thomas Jepson-Lay"}],"publisher":{"@type":"Organization","name":"The Sector Debrief","@id":"https://thesectordebrief.com/#organization","logo":{"@type":"ImageObject","url":"https://thesectordebrief.com/assets/apple-touch-icon.png"}},"isPartOf":{"@type":"Blog","@id":"https://thesectordebrief.com/blog/#blog","name":"The Sector Debrief Blog"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting","description":"Every essay on this site ends with five reflection prompts. They rotate through the Pause \u0026 Reflect tile on the blog page. Here is the honest answer to where they come from and what AI does and does not do.","url":"https://thesectordebrief.com/blog/pause-button-and-ai/","mainEntityOfPage":"https://thesectordebrief.com/blog/pause-button-and-ai/","image":"https://thesectordebrief.com/assets/cover.jpg","datePublished":"2026-01-01","dateModified":"2026-01-01","wordCount":1005,"author":[{"@type":"Person","@id":"https://thesectordebrief.com/#ali-al-mokdad","name":"Ali Al Mokdad"},{"@type":"Person","@id":"https://thesectordebrief.com/#kim-kucinskas","name":"Kim Kucinskas"},{"@type":"Person","@id":"https://thesectordebrief.com/#thomas-jepson-lay","name":"Thomas Jepson-Lay"}],"publisher":{"@type":"Organization","name":"The Sector Debrief","@id":"https://thesectordebrief.com/#organization","logo":{"@type":"ImageObject","url":"https://thesectordebrief.com/assets/apple-touch-icon.png"}},"isPartOf":{"@type":"Blog","@id":"https://thesectordebrief.com/blog/#blog","name":"The Sector Debrief Blog"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thesectordebrief.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thesectordebrief.com/blog/"},{"@type":"ListItem","position":3,"name":"Notes on the Pause Button: How AI Plays Its Role Without Doing the Reflecting","item":"https://thesectordebrief.com/blog/pause-button-and-ai/"}]}</script>
 </head>
 <body class="doc-body">

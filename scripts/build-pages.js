@@ -30,7 +30,9 @@ const { EPISODES, BLOG_POSTS, HOSTS, PLATFORMS, STATS } = require(path.join(ROOT
 
 const SITE = 'https://thesectordebrief.com';
 const ASSET_V = '2026-07-13a';                 // cache-bust for /css and shared assets
-const TODAY = '2026-07-13';                     // build date (Date.now is avoided for reproducibility)
+const TODAY = '2026-07-13';
+const TRANSCRIPT_DATE = '2026-08-14';          // when transcripts were published
+                     // build date (Date.now is avoided for reproducibility)
 const OG_DEFAULT = SITE + '/assets/cover.jpg';
 
 // ─── helpers ───────────────────────────────────────────────────
@@ -64,6 +66,123 @@ const isoDuration = (dur) => {
   return n ? `PT${n}M` : undefined;
 };
 const wordCount = (html) => stripTags(html).split(/\s+/).filter(Boolean).length;
+
+// Safe serialiser for anything placed inside <script type="application/ld+json">.
+// JSON.stringify escapes quotes and newlines but does NOT neutralise the sequence
+// </script>. Any string value containing it would close the tag early and corrupt the rest
+// of the page. That was harmless while every value was a short hand-written summary. It
+// stops being harmless the moment full episode transcripts are added.
+//
+// The last two patterns are written as \u2028 / \u2029 ESCAPES on purpose. Pasting the
+// literal characters here is itself a syntax error, because those codepoints terminate the
+// line and therefore terminate the regex literal.
+const ldJson = (o) => JSON.stringify(o)
+  .replace(/</g, '\\u003c')
+  .replace(/>/g, '\\u003e')
+  .replace(/&/g, '\\u0026')
+  .replace(/\u2028/g, '\\u2028')
+  .replace(/\u2029/g, '\\u2029');
+
+// ---- transcripts -------------------------------------------------------------
+// Source of truth is transcripts/<slug>.json, produced from the episode's YouTube caption
+// track. Kept OUT of js/data.js: that file is loaded by the SPA on every route, and the
+// transcripts total about 80,000 words.
+function loadTranscript(slug) {
+  try {
+    const p = path.join(ROOT, 'transcripts', slug + '.json');
+    if (!fs.existsSync(p)) return null;
+    const t = JSON.parse(fs.readFileSync(p, 'utf8'));
+    return (t && Array.isArray(t.turns) && t.turns.length) ? t : null;
+  } catch (e) { return null; }
+}
+
+// The three hosts have profiles on the about page, so their names link there. Guests do not
+// have a profile on this site, so a guest's name is plain text rather than a link that would
+// go nowhere useful.
+const HOST_ANCHOR = {
+  'Ali Al Mokdad': 'ali-al-mokdad',
+  'Kim Kucinskas': 'kim-kucinskas',
+  'Thomas Jepson-Lay': 'thomas-jepson-lay',
+};
+
+// One accent per person, reused down the page. This is the reason the transcript is scannable:
+// with three voices alternating over fifty minutes, a reader tracking who said what should not
+// have to read each name, and a consistent colour lets the eye follow one speaker down the
+// page. Only tokens that hold their contrast on cream are used.
+const SPEAKER_TINT = {
+  'Ali Al Mokdad': 'var(--crimson)',
+  'Kim Kucinskas': 'var(--cobalt)',
+  'Thomas Jepson-Lay': '#2A4530',
+};
+
+// Visible transcript section. Escaped with esc(); deliberately NOT routed through the blog
+// body path, which injects raw HTML.
+//
+// Every name here was read off the episode video, where the platform burns the active
+// speaker's name into the frame, so the attribution is a reading of the record rather than an
+// inference from the words. Where that reading could not be settled, and it could not on a
+// handful of fast three-way exchanges, the turn carries no name at all. Nothing is guessed.
+//
+// The name is also the layout. It groups each turn, which is what lets the spacing open up:
+// air between speakers, less between paragraphs of one speaker, so the shape of the
+// conversation is visible before a word is read.
+function transcriptHtml(ep, tr) {
+  const turns = tr.turns.map((tn) => {
+    const who = tn.speaker || '';
+    const anchor = HOST_ANCHOR[who];
+    const tint = SPEAKER_TINT[who] || 'var(--ink-soft)';
+    const label = who
+      ? (anchor
+          ? `<a class="tr-name" href="/about/#${anchor}">${esc(who)}</a>`
+          : `<span class="tr-name">${esc(who)}</span>`)
+      : `<span class="tr-name tr-anon">Speaker not established</span>`;
+    // The seek offset is coerced to a non-negative integer rather than interpolated as it
+    // arrives. It comes from a file this pipeline writes, so it is trusted today, but an
+    // unvalidated value reaching an href is the kind of thing that stays wrong once the data
+    // source changes hands.
+    const at = Math.max(0, Math.floor(Number(tn.t) || 0));
+    const stamp = `<a class="tr-ts" href="https://www.youtube.com/watch?v=${ep.id}&amp;t=${at}s"`
+      + ` target="_blank" rel="noopener noreferrer"`
+      + ` aria-label="Play from ${esc(tn.ts)} on YouTube">${esc(tn.ts)}</a>`;
+    const body = (tn.paras && tn.paras.length ? tn.paras : [tn.text])
+      .map((p) => `<p>${esc(p)}</p>`).join('\n        ');
+    return `<article class="tr-turn" style="--sp:${tint}">
+        <header class="tr-who">${label}${stamp}</header>
+        ${body}
+      </article>`;
+  });
+  // The episodes open on a trailer of clips lifted from later in the conversation, so those
+  // first turns are fragments that each reappear further down the page. They are real speech
+  // and stay, but unlabelled they read as a broken transcript, so they are fenced off under a
+  // heading that explains them. The count comes from the build step, which detects the montage
+  // by that duplication rather than by assuming a fixed length.
+  const cold = Number(tr.coldOpen) || 0;
+  const body = cold > 0
+    ? `<div class="tr-cold">
+        <p class="tr-cold-h">Cold open, clips from later in the conversation</p>
+        ${turns.slice(0, cold).join('\n        ')}
+      </div>
+      ${turns.slice(cold).join('\n      ')}`
+    : turns.join('\n      ');
+  const words = tr.turns.reduce((n, tn) => n
+    + (tn.paras && tn.paras.length ? tn.paras.join(' ') : (tn.text || ''))
+      .split(/\s+/).filter(Boolean).length, 0);
+  const named = tr.turns.filter((tn) => tn.speaker).length;
+  return `
+  <section class="doc-transcript" id="transcript" aria-labelledby="transcript-h">
+    <h2 id="transcript-h">Transcript</h2>
+    <p class="tr-note">About ${words.toLocaleString('en-GB')} words, from the episode's
+      captions, lightly edited: stumbles removed, names corrected, paragraphs added. No spoken
+      word was changed. Speakers are named from the episode video, and ${named} of
+      ${tr.turns.length} turns could be established that way; the rest are left unnamed rather
+      than guessed. Every timestamp opens that moment in the video, which is the record.
+      Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
+    <div class="tr-body">
+      ${body}
+    </div>
+  </section>`;
+}
+
 
 const episodeUrl = (ep) => `${SITE}/episodes/${ep.slug}/`;
 const blogUrl = (p) => `${SITE}/blog/${p.slug}/`;
@@ -227,7 +346,7 @@ function footerHtml() {
 // ─── page shell ────────────────────────────────────────────────
 function shell({ title, desc, canonical, ogType, ogImage, jsonld, body, active }) {
   const blocks = (jsonld || []).map(o =>
-    `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n  ');
+    `<script type="application/ld+json">${ldJson(o)}</script>`).join('\n  ');
   return `<!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -347,6 +466,53 @@ const DOC_CSS = `
 .doc-reflect ol{margin:0;padding-left:22px;display:grid;gap:14px}
 .doc-reflect li{font-size:16.5px;line-height:1.55;padding-left:4px}
 .doc-reflect li::marker{color:var(--mustard);font-weight:700}
+/* transcript. reads as an interview in a magazine, not a chat log.
+   The speaker's name is the structure, which is what earns the spacing: a wide gap between
+   speakers and a small one between paragraphs of the same speaker, so the shape of the
+   conversation is legible before a word is read. An earlier version set every paragraph the
+   same distance apart behind a hairline, and with nothing grouping them it read as one
+   undifferentiated column.
+   The measure is capped near 68 characters. The doc column is wide enough to run past 90,
+   which is well beyond comfortable reading and was the real reason the block felt heavy.
+   scroll-margin-top clears the fixed header: without it a jump to #transcript hides the
+   heading behind the nav, which a real mobile render made obvious. */
+.doc-transcript{margin:56px 0 0;padding:38px 0 0;border-top:2px solid rgba(26,22,20,.12);
+  scroll-margin-top:83px}
+.doc-transcript h2{font-family:var(--fd);font-weight:600;font-size:26px;letter-spacing:-.01em;color:var(--ink);margin:0 0 12px}
+.tr-note{font-size:13.5px;line-height:1.7;color:var(--ink-mute);margin:0;max-width:44rem}
+.tr-note a{color:var(--crimson)}
+.tr-body{font-size:17px;line-height:1.72;color:var(--ink-soft);max-width:44rem;padding-top:36px}
+.tr-cold{margin:0 0 10px;padding:2px 0 6px 26px;border-left:2px solid var(--cream-deep)}
+.tr-cold-h{font-family:var(--fb);font-size:11.5px;font-weight:600;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ink-mute);margin:0}
+.tr-cold .tr-turn{margin-top:20px}
+.tr-turn{margin:38px 0 0}
+.tr-turn:first-child{margin-top:0}
+.tr-turn p{margin:0 0 13px}
+.tr-turn p:last-child{margin-bottom:0}
+/* the name line: an editorial credit, quiet in size but carrying the speaker's accent so a
+   reader can follow one voice down a fifty-minute page without reading every name */
+.tr-who{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 9px}
+/* Scoped as .tr-who .tr-name rather than .tr-name alone: the transcript sits inside
+   .doc-body, and that shell's link rule (class plus element) outranks a lone class, so the
+   first version lost every speaker tint to the generic link navy and all three names rendered
+   in the same colour. Reading the COMPUTED colour is what exposed it, since both the markup
+   and the rule looked correct. Note also: no backticks in comments inside this template
+   literal, because a backtick ends the string. */
+.tr-who .tr-name{font-family:var(--fb);font-weight:600;font-size:12.5px;
+  letter-spacing:.075em;text-transform:uppercase;color:var(--sp);text-decoration:none;
+  border-bottom:1px solid transparent}
+.tr-who a.tr-name:hover,.tr-who a.tr-name:focus-visible{border-bottom-color:currentColor}
+.tr-who .tr-name.tr-anon{color:var(--ink-mute);font-style:italic;text-transform:none;letter-spacing:.01em;font-weight:500;font-size:13px}
+.tr-ts{font-family:var(--fm,ui-monospace,SFMono-Regular,Menlo,monospace);font-size:11.5px;
+  letter-spacing:.02em;color:var(--ink-mute);text-decoration:none;
+  border-bottom:1px dotted rgba(26,22,20,.28)}
+.tr-ts:hover,.tr-ts:focus-visible{color:var(--crimson);border-bottom-color:var(--crimson)}
+@media(max-width:640px){
+  .tr-body{font-size:16.5px}
+  .tr-turn{margin-top:32px}
+  .doc-transcript{scroll-margin-top:205px}
+}
 /* prev / next episode */
 .doc-pager{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:36px 0 0}
 .doc-pager a{display:block;padding:18px 20px;background:var(--paper);border:1px solid var(--cream-deep);border-radius:12px;text-decoration:none;color:var(--ink)}
@@ -377,7 +543,18 @@ const DOC_CSS = `
 .doc-host p{font-size:15.5px;line-height:1.62;color:var(--ink-soft);margin:0 0 14px}
 .doc-host a{font-weight:600;font-size:14px;color:var(--cobalt-deep);text-decoration:none}
 .doc-host a:hover{text-decoration:underline}
-:target{scroll-margin-top:90px}
+:target{scroll-margin-top:83px}
+/* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 189px at 390, where the brand and
+   the links stack, so one flat offset cannot clear it at both. The old single 90px value
+   left any anchored heading buried behind the nav on a phone. This is not only a
+   transcript problem: it applies to every in-page anchor on these generated pages,
+   including the host profiles on the about page that the transcript speaker names now
+   link to, so a reader tapping a name would have landed under the nav. The :target rule is
+   what actually governs an anchor jump, and it sits later in this sheet than the section rule,
+   which is why setting scroll-margin-top on .doc-transcript alone did nothing.
+   (Second time a backtick in a comment inside this template literal broke the build.
+   Plain prose only in here: a backtick ends the string.) */
+@media(max-width:640px){:target{scroll-margin-top:205px}}
 /* footer */
 .doc-foot{background:var(--ink);color:var(--cream-soft);margin-top:20px}
 .doc-foot-in{max-width:1080px;margin:0 auto;padding:52px 24px 30px}
@@ -438,15 +615,27 @@ function buildEpisodePage(ep) {
     { name: `Episode ${ep.n}`, path: url, url },
   ];
 
+  const tr = loadTranscript(ep.slug);
+
   const podcastLD = {
     '@context': 'https://schema.org', '@type': 'PodcastEpisode',
     url, name: ep.title, episodeNumber: ep.n, datePublished: ep.date,
+    // adding a transcript is a material content change, so the page reports when it changed
+    ...(tr ? { dateModified: TRANSCRIPT_DATE } : {}),
     duration: isoDuration(ep.duration), description: stripTags(ep.description),
     image: ytThumb(ep.id),
     partOfSeries: { '@type': 'PodcastSeries', name: 'The Sector Debrief', '@id': SITE + '/#series' },
     associatedMedia: { '@type': 'VideoObject', name: ep.title, thumbnailUrl: ytThumb(ep.id),
       uploadDate: ep.date, duration: isoDuration(ep.duration),
-      embedUrl: `https://www.youtube.com/embed/${ep.id}`, description: stripTags(ep.description) },
+      embedUrl: `https://www.youtube.com/embed/${ep.id}`, description: stripTags(ep.description),
+      // schema.org allows transcript on a media object. Google's video docs do not
+      // list it, so this is secondary: the transcript's real home is the visible
+      // section below, which is what structured data is supposed to describe.
+      // Names are included here too. The machine-readable transcript is what an assistant or
+      // a search engine quotes from, so leaving the attribution out of it would strip exactly
+      // the part that makes a quote citable to a person.
+      ...(tr ? { transcript: tr.turns.map(t => (t.speaker ? t.speaker + ': ' : '')
+        + (t.paras && t.paras.length ? t.paras.join(' ') : (t.text || ''))).join('\n\n') } : {}) },
     actor: [
       ...(ep.guest ? [{ '@type': 'Person', name: ep.guest }] : []),
       ...hostRefs(),
@@ -470,6 +659,7 @@ function buildEpisodePage(ep) {
     <a class="doc-btn" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
     <a class="doc-btn" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
   </div>
+  ${tr ? transcriptHtml(ep, tr) : ''}
   ${essay ? `<div class="doc-next"><div><div class="lbl">Read the companion essay</div><div class="ttl">${esc(essay.title)}</div></div><a class="doc-btn primary" href="/blog/${essay.slug}/">Read the essay</a></div>` : ''}
   <div class="doc-rule"></div>
   <div class="doc-pager">${pagerLink(older, 'prev')}${pagerLink(newer, 'next')}</div>
@@ -667,7 +857,10 @@ function buildSitemap() {
   add(SITE + '/episodes/', TODAY, '0.9', 'weekly');
   add(SITE + '/blog/', TODAY, '0.9', 'weekly');
   add(SITE + '/about/', TODAY, '0.6', 'monthly');
-  EPISODES.forEach(ep => add(episodeUrl(ep), ep.date, '0.8', 'monthly'));
+  // an episode carrying a transcript was modified on the transcript date, not on the
+  // day the episode aired, so lastmod must reflect that or crawlers see it as stale
+  EPISODES.forEach(ep => add(episodeUrl(ep),
+    loadTranscript(ep.slug) ? TRANSCRIPT_DATE : ep.date, '0.8', 'monthly'));
   BLOG_POSTS.forEach(p => {
     const ep = p.epId ? EPISODES.find(e => e.id === p.epId) : null;
     add(blogUrl(p), ep ? ep.date : TODAY, '0.7', 'monthly');
@@ -679,7 +872,14 @@ function buildSitemap() {
 function writeFile(rel, content) {
   const full = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(full), { recursive: true });
-  fs.writeFileSync(full, content, 'utf8');
+  // Trailing whitespace is stripped here, at the one place everything is written, rather than
+  // hunted through the template literals that produce it. Nested templates indent their blank
+  // lines, so the generated HTML carried trailing spaces on many lines and every regenerated
+  // page failed `git diff --check`. Fixing it at the exit point means new templates cannot
+  // reintroduce it. Only whitespace at end of line is touched, never content, and <pre> is not
+  // used in these pages so no rendering depends on it.
+  const clean = content.replace(/[ \t]+$/gm, '');
+  fs.writeFileSync(full, clean, 'utf8');
   return rel;
 }
 
