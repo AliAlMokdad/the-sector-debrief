@@ -622,13 +622,14 @@ function buildEpisodePage(ep) {
   const podcastLD = {
     '@context': 'https://schema.org', '@type': 'PodcastEpisode',
     url, name: ep.title, episodeNumber: ep.n, datePublished: ep.date,
+    inLanguage: 'en-GB',
     // adding a transcript is a material content change, so the page reports when it changed
     ...(tr ? { dateModified: TRANSCRIPT_DATE } : {}),
     duration: isoDuration(ep.duration), description: stripTags(ep.description),
     image: ytThumb(ep.id),
     partOfSeries: { '@type': 'PodcastSeries', name: 'The Sector Debrief', '@id': SITE + '/#series' },
     associatedMedia: { '@type': 'VideoObject', name: ep.title, thumbnailUrl: ytThumb(ep.id),
-      uploadDate: ep.date, duration: isoDuration(ep.duration),
+      uploadDate: ep.date, duration: isoDuration(ep.duration), inLanguage: 'en-GB',
       embedUrl: `https://www.youtube.com/embed/${ep.id}`, description: stripTags(ep.description),
       // schema.org allows transcript on a media object. Google's video docs do not
       // list it, so this is secondary: the transcript's real home is the visible
