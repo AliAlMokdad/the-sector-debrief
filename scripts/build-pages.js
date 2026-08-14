@@ -171,16 +171,10 @@ function transcriptHtml(ep, tr) {
   const words = tr.turns.reduce((n, tn) => n
     + (tn.paras && tn.paras.length ? tn.paras.join(' ') : (tn.text || ''))
       .split(/\s+/).filter(Boolean).length, 0);
-  const namedCount = tr.turns.filter((tn) => tn.speaker).length;
   return `
   <section class="doc-transcript" id="transcript" aria-labelledby="transcript-h">
     <h2 id="transcript-h">Transcript</h2>
-    <p class="tr-note">About ${words.toLocaleString('en-GB')} words, from the episode's
-      captions, lightly edited: stumbles removed, names corrected, paragraphs added. No spoken
-      word was changed. ${named
-        ? `Speakers are named from the episode video, and ${namedCount} of ${tr.turns.length} turns could be established that way; the rest are left unnamed rather than guessed.`
-        : `This episode's recording does not show speaker names on screen, so who is speaking cannot be established from it, and rather than guess, no speaker is named here.`}
-      Every timestamp opens that moment in the video, which is the record.
+    <p class="tr-note">Every timestamp opens that moment in the video, which is the record.
       Spotted an error? <a href="/#contact">Tell us</a> and we will fix it.</p>
     <div class="tr-body">
       ${body}
