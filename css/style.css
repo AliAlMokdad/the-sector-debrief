@@ -650,7 +650,10 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
 
 .quotes-track {
   display: flex; gap: 32px;
-  animation: marquee 60s linear infinite;
+  /* 72s, not 60s: a fifth slower so the cards drift rather than travel, since a quote
+     the reader has not finished should not leave the screen. The phone tier replaces
+     this with a swipe carousel, so this duration is desktop only. */
+  animation: marquee 72s linear infinite;
   width: max-content;
 }
 .quote-card {
