@@ -2618,3 +2618,108 @@ body.nav-open { overflow: hidden; }
 .orb-cs:hover { background: #a52f1c; }
 .orb-pc:hover { background: #635a51; }
 .orb-pf:hover { background: #a04434; }
+
+/* ── FIND THE SHOW ON, home ────────────────────────────────────
+   Every listening platform under the latest episodes, each icon with its name.
+   Five columns at every width, because ten divides evenly by five and so the
+   two-row shape holds without ever stranding a tile in a short final row; three or
+   four columns cannot, and a lone tile in a final row reads as a mistake. No fixed
+   tile width, because a grid row already aligns the discs even when one label wraps
+   to two lines and its neighbours do not: a fixed-width version had "Apple Podcasts"
+   wrapping while its three neighbours sat on one line, and the row looked broken.
+   The icons and links are generated from the contact-section orbs, so the two
+   surfaces cannot drift apart; Grokipedia and the full playlist are excluded there
+   because neither is a place you listen. */
+.listen-colophon { margin: 76px auto 0; max-width: 760px; text-align: center; }
+.listen-label {
+  font-family: var(--font-body); font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-mute);
+  margin: 0 0 30px;
+  /* flanked by two hairlines: the house press-sheet device, and it gives the field
+     below a top edge so ten icons read as one unit rather than loose furniture.
+     Tracking and weight match .contact-platforms-label exactly, so the same block
+     on the contact section and here are visibly the same thing. */
+  display: flex; align-items: center; justify-content: center; gap: 15px;
+}
+.listen-label::before, .listen-label::after {
+  content: ''; height: 1px; width: clamp(26px, 7vw, 78px);
+  background: rgba(26, 22, 20, .18);
+}
+.listen-row {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 36px 12px; justify-items: center; align-items: start;
+}
+.listen-tile {
+  display: flex; flex-direction: column; align-items: center; gap: 11px;
+  text-decoration: none; padding: 0 2px;
+  animation: listenDrift 9s ease-in-out infinite;
+}
+/* the drift is spread across the columns and the second row runs a longer period, so
+   the field breathes unevenly instead of pulsing together as one block */
+.listen-tile:nth-child(5n+2) { animation-delay: -1.8s; }
+.listen-tile:nth-child(5n+3) { animation-delay: -3.6s; }
+.listen-tile:nth-child(5n+4) { animation-delay: -5.4s; }
+.listen-tile:nth-child(5n)   { animation-delay: -7.2s; }
+.listen-tile:nth-child(n+6)  { animation-duration: 10.5s; }
+@keyframes listenDrift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+.listen-disc {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--cream); flex-shrink: 0;
+  box-shadow: 0 5px 12px -5px rgba(74, 56, 38, .38);
+  transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-emphasis);
+}
+.listen-disc svg { width: 24px; height: 24px; }
+.listen-name {
+  font-family: var(--font-body); font-size: 11px; font-weight: 600;
+  letter-spacing: .045em; text-transform: uppercase; line-height: 1.45;
+  color: var(--ink-soft); transition: color .25s var(--ease-standard);
+}
+/* Focus first, and deliberately OUTSIDE the hover query below, so a keyboard user on a
+   touch-capable laptop keeps the affordance. */
+.listen-tile:focus-visible .listen-disc {
+  transform: translateY(-3px) scale(1.07);
+  box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
+}
+.listen-tile:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 5px; border-radius: 8px; }
+/* Hover is a mouse courtesy ONLY, gated exactly as the quotes marquee is at line ~711 of
+   this file. On touch, :hover sticks after a tap, so an ungated rule would leave the tapped
+   tile lifted, crimson and with its drift stopped once the visitor comes back from the
+   platform. That is the same defect the marquee already paid for. */
+@media (hover: hover) {
+  .listen-tile:hover { animation-play-state: paused; }
+  .listen-tile:hover .listen-disc {
+    transform: translateY(-3px) scale(1.07);
+    box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
+  }
+  .listen-tile:hover .listen-name { color: var(--crimson); }
+}
+/* the column count never changes, so the two-row shape holds everywhere; only the disc
+   and the type scale, and a longer label takes a second line inside its own cell, which
+   the grid row absorbs without breaking the disc alignment */
+@media (max-width: 860px) {
+  .listen-row { gap: 30px 8px; }
+  .listen-disc { width: 48px; height: 48px; }
+  .listen-disc svg { width: 22px; height: 22px; }
+  .listen-name { font-size: 10.5px; letter-spacing: .03em; }
+}
+@media (max-width: 620px) {
+  .listen-colophon { margin-top: 58px; }
+  .listen-label { gap: 11px; margin-bottom: 26px; }
+  .listen-row { gap: 26px 5px; }
+  .listen-disc { width: 44px; height: 44px; }
+  .listen-disc svg { width: 20px; height: 20px; }
+  /* 9px, not 9.5px: it is what makes the longest label fit inside an equal grid
+     track, which is what keeps the discs evenly spaced. See minmax(0,1fr) above. */
+  .listen-name { font-size: 9px; letter-spacing: 0; }
+}
+/* below the realistic phone floor five columns cannot hold a legible label, so it folds
+   to two; ten divides by two as well, so still no stranded tile */
+@media (max-width: 359px) {
+  .listen-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 10px; }
+  .listen-name { font-size: 10.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .listen-tile { animation: none; } }
