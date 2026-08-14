@@ -2630,7 +2630,7 @@ body.nav-open { overflow: hidden; }
    The icons and links are generated from the contact-section orbs, so the two
    surfaces cannot drift apart; Grokipedia and the full playlist are excluded there
    because neither is a place you listen. */
-.listen-colophon { margin: 76px auto 0; max-width: 760px; text-align: center; }
+.listen-colophon { margin: 108px auto 0; max-width: 760px; text-align: center; }
 .listen-label {
   font-family: var(--font-body); font-size: 11px; font-weight: 700;
   letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-mute);
@@ -2652,25 +2652,27 @@ body.nav-open { overflow: hidden; }
 .listen-tile {
   display: flex; flex-direction: column; align-items: center; gap: 11px;
   text-decoration: none; padding: 0 2px;
-  animation: listenDrift 9s ease-in-out infinite;
 }
-/* the drift is spread across the columns and the second row runs a longer period, so
-   the field breathes unevenly instead of pulsing together as one block */
-.listen-tile:nth-child(5n+2) { animation-delay: -1.8s; }
-.listen-tile:nth-child(5n+3) { animation-delay: -3.6s; }
-.listen-tile:nth-child(5n+4) { animation-delay: -5.4s; }
-.listen-tile:nth-child(5n)   { animation-delay: -7.2s; }
-.listen-tile:nth-child(n+6)  { animation-duration: 10.5s; }
+/* The drift sits on the DISC so the label below it stays set and the anchor box stays
+   still. Spread across the columns, with the second row on a longer period, so the
+   field breathes unevenly rather than pulsing together as one block. */
+.listen-tile:nth-child(5n+2) .listen-disc { animation-delay: -1.8s; }
+.listen-tile:nth-child(5n+3) .listen-disc { animation-delay: -3.6s; }
+.listen-tile:nth-child(5n+4) .listen-disc { animation-delay: -5.4s; }
+.listen-tile:nth-child(5n)   .listen-disc { animation-delay: -7.2s; }
+.listen-tile:nth-child(n+6)  .listen-disc { animation-duration: 10.5s; }
+/* animates `translate`, NOT `transform`, so the hover scale below cannot collide with it */
 @keyframes listenDrift {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-3px); }
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -3px; }
 }
 .listen-disc {
   width: 52px; height: 52px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--cream); flex-shrink: 0;
   box-shadow: 0 5px 12px -5px rgba(74, 56, 38, .38);
-  transition: transform .35s var(--ease-spring), box-shadow .35s var(--ease-emphasis);
+  animation: listenDrift 9s ease-in-out infinite;
+  transition: scale .35s var(--ease-spring), box-shadow .35s var(--ease-emphasis);
 }
 .listen-disc svg { width: 24px; height: 24px; }
 .listen-name {
@@ -2681,7 +2683,7 @@ body.nav-open { overflow: hidden; }
 /* Focus first, and deliberately OUTSIDE the hover query below, so a keyboard user on a
    touch-capable laptop keeps the affordance. */
 .listen-tile:focus-visible .listen-disc {
-  transform: translateY(-3px) scale(1.07);
+  scale: 1.09;
   box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
 }
 .listen-tile:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 5px; border-radius: 8px; }
@@ -2690,9 +2692,9 @@ body.nav-open { overflow: hidden; }
    tile lifted, crimson and with its drift stopped once the visitor comes back from the
    platform. That is the same defect the marquee already paid for. */
 @media (hover: hover) {
-  .listen-tile:hover { animation-play-state: paused; }
   .listen-tile:hover .listen-disc {
-    transform: translateY(-3px) scale(1.07);
+    animation-play-state: paused;
+    scale: 1.09;
     box-shadow: 0 14px 26px -8px rgba(74, 56, 38, .5);
   }
   .listen-tile:hover .listen-name { color: var(--crimson); }
@@ -2713,8 +2715,13 @@ body.nav-open { overflow: hidden; }
   .listen-disc { width: 44px; height: 44px; }
   .listen-disc svg { width: 20px; height: 20px; }
   /* 9px, not 9.5px: it is what makes the longest label fit inside an equal grid
-     track, which is what keeps the discs evenly spaced. See minmax(0,1fr) above. */
-  .listen-name { font-size: 9px; letter-spacing: 0; }
+     track, which is what keeps the discs evenly spaced. See minmax(0,1fr) above.
+     min-height reserves the second line that "Apple Podcasts" and "Listen Notes"
+     need, so the label band stays level instead of going ragged under align-start. */
+  .listen-name { font-size: 9px; letter-spacing: 0; min-height: 2.9em; }
+  /* the eyebrow must not shout louder than the names it introduces, which it did at
+     11px/2.5px tracking over 9px names */
+  .listen-label { font-size: 10px; letter-spacing: 1.8px; }
 }
 /* below the realistic phone floor five columns cannot hold a legible label, so it folds
    to two; ten divides by two as well, so still no stranded tile */
@@ -2722,4 +2729,4 @@ body.nav-open { overflow: hidden; }
   .listen-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 10px; }
   .listen-name { font-size: 10.5px; }
 }
-@media (prefers-reduced-motion: reduce) { .listen-tile { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .listen-disc { animation: none; } }
