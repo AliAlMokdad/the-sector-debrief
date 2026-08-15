@@ -165,3 +165,11 @@
     animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; scroll-behavior: auto !important;
   }
 }
+
+/* Laptop only. The JS above never builds this on a phone, so this rule exists for the one case it
+   cannot catch: a laptop window that was wide at load and is dragged narrow afterwards, when the
+   widget already exists in the DOM. It targets the root by ID so it wins without !important, and
+   the same query the script uses keeps the two in step. */
+@media (max-width: 899.98px), (hover: none), (pointer: coarse) {
+  #fc-root { display: none; }
+}

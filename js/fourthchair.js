@@ -261,6 +261,29 @@
     load();
   }
 
+  // The Fourth Chair is a laptop feature by decision, not by accident. It asks one considered
+  // question at a time and expects a typed reflection, which is a keyboard interaction; on a phone
+  // the launcher alone measured 235px, sixty percent of a 390px screen, sat permanently over the
+  // content and could not be dismissed, and the panel would then compete with the on-screen
+  // keyboard for what little was left.
+  //
+  // So on a phone it does not merely hide: it never builds. No element is created, no conversation
+  // is read from or written to storage, and the Worker is never called. A phone visitor downloads
+  // the file and runs none of it.
+  //
+  // The test is width AND pointer, not width alone. A phone in landscape can clear a width
+  // threshold while still being a touch device with no keyboard, and `pointer: fine` is what
+  // actually separates a trackpad or mouse from a fingertip. 900px keeps it off phones and
+  // portrait tablets while every laptop clears it comfortably.
+  function isLaptop() {
+    try {
+      return window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches;
+    } catch (e) {
+      return true;   // a browser too old for matchMedia gets the widget rather than nothing
+    }
+  }
+  if (!isLaptop()) return;
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", build);
   } else {
