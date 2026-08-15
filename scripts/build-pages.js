@@ -26,7 +26,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const { EPISODES, BLOG_POSTS, HOSTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
+const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
 const ASSET_V = '2026-07-13a';                 // cache-bust for /css and shared assets
@@ -603,6 +603,11 @@ const DOC_CSS = `
 .doc-host .role{font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--crimson);margin-bottom:11px}
 .doc-host p{font-size:15.5px;line-height:1.62;color:var(--ink-soft);margin:0 0 14px}
 .doc-host a{font-weight:600;font-size:14px;color:var(--cobalt-deep);text-decoration:none}
+.doc-host a + a{margin-left:16px}
+.doc-guests-head{max-width:900px;margin:14px auto 0;padding:0 24px}
+.doc-guests-head h2{font-family:var(--fd);font-size:26px;margin:0 0 4px;color:var(--ink)}
+.doc-guests-head p{font-size:14.5px;color:var(--ink-mute);margin:0}
+.doc-guests{padding-top:16px}
 .doc-host a:hover{text-decoration:underline}
 :target{scroll-margin-top:83px}
 /* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 189px at 390, where the brand and
@@ -880,6 +885,26 @@ function buildAboutPage() {
         <a href="${esc(h.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn &rarr;</a>
       </div>
     </article>`).join('');
+  // Guests, in their own block under the hosts, using the same card markup so the styling matches.
+  // The episode each appeared on is linked, which keeps the association factual rather than
+  // implying an ongoing role in the show.
+  //
+  // Deliberately NO schema.org Person records for guests. The host records make this page the
+  // canonical entity page for the people who RUN the show; minting structured identity claims,
+  // jobTitle or knowsAbout for people who are not the site owners would assert more about them
+  // than this page has any business asserting.
+  const guests = (GUESTS || []).map(g => `
+    <article class="doc-host doc-guest" id="${esc(g.slug)}">
+      <img src="/${esc(g.photo)}" alt="${esc(g.name)}" width="${g.photoW || 440}" height="${g.photoH || 440}" loading="lazy"/>
+      <div>
+        <h2>${esc(g.name)}</h2>
+        <div class="role">${esc(g.role)}</div>
+        <p>${esc(g.bio)}</p>
+        <a href="/episodes/${esc(g.epSlug)}/">Episode ${g.epN} &rarr;</a>
+        <a href="${esc(g.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn &rarr;</a>
+      </div>
+    </article>`).join('');
+
   // Full Person records (senior, accurate) so the About page is the canonical
   // entity page Google uses to understand who is behind the show.
   const persons = HOSTS.map(h => {
@@ -902,7 +927,9 @@ function buildAboutPage() {
   const body = `${crumbHtml(crumbs)}
 <div class="doc-hub-head"><div class="doc-eyebrow">About</div><h1>Three people who ran out of patience with the official version</h1>
 <p>The Sector Debrief is a conversation between three people who have spent a long time inside humanitarian and development work. No polished lines. No scripted answers. The conversations that happen when the microphones are off.</p></div>
-<div class="doc-hosts">${hosts}</div>`;
+<div class="doc-hosts">${hosts}</div>
+${guests ? `<div class="doc-guests-head"><h2>Guests</h2><p>People who joined a conversation.</p></div>
+<div class="doc-hosts doc-guests">${guests}</div>` : ''}`;
   return shell({
     title: 'About the hosts | The Sector Debrief',
     desc: 'Meet the hosts of The Sector Debrief: Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay. Honest conversations on humanitarian and development leadership.',

@@ -2767,3 +2767,28 @@ body.nav-open { overflow: hidden; }
   .listen-disc { animation: none; }
   .listen-disc::after, .listen-name::after { transition: none; }
 }
+
+/* ── GUESTS on the About page ────────────────────────────────
+   Guest cards carry the host classes so they inherit the whole card treatment, and sit in their
+   own grid so the .host:nth-child accent rules apply per group. The one thing that must NOT carry
+   over is the per-host object-position: those values are tuned to each host's own crop, whereas the
+   guest stills are already centred, so they are reset here. */
+.guests-head { max-width: 1100px; margin: 78px auto 24px; padding: 0 24px; text-align: center; }
+.guests-h {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -.5px; color: var(--ink); margin: 0 0 6px;
+}
+.guests-sub { font-size: 15px; color: var(--ink-mute); margin: 0; }
+/* The ID is deliberate. `.host:nth-child(N) .host-avatar-photo img` scores (0,3,1) and sets a
+   per-host object-position tuned to each host's own crop; a `.guest ...` selector scores
+   (0,2,1) and loses, which left the guest portraits pulled up to 26-32% and cropping their
+   faces. `#guests-grid` scores (1,1,1) and wins cleanly without !important. */
+#guests-grid .host-avatar-photo img { object-position: center center; }
+.guest-ep {
+  display: inline-block; margin: 0 0 10px;
+  font-family: var(--font-body); font-size: 12.5px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-mute);
+  text-decoration: none; border-bottom: 1px solid rgba(26,22,20,.2); padding-bottom: 1px;
+}
+.guest-ep:hover, .guest-ep:focus-visible { color: var(--crimson); border-bottom-color: var(--crimson); }
+@media (max-width: 640px) { .guests-head { margin-top: 56px; } }

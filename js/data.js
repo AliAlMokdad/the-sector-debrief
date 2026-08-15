@@ -939,6 +939,54 @@ const HOSTS = [
   }
 ];
 
+// ─── Guests ──────────────────────────────────────────────
+// People who joined a conversation, listed in the order they appeared.
+//
+// Every LinkedIn link here was verified against at least two independent public signals before
+// being published, because sending readers to the wrong person of the same name is a real harm,
+// not a broken link: Sabrina's profile names The Risk Collaborative, the role the episode gives
+// her; Sofia's is corroborated by CARE International's own site, her Wikipedia entry, and World
+// Bank and European Humanitarian Forum speaker pages; Aisha's matches the Gambia and Denmark
+// connections and the development career she describes in her own words on the episode.
+//
+// The bios describe what each guest brought to their conversation and the roles they are publicly
+// known for. They deliberately stop short of asserting current job titles that are not verifiable
+// from a public source, and nothing here is inferred from the transcript beyond what was said on
+// camera.
+//
+// Photographs are stills from the episodes themselves, taken at a second where the person is
+// provably on screen: for Sofia and Aisha the video burns their name into the frame, and Sabrina's
+// come from her own speaking turns and were confirmed by eye.
+const GUESTS = [
+  {
+    name: 'Sofia Sprechmann Sineiro',
+    slug: 'sofia-sprechmann-sineiro',
+    role: 'Former Secretary General, CARE International',
+    bio: 'Spent three decades at CARE International, latterly as its Secretary General, and makes the case for locally led development as a practice rather than a term. On the show she argued that idealism is not naivety, and that authenticity and institutional survival are not the opposites the sector often assumes.',
+    linkedin: 'https://www.linkedin.com/in/sofia-sprechmann-72794019',
+    photo: 'assets/guest-sofia.jpg', photoW: 440, photoH: 440,
+    epN: 4, epSlug: 'ceo-perspective-urgent-patience'
+  },
+  {
+    name: 'Aisha Tambajang',
+    slug: 'aisha-tambajang',
+    role: 'Humanitarian and development practitioner',
+    bio: 'Works across international development between the Gambia and Denmark, and treats identity and positionality as practical questions rather than abstract ones. On the show she unpacked code switching, ancestral responsibility, and the difference between rushing to fix something and staying curious enough to solve it.',
+    linkedin: 'https://www.linkedin.com/in/aisha-tambajang-81129b1b0/',
+    photo: 'assets/guest-aisha.jpg', photoW: 440, photoH: 440,
+    epN: 5, epSlug: 'identity-and-positionality'
+  },
+  {
+    name: 'Sabrina Segal',
+    slug: 'sabrina-segal',
+    role: 'Director, The Risk Collaborative',
+    bio: 'Works on integrity, risk and compliance across the third sector, having spent years in humanitarian and development roles before that. On the show she argued that risk is the effect of uncertainty on objectives, which makes it opportunity as much as threat, and pressed for risk sharing instead of pushing risk down to the least resourced partner.',
+    linkedin: 'https://uk.linkedin.com/in/smsegal',
+    photo: 'assets/guest-sabrina.jpg', photoW: 440, photoH: 440,
+    epN: 8, epSlug: 'rethinking-risk-management'
+  }
+];
+
 // Real channel stats · updated from the YouTube channel
 // Total Views as of latest sync (2026-08-14): 87,857
 const STATS = {
@@ -951,5 +999,5 @@ const STATS = {
 // In Node (sync script + tests), this lets `require('./data.js')`
 // pull the live data. Doesn't affect runtime behaviour at all.
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PLATFORMS, EPISODES, QUOTES, BLOG_POSTS, TRANSLATIONS, HOSTS, STATS };
+  module.exports = { PLATFORMS, EPISODES, QUOTES, BLOG_POSTS, TRANSLATIONS, HOSTS, GUESTS, STATS };
 }

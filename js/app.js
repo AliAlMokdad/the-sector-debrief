@@ -625,6 +625,30 @@ function renderAbout() {
       </a>
     </article>
   `).join('');
+
+  // Guests reuse the host card markup exactly, so they inherit every host style. They sit in their
+  // own grid because .host:nth-child(1..3) drives the accent bar, the avatar colour and a
+  // per-photo object-position; running guests on from the hosts in one grid would push them past
+  // those rules entirely.
+  const gGrid = $('#guests-grid');
+  if (gGrid && typeof GUESTS !== 'undefined') {
+    gGrid.innerHTML = GUESTS.map(g => `
+    <article class="host guest" id="${escAttr(g.slug)}">
+      <div class="host-avatar host-avatar-photo">
+        <img src="${escAttr(g.photo)}" alt="${escAttr(g.name)}" width="${g.photoW || 440}" height="${g.photoH || 440}" decoding="async" loading="lazy"/>
+      </div>
+      <h3 class="host-name">${escAttr(g.name)}</h3>
+      <div class="host-role">${escAttr(g.role)}</div>
+      <p class="host-bio">${escAttr(g.bio)}</p>
+      <a class="guest-ep" href="/episodes/${escAttr(g.epSlug)}/">Episode ${escAttr(String(g.epN))} &rarr;</a>
+      <a class="host-linkedin" href="${escAttr(safeUrl(g.linkedin))}" target="_blank" rel="noopener noreferrer">
+        <span class="li-mark">in</span>
+        <span>Connect on LinkedIn</span>
+        <span class="li-arrow">→</span>
+      </a>
+    </article>
+  `).join('');
+  }
 }
 
 // Host anchor: when the URL hash matches a host slug (e.g. #ali-al-mokdad),
