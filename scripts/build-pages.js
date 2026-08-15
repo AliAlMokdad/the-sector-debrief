@@ -617,9 +617,9 @@ const DOC_CSS = `
 .doc-guests-band::after{bottom:0}
 .doc-guests-head{max-width:900px;margin:40px auto 0;padding:0 24px;text-align:center}
 .doc-guests-head::before{content:'';display:block;width:32px;height:2px;background:var(--crimson);margin:0 auto 16px}
-.doc-guests-head h2{font-family:var(--fd);font-weight:600;font-size:clamp(28px,3.4vw,40px);line-height:1.05;letter-spacing:-.7px;margin:0 0 6px;color:var(--ink)}
+.doc-guests-head h2{font-family:var(--fd);font-weight:600;font-size:clamp(32px,4.2vw,50px);line-height:1.03;letter-spacing:-.7px;margin:0 0 6px;color:var(--ink)}
 .doc-guests-head p{margin:0}
-.doc-guests-head p em{font-family:var(--fd);font-style:italic;font-weight:500;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.2px;color:var(--cobalt)}
+.doc-guests-head p em{font-family:var(--fd);font-style:italic;font-weight:500;font-size:clamp(17px,2vw,23px);line-height:1.25;letter-spacing:-.2px;color:var(--cobalt)}
 .doc-guests{padding-top:18px}
 .doc-host a:hover{text-decoration:underline}
 :target{scroll-margin-top:83px}
@@ -942,7 +942,7 @@ function buildAboutPage() {
 <p>The Sector Debrief is a conversation between three people who have spent a long time inside humanitarian and development work. No polished lines. No scripted answers. The conversations that happen when the microphones are off.</p></div>
 <div class="doc-hosts">${hosts}</div>
 ${guests ? `<div class="doc-guests-band">
-<div class="doc-guests-head"><h2>Guests</h2><p><em>Leaders</em></p></div>
+<div class="doc-guests-head"><h2>Guests</h2><p><em>Leaders who joined a conversation</em></p></div>
 <div class="doc-hosts doc-guests">${guests}</div></div>` : ''}`;
   return shell({
     title: 'About the hosts | The Sector Debrief',
