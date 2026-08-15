@@ -604,10 +604,23 @@ const DOC_CSS = `
 .doc-host p{font-size:15.5px;line-height:1.62;color:var(--ink-soft);margin:0 0 14px}
 .doc-host a{font-weight:600;font-size:14px;color:var(--cobalt-deep);text-decoration:none}
 .doc-host a + a{margin-left:16px}
-.doc-guests-head{max-width:900px;margin:14px auto 0;padding:0 24px}
-.doc-guests-head h2{font-family:var(--fd);font-size:26px;margin:0 0 4px;color:var(--ink)}
-.doc-guests-head p{font-size:14.5px;color:var(--ink-mute);margin:0}
-.doc-guests{padding-top:16px}
+/* The band gives the guests their own ground using the site's existing devices rather than a new
+   visual language: a warm paper tint with two soft radial blooms, hairlines instead of a hard
+   edge, the 32x2 crimson bar that marks a section elsewhere, and the display serif paired with an
+   italic accent. */
+.doc-guests-band{position:relative;margin-top:26px;padding:6px 0 22px;
+  background:radial-gradient(52% 46% at 18% 12%,rgba(44,91,170,.07),transparent 70%),
+             radial-gradient(48% 44% at 84% 78%,rgba(232,184,44,.10),transparent 72%),
+             linear-gradient(180deg,rgba(26,22,20,.028),rgba(26,22,20,.012))}
+.doc-guests-band::before,.doc-guests-band::after{content:'';position:absolute;left:0;right:0;height:1px;background:rgba(26,22,20,.10)}
+.doc-guests-band::before{top:0}
+.doc-guests-band::after{bottom:0}
+.doc-guests-head{max-width:900px;margin:40px auto 0;padding:0 24px;text-align:center}
+.doc-guests-head::before{content:'';display:block;width:32px;height:2px;background:var(--crimson);margin:0 auto 16px}
+.doc-guests-head h2{font-family:var(--fd);font-weight:600;font-size:clamp(28px,3.4vw,40px);line-height:1.05;letter-spacing:-.7px;margin:0 0 6px;color:var(--ink)}
+.doc-guests-head p{margin:0}
+.doc-guests-head p em{font-family:var(--fd);font-style:italic;font-weight:500;font-size:clamp(19px,2.2vw,26px);letter-spacing:-.2px;color:var(--cobalt)}
+.doc-guests{padding-top:18px}
 .doc-host a:hover{text-decoration:underline}
 :target{scroll-margin-top:83px}
 /* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 189px at 390, where the brand and
@@ -928,8 +941,9 @@ function buildAboutPage() {
 <div class="doc-hub-head"><div class="doc-eyebrow">About</div><h1>Three people who ran out of patience with the official version</h1>
 <p>The Sector Debrief is a conversation between three people who have spent a long time inside humanitarian and development work. No polished lines. No scripted answers. The conversations that happen when the microphones are off.</p></div>
 <div class="doc-hosts">${hosts}</div>
-${guests ? `<div class="doc-guests-head"><h2>Guests</h2><p>People who joined a conversation.</p></div>
-<div class="doc-hosts doc-guests">${guests}</div>` : ''}`;
+${guests ? `<div class="doc-guests-band">
+<div class="doc-guests-head"><h2>Guests</h2><p><em>Leaders</em></p></div>
+<div class="doc-hosts doc-guests">${guests}</div></div>` : ''}`;
   return shell({
     title: 'About the hosts | The Sector Debrief',
     desc: 'Meet the hosts of The Sector Debrief: Ali Al Mokdad, Kim Kucinskas, and Thomas Jepson-Lay. Honest conversations on humanitarian and development leadership.',

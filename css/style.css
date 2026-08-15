@@ -2771,18 +2771,52 @@ body.nav-open { overflow: hidden; }
 /* ── GUESTS on the About page ────────────────────────────────
    Guest cards carry the host classes so they inherit the whole card treatment, and sit in their
    own grid so the .host:nth-child accent rules apply per group. The one thing that must NOT carry
-   over is the per-host object-position: those values are tuned to each host's own crop, whereas the
-   guest stills are already centred, so they are reset here. */
-.guests-head { max-width: 1100px; margin: 78px auto 24px; padding: 0 24px; text-align: center; }
+   over is the per-host object-position, which is tuned to each host's own crop; the guest stills
+   are centred on the detected face, so it is reset below.
+
+   The band gives the group its own ground without inventing a new visual language: a warm paper
+   tint and two soft radial blooms in the house accents, the same device the manifesto and the
+   quiet block already use, plus the 32x2 crimson bar that marks a section everywhere else on the
+   site, and the display serif with an italic accent that is the site's signature pairing. */
+.guests-band {
+  position: relative; margin-top: 34px; padding: 8px 0 26px;
+  background:
+    radial-gradient(52% 46% at 18% 12%, rgba(44, 91, 170, .07), transparent 70%),
+    radial-gradient(48% 44% at 84% 78%, rgba(232, 184, 44, .10), transparent 72%),
+    linear-gradient(180deg, rgba(26, 22, 20, .028), rgba(26, 22, 20, .012));
+}
+/* hairlines top and bottom rather than a hard edge, so the band sits on the paper
+   instead of looking like a pasted panel */
+.guests-band::before, .guests-band::after {
+  content: ''; position: absolute; left: 0; right: 0; height: 1px;
+  background: rgba(26, 22, 20, .10);
+}
+.guests-band::before { top: 0; }
+.guests-band::after { bottom: 0; }
+.guests-head {
+  position: relative; max-width: 1100px; margin: 54px auto 30px;
+  padding: 0 24px; text-align: center;
+}
+.guests-head::before {
+  content: ''; display: block; width: 32px; height: 2px;
+  background: var(--crimson); margin: 0 auto 20px;
+}
 .guests-h {
   font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(26px, 3.2vw, 38px); letter-spacing: -.5px; color: var(--ink); margin: 0 0 6px;
+  font-size: clamp(30px, 3.8vw, 46px); line-height: 1.04;
+  letter-spacing: -.8px; color: var(--ink); margin: 0 0 8px;
 }
-.guests-sub { font-size: 15px; color: var(--ink-mute); margin: 0; }
+.guests-sub { margin: 0; }
+.guests-sub em {
+  font-family: var(--font-display); font-style: italic; font-weight: 500;
+  font-size: clamp(20px, 2.4vw, 29px); line-height: 1.1;
+  letter-spacing: -.2px; color: var(--cobalt);
+}
+.guests-grid { position: relative; }
 /* The ID is deliberate. `.host:nth-child(N) .host-avatar-photo img` scores (0,3,1) and sets a
-   per-host object-position tuned to each host's own crop; a `.guest ...` selector scores
-   (0,2,1) and loses, which left the guest portraits pulled up to 26-32% and cropping their
-   faces. `#guests-grid` scores (1,1,1) and wins cleanly without !important. */
+   per-host object-position tuned to each host's own crop; a `.guest ...` selector scores (0,2,1)
+   and loses, which left the guest portraits pulled up to 26-32% and cropping their faces.
+   `#guests-grid` scores (1,1,1) and wins cleanly without !important. */
 #guests-grid .host-avatar-photo img { object-position: center center; }
 .guest-ep {
   display: inline-block; margin: 0 0 10px;
@@ -2791,4 +2825,7 @@ body.nav-open { overflow: hidden; }
   text-decoration: none; border-bottom: 1px solid rgba(26,22,20,.2); padding-bottom: 1px;
 }
 .guest-ep:hover, .guest-ep:focus-visible { color: var(--crimson); border-bottom-color: var(--crimson); }
-@media (max-width: 640px) { .guests-head { margin-top: 56px; } }
+@media (max-width: 640px) {
+  .guests-head { margin-top: 42px; }
+  .guests-band { margin-top: 24px; }
+}
