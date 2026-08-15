@@ -275,18 +275,48 @@
   // threshold while still being a touch device with no keyboard, and `pointer: fine` is what
   // actually separates a trackpad or mouse from a fingertip. 900px keeps it off phones and
   // portrait tablets while every laptop clears it comfortably.
-  function isLaptop() {
-    try {
-      return window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)").matches;
-    } catch (e) {
-      return true;   // a browser too old for matchMedia gets the widget rather than nothing
-    }
-  }
-  if (!isLaptop()) return;
+  //
+  // It is a LIVE test, not a single reading taken at load. Two things depend on that. A laptop
+  // window that starts narrow and is maximised afterwards has to receive the widget without a
+  // reload. And one that starts wide and is dragged narrow has to stop BEHAVING as though its
+  // panel were open, because the stylesheet only hides it: the panel's Escape handler sits on the
+  // document alongside the site's own modal handler, and a stale open panel would keep answering
+  // that key and pull focus away from whatever the modal had just restored it to.
+  var LAPTOP = "(min-width: 900px) and (hover: hover) and (pointer: fine)";
+  var mq = null;
+  try { mq = window.matchMedia(LAPTOP); } catch (e) {}
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", build);
-  } else {
+  function laptop() { return mq ? mq.matches : true; }  // no matchMedia: the widget, not nothing
+
+  function boot() {
+    if (els.root) return;                 // built once, never twice
+    if (!document.body) {                 // script reached before the body it appends to
+      document.addEventListener("DOMContentLoaded", boot, { once: true });
+      return;
+    }
     build();
   }
+
+  // Leaving the laptop range. The stylesheet takes care of the pixels; this puts the state back in
+  // step, and moves focus only if focus was actually inside the widget being hidden.
+  function collapse() {
+    if (!els.root) return;
+    var hadFocus = els.root.contains(document.activeElement);
+    clearTimeout(focusTimer);
+    els.panel.classList.remove("fc-open");
+    els.panel.setAttribute("aria-hidden", "true");
+    els.fab.style.display = "inline-flex";
+    if (hadFocus && lastFocus && lastFocus.focus &&
+        document.contains(lastFocus) && !els.root.contains(lastFocus)) {
+      lastFocus.focus();
+    }
+  }
+
+  function sync() { if (laptop()) boot(); else collapse(); }
+
+  if (mq) {
+    if (mq.addEventListener) mq.addEventListener("change", sync);
+    else if (mq.addListener) mq.addListener(sync);   // Safari below 14
+  }
+  sync();
 })();

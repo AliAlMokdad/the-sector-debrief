@@ -166,10 +166,15 @@
   }
 }
 
-/* Laptop only. The JS above never builds this on a phone, so this rule exists for the one case it
-   cannot catch: a laptop window that was wide at load and is dragged narrow afterwards, when the
-   widget already exists in the DOM. It targets the root by ID so it wins without !important, and
-   the same query the script uses keeps the two in step. */
-@media (max-width: 899.98px), (hover: none), (pointer: coarse) {
+/* Laptop only. The script never builds this on a phone, so this rule covers the case it cannot:
+   a laptop window that was wide at load and is dragged narrow afterwards, when the widget already
+   exists in the DOM. It targets the root by ID so it wins without !important.
+
+   This is the EXACT logical negation of the script's test, written as `not all and (min-width)`
+   rather than a max-width figure. Negating a min-width by subtracting a hundredth of a pixel
+   leaves a band between the two numbers where neither rule applies, and fractional viewport widths
+   are ordinary on a display running at 125 or 150 percent scaling, so that band is reachable.
+   Negating the query itself cannot drift. */
+@media not all and (min-width: 900px), (hover: none), (pointer: coarse) {
   #fc-root { display: none; }
 }
