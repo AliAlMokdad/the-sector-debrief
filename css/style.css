@@ -1464,6 +1464,7 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   margin: 0 0 14px 0;
 }
 .mark-text:last-child { margin-bottom: 0; }
+.mark-invite { color: var(--ink); }
 .mark-text .brand-tm { font-size: 0.55em; vertical-align: super; line-height: 0; }
 @media (max-width: 640px) {
   .mark-note { margin-top: 30px; }
