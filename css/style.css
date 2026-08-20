@@ -1440,6 +1440,35 @@ section { padding: 100px 32px; max-width: var(--max-w); margin: 0 auto; }
   .quiet-block { margin-top: 32px; padding: 36px 28px; }
 }
 
+/* THE MARK - provenance and trade mark notice under the profile plates.
+   A colophon, not a panel: short rule, small type, recessive colour, so it
+   states the record without competing with the manifesto or the quiet block. */
+.mark-note { margin-top: 46px; }
+.mark-note-inner { max-width: 720px; }
+.mark-rule {
+  display: block; width: 46px; height: 2px;
+  background: var(--crimson);
+  margin-bottom: 18px;
+}
+.mark-eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--ink-mute);
+  margin: 0 0 16px 0;
+}
+.mark-text {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.15vw, 14.5px);
+  line-height: 1.8; font-weight: 400;
+  color: var(--ink-soft);
+  margin: 0 0 14px 0;
+}
+.mark-text:last-child { margin-bottom: 0; }
+.mark-text .brand-tm { font-size: 0.55em; vertical-align: super; line-height: 0; }
+@media (max-width: 640px) {
+  .mark-note { margin-top: 30px; }
+}
+
 /* ═══════════════════════════════════════════
    CONTACT
    ═══════════════════════════════════════════ */
