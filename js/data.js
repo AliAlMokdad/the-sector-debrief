@@ -12,8 +12,20 @@ const PLATFORMS = {
   rss:      'https://www.youtube.com/feeds/videos.xml?playlist_id=PLOGUm1NuLP3RWdEXeMca2w3aU6tMoEI7L'
 };
 
-// All 8 episodes from the playlist (newest first)
+// All episodes from the playlist (newest first)
 const EPISODES = [
+  {
+    n: 10,
+    id: 'zr4ZHoHXXrg',
+    slug: 'inside-the-impact-alliance',
+    transcript: true,
+    title: 'Inside the Impact Alliance',
+    guest: 'Vanessa Self',
+    date: '2026-08-28',
+    duration: '64 min',
+    description: 'A conversation with Vanessa Self, Project Director of the Impact Alliance, the collaboration between CARE, Mercy Corps, and Save the Children created when three CEOs came together aiming for deeper collaboration and efficiency. Vanessa Self is honest about the initiative: collaboration is slower, harder, and less intuitive than the slogans suggest. And honest about what it opened: while the sector talked about what to cut, this became a space for what could be. She walks through the three workstreams that survived the testing of 81 possibilities: collaborative procurement, with potential savings she puts at around ten million dollars over the coming year, a community insights engine she calls accountability, but not as you know it, and scale works, which takes interventions that already have an evidence base and helps governments scale them. Along the way, partnership mapping revealed the organisations share only around 2% of their partners. Ali Al Mokdad draws the line between efficiency and transformation, Kim Kucinskas presses on how change happens in a system designed to keep organisations fragmented, and Thomas Jepson-Lay calls the Alliance a canary in the coal mine. And when the conversation ends, the microphones stay on: Kim, Thomas, and Ali stay behind for a Hot Debrief on what the Impact Alliance really signals about how willing the sector is to change.',
+    themes: ['Collaboration', 'INGOs', 'Transformation']
+  },
   {
     n: 9,
     id: 'KPgZ2FhQpb4',
@@ -166,7 +178,9 @@ const QUOTES = [
   { text: "Those who came before us set the foundation. Our job is to clear out the outdated governance and the nonsense, so the people who come after us can focus on the real problems. This is our generational fight.", source: "Ali Al Mokdad",   color: "q-crimson" },
   { text: "We need to distinguish between purpose and task. The role should not disappear. The purpose should remain. Some tasks, yes, they have to disappear.",                                                                     source: "Ali Al Mokdad",               color: "q-mustard" },
   { text: "I'd much rather someone who asks a good question, or admits they don't know what they're doing, than someone who arrives with a five-point plan.", source: "Kim Kucinskas",           color: "q-forest" },
-  { text: "The guise of familiarity gets put forward as certainty, and that's just managed decline.",                            source: "Thomas Jepson-Lay",           color: "q-rust" }
+  { text: "The guise of familiarity gets put forward as certainty, and that's just managed decline.",                            source: "Thomas Jepson-Lay",           color: "q-rust" },
+  { text: "We are practising our way into what the future will look like. We don't claim to have it all worked out, but we do promise to be transparent about what we're learning.", source: "Vanessa Self",  color: "q-cobalt" },
+  { text: "We have to distinguish between efficiency and transformation. I'm not talking only about organisational transformation. I'm talking about the ecosystem.",               source: "Ali Al Mokdad", color: "q-crimson" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
@@ -243,6 +257,80 @@ const BLOG_POSTS = [
 <p>If you got this far and you have not clicked the Pause Button yet, scroll back up and try it. Read the question that comes up. Sit with it for one minute before you do anything else.</p>
 
 <p>That minute is the actual product on this site. Everything else is wrapping.</p>`
+  },
+  {
+    epId: 'zr4ZHoHXXrg',
+    epN: 10,
+    slug: 'practising-the-future',
+    title: 'Practising the Future: Inside the Impact Alliance',
+    excerpt: 'Notes from our conversation with Vanessa Self, Project Director of the Impact Alliance. Three INGOs decided to stop theorising about the future of the sector and practise it instead, and she was honest about how much harder that is than the slogans suggest.',
+    readTime: '8 min',
+    reflections: [
+      "Vanessa describes a funding shock that became a space for what could be possible. Look at the hardest constraint your organisation faces right now. Is anyone using it as a licence to redesign, or only as a reason to cut?",
+      "The Alliance found its three workstreams by testing a list of 81 possibilities against reality. What is your organisation's version of the 81, and what would it take to be as honest about which three survive contact?",
+      "Ali distinguishes efficiency from transformation: saving time and cost is achievable, changing the ecosystem is the harder question. Of the change efforts you are part of, which are genuinely the second, and which are the first wearing the second's language?",
+      "The partnership mapping revealed the three organisations share only around 2% of their partners. If you ran the same exercise with your closest peers, what do you expect it would show, and what would you do with the answer?",
+      "Kim argues it is not any single actor's job to fix the sector, but everyone's job within their sphere of control. Name the one thing inside your own sphere of control that you have been waiting for someone else to move first on."
+    ],
+    body: `<p>The Impact Alliance is the collaboration between CARE, Mercy Corps, and Save the Children, and this episode is the first time we have had it in the room. Vanessa Self is its Project Director, after fifteen years at Save the Children and earlier food security work with CARE in the Sahel, and she joined Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad for a conversation that was less a pitch than an honest progress report. Then she left, the microphones stayed on, and the three of us said what we actually thought. Both halves are in the episode, and both are worth your time.</p>
+
+<h2>A Space for What Could Be</h2>
+
+<p>The origin story matters because of when it happened. By Vanessa's telling, the three CEOs came together in what she has come to understand as a moment of solidarity, in the middle of the funding shock that hit the heart of their organisations. This was not an external crisis their teams were responding to on behalf of others. Colleagues were managing it and internalising it themselves, and asking people in the middle of that to collaborate is, in her words, a challenging one. What was created out of it is the part that stayed with us.</p>
+
+<blockquote>This became a space where we talked about what could be possible, where we were creative and ambitious.</blockquote>
+
+<p>While most of the sector's conversations were about what to stop, what to cut back, what to no longer do, this one became a space for what could be. She was equally honest about how the idea probably first landed with stressed, anxious, grieving staff: like a lead balloon. And when Ali shared the news in his own circles, the question that kept coming back was, is this a merger? Vanessa's answer, for the record, is no. Each organisation retains its own strategy, its own identity, its own history and values.</p>
+
+<h2>Practising, Not Theorising</h2>
+
+<p>Vanessa opened her account with what she called a generous helping of humility and self-awareness, and it set the register for the whole conversation. She is not claiming the Alliance has it sorted. Collaboration is slower, harder, and less intuitive than working alone, particularly for overstretched teams, and there is internal resistance to explain, not deny.</p>
+
+<blockquote>We are practising our way into what the future will look like.</blockquote>
+
+<p>That line is the episode in one sentence. The whole sector is talking about the future of INGOs. Instead of theorising it, three CEOs decided to just do it, to give it a go, with trial and error in the open and a promise to be transparent about what they learn. Whatever you think of the Alliance's chances, that is a different posture from another strategy paper.</p>
+
+<h2>From 81 Possibilities to Three Workstreams</h2>
+
+<p>The discipline behind the ambition is a list. By Vanessa's account, the Alliance began with 81 possible things it could do together and tested them down to the three that showed real promise. Collaborative procurement is the first: procurement is the sector's largest spend on third parties, and she puts the potential savings at around ten million dollars over the coming year on the spend categories piloted so far, with Plan International also part of that workstream. The second is a community insights engine, which she describes as accountability, but not as you know it: instead of asking communities how a project is doing, it asks how they are doing, and it is being built primarily as something useful to local organisations. The third is scale works, which takes interventions that already have an evidence base but have never been taken to scale, such as anticipatory cash before a crisis, and supports governments to scale them. A lighter piece of work on partner due diligence produced the number that surprised us most: the three organisations share only around 2% of their partners, which punctures the assumption that the big INGOs are all working with the same people.</p>
+
+<p>Thomas told a story from his Save the Children years that makes the procurement case better than any slide. After a multi-million pound emergency award, the largest his own organisation had ever handled, they went to the manufacturers of therapeutic food and were told to wait, because UNICEF and WFP were in the queue with orders that added zeros to theirs. What was for them a phenomenally large procurement was small fry in the pipeline. Buying together is not a technicality. It is the difference between being a customer suppliers wait for and one who waits.</p>
+
+<h2>Efficiency Is Not Transformation</h2>
+
+<p>Ali's reflection gave the episode its sharpest distinction, and it is the one we would ask you to carry out of it.</p>
+
+<blockquote>We have to distinguish between efficiency and transformation.</blockquote>
+
+<p>Saving time and cost through shared processes, tools, and structures is achievable, and worth doing. The harder question is transformation: not of one organisation but of the ecosystem, at country level, regional level, and headquarters level. If the Alliance banks its efficiency wins and stops, it will have been a good procurement project. The bigger question is whether it can start a wave that moves the wider system. Vanessa's answer was direct: the Alliance does not see it as sequential, efficiency first and change later. Localisation, she argued, is at the heart of each workstream, with community insights being built primarily as something useful to local organisations rather than as an input to the three INGOs' own programming.</p>
+
+<p>Ali also pointed at something the Alliance did not have to invent: the spirit of it already lives at country level. Country directors and programme coordinators already collaborate on procurement, advocacy, access negotiations, and partner information, informally and often in a WhatsApp group. His hope is that the Alliance finds those practical, field-level solutions that already exist and scales them, rather than designing collaboration from the top down. Kim's version of the same instinct came from her systems work: what she called small-t transformation, because collaborating in a system that is designed for fragmentation is radical, and the lessons the Alliance is learning in real time about leadership, culture, and feedback loops are exactly the ones the wider sector needs.</p>
+
+<h2>A Canary in the Coal Mine</h2>
+
+<p>Thomas placed the Alliance in its wider moment. Each of the three organisations keeps its own identity, but each of those identities is currently being questioned and revised, in very practical conversations about who these organisations are in five, ten, twenty years. Which makes the Alliance a test of something bigger than itself.</p>
+
+<blockquote>This alliance is a bit of a canary in the coal mine type initiative, almost, in terms of how organisations are willing to change.</blockquote>
+
+<p>Not a test of whether a plan gets executed, but of how willing organisations really are to change: to reach outside themselves, to be influenced by others, to give up some control. If the spirit of the Alliance survives and starts to permeate other parts of organisational thinking, he argued, it will be a phenomenal success. If it gets hard and quietly shrinks back to a procurement arrangement, that will tell the sector something too.</p>
+
+<h2>The Message to Funders</h2>
+
+<p>Asked what would help, Vanessa was blunt in the way this show tries to reward.</p>
+
+<blockquote>Funders need to support this kind of collaboration. They haven't in the past. Funding actively disincentivises it.</blockquote>
+
+<p>The Alliance stood itself up on seed funding from largely non-traditional sources: individuals, trusts, foundations, and corporates, plus services offered at low or no cost by people who want to see what the sector can do next. The mainstream funding architecture, by her account, still rewards organisations for competing. The Alliance will be at UNGA with its own side event, holding dialogues as a collective, which is itself a small piece of evidence that the posture is changing.</p>
+
+<h2>The Hot Debrief</h2>
+
+<p>Then Vanessa left, and we kept recording. Thomas described himself as equally excited and frustrated: excited by the intentionality and spirit behind the Alliance, frustrated that nothing in the conversation suggested the INGOs are going to start looking outside the traditional environments they have always occupied. Ali added the fatigue the sector carries: we have seen this movie so many times already. Kim reached for panarchy, one of her favourite systems frameworks, with its feedback loops between individuals, organisations, ecosystem, and sector: the CEOs have made the commitment, and the question is whether the loops that connect their commitment to the doers, and the doers back to the system, actually get built. Ali also named the questions there was no time to ask, about governance, processes, and the honest differences between three organisations whose mandates are not the same. And Kim closed on the line that reframes the whole thing.</p>
+
+<blockquote>It isn't any individual actor or organisation's job to fix the sector. It's everyone's job to do within their sphere of control.</blockquote>
+
+<p>So we wish the Alliance well, and we meant it. We also agreed to come back to it, Ali proposing an adult conversation in a couple of months, Thomas suggesting one side of the year-end break, and to invite Vanessa back to say out loud whether the practising has become the future or another pilot. That is the deal this show tries to keep: optimism, with a follow-up date.</p>
+
+<p>A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and that interpretation is ours. The episode itself, including the Hot Debrief, is the place to hear it in full.</p>`
   },
   {
     epId: 'KPgZ2FhQpb4',
@@ -956,7 +1044,11 @@ const HOSTS = [
 //
 // Photographs are stills from the episodes themselves, taken at a second where the person is
 // provably on screen: for Sofia and Aisha the video burns their name into the frame, and Sabrina's
-// come from her own speaking turns and were confirmed by eye.
+// and Vanessa's come from their own speaking turns and were confirmed by eye.
+//
+// Vanessa's LinkedIn was supplied by the show directly and matches a public profile that names
+// Save the Children, CARE, and Mercy Corps, the three organisations of the Impact Alliance role
+// the episode gives her.
 const GUESTS = [
   {
     name: 'Sofia Sprechmann Sineiro',
@@ -984,14 +1076,23 @@ const GUESTS = [
     linkedin: 'https://uk.linkedin.com/in/smsegal',
     photo: 'assets/guest-sabrina.jpg', photoW: 440, photoH: 440,
     epN: 8, epSlug: 'rethinking-risk-management'
+  },
+  {
+    name: 'Vanessa Self',
+    slug: 'vanessa-self',
+    role: 'Project Director, the Impact Alliance',
+    bio: 'Leads the Impact Alliance, the collaboration between CARE, Mercy Corps, and Save the Children, after fifteen years at Save the Children in global and technical leadership roles, most recently as Director of Regional and Multi-Country Programmes, with earlier food security and livelihoods work for CARE in the Sahel. On the show she was honest about how much harder collaboration is than the slogans suggest, and described an alliance that is practising its way into the future of INGOs rather than theorising about it.',
+    linkedin: 'https://www.linkedin.com/in/vanessa-self-7155aa15a/',
+    photo: 'assets/guest-vanessa.jpg', photoW: 440, photoH: 440,
+    epN: 10, epSlug: 'inside-the-impact-alliance'
   }
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-08-14): 87,857
+// Total Views as of latest sync (2026-08-28): 88,970
 const STATS = {
   episodes: EPISODES.length,
-  views: '87,857'
+  views: '88,970'
 };
 
 // ─── Node export shim ────────────────────────────────────────

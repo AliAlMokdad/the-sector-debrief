@@ -29,9 +29,9 @@ const ROOT = path.resolve(__dirname, '..');
 const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
-const ASSET_V = '2026-07-13a';                 // cache-bust for /css and shared assets
-const TODAY = '2026-07-13';
-const TRANSCRIPT_DATE = '2026-08-14';          // when transcripts were published
+const ASSET_V = '2026-08-28a';                 // cache-bust for /css and shared assets
+const TODAY = '2026-08-28';
+const TRANSCRIPT_DATE = '2026-08-28';          // when the newest transcript was published
                      // build date (Date.now is avoided for reproducibility)
 const OG_DEFAULT = SITE + '/assets/cover.jpg';
 
@@ -284,6 +284,7 @@ const HOST_PROFILES = {
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',    shape: 'editorial' },
   90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',    shape: 'editorial' },
+  10: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ALLIANCE', shape: 'lines'  },
   9:  { bg: '#0D1B2A', fg: '#F5F0E2', accent: '#E8B82C', word: 'PURPOSE',  shape: 'arc'    },
   8:  { bg: '#2A4530', fg: '#F5F0E2', accent: '#B83A2A', word: 'RISK',     shape: 'split'  },
   7:  { bg: '#1A1614', fg: '#FAF6EA', accent: '#E8B82C', word: 'CONTRACT', shape: 'circle' },
