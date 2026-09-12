@@ -225,6 +225,18 @@ function renderEpisodes() {
 
   const isFiltering = !!state.search;
   if (featured) featured.style.display = isFiltering ? 'none' : '';
+  const film = $('#film-feature');
+  if (film) {
+    film.style.display = isFiltering ? 'none' : '';
+    if (!isFiltering && !film.dataset.rendered && typeof FILM !== 'undefined') {
+      film.innerHTML = renderFilmFeature(FILM);
+      film.dataset.rendered = '1';
+      film.querySelectorAll('[data-film]').forEach(el => {
+        el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
+        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
+      });
+    }
+  }
 
   if (!filtered.length) {
     const safeQuery = escAttr(state.search);
@@ -260,6 +272,57 @@ function renderEpisodes() {
     window.applyTilt(grid);
     if (featured) window.applyTilt(featured);
   }
+}
+
+// ─── THE FIRST TEN: the milestone film ───
+function renderFilmFeature(f) {
+  const reel = Array.from({ length: 10 }, (_, i) => `<span>${String(i + 1).padStart(2, '0')}</span>`).join('');
+  const t = escAttr(f.title);
+  return `
+    <div class="film-thumb" data-film role="button" tabindex="0" aria-label="Watch the film: ${t}">
+      <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
+      <div class="film-play" aria-hidden="true"></div>
+    </div>
+    <div class="film-body">
+      <div class="film-tag">★ The film</div>
+      <div class="film-number" aria-hidden="true">${escAttr(f.milestone)}</div>
+      <h3 class="film-title">${t}</h3>
+      <p class="film-desc">${escAttr(f.description)}</p>
+      <div class="film-meta"><span>${fmtDate(f.date)}</span><span>·</span><span>${escAttr(f.duration)}</span><span>·</span><span>Hosts and guests of episodes one to ten</span></div>
+      <div class="ep-actions">
+        <button type="button" class="ep-link primary" data-film>▶ Watch the film</button>
+        <a class="ep-link film-link-yt" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">Open in YouTube ↗</a>
+      </div>
+    </div>
+    <div class="film-reel" aria-hidden="true">${reel}</div>
+  `;
+}
+
+function openFilm(f) {
+  const m = $('#modal-episode');
+  m.removeAttribute('hidden');
+  m.innerHTML = `
+    <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
+    <div class="modal-video">
+      <iframe src="https://www.youtube.com/embed/${escAttr(f.id)}?rel=0" loading="lazy" title="${escAttr(f.name)}: ${escAttr(f.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta"><span>${escAttr(f.name)}</span><span>·</span><span>${fmtDate(f.date)}</span><span>·</span><span>${escAttr(f.duration)}</span></div>
+      <h2 class="modal-title" id="modal-episode-title">${escAttr(f.title)}</h2>
+      <div class="modal-actions">
+        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
+        <a class="ep-link" href="${PLATFORMS.youtube}" target="_blank" rel="noopener noreferrer">The channel</a>
+      </div>
+      <p class="modal-desc">${escAttr(f.description)}</p>
+    </div>
+  `;
+  $$('.modal-backdrop.active').forEach(b => b.classList.remove('is-top'));
+  const backdrop = $('#modal-backdrop');
+  backdrop.classList.add('active', 'is-top');
+  lockBodyScroll();
+  rememberTrigger();
+  setTimeout(() => $('#modal-episode .modal-close')?.focus(), 50);
+  attachTrap(m);
 }
 
 function renderFeaturedEpisode(ep) {

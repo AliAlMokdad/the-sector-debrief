@@ -2872,3 +2872,83 @@ body.nav-open { overflow: hidden; }
   .guests-head { margin-top: 42px; }
   .guests-band { margin-top: 24px; }
 }
+
+/* ─── THE FIRST TEN · the milestone film on the Episodes page ─── */
+.film-feature {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0;
+  margin-bottom: 40px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--rad);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.5s var(--ease-emphasis), box-shadow 0.5s var(--ease-emphasis);
+}
+/* The offset paper is a box-shadow, not a ::before: on this site a z-index:-1 pseudo paints OVER the card body
+   (see the .ep-card stacking note), which turned this whole card mustard on first render. */
+.film-feature { box-shadow: 10px 10px 0 0 var(--mustard); }
+.film-feature:hover { transform: translate(-4px, -4px); box-shadow: 14px 14px 0 0 var(--mustard), 0 24px 40px -16px rgba(26,22,20,0.35); }
+.film-feature:empty { display: none; }
+.film-thumb {
+  position: relative; overflow: hidden; cursor: pointer;
+  background: #0b0709;
+  display: flex; align-items: center;
+}
+.film-thumb img { width: 100%; height: auto; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.7s var(--ease-emphasis); }
+.film-thumb:hover img, .film-thumb:focus-visible img { transform: scale(1.03); }
+.film-thumb:focus-visible { outline: 3px solid var(--mustard); outline-offset: -3px; }
+.film-play {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--mustard); border: 2px solid var(--ink);
+  box-shadow: 0 0 0 0 rgba(232,184,44,0.7);
+  animation: pulseGlow 2.4s ease-out infinite;
+}
+.film-play::before {
+  content: ''; position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%);
+  border-left: 22px solid var(--ink); border-top: 13px solid transparent; border-bottom: 13px solid transparent;
+}
+.film-body { padding: 36px 40px 28px; display: flex; flex-direction: column; gap: 10px; background: var(--ink); }
+.film-tag {
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mustard);
+}
+.film-number {
+  font-family: var(--font-display); font-style: italic; font-weight: 700;
+  font-size: clamp(56px, 6vw, 92px); line-height: 0.95; color: var(--mustard);
+  letter-spacing: -0.01em; margin: 2px 0 0;
+}
+.film-title {
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2vw, 30px); line-height: 1.15;
+  color: var(--paper); margin: 4px 0 0;
+}
+.film-desc { font-size: 15px; line-height: 1.6; color: var(--cream); margin: 6px 0 0; }
+.film-meta {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  font-family: var(--font-mono); font-size: 12px; color: var(--cream-deep); opacity: 0.85;
+}
+.film-body .ep-actions { margin-top: 8px; }
+.film-body .ep-link { border-color: var(--cream); color: var(--paper); background: transparent; }
+.film-body .ep-link.primary { background: var(--mustard); color: var(--ink); border-color: var(--mustard); }
+.film-body .ep-link:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.film-body .ep-link.primary:hover { background: var(--paper); border-color: var(--paper); }
+.film-reel {
+  grid-column: 1 / -1;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 40px; border-top: 1px solid rgba(250,246,234,0.18); background: var(--ink);
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.22em; color: var(--cream-deep); opacity: 0.7;
+}
+.film-reel span:last-child { color: var(--mustard); opacity: 1; }
+@media (max-width: 900px) {
+  .film-feature { grid-template-columns: 1fr; }
+  .film-body { padding: 24px; }
+  .film-reel { padding: 10px 24px; }
+}
+@media (max-width: 640px) {
+  .film-number { font-size: 52px; }
+  .film-reel { font-size: 10px; letter-spacing: 0.06em; padding: 8px 16px; gap: 6px; overflow: hidden; }
+}

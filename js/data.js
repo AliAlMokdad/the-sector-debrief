@@ -1089,10 +1089,23 @@ const GUESTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-08-28): 88,970
+// Total Views as of latest sync (2026-09-12): 101,080
 const STATS = {
   episodes: EPISODES.length,
-  views: '88,970'
+  views: '101,080'
+};
+
+// The First Ten: a film cut from the first ten episodes, marking 100,000 viewers and listeners.
+// Not an episode (it does not join EPISODES, the archive count, or the episode schema); it has its own feature on the Episodes page.
+const FILM = {
+  id: 'oc6JpmMzj1o',
+  title: 'Ten Episodes. 100,000 Viewers and Listeners. One Platform.',
+  name: 'The First Ten',
+  date: '2026-09-12',
+  duration: '22 min',
+  milestone: '100,000',
+  description: 'A film cut from the first ten episodes of The Sector Debrief, made to mark 100,000 viewers and listeners. Twenty-two minutes of the conversations that got us here: the vision, the system, risk, identity, trust, growth, the future, in the voices of the hosts and the guests who said them.',
+  thumb: 'assets/first-ten.jpg'
 };
 
 // ─── Node export shim ────────────────────────────────────────
@@ -1100,5 +1113,5 @@ const STATS = {
 // In Node (sync script + tests), this lets `require('./data.js')`
 // pull the live data. Doesn't affect runtime behaviour at all.
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { PLATFORMS, EPISODES, QUOTES, BLOG_POSTS, TRANSLATIONS, HOSTS, GUESTS, STATS };
+  module.exports = { PLATFORMS, EPISODES, QUOTES, BLOG_POSTS, TRANSLATIONS, HOSTS, GUESTS, STATS, FILM };
 }
