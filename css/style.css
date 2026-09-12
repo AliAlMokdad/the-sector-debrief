@@ -2902,11 +2902,11 @@ body.nav-open { overflow: hidden; }
 .film-thumb:hover img, .film-thumb:focus-visible img { transform: scale(1.03); }
 .film-thumb:focus-visible { outline: 3px solid var(--mustard); outline-offset: -3px; }
 .film-play {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-  width: 72px; height: 72px; border-radius: 50%;
+  /* bottom-right, not centred: centred it sat on the logo in the thumbnail */
+  position: absolute; right: 22px; bottom: 22px;
+  width: 64px; height: 64px; border-radius: 50%;
   background: var(--mustard); border: 2px solid var(--ink);
-  box-shadow: 0 0 0 0 rgba(232,184,44,0.7);
-  animation: pulseGlow 2.4s ease-out infinite;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);      /* still, no pulse halo: it spread over the number in the thumbnail */
 }
 .film-play::before {
   content: ''; position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%);
@@ -2940,8 +2940,8 @@ body.nav-open { overflow: hidden; }
   .film-title { font-size: 20px; line-height: 1.2; }
   .film-body .ep-actions { flex-wrap: nowrap; margin-top: 2px; }
   .film-body .ep-link { flex: 1 1 0; text-align: center; padding: 10px 8px; font-size: 11px; letter-spacing: 0.6px; white-space: nowrap; }
-  .film-play { width: 56px; height: 56px; }
-  .film-play::before { border-left-width: 17px; border-top-width: 10px; border-bottom-width: 10px; left: 56%; }
+  .film-play { width: 48px; height: 48px; right: 14px; bottom: 14px; }
+  .film-play::before { border-left-width: 15px; border-top-width: 9px; border-bottom-width: 9px; left: 56%; }
 }
 
 /* the film as a card in the home grid: the one dark card in the row */
