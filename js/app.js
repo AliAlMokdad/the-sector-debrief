@@ -144,12 +144,38 @@ function navigate(page) {
 function renderHome() {
   const latest = $('#home-episodes');
   if (!latest) return;
-  latest.innerHTML = EPISODES.slice(0, 3).map(epCard).join('');
+  const filmCard = (typeof FILM !== 'undefined') ? homeFilmCard(FILM) : '';
+  latest.innerHTML = epCard(EPISODES[0]) + filmCard + EPISODES.slice(1, filmCard ? 2 : 3).map(epCard).join('');
   bindEpCards(latest);
+  latest.querySelectorAll('[data-film]').forEach(el => {
+    el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
+  });
 
   const setStat = (id, val) => { const el = $(id); if (el) el.textContent = val; };
   setStat('#stat-episodes', STATS.episodes);
   setStat('#stat-views',    STATS.views);
+}
+
+// ─── THE FILM, as a card in the home grid (sits after Episode 10) ───
+function homeFilmCard(f) {
+  const t = escAttr(f.title);
+  return `
+    <article class="ep-card film-card">
+      <div class="ep-thumb film-card-thumb" data-film role="button" tabindex="0" aria-label="Watch the film: ${t}">
+        <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
+        <div class="ep-thumb-play"></div>
+      </div>
+      <div class="ep-body">
+        <div class="film-card-number" aria-hidden="true">${escAttr(f.milestone)}</div>
+        <h3 class="ep-title film-card-title">${t}</h3>
+        <div class="ep-actions">
+          <button type="button" class="ep-link primary" data-film>▶ Watch the film</button>
+          <a class="ep-link" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">YouTube</a>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 // ─── EPISODE CARD ───
@@ -276,7 +302,6 @@ function renderEpisodes() {
 
 // ─── THE FIRST TEN: the milestone film ───
 function renderFilmFeature(f) {
-  const reel = Array.from({ length: 10 }, (_, i) => `<span>${String(i + 1).padStart(2, '0')}</span>`).join('');
   const t = escAttr(f.title);
   return `
     <div class="film-thumb" data-film role="button" tabindex="0" aria-label="Watch the film: ${t}">
@@ -284,17 +309,13 @@ function renderFilmFeature(f) {
       <div class="film-play" aria-hidden="true"></div>
     </div>
     <div class="film-body">
-      <div class="film-tag">★ The film</div>
       <div class="film-number" aria-hidden="true">${escAttr(f.milestone)}</div>
       <h3 class="film-title">${t}</h3>
-      <p class="film-desc">${escAttr(f.description)}</p>
-      <div class="film-meta"><span>${fmtDate(f.date)}</span><span>·</span><span>${escAttr(f.duration)}</span><span>·</span><span>Hosts and guests of episodes one to ten</span></div>
       <div class="ep-actions">
         <button type="button" class="ep-link primary" data-film>▶ Watch the film</button>
         <a class="ep-link film-link-yt" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">Open in YouTube ↗</a>
       </div>
     </div>
-    <div class="film-reel" aria-hidden="true">${reel}</div>
   `;
 }
 
@@ -307,13 +328,11 @@ function openFilm(f) {
       <iframe src="https://www.youtube.com/embed/${escAttr(f.id)}?rel=0" loading="lazy" title="${escAttr(f.name)}: ${escAttr(f.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="modal-body">
-      <div class="modal-meta"><span>${escAttr(f.name)}</span><span>·</span><span>${fmtDate(f.date)}</span><span>·</span><span>${escAttr(f.duration)}</span></div>
       <h2 class="modal-title" id="modal-episode-title">${escAttr(f.title)}</h2>
       <div class="modal-actions">
         <a class="ep-link primary" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
         <a class="ep-link" href="${PLATFORMS.youtube}" target="_blank" rel="noopener noreferrer">The channel</a>
       </div>
-      <p class="modal-desc">${escAttr(f.description)}</p>
     </div>
   `;
   $$('.modal-backdrop.active').forEach(b => b.classList.remove('is-top'));
