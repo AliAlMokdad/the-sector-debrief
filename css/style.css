@@ -2932,7 +2932,16 @@ body.nav-open { overflow: hidden; }
   .film-body { padding: 24px; }
 }
 @media (max-width: 640px) {
-  .film-number { font-size: 52px; }
+  /* Phone: the thumbnail already carries the 100,000, so the body is short: title, two buttons in one row. */
+  .film-feature { box-shadow: 6px 6px 0 0 var(--mustard); margin-bottom: 28px; }
+  .film-feature:hover { transform: none; box-shadow: 6px 6px 0 0 var(--mustard); }
+  .film-number { display: none; }
+  .film-body { padding: 18px 18px 20px; gap: 12px; }
+  .film-title { font-size: 20px; line-height: 1.2; }
+  .film-body .ep-actions { flex-wrap: nowrap; margin-top: 2px; }
+  .film-body .ep-link { flex: 1 1 0; text-align: center; padding: 10px 8px; font-size: 11px; letter-spacing: 0.6px; white-space: nowrap; }
+  .film-play { width: 56px; height: 56px; }
+  .film-play::before { border-left-width: 17px; border-top-width: 10px; border-bottom-width: 10px; left: 56%; }
 }
 
 /* the film as a card in the home grid: the one dark card in the row */
@@ -2949,3 +2958,12 @@ body.nav-open { overflow: hidden; }
 .film-card .ep-link.primary { background: var(--mustard); color: var(--ink); border-color: var(--mustard); }
 .film-card .ep-link:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 .film-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Phone: the film leads the home row, before Episode 10 (desktop keeps it after); the thumbnail carries the number. */
+@media (max-width: 640px) {
+  #home-episodes .film-card { order: -1; }
+  .film-card-number { display: none; }
+  .film-card .ep-title.film-card-title { font-size: 20px; }
+  .film-card .ep-actions { flex-wrap: nowrap; }
+  .film-card .ep-link { flex: 1 1 0; text-align: center; white-space: nowrap; }
+}
