@@ -250,6 +250,7 @@ function renderEpisodes() {
   });
 
   const isFiltering = !!state.search;
+  const filmHit = isFiltering && typeof FILM !== 'undefined' && filmMatches(state.search);
   if (featured) featured.style.display = isFiltering ? 'none' : '';
   const film = $('#film-feature');
   if (film) {
@@ -264,7 +265,7 @@ function renderEpisodes() {
     }
   }
 
-  if (!filtered.length) {
+  if (!filtered.length && !filmHit) {
     const safeQuery = escAttr(state.search);
     grid.innerHTML = `
       <div class="ep-empty" style="grid-column:1/-1;">
@@ -285,7 +286,12 @@ function renderEpisodes() {
   }
 
   if (isFiltering) {
-    grid.innerHTML = filtered.map(epCard).join('');
+    // the film answers to its own words (film, 100,000, the title) and leads the results when it does
+    grid.innerHTML = (filmHit ? homeFilmCard(FILM) : '') + filtered.map(epCard).join('');
+    grid.querySelectorAll('[data-film]').forEach(el => {
+      el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
+    });
   } else {
     if (featured) {
       featured.innerHTML = renderFeaturedEpisode(filtered[0]);
@@ -301,6 +307,15 @@ function renderEpisodes() {
 }
 
 // ─── THE FIRST TEN: the milestone film ───
+function filmMatches(q) {
+  const s = q.toLowerCase().replace(/[.,\s]/g, '');
+  if (!s) return false;
+  const hay = [FILM.title, FILM.name, FILM.description, 'film', 'the first ten', '100,000', '100000', '100k',
+               'hundred thousand', 'milestone', 'viewers', 'listeners', 'one platform', 'ten episodes']
+    .join(' | ').toLowerCase().replace(/[.,\s]/g, '');
+  return hay.includes(s);
+}
+
 function renderFilmFeature(f) {
   const t = escAttr(f.title);
   return `
