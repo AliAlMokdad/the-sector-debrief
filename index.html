@@ -61,7 +61,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
 
-  <link rel="stylesheet" href="css/style.css?v=2026-09-13d"/>
+  <link rel="stylesheet" href="css/style.css?v=2026-09-13e"/>
   <link rel="stylesheet" href="css/motion.css?v=2026-07-10b"/>
   <link rel="stylesheet" href="css/fourthchair.css?v=2026-08-15b"/>
 
@@ -1050,6 +1050,7 @@
     <ul class="nav-links" id="primary-nav">
       <li><a data-nav="home"     href="#home">Home</a></li>
       <li><a data-nav="episodes" href="#episodes">Episodes</a></li>
+      <li class="laptop-only"><a data-nav="audience" href="#audience">Audience reach</a></li>
       <li><a data-nav="blog"     href="#blog">Blog</a></li>
       <li><a data-nav="about"    href="#about">About</a></li>
       <li><a data-nav="contact"  href="#contact">Contact</a></li>
@@ -1278,6 +1279,14 @@
     </div>
 
     <div class="episodes-grid reveal-stagger" id="episodes-grid"></div>
+  </section>
+</div>
+
+<!-- ═══════ AUDIENCE REACH PAGE (laptop only) ═══════ -->
+<div class="page laptop-only" data-page="audience" id="main-audience" tabindex="-1">
+  <section class="audience-embed">
+    <h1 class="visually-hidden">Audience reach across YouTube, the podcast feed and Google Search</h1>
+    <iframe id="audience-frame" class="audience-frame" title="The Sector Debrief audience dashboard" data-src="https://alialmokdad.github.io/sector-debrief-audience/#all" scrolling="no" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </section>
 </div>
 
@@ -1694,7 +1703,7 @@
 
 <script src="js/data.js?v=2026-09-13c"></script>
 <script src="js/motion.js?v=2026-07-10b"></script>
-<script src="js/app.js?v=2026-09-13f"></script>
+<script src="js/app.js?v=2026-09-13g"></script>
 <script src="js/fourthchair.js?v=2026-08-15b"></script>
 
 </body>

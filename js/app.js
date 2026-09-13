@@ -66,6 +66,7 @@ function _showRevealsIn(scope) {
 const PAGE_TITLES = {
   home:     'The Sector Debrief · Honest Humanitarian & Development Podcast',
   episodes: 'Episodes · The Sector Debrief',
+  audience: 'Audience reach · The Sector Debrief',
   blog:     'Essays · The Sector Debrief',
   about:    'About · The Sector Debrief',
   contact:  'Contact · The Sector Debrief',
@@ -74,8 +75,15 @@ const PAGE_TITLES = {
 // renderEpisodes when the user navigates away mid-debounce (otherwise the
 // stale timer re-renders the now-hidden grid 120ms after leaving the page).
 let searchDebounce = null;
+const LAPTOP = () => matchMedia('(min-width: 961px)').matches;
 function _doNavigate(page, opts) {
   opts = opts || {};
+  const forcedHome = page === 'audience' && !LAPTOP();
+  if (forcedHome) { page = 'home'; history.replaceState({ page: 'home' }, '', '#home'); opts = Object.assign({}, opts, { fromHashChange: true }); }
+  if (page === 'audience') {
+    const f = document.getElementById('audience-frame');
+    if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+  }
   // Reset the episode search when leaving the Episodes page so the input value
   // and `state.search` don't desync — returning to Episodes would otherwise show
   // a blank input but a filtered grid.
@@ -1359,7 +1367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // that path doesn't pass fromHashChange and would rewrite the hash.
     openHostAnchor(initial, { coldLoad: true });
   } else {
-    navigate(['home','episodes','blog','about','contact'].includes(initial) ? initial : 'home');
+    navigate(['home','episodes','audience','blog','about','contact'].includes(initial) ? initial : 'home');
   }
 
   $$('[data-nav]').forEach(el => {
@@ -1386,7 +1394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // up, only the underlying page changes. Mirrors navigate()'s pattern.
     state.lastTrigger = null;
     for (let i = 0; i < 5 && $$('.modal-backdrop.active').length; i++) closeModal();
-    const valid = ['home','episodes','blog','about','contact'];
+    const valid = ['home','episodes','audience','blog','about','contact'];
     const hostSlugs = HOSTS.map(h => h.slug);
     const raw = (location.hash || '#home').slice(1);
     if (hostSlugs.includes(raw)) {
@@ -1409,6 +1417,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastHashHandled === location.hash) return; // already handled by popstate
     handleHashRoute({ fromHashChange: true });
   });
+
+  // The audience dashboard is framed from its own site. It posts its content
+  // height (so the frame never scrolls inside the page) and, when a map pin is
+  // clicked, the position of the row to bring into view.
+  const AUDIENCE_ORIGIN = 'https://alialmokdad.github.io';
+  addEventListener('message', e => {
+    if (e.origin !== AUDIENCE_ORIGIN || !e.data || typeof e.data !== 'object') return;
+    const f = document.getElementById('audience-frame');
+    if (!f || e.source !== f.contentWindow) return;
+    if (e.data.type === 'sd-audience-height' && Number.isFinite(e.data.height) && e.data.height > 0) {
+      f.style.height = Math.ceil(e.data.height) + 'px';
+    } else if (e.data.type === 'sd-audience-scroll' && Number.isFinite(e.data.top) && state.page === 'audience' && LAPTOP()) {
+      const y = f.getBoundingClientRect().top + scrollY + e.data.top - Math.max(0, (innerHeight - (e.data.height || 40)) / 2);
+      scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    }
+  });
+  let audienceRt;
+  addEventListener('resize', () => { clearTimeout(audienceRt); audienceRt = setTimeout(() => { if (state.page === 'audience' && !LAPTOP()) { history.replaceState({ page: 'home' }, '', '#home'); _doNavigate('home', { fromHashChange: true }); } }, 150); });
 
   bindContactForm();
   bindSearch();
