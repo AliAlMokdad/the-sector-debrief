@@ -277,6 +277,9 @@ html{background:var(--plum-deep)}
 .ft-bg .g{position:absolute;inset:-50%;border-radius:0;filter:none;mix-blend-mode:overlay;opacity:.16;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.85 0 0 0 0 0.75 0 0 0 .55 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");background-size:160px 160px}
 main#doc-main{position:relative;z-index:1}
 /* hero */
+.ft-city{position:absolute;transform:translate(-50%,-50%);font-family:'Bebas Neue',Impact,sans-serif;letter-spacing:.18em;white-space:nowrap;opacity:0;
+  text-shadow:0 2px 18px rgba(0,0,0,.6),0 0 24px rgba(240,195,60,.35);animation:ft-city-rise 2.3s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes ft-city-rise{0%{opacity:0;transform:translate(-50%,-30%) scale(.9)}18%{opacity:.95}70%{opacity:.85}100%{opacity:0;transform:translate(-50%,-120%) scale(1.04)}}
 .ft-hero{position:relative;max-width:1240px;margin:0 auto;padding:56px 24px 0}
 .ft-hero::before{content:'';position:absolute;left:50%;top:50%;width:min(1400px,120vw);height:120%;transform:translate(-50%,-48%);pointer-events:none;z-index:-1;
   background:radial-gradient(ellipse at center,rgba(240,195,60,.22) 0%,rgba(176,82,80,.16) 28%,rgba(96,108,178,.10) 48%,rgba(24,13,28,0) 70%);filter:blur(30px)}
@@ -320,7 +323,7 @@ main#doc-main{position:relative;z-index:1}
   .wall-grid{display:grid;width:min(1180px,calc(100% - 48px));margin:0 auto;padding:0;animation:none;grid-template-columns:repeat(3,1fr);gap:12px}
   .wall-tile{width:auto;height:auto;aspect-ratio:4/5;margin:0;transform:none!important}
   .wall-tile.is-dup{display:none}
-  .wall-face{filter:brightness(.62)}
+  .wall-face{filter:brightness(.74)}
 }
 @media (max-width:640px){
   .doc-links{display:none}.doc-nav-in{gap:12px;padding:12px 16px}.doc-brand{font-size:17px}
@@ -328,8 +331,7 @@ main#doc-main{position:relative;z-index:1}
   .ft-video{box-shadow:0 0 0 1px rgba(240,195,60,.55),0 30px 70px -30px rgba(0,0,0,.95),0 0 90px -20px rgba(240,195,60,.35)}
   .ft-video{border-radius:10px}
   .wall-grid{grid-template-columns:repeat(2,1fr);gap:10px;width:calc(100% - 32px)}
-  .wall-tile:nth-child(11){grid-column:1/span 2;aspect-ratio:2/1}
-  .wall-tile:nth-child(11) .wall-face{object-position:50% 25%}
+  .wall-tile:nth-child(11){grid-column:1/span 2;justify-self:center;width:calc(50% - 5px)}
   .wall-word{left:12px;right:10px;bottom:12px}.wall-word-xl{font-size:44px}.wall-word-lg{font-size:38px}.wall-word-md{font-size:29px}.wall-word-sm{font-size:21px;letter-spacing:.03em}
   .wall-cap{font-size:9.5px}
   .ft-actions{padding:0 16px 56px;margin-top:28px;justify-content:flex-start}
@@ -430,7 +432,7 @@ main#doc-main{position:relative;z-index:1}
   var grid = document.getElementById('wall-grid');
   // each tile is a link to the episode the word came from; on a pointer device the person moves, silently, while you hover
   var tile = function (w, i, dup) { return '' +
-    '<a class="wall-tile' + (dup ? ' is-dup' : '') + '" href="/episodes/' + w.slug + '/" data-i="' + i + '"' + (dup ? ' aria-hidden="true" tabindex="-1" inert' : '') +
+    '<a class="wall-tile' + (dup ? ' is-dup' : '') + '" href="/episodes/' + w.slug + '/" data-i="' + i + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') +
       ' aria-label="' + esc(w.word) + '. ' + esc(w.name) + ', episode ' + w.ep + '. Open the episode.">' +
       '<img class="wall-face" src="/assets/wall/' + w.file + '.jpg" alt="" loading="lazy" decoding="async" width="480" height="600"/>' +
       '<span class="wall-shade" aria-hidden="true"></span>' +
@@ -439,18 +441,75 @@ main#doc-main{position:relative;z-index:1}
     '</a>'; };
   grid.innerHTML = WALL.map(function (w, i) { return tile(w, i, false); }).join('') + WALL.map(function (w, i) { return tile(w, i, true); }).join('');
 
+  // the page opens on fireworks, silent, in the painting's colours (skipped for people who asked for less motion)
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var c = document.createElement('canvas'); c.setAttribute('aria-hidden', 'true');
+    c.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:99999;pointer-events:none;';
+    var dpr = Math.min(2, window.devicePixelRatio || 1), ctx = c.getContext('2d');
+    var fit = function () { c.width = innerWidth * dpr; c.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    fit(); window.addEventListener('resize', fit); document.body.appendChild(c);
+    var small = innerWidth < 700, COLORS = ['#F0C33C', '#FFE88A', '#CE9830', '#B05250', '#606CB2', '#F4F1EA'];
+    var parts = [], seed = 11, rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    var burst = function (x, y, n, power) {
+      for (var i = 0; i < n; i++) {
+        var ang = (i / n) * Math.PI * 2 + rnd() * 0.3, sp = power * (0.55 + rnd() * 0.75);
+        parts.push({ x: x, y: y, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - power * 0.25, life: 1, decay: 0.009 + rnd() * 0.011,
+                     r: (small ? 1.8 : 2.2) + rnd() * 2.6, col: COLORS[Math.floor(rnd() * COLORS.length)], tw: rnd() * 6.28 });
+      }
+    };
+    var W = innerWidth, H = innerHeight, n = small ? 80 : 130, pw = small ? 4.8 : 6.6;
+    var bursts = [[W * 0.5, H * 0.32, 120], [W * 0.2, H * 0.24, 360], [W * 0.8, H * 0.28, 520], [W * 0.35, H * 0.55, 760], [W * 0.68, H * 0.5, 900], [W * 0.5, H * 0.2, 1120]];
+    // laptop: the cities the audience is in rise out of each burst
+    var CITIES = ['COPENHAGEN', 'DUBAI', 'GENEVA', 'NEW YORK', 'NAIROBI', 'AMMAN', 'OSLO', 'LONDON', 'DOHA', 'BEIRUT', 'CAIRO', 'ISTANBUL',
+                  'DAKAR', 'BOGOTA', 'WASHINGTON', 'BRUSSELS', 'BERLIN', 'PARIS', 'STOCKHOLM', 'THE HAGUE', 'BANGKOK', 'KABUL', 'KHARTOUM', 'JUBA',
+                  'ADDIS ABABA', 'KINSHASA', 'KYIV', 'ISLAMABAD', 'TORONTO', 'AMSTERDAM', 'RIYADH', 'TUNIS', 'ABUJA', 'KIGALI', 'MOGADISHU', 'LIMA',
+                  'KUALA LUMPUR', 'MANILA', 'JAKARTA', 'DENMARK'];
+    var names = null, ci = 0;
+    if (!small) {
+      names = document.createElement('div'); names.setAttribute('aria-hidden', 'true');
+      names.style.cssText = 'position:fixed;inset:0;z-index:99998;pointer-events:none;overflow:hidden;';
+      document.body.appendChild(names);
+      for (var k = CITIES.length - 1; k > 0; k--) { var j = Math.floor(rnd() * (k + 1)); var tmp = CITIES[k]; CITIES[k] = CITIES[j]; CITIES[j] = tmp; }
+    }
+    var release = function (x, y) {
+      if (!names) return;
+      for (var q = 0; q < 3; q++) {
+        var el = document.createElement('span'), city = CITIES[ci++ % CITIES.length];
+        var size = 16 + Math.floor(rnd() * 3) * 6, dx = (rnd() - 0.5) * 260, dy = (rnd() - 0.5) * 90;
+        el.textContent = city; el.className = 'ft-city';
+        el.style.cssText = 'left:' + Math.round(x + dx) + 'px;top:' + Math.round(y + dy) + 'px;font-size:' + size + 'px;animation-delay:' + (q * 140) + 'ms;color:' + (q === 1 ? '#F4F1EA' : '#F0C33C') + ';';
+        names.appendChild(el);
+      }
+    };
+    var t0 = null;
+    var frame = function (now) {
+      if (t0 === null) t0 = now; var t = now - t0;
+      bursts.forEach(function (b) { if (b[2] !== null && t >= b[2]) { burst(b[0], b[1], n, pw); release(b[0], b[1]); b[2] = null; } });
+      ctx.clearRect(0, 0, innerWidth, innerHeight);
+      for (var i = 0; i < parts.length; i++) {
+        var p = parts[i]; if (p.life <= 0) continue;
+        p.vy += 0.085; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx; p.y += p.vy; p.life -= p.decay; p.tw += 0.35;
+        ctx.globalAlpha = Math.max(0, p.life) * (0.72 + 0.28 * Math.sin(p.tw)); ctx.fillStyle = p.col;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.5 + p.life * 0.5), 0, 6.283); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      if (t < 3600) requestAnimationFrame(frame); else { window.removeEventListener('resize', fit); c.remove(); if (names) names.remove(); }
+    };
+    requestAnimationFrame(frame);
+  }
+
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    grid.addEventListener('pointerover', function (e) {
+    grid.addEventListener('mouseover', function (e) {
       var t = e.target.closest('.wall-tile'); if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return;
       var w = WALL[Number(t.dataset.i)], v = t.querySelector('video');
       if (!v) {
         v = document.createElement('video'); v.className = 'wall-video'; v.muted = true; v.loop = true; v.playsInline = true;
         v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.preload = 'auto'; v.poster = '/assets/wall/' + w.file + '.jpg';
-        v.src = '/assets/wall/' + w.file + '.mp4'; t.insertBefore(v, t.querySelector('.wall-shade')); v.load();
+        v.src = '/assets/wall/' + w.file + '.mp4'; t.insertBefore(v, t.querySelector('.wall-shade'));
       }
       t.classList.add('is-hot'); v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {});
     });
-    grid.addEventListener('pointerout', function (e) {
+    grid.addEventListener('mouseout', function (e) {
       var t = e.target.closest('.wall-tile'); if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return;
       t.classList.remove('is-hot'); var v = t.querySelector('video'); if (v) { v.pause(); v.currentTime = 0; }
     });
