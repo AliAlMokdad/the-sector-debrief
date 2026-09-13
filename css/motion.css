@@ -1036,3 +1036,9 @@ body::after {
 .manifesto-blob {
   animation: none !important;
 }
+
+/* phones: the scrolled nav keeps the phone gutters, so the brand stays on one line */
+@media (max-width: 640px) {
+  .nav.scrolled .nav-inner { padding: 10px 20px; }
+  .nav.scrolled .nav-logo { font-size: 15px; }
+}
