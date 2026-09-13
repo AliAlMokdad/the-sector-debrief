@@ -102,6 +102,8 @@ function _doNavigate(page, opts) {
     const searchInput = document.getElementById('search-input');
     if (searchInput) searchInput.value = '';
     if (searchDebounce) { clearTimeout(searchDebounce); searchDebounce = null; }
+    // the grid has to be rebuilt too, or coming back shows an empty box over a filtered list
+    renderEpisodes();
   }
   state.page = page;
   document.title = PAGE_TITLES[page] || PAGE_TITLES.home;
@@ -118,7 +120,7 @@ function _doNavigate(page, opts) {
     // its focusable elements from being reached.
     p.toggleAttribute('inert', !isActive);
   });
-  $$('.nav-links a').forEach(a => a.classList.toggle('active', a.dataset.page === page));
+  $$('.nav-links a').forEach(a => { const on = a.dataset.nav === page; a.classList.toggle('active', on); if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   if (!opts.preserveScroll) {
     window.scrollTo(0, 0);
   }
@@ -571,7 +573,7 @@ function renderBlog() {
       : `<span>Episode ${post.epN}</span>`;
     return `
       <article class="blog-card${post.pinned ? ' is-pinned' : ''}" data-slug="${escAttr(post.slug)}">
-        <div class="blog-card-img" style="background:#000;">
+        <div class="blog-card-img" style="background:#000;" role="button" tabindex="0" aria-label="Read the essay: ${escAttr(post.title)}">
           <img src="${cover}" alt="${escAttr(post.title)}"/>
         </div>
         <div class="blog-card-body">
@@ -597,6 +599,16 @@ function renderBlog() {
     grid.addEventListener('click', e => {
       const card = e.target.closest('.blog-card');
       if (card && grid.contains(card)) openBlog(card.dataset.slug);
+    });
+    // the cover carries role=button and a tab stop, so Enter and Space open the essay as a click does
+    grid.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const trigger = e.target.closest('.blog-card-img');
+      if (!trigger || !grid.contains(trigger)) return;
+      const card = trigger.closest('.blog-card');
+      if (!card) return;
+      e.preventDefault();
+      openBlog(card.dataset.slug);
     });
   }
 }
@@ -1476,7 +1488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state.search = deepSearch;
     const dsInput = $('#search-input');
     if (dsInput) dsInput.value = deepSearch;
-    if (state.page === 'episodes') renderEpisodes();
+    renderEpisodes();
   }
 
   setTimeout(() => {

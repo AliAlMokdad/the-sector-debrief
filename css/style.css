@@ -2137,10 +2137,6 @@ body:has(.page[data-page="home"].active) .footer {
     list-style: none;
     animation: mobileNavIn 0.2s ease;
   }
-  @keyframes mobileNavIn {
-    from { opacity: 0; transform: translateY(-8px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
   .nav-links.mobile-open li { width: 100%; }
   .nav-links.mobile-open a {
     display: block;
@@ -3069,3 +3065,39 @@ body:has(.page[data-page="home"].active) {
 /* narrow phones: the wordmark stays on one line so the nav keeps one height */
 @media (max-width: 360px) { .nav-logo { white-space: nowrap; font-size: 13px; } }
 @media (max-width: 340px) { .nav-logo { font-size: 12px; gap: 8px; } .nav-cta { padding: 8px 8px; } }
+
+
+/* the drawer opens at more than one width, so its animation lives outside any media block */
+@keyframes mobileNavIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 4. an open drawer never runs past the bottom of the screen: it scrolls inside itself instead */
+.nav-links.mobile-open {
+  max-height: max(120px, calc(100vh - var(--nav-h, 70px)));
+  max-height: max(120px, calc(100dvh - var(--nav-h, 70px)));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+/* and it sits above the mini player while it is open */
+body.nav-open .nav { z-index: 300; }
+
+/* 3. the narrowest phones: one episode to a row, so the card fits between the gutters */
+@media (max-width: 339px) {
+  .episodes-grid { grid-template-columns: 1fr; }
+}
+
+/* the two film buttons stop fighting for one row on narrow phones, which is what forced the block wider than the screen */
+@media (max-width: 359px) {
+  .film-body .ep-actions, .film-card .ep-actions { flex-wrap: wrap; }
+  .film-body .ep-link, .film-card .ep-link { flex: 1 1 auto; }
+}
+
+/* 2. the essay cover is a tab stop now, so it gets the same focus ring as everything else */
+.blog-card-img:focus-visible,
+.ep-thumb:focus-visible,
+.ep-feat-thumb:focus-visible {
+  outline: 2px solid var(--cobalt);
+  outline-offset: 3px;
+}
