@@ -3025,3 +3025,13 @@ body:has(.page[data-page="home"].active) {
       linear-gradient(180deg, #F3ECD9 0%, #EFE8D6 42%, #ECE4CE 100%);
   }
 }
+
+
+/* ═══════ AUDIENCE REACH on phones: the frame fills the screen below the nav and scrolls on its own ═══════ */
+@media (max-width: 960px) { .laptop-only { display: revert !important; } }
+@media (max-width: 960px) { .stat-link { pointer-events: auto; } }
+@media (max-width: 640px) {
+  .audience-embed { padding-top: 70px; }
+  .audience-frame { height: calc(100dvh - 70px); min-height: 480px; }
+  body:has(.page[data-page="audience"].active) .footer { margin-top: 0; }
+}

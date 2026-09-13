@@ -84,11 +84,10 @@ function askAudienceFrame() {
 }
 function _doNavigate(page, opts) {
   opts = opts || {};
-  const forcedHome = page === 'audience' && !LAPTOP();
-  if (forcedHome) { page = 'home'; history.replaceState({ page: 'home' }, '', '#home'); opts = Object.assign({}, opts, { fromHashChange: true }); }
+  const PHONE_FRAME = matchMedia('(max-width: 640px)').matches;
   if (page === 'audience') {
     const f = document.getElementById('audience-frame');
-    if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+    if (f && !f.getAttribute('src')) f.setAttribute('src', PHONE_FRAME ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src);
     else setTimeout(askAudienceFrame, 80);
   } else {
     audienceTarget = null;
@@ -1444,13 +1443,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const y = f.getBoundingClientRect().top + scrollY + e.data.top - 96;
       scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
       clearTimeout(askAudienceFrame._t); askAudienceFrame._t = setTimeout(() => { audienceTarget = null; }, 2500);
-    } else if (e.data.type === 'sd-audience-scroll' && Number.isFinite(e.data.top) && state.page === 'audience' && LAPTOP()) {
+    } else if (e.data.type === 'sd-audience-scroll' && Number.isFinite(e.data.top) && state.page === 'audience' && !matchMedia('(max-width: 640px)').matches) {
       const y = f.getBoundingClientRect().top + scrollY + e.data.top - Math.max(0, (innerHeight - (e.data.height || 40)) / 2);
       scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   });
   let audienceRt;
-  addEventListener('resize', () => { clearTimeout(audienceRt); audienceRt = setTimeout(() => { if (state.page === 'audience' && !LAPTOP()) { history.replaceState({ page: 'home' }, '', '#home'); _doNavigate('home', { fromHashChange: true }); } }, 150); });
+  // crossing the phone breakpoint swaps the frame between its standalone and height-synced modes
+  let audienceMode = matchMedia('(max-width: 640px)').matches;
+  addEventListener('resize', () => { clearTimeout(audienceRt); audienceRt = setTimeout(() => { const now = matchMedia('(max-width: 640px)').matches; if (now === audienceMode) return; audienceMode = now; const f = document.getElementById('audience-frame'); if (f && f.getAttribute('src')) { f.style.height = ''; f.setAttribute('src', now ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src); } }, 150); });
 
   bindContactForm();
   bindSearch();
