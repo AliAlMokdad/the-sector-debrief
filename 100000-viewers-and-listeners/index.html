@@ -258,8 +258,8 @@
 <style>
 /* ─── THE FIRST TEN · a dark page in the painting's colours ─── */
 :root{--plum:#2A1631;--plum-deep:#180d1c;--ochre:#CE9830;--coral:#B05250;--peri:#606CB2;--gold:#F0C33C;--gold-hi:#FFE88A;--gold-lo:#B87809;--cream-ft:#F4F1EA}
-html{background:var(--plum-deep)}
-.doc-body{background:var(--plum-deep);color:var(--cream-ft)}
+html{background:var(--plum-deep);overflow-x:hidden}
+.doc-body{background:var(--plum-deep);color:var(--cream-ft);overflow-x:hidden}
 /* the chrome goes dark on this page */
 .doc-nav{background:rgba(24,13,28,.92);border-bottom:1px solid rgba(244,241,234,.08)}
 .doc-brand,.doc-brand span,.doc-links a{color:var(--cream-ft)!important}
@@ -267,7 +267,7 @@ html{background:var(--plum-deep)}
 .doc-cta{background:var(--gold);color:#1a1614}.doc-cta:hover{background:var(--gold-hi)}
 .doc-brand-mark{background:var(--gold);color:#1a1614}
 /* the painting, out of focus, behind everything */
-.ft-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.ft-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:paint}
 .ft-bg span{position:absolute;border-radius:50%;filter:blur(90px);opacity:.55;mix-blend-mode:screen}
 .ft-bg .o{width:62vw;height:38vw;left:-14vw;top:-6vw;background:var(--ochre);opacity:.28;transform:rotate(-14deg)}
 .ft-bg .c{width:44vw;height:30vw;right:-12vw;top:22vh;background:var(--coral);opacity:.30;transform:rotate(18deg)}
