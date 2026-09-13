@@ -2173,6 +2173,7 @@ body:has(.page[data-page="home"].active) .footer {
   .hero-cover { max-width: 320px; margin: 0 auto; }
   .hero-cover-text text { font-size: 6.4px; letter-spacing: 3px; }
   .hero-cover-badge { bottom: 14%; right: -10px; font-size: 9px; padding: 7px 12px 7px 22px; }
+  .badge-long { display: none; }   /* the phone badge reads 100,000 only; the full line clipped on the disc */
   section { padding: 64px 20px; }
   .section-head { margin-bottom: 36px; padding-bottom: 18px; gap: 14px; }
   .section-title { font-size: clamp(30px, 8vw, 38px); letter-spacing: -0.5px; }
@@ -2967,3 +2968,7 @@ body.nav-open { overflow: hidden; }
   .film-card .ep-actions { flex-wrap: nowrap; }
   .film-card .ep-link { flex: 1 1 0; text-align: center; white-space: nowrap; }
 }
+
+/* the About growth line links to the film; make the link visible as one */
+.about-intro p a { color: inherit; text-decoration: underline; text-decoration-color: var(--mustard); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.about-intro p a:hover, .about-intro p a:focus-visible { text-decoration-color: var(--crimson); }
