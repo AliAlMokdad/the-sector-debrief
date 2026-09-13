@@ -471,7 +471,17 @@ main#doc-main{position:relative;z-index:1}
                   'KUALA LUMPUR', 'MANILA', 'JAKARTA', 'DENMARK', 'SAUDI ARABIA', 'MEXICO', 'ROME', 'MADRID', 'GOMA', 'PORT-AU-PRINCE', 'DHAKA',
                   'CALIFORNIA', 'VIENNA', 'LISBON', 'DUBLIN', 'ATHENS', 'WARSAW', 'PRAGUE', 'BUDAPEST', 'HELSINKI', 'ZURICH', 'KUWAIT', 'MUSCAT',
                   'ABU DHABI', 'BAGHDAD', 'DAMASCUS', 'SANAA', 'RAMALLAH', 'RABAT', 'ACCRA', 'DAR ES SALAAM', 'MAPUTO', 'BAMAKO', 'SANTIAGO',
-                  'BUENOS AIRES', 'HANOI', 'COLOMBO', 'PHNOM PENH'];
+                  'BUENOS AIRES', 'HANOI', 'COLOMBO', 'PHNOM PENH',
+                  'SUDAN', 'SOUTH SUDAN', 'ETHIOPIA', 'SOMALIA', 'KENYA', 'UGANDA', 'TANZANIA', 'RWANDA', 'DR CONGO', 'NIGERIA', 'GHANA', 'SENEGAL',
+                  'MALI', 'NIGER', 'BURKINA FASO', 'CHAD', 'CAMEROON', 'MOZAMBIQUE', 'ZIMBABWE', 'ZAMBIA', 'MALAWI', 'MADAGASCAR', 'SOUTH AFRICA',
+                  'JOHANNESBURG', 'CAPE TOWN', 'LAGOS', 'KAMPALA', 'LUSAKA', 'HARARE', 'LILONGWE', 'ANTANANARIVO', 'FREETOWN', 'MONROVIA', 'NIAMEY',
+                  'OUAGADOUGOU', 'NDJAMENA', 'YAOUNDE', 'DJIBOUTI', 'ASMARA', 'HARGEISA', 'BANGUI', 'BUJUMBURA', 'ALGIERS', 'CASABLANCA', 'TRIPOLI',
+                  'BENGHAZI', 'ALEXANDRIA', 'PORT SUDAN', 'DARFUR', 'KASSALA',
+                  'LEBANON', 'SYRIA', 'JORDAN', 'IRAQ', 'YEMEN', 'PALESTINE', 'GAZA', 'ALEPPO', 'HOMS', 'IDLIB', 'ERBIL', 'MOSUL', 'BASRA', 'ADEN',
+                  'TAIZ', 'HODEIDAH', 'TYRE', 'ZAATARI', 'IRBID', 'ZARQA', 'JEDDAH', 'MANAMA', 'TEHRAN', 'MASHHAD',
+                  'AFGHANISTAN', 'PAKISTAN', 'BANGLADESH', 'MYANMAR', 'NEPAL', 'SRI LANKA', 'HERAT', 'KANDAHAR', 'MAZAR-I-SHARIF', 'PESHAWAR',
+                  'KARACHI', 'LAHORE', 'QUETTA', 'COX’S BAZAR', 'CHITTAGONG', 'KATHMANDU', 'YANGON', 'HAITI', 'VENEZUELA', 'COLOMBIA', 'HONDURAS',
+                  'GUATEMALA', 'EL SALVADOR', 'TEGUCIGALPA', 'SAN SALVADOR', 'CARACAS', 'QUITO', 'LA PAZ', 'MEDELLIN', 'CALI'];
     var names = null, ci = 0;
     if (!small) {
       names = document.createElement('div'); names.setAttribute('aria-hidden', 'true');
@@ -481,11 +491,12 @@ main#doc-main{position:relative;z-index:1}
     }
     var release = function (x, y) {
       if (!names) return;
-      for (var q = 0; q < 4; q++) {
+      for (var q = 0; q < 5; q++) {
         var el = document.createElement('span'), city = CITIES[ci++ % CITIES.length];
-        var size = 16 + Math.floor(rnd() * 4) * 6, dx = (rnd() - 0.5) * 340, dy = (rnd() - 0.5) * 140;
+        var pick = rnd(), size = pick < 0.28 ? 14 : pick < 0.58 ? 20 : pick < 0.82 ? 28 : pick < 0.95 ? 38 : 50;
+        var dx = (rnd() - 0.5) * 380, dy = (rnd() - 0.5) * 170;
         el.textContent = city; el.className = 'ft-city';
-        el.style.cssText = 'left:' + Math.round(x + dx) + 'px;top:' + Math.round(y + dy) + 'px;font-size:' + size + 'px;animation-delay:' + (q * 140) + 'ms;color:' + (q === 1 ? '#F4F1EA' : '#F0C33C') + ';';
+        el.style.cssText = 'left:' + Math.round(x + dx) + 'px;top:' + Math.round(y + dy) + 'px;font-size:' + size + 'px;animation-delay:' + (q * 120) + 'ms;color:' + (q % 3 === 1 ? '#F4F1EA' : q % 3 === 2 ? '#FFE88A' : '#F0C33C') + ';';
         names.appendChild(el);
       }
     };
