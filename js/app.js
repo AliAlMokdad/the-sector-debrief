@@ -294,6 +294,66 @@ function renderEpisodes() {
   }
 }
 
+// ─── THE FIRST TEN: a silent burst of fireworks on the way to the film page (pointer devices only) ───
+const FILM_PAGE = '/the-first-ten/';
+function filmCelebrate(e) {
+  const t = e.target instanceof Element ? e.target : e.target && e.target.parentElement;
+  const a = t && t.closest(`a[href="${FILM_PAGE}"]`);
+  if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  if ((a.target && a.target !== '_self') || a.hasAttribute('download') || a.origin !== location.origin) return;
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (document.getElementById('film-fireworks')) return;
+  e.preventDefault();
+  const c = document.createElement('canvas'); c.id = 'film-fireworks';
+  c.setAttribute('aria-hidden', 'true');
+  c.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;z-index:99999;pointer-events:none;';
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const ctx = c.getContext('2d');
+  const fit = () => { c.width = innerWidth * dpr; c.height = innerHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+  fit(); window.addEventListener('resize', fit);
+  document.body.appendChild(c);
+  const COLORS = ['#F0C33C', '#FFE88A', '#CE9830', '#B05250', '#606CB2', '#F4F1EA'];
+  const parts = []; let seed = 7;
+  const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const burst = (x, y, n, power) => {
+    for (let i = 0; i < n; i++) {
+      const ang = (i / n) * Math.PI * 2 + rnd() * 0.3, sp = power * (0.55 + rnd() * 0.75);
+      parts.push({ x, y, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp - power * 0.25, life: 1, decay: 0.010 + rnd() * 0.012,
+                   r: 2.2 + rnd() * 2.6, col: COLORS[Math.floor(rnd() * COLORS.length)], tw: rnd() * 6.28 });
+    }
+  };
+  // three bursts: where the click landed, then two answering it across the screen, a beat apart
+  const bursts = [[e.clientX, e.clientY, 0], [innerWidth * 0.22, innerHeight * 0.30, 160], [innerWidth * 0.78, innerHeight * 0.34, 300],
+                  [innerWidth * 0.5, innerHeight * 0.22, 460]];
+  const t0 = performance.now(); let navigated = false;
+  const go = () => {
+    if (navigated) return; navigated = true;
+    location.href = FILM_PAGE;
+    setTimeout(() => { window.removeEventListener('resize', fit); c.remove(); }, 2500);   // if the navigation is cancelled, the dim does not stay
+  };
+  const frame = (now) => {
+    const t = now - t0;
+    bursts.forEach(b => { if (b[2] !== null && t >= b[2]) { burst(b[0], b[1], 140, 6.6); b[2] = null; } });
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    for (const p of parts) {
+      if (p.life <= 0) continue;
+      p.vy += 0.085; p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx; p.y += p.vy; p.life -= p.decay; p.tw += 0.35;
+      const a = Math.max(0, p.life) * (0.72 + 0.28 * Math.sin(p.tw));
+      ctx.globalAlpha = a; ctx.fillStyle = p.col;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.5 + p.life * 0.5), 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (t < 1350) requestAnimationFrame(frame); else go();
+  };
+  requestAnimationFrame(frame);
+  setTimeout(go, 1500);   // whatever happens to the animation, the page still opens
+  // the ground dims slightly so the sparks read
+  c.style.background = 'rgba(24,13,28,0)'; c.style.transition = 'background 0.4s';
+  requestAnimationFrame(() => { c.style.background = 'rgba(24,13,28,0.28)'; });
+}
+document.addEventListener('click', filmCelebrate, true);
+
 // ─── THE FIRST TEN: the milestone film ───
 function filmMatches(q) {
   const s = q.toLowerCase().replace(/[.,\s]/g, '');

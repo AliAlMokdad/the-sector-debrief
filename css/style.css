@@ -2955,7 +2955,7 @@ body.nav-open { overflow: hidden; }
   font-size: 44px; line-height: 1; color: var(--mustard); margin-bottom: 8px;
 }
 .film-card .ep-title.film-card-title { color: var(--paper); cursor: default; }
-.film-card .ep-title.film-card-title:hover { color: var(--paper); }
+.film-card .ep-title.film-card-title:hover, .film-card .ep-title.film-card-title:focus-visible { color: var(--paper); text-decoration: none; }
 .film-card .ep-link { border-color: var(--cream); color: var(--paper); background: transparent; }
 .film-card .ep-link.primary { background: var(--mustard); color: var(--ink); border-color: var(--mustard); }
 .film-card .ep-link:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }

@@ -430,7 +430,7 @@ main#doc-main{position:relative;z-index:1}
   var grid = document.getElementById('wall-grid');
   // each tile is a link to the episode the word came from; on a pointer device the person moves, silently, while you hover
   var tile = function (w, i, dup) { return '' +
-    '<a class="wall-tile' + (dup ? ' is-dup' : '') + '" href="/episodes/' + w.slug + '/" data-i="' + i + '"' + (dup ? ' aria-hidden="true" tabindex="-1"' : '') +
+    '<a class="wall-tile' + (dup ? ' is-dup' : '') + '" href="/episodes/' + w.slug + '/" data-i="' + i + '"' + (dup ? ' aria-hidden="true" tabindex="-1" inert' : '') +
       ' aria-label="' + esc(w.word) + '. ' + esc(w.name) + ', episode ' + w.ep + '. Open the episode.">' +
       '<img class="wall-face" src="/assets/wall/' + w.file + '.jpg" alt="" loading="lazy" decoding="async" width="480" height="600"/>' +
       '<span class="wall-shade" aria-hidden="true"></span>' +
@@ -440,17 +440,17 @@ main#doc-main{position:relative;z-index:1}
   grid.innerHTML = WALL.map(function (w, i) { return tile(w, i, false); }).join('') + WALL.map(function (w, i) { return tile(w, i, true); }).join('');
 
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    grid.addEventListener('mouseover', function (e) {
+    grid.addEventListener('pointerover', function (e) {
       var t = e.target.closest('.wall-tile'); if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return;
       var w = WALL[Number(t.dataset.i)], v = t.querySelector('video');
       if (!v) {
         v = document.createElement('video'); v.className = 'wall-video'; v.muted = true; v.loop = true; v.playsInline = true;
         v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.preload = 'auto'; v.poster = '/assets/wall/' + w.file + '.jpg';
-        v.src = '/assets/wall/' + w.file + '.mp4'; t.insertBefore(v, t.querySelector('.wall-shade'));
+        v.src = '/assets/wall/' + w.file + '.mp4'; t.insertBefore(v, t.querySelector('.wall-shade')); v.load();
       }
       t.classList.add('is-hot'); v.currentTime = 0; var p = v.play(); if (p && p.catch) p.catch(function () {});
     });
-    grid.addEventListener('mouseout', function (e) {
+    grid.addEventListener('pointerout', function (e) {
       var t = e.target.closest('.wall-tile'); if (!t || (e.relatedTarget && t.contains(e.relatedTarget))) return;
       t.classList.remove('is-hot'); var v = t.querySelector('video'); if (v) { v.pause(); v.currentTime = 0; }
     });
