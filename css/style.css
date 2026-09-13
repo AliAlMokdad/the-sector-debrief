@@ -3000,3 +3000,28 @@ body:has(.page[data-page="audience"].active) .footer { margin-top: 0; }
   .stats-grid-3 .stat:nth-child(2) { grid-column: 1 / -1; order: -1; }
   .stats-grid-3 .stat-num { font-size: clamp(40px, 12vw, 56px); }
 }
+
+/* ═══════ HOME GROUND: layered paint from the logo colours, home page only ═══════ */
+body:has(.page[data-page="home"].active) {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 520 220%22%3E%3Cfilter id%3D%22b%22 x%3D%22-20%25%22 y%3D%22-40%25%22 width%3D%22140%25%22 height%3D%22180%25%22%3E%3CfeGaussianBlur stdDeviation%3D%222.5%22%2F%3E%3C%2Ffilter%3E%3Cpath d%3D%22M20%2C150 C120%2C20 230%2C40 300%2C120 S440%2C200 500%2C90%22 stroke%3D%22%23C89A3C%22 stroke-width%3D%2234%22 fill%3D%22none%22 stroke-linecap%3D%22round%22 opacity%3D%220.3%22 filter%3D%22url(%23b)%22%2F%3E%3C%2Fsvg%3E") no-repeat right -130px top 30px / 640px auto,
+    url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 480 200%22%3E%3Cfilter id%3D%22b%22 x%3D%22-20%25%22 y%3D%22-40%25%22 width%3D%22140%25%22 height%3D%22180%25%22%3E%3CfeGaussianBlur stdDeviation%3D%222.5%22%2F%3E%3C%2Ffilter%3E%3Cpath d%3D%22M20%2C60 C110%2C150 220%2C150 300%2C80 S420%2C20 460%2C120%22 stroke%3D%22%23B0405A%22 stroke-width%3D%2230%22 fill%3D%22none%22 stroke-linecap%3D%22round%22 opacity%3D%220.22%22 filter%3D%22url(%23b)%22%2F%3E%3C%2Fsvg%3E") no-repeat left -170px top 34% / 580px auto,
+    url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 520 200%22%3E%3Cfilter id%3D%22b%22 x%3D%22-20%25%22 y%3D%22-40%25%22 width%3D%22140%25%22 height%3D%22180%25%22%3E%3CfeGaussianBlur stdDeviation%3D%222.5%22%2F%3E%3C%2Ffilter%3E%3Cpath d%3D%22M20%2C140 C140%2C40 300%2C60 500%2C110%22 stroke%3D%22%232C5BAA%22 stroke-width%3D%2230%22 fill%3D%22none%22 stroke-linecap%3D%22round%22 opacity%3D%220.16%22 filter%3D%22url(%23b)%22%2F%3E%3C%2Fsvg%3E") no-repeat right -160px top 62% / 620px auto,
+    url("data:image/svg+xml,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 viewBox%3D%220 0 460 180%22%3E%3Cfilter id%3D%22b%22 x%3D%22-20%25%22 y%3D%22-40%25%22 width%3D%22140%25%22 height%3D%22180%25%22%3E%3CfeGaussianBlur stdDeviation%3D%222.5%22%2F%3E%3C%2Ffilter%3E%3Cpath d%3D%22M20%2C40 C120%2C150 300%2C150 440%2C60%22 stroke%3D%22%23E8B82C%22 stroke-width%3D%2228%22 fill%3D%22none%22 stroke-linecap%3D%22round%22 opacity%3D%220.3%22 filter%3D%22url(%23b)%22%2F%3E%3C%2Fsvg%3E") no-repeat left 6% bottom -20px / 520px auto,
+    radial-gradient(1000px 640px at 94% 2%, rgba(232,184,44,.30), transparent 62%),
+    radial-gradient(800px 580px at 2% 24%, rgba(184,58,42,.13), transparent 60%),
+    radial-gradient(940px 640px at 98% 50%, rgba(44,91,170,.14), transparent 60%),
+    radial-gradient(860px 580px at 4% 76%, rgba(42,69,48,.12), transparent 60%),
+    radial-gradient(900px 540px at 58% 100%, rgba(232,184,44,.20), transparent 60%),
+    linear-gradient(180deg, #F3ECD9 0%, #EFE8D6 42%, #ECE4CE 100%);
+}
+@media (max-width: 640px) {
+  body:has(.page[data-page="home"].active) {
+    background:
+      radial-gradient(520px 380px at 96% 0%, rgba(232,184,44,.28), transparent 62%),
+      radial-gradient(460px 360px at 0% 28%, rgba(184,58,42,.12), transparent 60%),
+      radial-gradient(520px 400px at 100% 56%, rgba(44,91,170,.13), transparent 60%),
+      radial-gradient(480px 360px at 0% 82%, rgba(42,69,48,.11), transparent 60%),
+      linear-gradient(180deg, #F3ECD9 0%, #EFE8D6 42%, #ECE4CE 100%);
+  }
+}
