@@ -458,12 +458,20 @@ main#doc-main{position:relative;z-index:1}
       }
     };
     var W = innerWidth, H = innerHeight, n = small ? 80 : 130, pw = small ? 4.8 : 6.6;
-    var bursts = [[W * 0.5, H * 0.32, 120], [W * 0.2, H * 0.24, 360], [W * 0.8, H * 0.28, 520], [W * 0.35, H * 0.55, 760], [W * 0.68, H * 0.5, 900], [W * 0.5, H * 0.2, 1120]];
+    // phones: five bursts around the film. laptops: twelve, all over the screen, over five seconds
+    var bursts = small
+      ? [[W * 0.5, H * 0.32, 120], [W * 0.2, H * 0.24, 360], [W * 0.8, H * 0.28, 520], [W * 0.35, H * 0.55, 760], [W * 0.68, H * 0.5, 900]]
+      : [[W * 0.5, H * 0.34, 100], [W * 0.14, H * 0.22, 330], [W * 0.86, H * 0.26, 520], [W * 0.3, H * 0.62, 760], [W * 0.7, H * 0.58, 940],
+         [W * 0.08, H * 0.7, 1200], [W * 0.92, H * 0.68, 1400], [W * 0.42, H * 0.16, 1650], [W * 0.62, H * 0.84, 1900], [W * 0.2, H * 0.44, 2200],
+         [W * 0.8, H * 0.46, 2450], [W * 0.5, H * 0.72, 2750]];
     // laptop: the cities the audience is in rise out of each burst
     var CITIES = ['COPENHAGEN', 'DUBAI', 'GENEVA', 'NEW YORK', 'NAIROBI', 'AMMAN', 'OSLO', 'LONDON', 'DOHA', 'BEIRUT', 'CAIRO', 'ISTANBUL',
                   'DAKAR', 'BOGOTA', 'WASHINGTON', 'BRUSSELS', 'BERLIN', 'PARIS', 'STOCKHOLM', 'THE HAGUE', 'BANGKOK', 'KABUL', 'KHARTOUM', 'JUBA',
                   'ADDIS ABABA', 'KINSHASA', 'KYIV', 'ISLAMABAD', 'TORONTO', 'AMSTERDAM', 'RIYADH', 'TUNIS', 'ABUJA', 'KIGALI', 'MOGADISHU', 'LIMA',
-                  'KUALA LUMPUR', 'MANILA', 'JAKARTA', 'DENMARK'];
+                  'KUALA LUMPUR', 'MANILA', 'JAKARTA', 'DENMARK', 'SAUDI ARABIA', 'MEXICO', 'ROME', 'MADRID', 'GOMA', 'PORT-AU-PRINCE', 'DHAKA',
+                  'CALIFORNIA', 'VIENNA', 'LISBON', 'DUBLIN', 'ATHENS', 'WARSAW', 'PRAGUE', 'BUDAPEST', 'HELSINKI', 'ZURICH', 'KUWAIT', 'MUSCAT',
+                  'ABU DHABI', 'BAGHDAD', 'DAMASCUS', 'SANAA', 'RAMALLAH', 'RABAT', 'ACCRA', 'DAR ES SALAAM', 'MAPUTO', 'BAMAKO', 'SANTIAGO',
+                  'BUENOS AIRES', 'HANOI', 'COLOMBO', 'PHNOM PENH'];
     var names = null, ci = 0;
     if (!small) {
       names = document.createElement('div'); names.setAttribute('aria-hidden', 'true');
@@ -473,9 +481,9 @@ main#doc-main{position:relative;z-index:1}
     }
     var release = function (x, y) {
       if (!names) return;
-      for (var q = 0; q < 3; q++) {
+      for (var q = 0; q < 4; q++) {
         var el = document.createElement('span'), city = CITIES[ci++ % CITIES.length];
-        var size = 16 + Math.floor(rnd() * 3) * 6, dx = (rnd() - 0.5) * 260, dy = (rnd() - 0.5) * 90;
+        var size = 16 + Math.floor(rnd() * 4) * 6, dx = (rnd() - 0.5) * 340, dy = (rnd() - 0.5) * 140;
         el.textContent = city; el.className = 'ft-city';
         el.style.cssText = 'left:' + Math.round(x + dx) + 'px;top:' + Math.round(y + dy) + 'px;font-size:' + size + 'px;animation-delay:' + (q * 140) + 'ms;color:' + (q === 1 ? '#F4F1EA' : '#F0C33C') + ';';
         names.appendChild(el);
@@ -493,7 +501,7 @@ main#doc-main{position:relative;z-index:1}
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.5 + p.life * 0.5), 0, 6.283); ctx.fill();
       }
       ctx.globalAlpha = 1;
-      if (t < 3600) requestAnimationFrame(frame); else { window.removeEventListener('resize', fit); c.remove(); if (names) names.remove(); }
+      if (t < (small ? 3400 : 5600)) requestAnimationFrame(frame); else { window.removeEventListener('resize', fit); c.remove(); if (names) names.remove(); }
     };
     requestAnimationFrame(frame);
   }
