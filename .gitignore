@@ -14,3 +14,6 @@ node_modules/
 *.mp4
 *.mov
 *.avi
+
+# the eleven short clips behind /the-first-ten/ are deliberate (about 0.9 MB in total)
+!assets/wall/*.mp4
