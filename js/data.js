@@ -1089,10 +1089,12 @@ const GUESTS = [
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total Views as of latest sync (2026-09-12): 101,080
+// Total listeners and viewers as of 2026-09-13: YouTube views 106,613 + podcast plays and downloads 334 + Google Search impressions 301 = 107,248.
+// Countries reached: 73 distinct countries across the three platforms. Both figures come from the audience dashboard (thesectordebrief.com/#audience).
 const STATS = {
   episodes: EPISODES.length,
-  views: '101,080'
+  views: '107,248',
+  countries: 73
 };
 
 // The First Ten: a film cut from the first ten episodes, marking 100,000 viewers and listeners.

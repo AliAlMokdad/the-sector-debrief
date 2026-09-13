@@ -159,6 +159,7 @@ function renderHome() {
   const setStat = (id, val) => { const el = $(id); if (el) el.textContent = val; };
   setStat('#stat-episodes', STATS.episodes);
   setStat('#stat-views',    STATS.views);
+  setStat('#stat-countries', STATS.countries);
 }
 
 // ─── THE FILM, as a card in the home grid (sits after Episode 10) ───
