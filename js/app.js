@@ -158,7 +158,7 @@ function homeFilmCard(f) {
   const t = escAttr(f.title);
   return `
     <article class="ep-card film-card">
-      <a class="ep-thumb film-card-thumb" href="/the-first-ten/" aria-label="Open the film: ${t}">
+      <a class="ep-thumb film-card-thumb" href="/100000-viewers-and-listeners/" aria-label="Open the film: ${t}">
         <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
         <div class="ep-thumb-play"></div>
       </a>
@@ -166,7 +166,7 @@ function homeFilmCard(f) {
         <div class="film-card-number" aria-hidden="true">${escAttr(f.milestone)}</div>
         <h3 class="ep-title film-card-title">${t}</h3>
         <div class="ep-actions">
-          <a class="ep-link primary" href="/the-first-ten/">▶ Watch the film</a>
+          <a class="ep-link primary" href="/100000-viewers-and-listeners/">▶ Watch the film</a>
           <a class="ep-link" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
       </div>
@@ -295,7 +295,7 @@ function renderEpisodes() {
 }
 
 // ─── THE FIRST TEN: a silent burst of fireworks on the way to the film page (pointer devices only) ───
-const FILM_PAGE = '/the-first-ten/';
+const FILM_PAGE = '/100000-viewers-and-listeners/';
 function filmCelebrate(e) {
   const t = e.target instanceof Element ? e.target : e.target && e.target.parentElement;
   const a = t && t.closest(`a[href="${FILM_PAGE}"]`);
@@ -367,7 +367,7 @@ function filmMatches(q) {
 function renderFilmFeature(f) {
   const t = escAttr(f.title);
   return `
-    <a class="film-thumb" href="/the-first-ten/" aria-label="Open the film: ${t}">
+    <a class="film-thumb" href="/100000-viewers-and-listeners/" aria-label="Open the film: ${t}">
       <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
       <div class="film-play" aria-hidden="true"></div>
     </a>
@@ -375,7 +375,7 @@ function renderFilmFeature(f) {
       <div class="film-number" aria-hidden="true">${escAttr(f.milestone)}</div>
       <h3 class="film-title">${t}</h3>
       <div class="ep-actions">
-        <a class="ep-link primary" href="/the-first-ten/">▶ Watch the film</a>
+        <a class="ep-link primary" href="/100000-viewers-and-listeners/">▶ Watch the film</a>
         <a class="ep-link film-link-yt" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">Open in YouTube ↗</a>
       </div>
     </div>
