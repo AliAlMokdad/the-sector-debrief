@@ -147,10 +147,6 @@ function renderHome() {
   const filmCard = (typeof FILM !== 'undefined') ? homeFilmCard(FILM) : '';
   latest.innerHTML = epCard(EPISODES[0]) + filmCard + EPISODES.slice(1, filmCard ? 2 : 3).map(epCard).join('');
   bindEpCards(latest);
-  latest.querySelectorAll('[data-film]').forEach(el => {
-    el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
-    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
-  });
 
   const setStat = (id, val) => { const el = $(id); if (el) el.textContent = val; };
   setStat('#stat-episodes', STATS.episodes);
@@ -162,15 +158,15 @@ function homeFilmCard(f) {
   const t = escAttr(f.title);
   return `
     <article class="ep-card film-card">
-      <div class="ep-thumb film-card-thumb" data-film role="button" tabindex="0" aria-label="Watch the film: ${t}">
+      <a class="ep-thumb film-card-thumb" href="/the-first-ten/" aria-label="Open the film: ${t}">
         <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
         <div class="ep-thumb-play"></div>
-      </div>
+      </a>
       <div class="ep-body">
         <div class="film-card-number" aria-hidden="true">${escAttr(f.milestone)}</div>
         <h3 class="ep-title film-card-title">${t}</h3>
         <div class="ep-actions">
-          <button type="button" class="ep-link primary" data-film>▶ Watch the film</button>
+          <a class="ep-link primary" href="/the-first-ten/">▶ Watch the film</a>
           <a class="ep-link" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">YouTube</a>
         </div>
       </div>
@@ -258,10 +254,6 @@ function renderEpisodes() {
     if (!isFiltering && !film.dataset.rendered && typeof FILM !== 'undefined') {
       film.innerHTML = renderFilmFeature(FILM);
       film.dataset.rendered = '1';
-      film.querySelectorAll('[data-film]').forEach(el => {
-        el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
-        el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
-      });
     }
   }
 
@@ -288,10 +280,6 @@ function renderEpisodes() {
   if (isFiltering) {
     // the film answers to its own words (film, 100,000, the title) and leads the results when it does
     grid.innerHTML = (filmHit ? homeFilmCard(FILM) : '') + filtered.map(epCard).join('');
-    grid.querySelectorAll('[data-film]').forEach(el => {
-      el.addEventListener('click', e => { e.preventDefault(); openFilm(FILM); });
-      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openFilm(FILM); } });
-    });
   } else {
     if (featured) {
       featured.innerHTML = renderFeaturedEpisode(filtered[0]);
@@ -319,44 +307,19 @@ function filmMatches(q) {
 function renderFilmFeature(f) {
   const t = escAttr(f.title);
   return `
-    <div class="film-thumb" data-film role="button" tabindex="0" aria-label="Watch the film: ${t}">
+    <a class="film-thumb" href="/the-first-ten/" aria-label="Open the film: ${t}">
       <img src="${escAttr(f.thumb)}" alt="${escAttr(f.name)}: ${t}" loading="lazy" width="1280" height="720"/>
       <div class="film-play" aria-hidden="true"></div>
-    </div>
+    </a>
     <div class="film-body">
       <div class="film-number" aria-hidden="true">${escAttr(f.milestone)}</div>
       <h3 class="film-title">${t}</h3>
       <div class="ep-actions">
-        <button type="button" class="ep-link primary" data-film>▶ Watch the film</button>
+        <a class="ep-link primary" href="/the-first-ten/">▶ Watch the film</a>
         <a class="ep-link film-link-yt" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">Open in YouTube ↗</a>
       </div>
     </div>
   `;
-}
-
-function openFilm(f) {
-  const m = $('#modal-episode');
-  m.removeAttribute('hidden');
-  m.innerHTML = `
-    <button class="modal-close" type="button" aria-label="Close" onclick="closeModal()">×</button>
-    <div class="modal-video">
-      <iframe src="https://www.youtube.com/embed/${escAttr(f.id)}?rel=0" loading="lazy" title="${escAttr(f.name)}: ${escAttr(f.title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-    <div class="modal-body">
-      <h2 class="modal-title" id="modal-episode-title">${escAttr(f.title)}</h2>
-      <div class="modal-actions">
-        <a class="ep-link primary" href="https://www.youtube.com/watch?v=${escAttr(f.id)}" target="_blank" rel="noopener noreferrer">▶ Open in YouTube</a>
-        <a class="ep-link" href="${PLATFORMS.youtube}" target="_blank" rel="noopener noreferrer">The channel</a>
-      </div>
-    </div>
-  `;
-  $$('.modal-backdrop.active').forEach(b => b.classList.remove('is-top'));
-  const backdrop = $('#modal-backdrop');
-  backdrop.classList.add('active', 'is-top');
-  lockBodyScroll();
-  rememberTrigger();
-  setTimeout(() => $('#modal-episode .modal-close')?.focus(), 50);
-  attachTrap(m);
 }
 
 function renderFeaturedEpisode(ep) {

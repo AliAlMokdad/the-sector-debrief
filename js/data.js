@@ -1108,6 +1108,7 @@ const FILM = {
   thumb: 'assets/first-ten.jpg'
 };
 
+
 // ─── Node export shim ────────────────────────────────────────
 // In browsers, this block is silently a no-op (module is undefined).
 // In Node (sync script + tests), this lets `require('./data.js')`
