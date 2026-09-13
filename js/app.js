@@ -77,6 +77,8 @@ const PAGE_TITLES = {
 let searchDebounce = null;
 const LAPTOP = () => matchMedia('(min-width: 961px)').matches;
 let audienceTarget = null; // a part of the framed dashboard to scroll to once it can tell us where it is
+let audienceSettle = 0; // after the first reply the target lives on briefly so a following height report can correct the landing
+['wheel', 'touchstart', 'keydown'].forEach(t => addEventListener(t, () => { audienceTarget = null; }, { passive: true }));
 function askAudienceFrame() {
   const f = document.getElementById('audience-frame');
   if (!audienceTarget || !f || !f.getAttribute('src') || !f.contentWindow) return;
@@ -87,7 +89,7 @@ function _doNavigate(page, opts) {
   const PHONE_FRAME = matchMedia('(max-width: 640px)').matches;
   if (page === 'audience') {
     const f = document.getElementById('audience-frame');
-    if (f && !f.getAttribute('src')) f.setAttribute('src', PHONE_FRAME ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src);
+    if (f && !f.getAttribute('src')) { f.setAttribute('src', PHONE_FRAME ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src); f.addEventListener('load', () => { setTimeout(askAudienceFrame, 120); setTimeout(askAudienceFrame, 900); }, { once: true }); }
     else setTimeout(askAudienceFrame, 80);
   } else {
     audienceTarget = null;
@@ -1379,10 +1381,13 @@ document.addEventListener('DOMContentLoaded', () => {
     navigate(['home','episodes','audience','blog','about','contact'].includes(initial) ? initial : 'home');
   }
 
+  // a cold load leaves history.state empty, so the first click would replace this entry and Back would leave the site
+  if (!history.state || !history.state.page) history.replaceState({ page: state.page }, '', location.href);
+
   $$('[data-nav]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
-      audienceTarget = el.dataset.audience || null;
+      audienceTarget = el.dataset.audience || null; clearTimeout(audienceSettle); audienceSettle = 0;
       navigate(el.dataset.nav);
     });
   });
@@ -1436,13 +1441,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.origin !== AUDIENCE_ORIGIN || !e.data || typeof e.data !== 'object') return;
     const f = document.getElementById('audience-frame');
     if (!f || e.source !== f.contentWindow) return;
-    if (e.data.type === 'sd-audience-height' && Number.isFinite(e.data.height) && e.data.height > 0) {
+    if (e.data.type === 'sd-audience-height' && Number.isFinite(e.data.height) && e.data.height > 0 && !matchMedia('(max-width: 640px)').matches) {
       f.style.height = Math.ceil(e.data.height) + 'px';
       askAudienceFrame();
     } else if (e.data.type === 'sd-audience-pos' && Number.isFinite(e.data.top) && audienceTarget && e.data.what === audienceTarget && state.page === 'audience') {
       const y = f.getBoundingClientRect().top + scrollY + e.data.top - 96;
       scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-      clearTimeout(askAudienceFrame._t); askAudienceFrame._t = setTimeout(() => { audienceTarget = null; }, 2500);
+      if (!audienceSettle) audienceSettle = setTimeout(() => { audienceTarget = null; audienceSettle = 0; }, 1500);
     } else if (e.data.type === 'sd-audience-scroll' && Number.isFinite(e.data.top) && state.page === 'audience' && !matchMedia('(max-width: 640px)').matches) {
       const y = f.getBoundingClientRect().top + scrollY + e.data.top - Math.max(0, (innerHeight - (e.data.height || 40)) / 2);
       scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
@@ -1451,7 +1456,11 @@ document.addEventListener('DOMContentLoaded', () => {
   let audienceRt;
   // crossing the phone breakpoint swaps the frame between its standalone and height-synced modes
   let audienceMode = matchMedia('(max-width: 640px)').matches;
-  addEventListener('resize', () => { clearTimeout(audienceRt); audienceRt = setTimeout(() => { const now = matchMedia('(max-width: 640px)').matches; if (now === audienceMode) return; audienceMode = now; const f = document.getElementById('audience-frame'); if (f && f.getAttribute('src')) { f.style.height = ''; f.setAttribute('src', now ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src); } }, 150); });
+  // the phone frame sits under the fixed nav, whose height depends on how the wordmark wraps: measure it, do not assume it
+  const navH = () => { const n = document.querySelector('.nav'); if (n && !n.classList.contains('scrolled')) document.documentElement.style.setProperty('--nav-h', Math.round(n.getBoundingClientRect().height) + 'px'); };
+  navH(); addEventListener('load', navH); if (document.fonts && document.fonts.ready) document.fonts.ready.then(navH);
+  const navEl = document.querySelector('.nav'); if (navEl && window.ResizeObserver) new ResizeObserver(navH).observe(navEl);
+  addEventListener('resize', () => { clearTimeout(audienceRt); audienceRt = setTimeout(() => { navH(); const now = matchMedia('(max-width: 640px)').matches; if (now === audienceMode) return; audienceMode = now; const f = document.getElementById('audience-frame'); if (f && f.getAttribute('src')) { f.style.height = ''; const url = now ? f.dataset.src.replace('#all', '?standalone=1#all') : f.dataset.src; try { f.contentWindow.location.replace(url); } catch (err) { const c = f.cloneNode(false); c.removeAttribute('style'); c.setAttribute('src', url); f.replaceWith(c); } } }, 150); });
 
   bindContactForm();
   bindSearch();
