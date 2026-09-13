@@ -3062,8 +3062,9 @@ body:has(.page[data-page="home"].active) {
 }
 
 
-/* narrow phones: the wordmark stays on one line so the nav keeps one height */
-@media (max-width: 360px) { .nav-logo { white-space: nowrap; font-size: 13px; } }
+/* narrow phones: the wordmark and the Listen button each stay on one line, so the header keeps the height it has on a wider phone */
+@media (max-width: 389px) { .nav-logo, .nav-cta { white-space: nowrap; } }
+@media (max-width: 360px) { .nav-logo { font-size: 13px; } }
 @media (max-width: 340px) { .nav-logo { font-size: 12px; gap: 8px; } .nav-cta { padding: 8px 8px; } }
 
 
