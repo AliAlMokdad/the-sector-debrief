@@ -76,6 +76,12 @@ const PAGE_TITLES = {
 // stale timer re-renders the now-hidden grid 120ms after leaving the page).
 let searchDebounce = null;
 const LAPTOP = () => matchMedia('(min-width: 961px)').matches;
+let audienceTarget = null; // a part of the framed dashboard to scroll to once it can tell us where it is
+function askAudienceFrame() {
+  const f = document.getElementById('audience-frame');
+  if (!audienceTarget || !f || !f.getAttribute('src') || !f.contentWindow) return;
+  try { f.contentWindow.postMessage({ type: 'sd-audience-where', what: audienceTarget }, 'https://alialmokdad.github.io'); } catch (e) {}
+}
 function _doNavigate(page, opts) {
   opts = opts || {};
   const forcedHome = page === 'audience' && !LAPTOP();
@@ -83,6 +89,9 @@ function _doNavigate(page, opts) {
   if (page === 'audience') {
     const f = document.getElementById('audience-frame');
     if (f && !f.getAttribute('src')) f.setAttribute('src', f.dataset.src);
+    else setTimeout(askAudienceFrame, 80);
+  } else {
+    audienceTarget = null;
   }
   // Reset the episode search when leaving the Episodes page so the input value
   // and `state.search` don't desync — returning to Episodes would otherwise show
@@ -1374,6 +1383,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $$('[data-nav]').forEach(el => {
     el.addEventListener('click', e => {
       e.preventDefault();
+      audienceTarget = el.dataset.audience || null;
       navigate(el.dataset.nav);
     });
   });
@@ -1429,6 +1439,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!f || e.source !== f.contentWindow) return;
     if (e.data.type === 'sd-audience-height' && Number.isFinite(e.data.height) && e.data.height > 0) {
       f.style.height = Math.ceil(e.data.height) + 'px';
+      askAudienceFrame();
+    } else if (e.data.type === 'sd-audience-pos' && Number.isFinite(e.data.top) && audienceTarget && e.data.what === audienceTarget && state.page === 'audience') {
+      const y = f.getBoundingClientRect().top + scrollY + e.data.top - 96;
+      scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      clearTimeout(askAudienceFrame._t); askAudienceFrame._t = setTimeout(() => { audienceTarget = null; }, 2500);
     } else if (e.data.type === 'sd-audience-scroll' && Number.isFinite(e.data.top) && state.page === 'audience' && LAPTOP()) {
       const y = f.getBoundingClientRect().top + scrollY + e.data.top - Math.max(0, (innerHeight - (e.data.height || 40)) / 2);
       scrollTo({ top: Math.max(0, y), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
