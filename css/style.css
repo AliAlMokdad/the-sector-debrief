@@ -3035,3 +3035,9 @@ body:has(.page[data-page="home"].active) {
   .audience-frame { height: calc(100dvh - 70px); min-height: 480px; }
   body:has(.page[data-page="audience"].active) .footer { margin-top: 0; }
 }
+
+/* phones: Audience reach is one screen, the nav and the dashboard; the footer stays on the other pages */
+@media (max-width: 640px) {
+  body:has(.page[data-page="audience"].active) .footer { display: none; }
+  body:has(.page[data-page="audience"].active) { overflow: hidden; }
+}
