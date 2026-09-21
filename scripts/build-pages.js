@@ -795,7 +795,10 @@ function buildBlogPage(post) {
   };
 
   // related essays: three others, prefer same kind (episode essays)
-  const related = BLOG_POSTS.filter(p => p.slug !== post.slug).slice(0, 3);
+  // same kind first (episode essay, reflection, or editorial), then the rest in list order
+  const kindOf = (p) => p.kind === 'reflection' ? 'reflection' : (p.pinned || p.epId === null) ? 'editorial' : 'essay';
+  const others = BLOG_POSTS.filter(p => p.slug !== post.slug);
+  const related = [...others.filter(p => kindOf(p) === kindOf(post)), ...others.filter(p => kindOf(p) !== kindOf(post))].slice(0, 3);
   const relatedHtml = related.map(p => {
     const rc = blogCoverSVG(p);
     const rl = p.kind === 'reflection' ? 'Reflections' : (p.pinned || p.epId === null) ? 'Editorial' : `Episode ${p.epN}`;
