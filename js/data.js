@@ -286,6 +286,7 @@ const BLOG_POSTS = [
     coverCaption: 'The Sector Debrief. Still recording.',
     slug: 'the-conversation-after-the-conversation',
     title: 'The Conversation After the Conversation',
+    seoDescription: 'Why would somebody give an hour to three people thinking out loud with no conclusion at the end? Why share it? Why subscribe after one episode?',
     excerpt: 'Five people liked your Short. Twelve people liked your Short. Twenty people viewed your video. You have three new subscribers. My laptop keeps buzzing.',
     readTime: '15 min',
     reflections: [],

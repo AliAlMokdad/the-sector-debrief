@@ -29,7 +29,7 @@ const ROOT = path.resolve(__dirname, '..');
 const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
-const ASSET_V = '2026-09-21c';                 // cache-bust for /css and shared assets
+const ASSET_V = '2026-09-21d';                 // cache-bust for /css and shared assets
 const TODAY = '2026-09-21';
 const TRANSCRIPT_DATE = '2026-09-21';          // when the newest transcript was published
                      // build date (Date.now is avoided for reproducibility)
@@ -768,7 +768,7 @@ function buildBlogPage(post) {
   const authorHref = /^https?:\/\//.test(post.authorUrl || '') ? post.authorUrl : '/about/#ali-al-mokdad';
   const postDate = ep ? ep.date : (post.date || '2026-01-01');
   const title = `${post.title} | The Sector Debrief`;
-  const desc = clip(post.excerpt || stripTags(post.body), 158);
+  const desc = clip(post.seoDescription || post.excerpt || stripTags(post.body), 158);
   const cover = blogCoverSVG(post);
   const ogImage = post.cover ? `${SITE}/${esc(post.cover)}` : ep ? ytThumb(ep.id) : OG_DEFAULT;
 
@@ -780,7 +780,7 @@ function buildBlogPage(post) {
 
   const blogLD = {
     '@context': 'https://schema.org', '@type': 'BlogPosting',
-    headline: post.title, description: post.excerpt ? stripTags(post.excerpt) : desc,
+    headline: post.title, description: post.seoDescription || (post.excerpt ? stripTags(post.excerpt) : desc),
     url, mainEntityOfPage: url, image: ogImage,
     datePublished: postDate,
     dateModified: postDate,
@@ -791,6 +791,9 @@ function buildBlogPage(post) {
     publisher: { '@type': 'Organization', name: 'The Sector Debrief', '@id': SITE + '/#organization',
       logo: { '@type': 'ImageObject', url: SITE + '/assets/apple-touch-icon.png' } },
     isPartOf: { '@type': 'Blog', '@id': SITE + '/blog/#blog', name: 'The Sector Debrief Blog' },
+    // a post first published elsewhere by its author declares the original, so the two are
+    // not read as duplicates; this page stays self-canonical
+    ...(post.source ? { isBasedOn: post.source } : {}),
     ...(ep ? { about: { '@type': 'PodcastEpisode', name: ep.title, url: episodeUrl(ep) } } : {}),
   };
 
