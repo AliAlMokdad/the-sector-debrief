@@ -15,6 +15,18 @@ const PLATFORMS = {
 // All episodes from the playlist (newest first)
 const EPISODES = [
   {
+    n: 11,
+    id: 'QYzV7tKraLI',
+    slug: 'collaboration-over-control',
+    transcript: true,
+    title: 'The Joy of Collaboration Over Control',
+    guest: 'Susan le Jeune d\'Allegeershecque',
+    date: '2026-09-20',
+    duration: '66 min',
+    description: 'A conversation with Susan le Jeune d\'Allegeershecque, Secretary General of St John International, the federation of independent St John charities present in 44 countries and territories, more than 900 years after it began caring for pilgrims in the Holy Land. St John never had to localise, because it was locally led by design, and Susan is candid about what that costs: in a loose federation, oversight is exercised by cooperation, not coercion. She walks through what the centre is for, the relationship agreement that all but three of the smaller establishments welcomed, the tough decisions on leaders who no longer live the values, and the joy of leading without control. Kim Kucinskas asks about the people who do not make it across the bridge, Thomas Jepson-Lay asks how expensive values are to live, and Ali Al Mokdad explains why the electric light did not come from improving the candles. Then the microphones stay on for a hosts-only Hot Debrief: is the sector\'s problem psychological or structural?',
+    themes: ['Localisation', 'Leadership', 'Federations']
+  },
+  {
     n: 10,
     id: 'zr4ZHoHXXrg',
     slug: 'inside-the-impact-alliance',
@@ -180,7 +192,10 @@ const QUOTES = [
   { text: "I'd much rather someone who asks a good question, or admits they don't know what they're doing, than someone who arrives with a five-point plan.", source: "Kim Kucinskas",           color: "q-forest" },
   { text: "The guise of familiarity gets put forward as certainty, and that's just managed decline.",                            source: "Thomas Jepson-Lay",           color: "q-rust" },
   { text: "We are practising our way into what the future will look like. We don't claim to have it all worked out, but we do promise to be transparent about what we're learning.", source: "Vanessa Self",  color: "q-cobalt" },
-  { text: "We have to distinguish between efficiency and transformation. I'm not talking only about organisational transformation. I'm talking about the ecosystem.",               source: "Ali Al Mokdad", color: "q-crimson" }
+  { text: "We have to distinguish between efficiency and transformation. I'm not talking only about organisational transformation. I'm talking about the ecosystem.",               source: "Ali Al Mokdad", color: "q-crimson" },
+  { text: "It is one of the joys of this organisation that we don't control, we don't try to control, and we allow others to flourish.", source: "Susan le Jeune d'Allegeershecque", color: "q-mustard" },
+  { text: "The electric light didn't come from continuous improvement of the candles.", source: "Ali Al Mokdad", color: "q-forest" },
+  { text: "But gosh, how do you get through it if you can't find the joy?", source: "Kim Kucinskas", color: "q-rust" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
@@ -257,6 +272,84 @@ const BLOG_POSTS = [
 <p>If you got this far and you have not clicked the Pause Button yet, scroll back up and try it. Read the question that comes up. Sit with it for one minute before you do anything else.</p>
 
 <p>That minute is the actual product on this site. Everything else is wrapping.</p>`
+  },
+  {
+    epId: 'QYzV7tKraLI',
+    epN: 11,
+    slug: 'the-joy-of-not-controlling',
+    title: 'The Joy of Not Controlling: What a 900-Year-Old Federation Knows About Localisation',
+    excerpt: 'Notes from our conversation with Susan le Jeune d\'Allegeershecque, Secretary General of St John International. A federation of independent charities in 44 countries and territories never had to localise, because it was built that way, and she was candid about what holding it together by cooperation rather than coercion actually costs.',
+    readTime: '11 min',
+    reflections: [
+      "St John never had to localise because it was built locally led. If you drew your organisation's structure as it actually operates, not as the org chart says, where does control really sit, and what would have to be true for it to sit somewhere else?",
+      "Susan describes oversight in a loose federation as exercised mainly by cooperation, not coercion. Which of your controls work only because people cooperate with them, and what are you doing to keep that cooperation earned?",
+      "All but three of the smaller establishments welcomed a relationship agreement, because they wanted the relationship defined. Where in your partnerships is the absence of a defined relationship being mistaken for respect?",
+      "Kim asks how you get through it if you cannot find the joy. When did you last name, out loud and in a work setting, what is going well? What stopped you the other times?",
+      "Ali says the electric light did not come from continuous improvement of the candles. Name the one thing in your work you keep improving that might need to be reimagined instead, and one thing from the sector's past worth bringing back."
+    ],
+    body: `<p>St John is the organisation many people know as their local St John ambulance at sporting and community events, and very few know as a global federation. Susan le Jeune d'Allegeershecque is Secretary General of St John International, the small office in London that sits at the centre of that federation, and she joined Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad after more than thirty years in the diplomatic service and five in this job. The conversation was about localisation, but it arrived from an unusual direction: an organisation that never had to localise because it was locally led from the start. Then she left, the microphones stayed on, and the three of us argued about whether the sector's problem is psychological or structural. Both halves are in the episode.</p>
+
+<h2>Locally Led by Design</h2>
+
+<p>By Susan's account, St John began more than 900 years ago providing medical care to pilgrims in the Holy Land, was disbanded in England under the Reformation, and was restarted in the Victorian era, providing the first ambulances to the victims of industrial accidents in mines, railways, mills and factories. Today it is present in 44 countries and territories, most of them in the Commonwealth, and it is both a charity and an order of chivalry. Its work is first aid and pre-hospital care, the training that lets others provide it, and community healthcare adapted to each country. Volunteers do most of the delivering, nearly 200,000 of them by her count, drawn from the communities they serve.</p>
+
+<p>Asked what localisation means for St John, she gave the answer the rest of the sector has spent a decade working towards: it did not have to localise, because it is a federation of independent charities, each locally led and locally focused, with oversight from a board in London. Nobody in London tells the people in Malawi or the Solomon Islands what they need. That is the advantage, and she was equally clear about the cost.</p>
+
+<blockquote>In a loose federation, your control and your oversight has to be exercised mainly by cooperation, not coercion.</blockquote>
+
+<p>Safeguarding matters in an organisation full of young volunteers. Quality matters when the service is medical care. The tension between the benefits of a loose federation and the need for real oversight is, in her words, what her team grapples with on a daily basis. The rest of the conversation was about how they do it.</p>
+
+<h2>What the Centre Is For</h2>
+
+<p>The design she described is deliberately split. In the late 1990s, by her telling, a deliberate decision was made in England to let go of control, and a very small international office was set up, around fifteen people today. Since then, three informal regions, the Americas, Europe with the Middle East and Africa, and Asia Pacific, have each had a senior leader take on the job of bringing establishments together. The regions are not there to police or wave a big stick. They encourage development, foster improvement, and connect St John in New Zealand with St John in Fiji, so that good practice moves between establishments without going through the centre. The harder-edged work, standards, governance, and enforcement when it is needed, comes from her office in London. As she put it, it means her team does not get to do the nice stuff quite as often, and that is fine.</p>
+
+<p>The centre also builds tools. A resource hub now makes the federation's best practice available to every establishment. London is fundraising seriously for the first time, not as a handout but against sustainable plans, and a new small grant fund gives establishments a yes or no within two weeks, decided by a panel of practitioners drawn from across the federation rather than by anyone in her office. Ali's question was how a centre supports and amplifies local solutions without getting in their way, and her answer was to define very clearly who does what, and then to stay on your own side of the line.</p>
+
+<h2>The Joy Question</h2>
+
+<p>Thomas asked for something that is in short supply in these conversations. Most of the sector approaches decentralisation with dread, fear, and trepidation about letting go of control. What, he asked, is the joy of leading a global entity that is so decentralised? She answered that part first.</p>
+
+<blockquote>It is one of the joys of this organisation that we don't control, we don't try to control, and we allow others to flourish.</blockquote>
+
+<p>The image she reached for was children leaving home for university and starting their own lives. It was not always like that; the central priory in England once ran the world from London. The letting go was a decision, and its unfinished business was the relationship with the smaller establishments, most of them in the global South, where there was no governance framework at all: they could not see the benefit of the centre, and the centre had no levers to support them. Over the last eighteen months, by her account, a relationship agreement has been written and put in place with the smaller establishments. She called the result a huge surprise: instead of the resistance and the post-colonial reading of London crawling all over them that she had thought possible, all but three welcomed it, because they wanted the relationship defined: what they could expect from the centre, what was expected of them, and where the support would come from. The agreement also says what happens when values, standards, or financial transparency are not honoured, which she called the part that gives reputation and trust their meaning.</p>
+
+<blockquote>If your ego is not massive, then actually one of the most satisfying things you can do is to see the people that work with you flourish and sometimes overtake you.</blockquote>
+
+<p>Her examples of shared learning were concrete. A mother and baby programme now running in six African countries, Ghana the newest, has reached over a million women, men and children in ten years, and its methodology is being transferred to community first-aid training in the Caribbean. The fundraising is not one-directional either: colleagues in Western Australia need money for programmes with remote Indigenous communities that their own charitable income cannot cover. The point she kept returning to was that it is not London deciding what is needed.</p>
+
+<h2>Not Everyone Comes Along</h2>
+
+<p>Kim named the elephant: not everyone stays for the journey, and the person who was right for the organisation five years ago may not be right for where it is going. Her own shorthand for it is three questions about each colleague: do they get it, do they want it, can they do it. Ali's answer was that you do not always need to bring everyone on board, that progress does not mean everyone shares the same idea, and that the sector is fluent in the language of localisation, digitalisation, and collaboration while still following donor strategies in practice.</p>
+
+<p>Susan's answer was the most candid stretch of the conversation. None of the transformation, by her account, would have happened without the organisation's most senior leader outside the Royal Family, an Australian from the private health sector who came in clear that things needed to change. Leadership in the establishments has changed, and so has who gets shortlisted; a global leadership development programme now brings younger and far more diverse people from across the federation to London and tells them they are empowered to challenge what they see at home. Her own team has had significant turnover. And the difficult cases are real: a fraud dealt with by not so gentle persuasion, legal routes to close an organisation whose leadership no longer serves its charitable objects, and the feeling in her office of always being the bad guys. She would much rather be helping people flourish, she said, but somebody has to do it.</p>
+
+<blockquote>If we're serious about being a values driven organisation, which we are, then that has to mean something. It's not just a post-it note stuck on the wall.</blockquote>
+
+<h2>What Leaders of Tomorrow Need</h2>
+
+<p>Kim asked the three of them to draw the scattered threads together. Susan's list was courage, to take the tough decisions; curiosity, which for her means talking to the woman visiting villages in Malawi and the person training community health workers in the Caribbean, not only to the senior people; and communication, because the best vision in the world goes nowhere if the organisation cannot see how it relates to them. Thomas added creativity and discernment, the discipline of staying with the trouble instead of rushing to fix, and he put the relational piece at the centre of it.</p>
+
+<blockquote>It's about that emotional intelligence to be relational with people and have that human-to-human connection with individuals because that's where trust is built.</blockquote>
+
+<p>Ali, who admitted to an unpublished book of twenty-five chapters on the question, condensed it to two ideas. The first came from a friend.</p>
+
+<blockquote>The electric light didn't come from continuous improvement of the candles.</blockquote>
+
+<p>Sometimes leadership is not optimising what exists but pausing, being curious and courageous, and reimagining how something works. The second was that hope and history rhyme: there is hope in history, and emerging leaders should step back into the record of past interventions and designs and bring what worked into the present. Ali tied the pairing to St John, the hope being that it can save more lives, and Susan took the history: 900 years of treating whoever comes to the door in the same way, which she said young volunteers find exactly as attractive as the purpose.</p>
+
+<h2>Values Are Expensive</h2>
+
+<p>Kim connected Ali's reimagining to her own language of small-t and big-T transformation: the incremental changes in how you operate and who is at the table, and the questions about whether you should even be here, which a leader has to hold at the same time. Susan turned it towards the questions St John is grappling with now, in what she called a big, wide, crazy, scary world: staying apolitical so that first aid can be given to protesters and security forces alike, and drawing lines on whose money to take. Thomas raised the finding from corporate surveys that values are expensive to live when money gets tight, and asked how that lands in the charitable space. Her answer was a fictional country whose government offers St John access to one ethnic minority but not another. She was clear what she thinks the answer should be, and clear that the board has to have the conversation before it arrives, revisit it, and resist the quick fix.</p>
+
+<h2>The Hot Debrief</h2>
+
+<p>After Susan left, Kim's first observation was how much transfers from an organisation outside the multilateral system into it, and that in some ways St John's conditions are easier, otherwise everyone would have done it by now. Thomas disagreed with the conclusion: he thinks the sector is held back by a psychological step it cannot bring itself to take, not by missing knowledge. Ali agreed that fear does a lot of the work, and added two more: proceduralism, organisations so focused on the process that they lose the outcome, and an imagination gap, INGOs that cannot picture what the alternative looks like in practice and keep rebranding what has already been tried. Kim pushed back on behalf of the CEO with three hundred people on payroll: the funding constraints and the system are structural too, and nobody is starting from a blank page. Thomas reached for heritage: the founders of Save the Children gave their first ten thousand pounds to a local organisation, so localisation is where that organisation began, not a departure from it. Kim proposed it as the next hosts-only episode, and Thomas agreed.</p>
+
+<blockquote>But gosh, how do you get through it if you can't find the joy?</blockquote>
+
+<p>Kim's question is the one we would ask you to carry out of this episode. Ali confessed to unfollowing some NGOs whose language divides more than it builds, to keep some room for what excites and motivates. Thomas said the joy never features in the discourse of change, which is always about the angst of it. And Susan, who said she had found plenty of joy in an afternoon of talking about the hard parts, said that Ali's framing of her work as humanitarian diplomacy in action brings the two halves of her life together.</p>
+
+<p>A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and that interpretation is ours. The episode itself, including the Hot Debrief, is the place to hear it in full.</p>`
   },
   {
     epId: 'zr4ZHoHXXrg',
@@ -1085,15 +1178,24 @@ const GUESTS = [
     linkedin: 'https://www.linkedin.com/in/vanessa-self-7155aa15a/',
     photo: 'assets/guest-vanessa.jpg', photoW: 440, photoH: 440,
     epN: 10, epSlug: 'inside-the-impact-alliance'
+  },
+  {
+    name: 'Susan le Jeune d\'Allegeershecque',
+    slug: 'susan-le-jeune-d-allegeershecque',
+    role: 'Secretary General, St John International',
+    bio: 'Secretary General of St John International, the London office at the centre of the St John federation, after more than thirty years in the British diplomatic service, latterly as High Commissioner to Canada. On the show she described an organisation that never had to localise because it was locally led by design, and was candid about holding a loose federation together by cooperation rather than coercion, and about the joy of leading without control.',
+    linkedin: 'https://uk.linkedin.com/in/susan-le-jeune-d-allegeershecque-35b78659',
+    photo: 'assets/guest-susan.jpg', photoW: 440, photoH: 440,
+    epN: 11, epSlug: 'collaboration-over-control'
   }
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total listeners and viewers as of 2026-09-13: YouTube views 106,613 + podcast plays and downloads 334 + Google Search impressions 301 = 107,248.
+// Total listeners and viewers as of 2026-09-21: YouTube views 109,030 (Studio, supplied by Ali on release day) + podcast plays and downloads 334 + Google Search impressions 301 (both carried from the 13 Sep audience check) = 109,665.
 // Countries reached: 73 distinct countries across the three platforms. Both figures come from the audience dashboard (thesectordebrief.com/#audience).
 const STATS = {
   episodes: EPISODES.length,
-  views: '107,248',
+  views: '109,665',
   countries: 73
 };
 
