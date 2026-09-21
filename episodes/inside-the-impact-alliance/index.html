@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
-  <link rel="stylesheet" href="/css/style.css?v=2026-09-21a"/>
+  <link rel="stylesheet" href="/css/style.css?v=2026-09-21b"/>
   <style>
 :root{--cream:#EFE8D6;--cream-soft:#F5F0E2;--cream-deep:#E5DCC3;--paper:#FAF6EA;--ink:#1A1614;--ink-soft:#2C2622;--ink-mute:#524A42;--cobalt:#2C5BAA;--cobalt-deep:#1A3866;--crimson:#B83A2A;--crimson-deep:#8B2818;--mustard:#E8B82C;--forest:#2A4530;--rust:#A0531F;--fd:'Fraunces',Georgia,serif;--fb:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 .doc-body{visibility:visible!important;opacity:1!important;margin:0;background:var(--cream);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -80,7 +80,8 @@
 .doc-prose strong{font-weight:600;color:var(--ink)}
 .doc-prose a{color:var(--cobalt-deep)}
 .doc-cover{width:100%;aspect-ratio:8/5;border-radius:12px;overflow:hidden;margin:0 0 30px;background:#000;box-shadow:0 20px 50px -24px rgba(26,22,20,.5)}
-.doc-cover svg{width:100%;height:100%;display:block}
+.doc-cover svg,.doc-cover img{width:100%;height:100%;display:block;object-fit:cover}
+.doc-cover-caption{font-size:13px;color:var(--ink-mute);margin:-20px 0 26px;letter-spacing:.2px}
 /* chips + buttons */
 .doc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0}
 .doc-chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);background:var(--cream-deep);border-radius:20px;padding:6px 13px}

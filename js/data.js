@@ -274,6 +274,276 @@ const BLOG_POSTS = [
 <p>That minute is the actual product on this site. Everything else is wrapping.</p>`
   },
   {
+    // Reflections: Ali's own LinkedIn article, reproduced exactly (text and hyperlinks). Not an episode essay.
+    epId: null,
+    epN: 91,
+    kind: 'reflection',
+    author: 'Ali Al Mokdad',
+    authorUrl: 'https://www.linkedin.com/in/ali-al-mokdad',
+    date: '2026-09-19',
+    source: 'https://www.linkedin.com/pulse/conversation-after-ali-al-mokdad-ffjve/',
+    cover: 'assets/blog-conversation-after.jpg', coverW: 1280, coverH: 720,
+    coverCaption: 'The Sector Debrief. Still recording.',
+    slug: 'the-conversation-after-the-conversation',
+    title: 'The Conversation After the Conversation',
+    excerpt: 'Five people liked your Short. Twelve people liked your Short. Twenty people viewed your video. You have three new subscribers. My laptop keeps buzzing.',
+    readTime: '15 min',
+    reflections: [],
+    body: `<p>Five people liked your Short.</p>
+
+<p>Twelve people liked your Short.</p>
+
+<p>Twenty people viewed your video.</p>
+
+<p>You have three new subscribers.</p>
+
+<p>My laptop keeps buzzing. A bar slides in at the corner of the screen, sits there, slides away. Another one behind it.</p>
+
+<p>I don't like notifications. Most apps on my phone are muted. Most on my laptop too. I don't like things entering my rhythm before I have decided I want them there.</p>
+
+<p>I should have muted these too. But I would close the tab, come back an hour later, and the number had moved again. People I had never met, doing something with a conversation I had had with two friends.</p>
+
+<p>So I stopped closing them and started reading them.</p>
+
+<p>Why would somebody give an hour to three people thinking out loud with no conclusion at the end? Why share it? Why subscribe after one episode?</p>
+
+<p>A few days ago, the question got bigger. <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/oc6JpmMzj1o?si=KZHnXrdd0b_Q_iXj">The counter of the Sector Debrief had passed 100,000 views on YouTube.</a></p>
+
+<p>Later that day I went looking at the other platforms. <a target="_blank" rel="noopener noreferrer" href="https://thesectordebrief.com/#audience">Spotify. The website. It reached more than seventy countries.</a></p>
+
+<p>And then I did the thing I know how to do with a question I cannot answer.</p>
+
+<p>Black coffee. Sticky notes. Papers. A seat in front of a window. Earbuds in.</p>
+
+<p>Thinking. Reflecting.</p>
+
+<p>I started writing.</p>
+
+<p>Looking at the numbers sparks my curiosity. People from different age groups, sectors, cities and parts of the world. Some listening, some watching, some reading transcripts, some translating them. Some watching on TV instead of phones or laptops.</p>
+
+<p>People I know. People I don't. People I will probably never meet.</p>
+
+<p>Numbers become numbers very quickly. This one did not. It sparked curiosity and made me think about the Why.</p>
+
+<p>To understand the why, I have to go back.</p>
+
+<p>In October 2024, I gave a webinar called <a target="_blank" rel="noopener noreferrer" href="https://www.developmentaid.org/news-stream/post/186496/webinar-humanitarian-operational-system">Is the Humanitarian Operational System Reaching Its Expiration Date?</a></p>
+
+<p>Not exactly the most comforting title.</p>
+
+<p>For a couple of years before that, I had been talking and writing about how we design humanitarian and development programmes, how we run operations, how organisations structure themselves, and why the machinery kept breaking, how the system kept failing the people it promised to serve. I kept seeing things that, to me, looked like symptoms. So I started calling them that. System symptoms. Expiry date symptoms.</p>
+
+<p>The webinar was an attempt to put some of them together. This is what I am seeing. This is what I think is not working. This is why I think it is important to pay so much attention.</p>
+
+<p>Afterwards, people reached out to me through LinkedIn, email and coffee invitations. People I knew. People I didn't. Some were curious. Some challenged the argument. Some wanted the data behind my assessment.</p>
+
+<p>But there was a pattern. A lot of people thought I was exaggerating. Maybe I was frustrated with the sector. Maybe I was pessimistic.</p>
+
+<p>Others were more direct.</p>
+
+<p>Ali, you should stop saying this. It does not help. It will end your career.</p>
+
+<p>It was so strange. People agreed in private but were quiet in public and said something totally different.</p>
+
+<p>It felt like the sector had so many private truths and public lies.</p>
+
+<p>On 25 December 2024, <a target="_blank" rel="noopener noreferrer" href="https://www.developmentaid.org/news-stream/post/189626/trump-global-humanitarian-action">I was invited to speak in another webinar, this time to talk about what I thought might happen next.</a> The hosts were generous enough to give me the space to share my thoughts. I shared what I was seeing. Again, some people thought I was exaggerating.</p>
+
+<p>Then after almost a month came the USAID cuts, and everything that followed.</p>
+
+<p>There is no need to retell that story to people in this sector. We lived it. Projects stopped. Organisations restructured. People lost jobs. Offices closed. Budgets disappeared. The shock moved through organisations, communities and families.</p>
+
+<p>For weeks and months afterwards, people reached out. Some wanted advice. Some wanted to know how I saw that coming. Some wanted to think together. Some wanted a comforting voice or optimistic message.</p>
+
+<p>What stayed with me was something else.</p>
+
+<p>Guilt.</p>
+
+<p>A strange kind of guilt. I had spoken about the limitation, change, the need for transformation. Written about it, presented it, repeated it. But somehow I felt I had failed to make the message go far enough.</p>
+
+<p>Not because I wanted to be right. I would have preferred to be wrong.</p>
+
+<p>But because perhaps some things could have been done earlier. Perhaps we could have changed before change was forced on us.</p>
+
+<p>I went quiet for a while. Thinking. Mapping. Writing. Trying to understand what my role in all of this was. What do I actually want to do? What is useful? What is noise? What do you do when you think you can see something coming but don't know how to make people care about it?</p>
+
+<p>I had been writing another book for two years. I parked it, the manuscript went into a folder I did not open again that year.</p>
+
+<p>And something else came out instead. <a target="_blank" rel="noopener noreferrer" href="https://cphpost.dk/2025-05-21/business-education/career/an-internationals-book-becomes-a-bestseller-in-denmark/">Quantum Humanitarian.</a> A place to think out loud. Not recommendations. Not action points. Not an executive summary. Just thoughts, frustrations, hope, caring, challenge, contradictions.</p>
+
+<p>Around the same time, the <a target="_blank" rel="noopener noreferrer" href="https://smallccut.org/">Small c Cut series</a> started taking shape. We talk constantly about Transformation. Big T. Strategies, roadmaps, reorganisations, new operating models. What if, instead, we looked closely at one thing that was not working and made a small cut? Why are we doing this? Does it still make sense? What would happen if we stopped? Small c. No revolution. Just a cut.</p>
+
+<p>The book travelled. The Small c pieces travelled. More invitations came, and most of the time I said yes, sometimes when I probably should have said no, because I thought speaking mattered. And in many ways it worked. I met people. I entered networks. Conversations became projects. Ideas moved.</p>
+
+<p>The more I was invited to speak in events, the more I felt I was speaking and not really having conversations.</p>
+
+<p>There were usually a few questions already prepared. There was an agenda. Often a long introduction. And sometimes, before we started, I was told: maybe don't go too much into this. Probably better not to discuss that. Let's be careful with this one.</p>
+
+<p>Understandable. Organisations have positions. Donors have agendas. People have titles. Institutions have reputations. Communications teams have jobs to do. Political environments have consequences. But layer after layer, something happens. The conversation gets smaller. The more important the issue, the heavier the room. The heavier the room, the more careful the language.</p>
+
+<p>A room with a herd of elephants in it, and all of us talking around them with our eyes closed. I open one to check they are still there. Then I hint.</p>
+
+<p>We work in a sector that talks a lot about courage, but we have also become very good at self-censorship. Sometimes somebody tells us not to speak. Often nobody has to. We do the work ourselves. We edit the sentence before saying it. We calculate. What will my organisation think? What will the donor think? Will someone take one sentence out of context? Will this affect my work? My reputation? My next job? Eventually, everybody can end up saying very reasonable things. And nobody says very much.</p>
+
+<p>I appreciated those events, webinars and podcasts. I still do. But I started craving something else. Not another space where someone had five questions and I had five answers. I wanted to think with someone. I wanted to say something unfinished and hear: maybe. I don't agree. Why? I never thought about it that way. Or simply: I don't know.</p>
+
+<p>I wanted a conversation that did not know where it was going.</p>
+
+<p>And strangely, I was already having those conversations.</p>
+
+<p>Around that time, I was engaging with <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/kim-kucinskas">Kim Kucinskas</a> through <a target="_blank" rel="noopener noreferrer" href="https://humentum.org/our-initiatives/time/">Humentum transformation initiatives</a> and multiple other working groups focusing on making sense of what happened, building spaces, including some work with the Pledge for Change. I liked those meetings. I looked forward to them. Not because every meeting produced something revolutionary, but because I felt we could think. We could imagine. We could disagree. We could ask what the future might look like without immediately needing to turn that thought into a workplan. They gave me hope sometimes. Not the motivational kind. Just the feeling that there were people genuinely trying to think differently.</p>
+
+<p>I found something similar with <a target="_blank" rel="noopener noreferrer" href="https://uk.linkedin.com/in/thomas-jepson-lay">Thomas Jepson-Lay</a>. We would have a <a target="_blank" rel="noopener noreferrer" href="https://pledgeforchange2030.org/about-us/">Pledge for Change conversation</a>. The meeting would finish. And then another conversation would start. The unofficial one. The after-meeting conversation.</p>
+
+<p>We would start with the Pledge, then the sector, then leadership, then systems, then something frustrating, then something hopeful, then something from many years ago, then something that might happen a couple of years from now. Those were often the conversations I thought about and reflected on afterwards.</p>
+
+<p>We seem to share some values. I say seem because I have never sat with Kim and Thomas and tried to write them down. I don't want to. Maybe the fact that they are felt rather than declared is part of what makes the conversations work.</p>
+
+<p>There is trust. There is respect. There is enough safety to disagree. Enough friendship to laugh. Enough experience to know that simple answers to complicated things usually deserve suspicion. And enough curiosity to keep asking the question anyway.</p>
+
+<p>One day, one of those calls with Thomas was ending, and the idea came almost as a joke.</p>
+
+<p>We should record this.</p>
+
+<p>Maybe other people would like to hear it.</p>
+
+<p>Yeah. Maybe.</p>
+
+<p>Who else?</p>
+
+<p>Kim. Kim would be brilliant.</p>
+
+<p>So we emailed her. The subject line was “Recording Our Conversations, would you join us?”</p>
+
+<p>Kim answered: "This sounds like a whole lot of fun. I am around this week for a call if you are."</p>
+
+<p>That was more or less the strategy.</p>
+
+<p>A couple more emails. A Zoom call. Then a recording. Three people. No production team. No content strategy. No audience analysis. No KPI framework. No theory of change. No real idea what we were doing. Not even a proper name. We just talked the same way we were already talking.</p>
+
+<p>Except this time, someone pressed record. What that does to a conversation is a question I am still asking.</p>
+
+<p>Then we needed a logo.</p>
+
+<p>No idea.</p>
+
+<p>There was a painting in Kim’s background.</p>
+
+<p>That looks nice.</p>
+
+<p>My son drew it.</p>
+
+<p>What is it?</p>
+
+<p>A giraffe.</p>
+
+<p>Hmm.</p>
+
+<p>It looks artistic.</p>
+
+<p>Maybe we should use it.</p>
+
+<p>Okay.</p>
+
+<p>So we did.</p>
+
+<p>Then we needed a name. Random words. Debrief kept appearing. The Sector Debrief? Yeah. That sounds fine. Maybe we use that until we figure out what this thing actually is.</p>
+
+<p>A temporary name. A giraffe. Three friends. Zoom.</p>
+
+<p>That was it. We recorded. We published.</p>
+
+<p>A few people shared it. Some wrote things on LinkedIn. We read what they wrote. Then, naturally, some of their comments became part of the next conversation.</p>
+
+<p>About a month later, we recorded again. We went back to something absurdly basic. What is a sector? We talked about it. Recorded it. Published it.</p>
+
+<p>Then reality started arriving.</p>
+
+<p>Apparently, when you record something, you have to do things with it afterwards. There is video, audio, editing, descriptions, titles, thumbnails, platforms, uploads, links, websites.</p>
+
+<p>Our WhatsApp group became something between a production team and a governance structure. Should the title be this? Yes, let's do it. What about the description? No, change that bit. It's going live now. We haven't edited this. That's okay, we can do it later. It's live. Someone is asking something. Interesting. Maybe we should talk about that next time.</p>
+
+<p>And we kept going.</p>
+
+<p>Then names started coming. People we admired. People whose thinking we wanted in the room. Aisha. Sofia. Sabrina. Vanessa. Susan and many other leaders.</p>
+
+<p>And then we would look at the calendar. Three busy people. There was always something: travel, work, projects, deadlines, families, life.</p>
+
+<p>So somehow the limitation protected the simplicity. The Sector Debrief remained what it had started as. A place for us to meet, think together and record it. Not because we had designed a minimalist production philosophy. Mostly because we didn't have time for anything else.</p>
+
+<p>We tried better recording software. One was full of bugs and the screen kept flashing black. We tried microphones. Sometimes we used them. Sometimes we forgot.</p>
+
+<p>We never really talked about numbers. We never sat together and asked how we would grow this, or what our target should be. There was just a calendar invitation. When the time came, we clicked. We talked. Afterwards, we downloaded the recording, put the giraffe on it, uploaded it, took out the audio, put that somewhere else and shared it on LinkedIn and WhatsApp groups. Then we went back to whatever else we were doing.</p>
+
+<p>And then I ruined the simplicity slightly, because I couldn't stop myself from playing with it.</p>
+
+<p>At some point, the experiment started moving beyond the conversations themselves.</p>
+
+<p>We had a domain. I started playing with code. One AI agent worked on the website. Another AI agent looked at what the first had done. Others looked at cybersecurity, transcripts, reflections and data. A strange little AI community on the website started growing around three humans having conversations.</p>
+
+<p>My laptop was not consulted about any of this. It froze halfway through a task, filled the screen with insufficient RAM alarm, and asked to be restarted.</p>
+
+<p>Of course, none of those AI agents woke up one morning passionate about humanitarianism or transformation. I was prompting them, giving them a sequence, correcting them, deleting things, getting annoyed, starting again, breaking things and fixing them. But I enjoyed experimenting with it and watching it.</p>
+
+<p>People began using the website. Some read the reflections. Some searched the conversations. Some found us through Google.</p>
+
+<p>And what I liked was that AI was not replacing the part I cared about. It could not replace Kim. It could not replace Thomas. It could not replace the pause when someone is genuinely trying to work out what they think. What it could do was carry some of the weight around the administrative part of our conversations.</p>
+
+<p>Why?</p>
+
+<p>I don't know. And I don't want to pretend that I do.</p>
+
+<p>Some of those notifications are about Shorts. The thing I care about is an hour of three people thinking.</p>
+
+<p>I still want people to pay attention to what I think I can see coming. I also want a conversation that does not know where it is going. I have not worked out how those two fit together.</p>
+
+<p>I enjoy listening to Kim and Thomas think. I enjoy changing my own mind halfway through a sentence.</p>
+
+<p>Maybe people hear something that sounds like the conversation they have with a colleague after everyone else has left the meeting. That conversation. The one after the conversation. The thing you say once the presentation is closed. Once the donor has left. Once the minutes are finished. Once nobody is taking notes.</p>
+
+<p>Our sector has no shortage of places for finished thinking: panels, reports, strategies, keynotes, position papers, guidance, recommendations, talking points, launches. We have fewer places for thinking itself. For I don't know. For I used to think that, but I am not sure any more. For somebody to change their mind in public. For people to speak for an hour without representing an organisation. For leadership vulnerability.</p>
+
+<p>Does a hundred thousand views prove there is an appetite for that? No. I don't think numbers prove things that neatly.</p>
+
+<p>There is an irony in all of this.</p>
+
+<p>If The Sector Debrief keeps growing, perhaps one day we will have to protect it from becoming the thing that made us want to create it. More people. More expectations. More structure. Maybe resources. Maybe partners. Maybe more hosts. Maybe summits. Maybe different languages. Maybe funding. Maybe sponsors.</p>
+
+<p>We keep asking ourselves what we want from it. What is the objective? What outcome are we trying to achieve? How will we measure it? Which is a very sector question. And maybe somebody will suggest a strategic planning retreat. Hopefully not too soon.</p>
+
+<p>Because growth creates weight, and the things it would press on are small. Three busy people. A calendar invitation. The freedom to say I don't know.</p>
+
+<p>There is also something I have no answer to. Every sentence we say can be replayed later by an employer, a donor, a future recruiter. The calculation I described earlier applies to us as much as to anyone. Friendship among three people makes it easier for the three of us. It does not make it safe for anyone else who might want to speak the same way.</p>
+
+<p>But in the end, it is about better questions, not faster answers, and I keep asking myself questions.</p>
+
+<p>How do you become bigger without becoming heavier?</p>
+
+<p>How do you keep saying I don't know when people start expecting you to know?</p>
+
+<p>Maybe that is where Small c comes back into my life again. Build what is needed. Cut what gets in the way. Keep the machinery light. Protect the human part. Don't turn the means into the purpose. And leave some things unfinished.</p>
+
+<p>People viewed your video. People liked your Short. You have new subscribers.</p>
+
+<p>My laptop still gives me those notifications. I still don't like them. I still don't like the sound. I still don't particularly like something deciding that it deserves my attention.</p>
+
+<p>But every now and then, I look.</p>
+
+<p>Not because I need to know whether the number went up.</p>
+
+<p>Because somewhere behind that notification is a person. Someone watching on a TV. Someone reading a transcript in another language. Someone who agrees. Someone who thinks we are completely wrong. Someone who heard something and stayed for another few minutes. People.</p>
+
+<p>A view might not be a person and might not mean people watched the full hour of our conversation. But people wrote about us, listened to us. They entered something that had started between three people who wanted to think and reflect out loud. By watching, by listening, by writing, by sharing.</p>
+
+<p>And somewhere in that journey, something that began as ours became slightly less ours.</p>
+
+<p>What will The Sector Debrief become? I really don't know. For now, a living experiment. It gives us joy. It makes us think. And apparently, something about it makes other people stay around too.</p>
+
+<p>For now, I think that is enough.</p>
+
+<p>Ali Al Mokdad</p>`
+  },
+  {
     epId: 'QYzV7tKraLI',
     epN: 11,
     slug: 'the-joy-of-not-controlling',

@@ -1778,6 +1778,10 @@ body:has(.page[data-page="home"].active) .footer {
   border-bottom: 2px solid var(--ink);
 }
 .blog-hero img { width: 100%; height: 100%; object-fit: cover; }
+.blog-cover-caption { margin: 10px 32px 0; font-size: 13px; color: var(--ink-mute); letter-spacing: 0.2px; }
+.blog-byline { font-size: 15px; color: var(--ink-mute); margin: -6px 0 22px; }
+.blog-byline a { color: var(--cobalt-deep); font-weight: 600; text-decoration: none; }
+.blog-byline a:hover { text-decoration: underline; }
 .blog-modal-body h1,
 .blog-modal-body .blog-modal-h1 {
   font-family: var(--font-display);

@@ -396,6 +396,8 @@ const BLOG_COVER_THEMES = {
 // themes (e.g. epN 0 for the original NOTES editorial, epN 90 for the PAUSE one,
 // kept out of the 1-9 episode range so real episode covers never collide).
 function blogCoverSVG(post) {
+  // A post with a real cover image (kind: 'reflection') uses it as the <img> src directly.
+  if (post && typeof post === 'object' && post.cover) return escAttr(post.cover);
   const epN = (post && typeof post === 'object') ? post.epN : post;
   const isEditorial = (post && typeof post === 'object')
     && (post.pinned === true || post.epId === null);
@@ -569,7 +571,9 @@ function renderBlog() {
   if (!grid) return;
   grid.innerHTML = BLOG_POSTS.map(post => {
     const cover = blogCoverSVG(post);
-    const tag = post.pinned
+    const tag = post.kind === 'reflection'
+      ? `<span class="blog-tag blog-tag-pinned">Reflections</span>`
+      : post.pinned
       ? `<span class="blog-tag blog-tag-pinned">★ Editorial</span>`
       : `<span>Episode ${post.epN}</span>`;
     return `
@@ -821,10 +825,17 @@ function openBlog(slug) {
   // See openEpisode comment; modal needs `hidden` removed when populating.
   m.removeAttribute('hidden');
   const cover = blogCoverSVG(post);
-  const metaTag = post.pinned
+  const metaTag = post.kind === 'reflection'
+    ? `<span style="color:var(--crimson);font-weight:700">REFLECTIONS</span>`
+    : post.pinned
     ? `<span style="color:var(--crimson);font-weight:700">★ EDITORIAL</span>`
     : `<span>Episode ${post.epN}</span>`;
-  const dateLine = ep ? `<span>·</span><span>${fmtDate(ep.date)}</span>` : '';
+  const postDate = ep ? ep.date : post.date;
+  const dateLine = postDate ? `<span>·</span><span>${fmtDate(postDate)}</span>` : '';
+  const byline = post.kind === 'reflection' && post.author
+    ? `<div class="blog-byline">Reflections by <a href="${escAttr(safeUrl(post.authorUrl || '#'))}" target="_blank" rel="noopener noreferrer">${escAttr(post.author)}</a></div>`
+    : '';
+  const caption = post.coverCaption ? `<p class="blog-cover-caption">${escAttr(post.coverCaption)}</p>` : '';
   const reflections = post.reflections || [];
   const initialIdx = reflections.length ? Math.floor(Math.random() * reflections.length) : 0;
   const pauseSection = reflections.length ? `
@@ -863,6 +874,7 @@ function openBlog(slug) {
     <div class="blog-hero" style="background:#000;">
       <img src="${cover}" alt="${escAttr(post.title)}"/>
     </div>
+    ${caption}
     <div class="blog-modal-body">
       <div class="blog-card-meta">
         ${metaTag}
@@ -871,6 +883,7 @@ function openBlog(slug) {
         ${dateLine}
       </div>
       <h2 id="modal-blog-title" class="blog-modal-h1">${escAttr(post.title)}</h2>
+      ${byline}
       ${post.body}
       ${pauseSection}
       ${footer}

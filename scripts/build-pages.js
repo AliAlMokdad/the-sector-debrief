@@ -29,7 +29,7 @@ const ROOT = path.resolve(__dirname, '..');
 const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
-const ASSET_V = '2026-09-21a';                 // cache-bust for /css and shared assets
+const ASSET_V = '2026-09-21b';                 // cache-bust for /css and shared assets
 const TODAY = '2026-09-21';
 const TRANSCRIPT_DATE = '2026-09-21';          // when the newest transcript was published
                      // build date (Date.now is avoided for reproducibility)
@@ -297,6 +297,8 @@ const BLOG_COVER_THEMES = {
   1:  { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ORIGINS',  shape: 'sun'    },
 };
 function blogCoverSVG(post) {
+  // A post with a real cover image (kind: 'reflection') renders it as an <img>; the CSS below sizes img and svg alike.
+  if (post.cover) return `<img src="/${esc(post.cover)}" alt="${esc(post.title)}" width="${post.coverW || 1280}" height="${post.coverH || 720}" loading="lazy"/>`;
   const isEditorial = post.pinned === true || post.epId === null;
   const n = Number.isFinite(Number(post.epN)) ? Number(post.epN) : 1;
   const t = BLOG_COVER_THEMES[n] || BLOG_COVER_THEMES[1];
@@ -489,7 +491,8 @@ const DOC_CSS = `
 .doc-prose strong{font-weight:600;color:var(--ink)}
 .doc-prose a{color:var(--cobalt-deep)}
 .doc-cover{width:100%;aspect-ratio:8/5;border-radius:12px;overflow:hidden;margin:0 0 30px;background:#000;box-shadow:0 20px 50px -24px rgba(26,22,20,.5)}
-.doc-cover svg{width:100%;height:100%;display:block}
+.doc-cover svg,.doc-cover img{width:100%;height:100%;display:block;object-fit:cover}
+.doc-cover-caption{font-size:13px;color:var(--ink-mute);margin:-20px 0 26px;letter-spacing:.2px}
 /* chips + buttons */
 .doc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0}
 .doc-chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);background:var(--cream-deep);border-radius:20px;padding:6px 13px}
@@ -759,10 +762,13 @@ function buildBlogPage(post) {
   const url = blogUrl(post);
   const ep = post.epId ? EPISODES.find(e => e.id === post.epId) : null;
   const isEditorial = post.pinned === true || post.epId === null;
+  const isReflection = post.kind === 'reflection';
+  const authorHref = /^https?:\/\//.test(post.authorUrl || '') ? post.authorUrl : '/about/#ali-al-mokdad';
+  const postDate = ep ? ep.date : (post.date || '2026-01-01');
   const title = `${post.title} | The Sector Debrief`;
   const desc = clip(post.excerpt || stripTags(post.body), 158);
   const cover = blogCoverSVG(post);
-  const ogImage = ep ? ytThumb(ep.id) : OG_DEFAULT;
+  const ogImage = post.cover ? `${SITE}/${esc(post.cover)}` : ep ? ytThumb(ep.id) : OG_DEFAULT;
 
   const crumbs = [
     { name: 'Home', path: '/', url: SITE + '/' },
@@ -774,10 +780,12 @@ function buildBlogPage(post) {
     '@context': 'https://schema.org', '@type': 'BlogPosting',
     headline: post.title, description: post.excerpt ? stripTags(post.excerpt) : desc,
     url, mainEntityOfPage: url, image: ogImage,
-    datePublished: ep ? ep.date : '2026-01-01',
-    dateModified: ep ? ep.date : '2026-01-01',
+    datePublished: postDate,
+    dateModified: postDate,
     wordCount: wordCount(post.body),
-    author: hostRefs(),
+    author: isReflection && post.author
+      ? [{ '@type': 'Person', '@id': HOST_ID[post.author] || undefined, name: post.author, ...(post.authorUrl ? { sameAs: [post.authorUrl] } : {}) }]
+      : hostRefs(),
     publisher: { '@type': 'Organization', name: 'The Sector Debrief', '@id': SITE + '/#organization',
       logo: { '@type': 'ImageObject', url: SITE + '/assets/apple-touch-icon.png' } },
     isPartOf: { '@type': 'Blog', '@id': SITE + '/blog/#blog', name: 'The Sector Debrief Blog' },
@@ -788,7 +796,7 @@ function buildBlogPage(post) {
   const related = BLOG_POSTS.filter(p => p.slug !== post.slug).slice(0, 3);
   const relatedHtml = related.map(p => {
     const rc = blogCoverSVG(p);
-    const rl = (p.pinned || p.epId === null) ? 'Editorial' : `Episode ${p.epN}`;
+    const rl = p.kind === 'reflection' ? 'Reflections' : (p.pinned || p.epId === null) ? 'Editorial' : `Episode ${p.epN}`;
     return `<a class="doc-card" href="/blog/${p.slug}/"><div class="doc-card-thumb">${rc}</div><div class="doc-card-body"><div class="doc-card-k">${rl}</div><div class="doc-card-t">${esc(p.title)}</div><div class="doc-card-d">${esc(clip(p.excerpt, 100))}</div></div></a>`;
   }).join('');
 
@@ -802,10 +810,13 @@ function buildBlogPage(post) {
   const body = `${crumbHtml(crumbs)}
 <article class="doc-wrap doc-article">
   <div class="doc-cover">${cover}</div>
-  <div class="doc-eyebrow">${isEditorial ? 'Editorial' : `Episode ${post.epN} &middot; Essay`}</div>
+  ${post.coverCaption ? `<p class="doc-cover-caption">${esc(post.coverCaption)}</p>` : ''}
+  <div class="doc-eyebrow">${isReflection ? 'Reflections' : isEditorial ? 'Editorial' : `Episode ${post.epN} &middot; Essay`}</div>
   <h1 class="doc-h1">${esc(post.title)}</h1>
-  <div class="doc-meta"><span>${esc(post.readTime)} read</span>${ep ? `<span class="dot">&middot;</span><span>${fmtDate(ep.date)}</span>` : ''}<span class="dot">&middot;</span><span>The Sector Debrief</span></div>
-  <div class="doc-byline">By <a href="/about/#ali-al-mokdad">Ali Al Mokdad</a>, <a href="/about/#kim-kucinskas">Kim Kucinskas</a> and <a href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a></div>
+  <div class="doc-meta"><span>${esc(post.readTime)} read</span>${(ep || post.date) ? `<span class="dot">&middot;</span><span>${fmtDate(postDate)}</span>` : ''}<span class="dot">&middot;</span><span>The Sector Debrief</span></div>
+  ${isReflection && post.author
+    ? `<div class="doc-byline">Reflections by <a href="${esc(authorHref)}"${authorHref.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : ''}>${esc(post.author)}</a></div>`
+    : `<div class="doc-byline">By <a href="/about/#ali-al-mokdad">Ali Al Mokdad</a>, <a href="/about/#kim-kucinskas">Kim Kucinskas</a> and <a href="/about/#thomas-jepson-lay">Thomas Jepson-Lay</a></div>`}
   <div class="doc-prose">${post.body}</div>
   ${reflections}
   ${ep ? `<div class="doc-next"><div><div class="lbl">Listen to the full episode</div><div class="ttl">Episode ${ep.n}: ${esc(ep.title)}</div></div><a class="doc-btn primary" href="/episodes/${ep.slug}/">Go to the episode</a></div>`
@@ -859,7 +870,7 @@ function buildBlogHub() {
   const crumbs = [{ name: 'Home', path: '/', url: SITE + '/' }, { name: 'Blog', path: '/blog/', url }];
   const ordered = BLOG_POSTS.slice().sort((a, b) => (b.epN === 90 || b.epN === 0 ? -1 : 0) - (a.epN === 90 || a.epN === 0 ? -1 : 0));
   const cards = BLOG_POSTS.map(p => {
-    const rl = (p.pinned || p.epId === null) ? 'Editorial' : `Episode ${p.epN}`;
+    const rl = p.kind === 'reflection' ? 'Reflections' : (p.pinned || p.epId === null) ? 'Editorial' : `Episode ${p.epN}`;
     return `<a class="doc-card" href="/blog/${p.slug}/">
       <div class="doc-card-thumb">${blogCoverSVG(p)}</div>
       <div class="doc-card-body">
