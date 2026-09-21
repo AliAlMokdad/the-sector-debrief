@@ -29,7 +29,7 @@ const ROOT = path.resolve(__dirname, '..');
 const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
-const ASSET_V = '2026-09-21b';                 // cache-bust for /css and shared assets
+const ASSET_V = '2026-09-21c';                 // cache-bust for /css and shared assets
 const TODAY = '2026-09-21';
 const TRANSCRIPT_DATE = '2026-09-21';          // when the newest transcript was published
                      // build date (Date.now is avoided for reproducibility)
@@ -493,6 +493,8 @@ const DOC_CSS = `
 .doc-cover{width:100%;aspect-ratio:8/5;border-radius:12px;overflow:hidden;margin:0 0 30px;background:#000;box-shadow:0 20px 50px -24px rgba(26,22,20,.5)}
 .doc-cover svg,.doc-cover img{width:100%;height:100%;display:block;object-fit:cover}
 .doc-cover-caption{font-size:13px;color:var(--ink-mute);margin:-20px 0 26px;letter-spacing:.2px}
+.doc-prose .doc-divider{display:flex;justify-content:center;margin:44px 0 36px;color:var(--dv,var(--ink))}
+.doc-prose .doc-divider span{font-family:'Fraunces',Georgia,serif;font-size:22px;font-weight:600;letter-spacing:2px;line-height:1}
 /* chips + buttons */
 .doc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0}
 .doc-chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);background:var(--cream-deep);border-radius:20px;padding:6px 13px}

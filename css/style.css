@@ -1782,6 +1782,9 @@ body:has(.page[data-page="home"].active) .footer {
 .blog-byline { font-size: 15px; color: var(--ink-mute); margin: -6px 0 22px; }
 .blog-byline a { color: var(--cobalt-deep); font-weight: 600; text-decoration: none; }
 .blog-byline a:hover { text-decoration: underline; }
+.blog-modal-body .doc-divider { display: flex; justify-content: center; margin: 44px 0 36px; color: var(--dv, var(--ink)); }
+.blog-modal-body .doc-divider span { font-family: var(--font-display); font-size: 22px; font-weight: 600; letter-spacing: 2px; line-height: 1; }
+
 .blog-modal-body h1,
 .blog-modal-body .blog-modal-h1 {
   font-family: var(--font-display);

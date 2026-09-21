@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
-  <link rel="stylesheet" href="/css/style.css?v=2026-09-21b"/>
+  <link rel="stylesheet" href="/css/style.css?v=2026-09-21c"/>
   <style>
 :root{--cream:#EFE8D6;--cream-soft:#F5F0E2;--cream-deep:#E5DCC3;--paper:#FAF6EA;--ink:#1A1614;--ink-soft:#2C2622;--ink-mute:#524A42;--cobalt:#2C5BAA;--cobalt-deep:#1A3866;--crimson:#B83A2A;--crimson-deep:#8B2818;--mustard:#E8B82C;--forest:#2A4530;--rust:#A0531F;--fd:'Fraunces',Georgia,serif;--fb:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 .doc-body{visibility:visible!important;opacity:1!important;margin:0;background:var(--cream);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -82,6 +82,8 @@
 .doc-cover{width:100%;aspect-ratio:8/5;border-radius:12px;overflow:hidden;margin:0 0 30px;background:#000;box-shadow:0 20px 50px -24px rgba(26,22,20,.5)}
 .doc-cover svg,.doc-cover img{width:100%;height:100%;display:block;object-fit:cover}
 .doc-cover-caption{font-size:13px;color:var(--ink-mute);margin:-20px 0 26px;letter-spacing:.2px}
+.doc-prose .doc-divider{display:flex;justify-content:center;margin:44px 0 36px;color:var(--dv,var(--ink))}
+.doc-prose .doc-divider span{font-family:'Fraunces',Georgia,serif;font-size:22px;font-weight:600;letter-spacing:2px;line-height:1}
 /* chips + buttons */
 .doc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0}
 .doc-chip{font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--ink-soft);background:var(--cream-deep);border-radius:20px;padding:6px 13px}
@@ -255,7 +257,7 @@
 }
 @media(prefers-reduced-motion:reduce){.doc-body *{transition:none!important;animation:none!important}}
 </style>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The Conversation After the Conversation","description":"Five people liked your Short. Twelve people liked your Short. Twenty people viewed your video. You have three new subscribers. My laptop keeps buzzing.","url":"https://thesectordebrief.com/blog/the-conversation-after-the-conversation/","mainEntityOfPage":"https://thesectordebrief.com/blog/the-conversation-after-the-conversation/","image":"https://thesectordebrief.com/assets/blog-conversation-after.jpg","datePublished":"2026-09-19","dateModified":"2026-09-19","wordCount":3066,"author":[{"@type":"Person","@id":"https://thesectordebrief.com/#ali-al-mokdad","name":"Ali Al Mokdad","sameAs":["https://www.linkedin.com/in/ali-al-mokdad"]}],"publisher":{"@type":"Organization","name":"The Sector Debrief","@id":"https://thesectordebrief.com/#organization","logo":{"@type":"ImageObject","url":"https://thesectordebrief.com/assets/apple-touch-icon.png"}},"isPartOf":{"@type":"Blog","@id":"https://thesectordebrief.com/blog/#blog","name":"The Sector Debrief Blog"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"The Conversation After the Conversation","description":"Five people liked your Short. Twelve people liked your Short. Twenty people viewed your video. You have three new subscribers. My laptop keeps buzzing.","url":"https://thesectordebrief.com/blog/the-conversation-after-the-conversation/","mainEntityOfPage":"https://thesectordebrief.com/blog/the-conversation-after-the-conversation/","image":"https://thesectordebrief.com/assets/blog-conversation-after.jpg","datePublished":"2026-09-19","dateModified":"2026-09-19","wordCount":3072,"author":[{"@type":"Person","@id":"https://thesectordebrief.com/#ali-al-mokdad","name":"Ali Al Mokdad","sameAs":["https://www.linkedin.com/in/ali-al-mokdad"]}],"publisher":{"@type":"Organization","name":"The Sector Debrief","@id":"https://thesectordebrief.com/#organization","logo":{"@type":"ImageObject","url":"https://thesectordebrief.com/assets/apple-touch-icon.png"}},"isPartOf":{"@type":"Blog","@id":"https://thesectordebrief.com/blog/#blog","name":"The Sector Debrief Blog"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://thesectordebrief.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://thesectordebrief.com/blog/"},{"@type":"ListItem","position":3,"name":"The Conversation After the Conversation","item":"https://thesectordebrief.com/blog/the-conversation-after-the-conversation/"}]}</script>
 </head>
 <body class="doc-body">
@@ -316,6 +318,8 @@
 <p>Numbers become numbers very quickly. This one did not. It sparked curiosity and made me think about the Why.</p>
 
 <p>To understand the why, I have to go back.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section I" style="--dv:#1a3866"><span>I</span></div>
 
 <p>In October 2024, I gave a webinar called <a target="_blank" rel="noopener noreferrer" href="https://www.developmentaid.org/news-stream/post/186496/webinar-humanitarian-operational-system">Is the Humanitarian Operational System Reaching Its Expiration Date?</a></p>
 
@@ -380,6 +384,8 @@
 <p>I wanted a conversation that did not know where it was going.</p>
 
 <p>And strangely, I was already having those conversations.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section II" style="--dv:#8b2818"><span>II</span></div>
 
 <p>Around that time, I was engaging with <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/kim-kucinskas">Kim Kucinskas</a> through <a target="_blank" rel="noopener noreferrer" href="https://humentum.org/our-initiatives/time/">Humentum transformation initiatives</a> and multiple other working groups focusing on making sense of what happened, building spaces, including some work with the Pledge for Change. I liked those meetings. I looked forward to them. Not because every meeting produced something revolutionary, but because I felt we could think. We could imagine. We could disagree. We could ask what the future might look like without immediately needing to turn that thought into a workplan. They gave me hope sometimes. Not the motivational kind. Just the feeling that there were people genuinely trying to think differently.</p>
 
@@ -447,6 +453,8 @@
 
 <p>About a month later, we recorded again. We went back to something absurdly basic. What is a sector? We talked about it. Recorded it. Published it.</p>
 
+<div class="doc-divider" role="separator" aria-label="Section III" style="--dv:#2a4530"><span>III</span></div>
+
 <p>Then reality started arriving.</p>
 
 <p>Apparently, when you record something, you have to do things with it afterwards. There is video, audio, editing, descriptions, titles, thumbnails, platforms, uploads, links, websites.</p>
@@ -479,6 +487,8 @@
 
 <p>And what I liked was that AI was not replacing the part I cared about. It could not replace Kim. It could not replace Thomas. It could not replace the pause when someone is genuinely trying to work out what they think. What it could do was carry some of the weight around the administrative part of our conversations.</p>
 
+<div class="doc-divider" role="separator" aria-label="Section IV" style="--dv:#a0531f"><span>IV</span></div>
+
 <p>Why?</p>
 
 <p>I don't know. And I don't want to pretend that I do.</p>
@@ -494,6 +504,8 @@
 <p>Our sector has no shortage of places for finished thinking: panels, reports, strategies, keynotes, position papers, guidance, recommendations, talking points, launches. We have fewer places for thinking itself. For I don't know. For I used to think that, but I am not sure any more. For somebody to change their mind in public. For people to speak for an hour without representing an organisation. For leadership vulnerability.</p>
 
 <p>Does a hundred thousand views prove there is an appetite for that? No. I don't think numbers prove things that neatly.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section V" style="--dv:#8b3a2a"><span>V</span></div>
 
 <p>There is an irony in all of this.</p>
 
@@ -512,6 +524,8 @@
 <p>How do you keep saying I don't know when people start expecting you to know?</p>
 
 <p>Maybe that is where Small c comes back into my life again. Build what is needed. Cut what gets in the way. Keep the machinery light. Protect the human part. Don't turn the means into the purpose. And leave some things unfinished.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section VI" style="--dv:#524a42"><span>VI</span></div>
 
 <p>People viewed your video. People liked your Short. You have new subscribers.</p>
 

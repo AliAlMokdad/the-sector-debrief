@@ -327,6 +327,8 @@ const BLOG_POSTS = [
 
 <p>To understand the why, I have to go back.</p>
 
+<div class="doc-divider" role="separator" aria-label="Section I" style="--dv:#1a3866"><span>I</span></div>
+
 <p>In October 2024, I gave a webinar called <a target="_blank" rel="noopener noreferrer" href="https://www.developmentaid.org/news-stream/post/186496/webinar-humanitarian-operational-system">Is the Humanitarian Operational System Reaching Its Expiration Date?</a></p>
 
 <p>Not exactly the most comforting title.</p>
@@ -390,6 +392,8 @@ const BLOG_POSTS = [
 <p>I wanted a conversation that did not know where it was going.</p>
 
 <p>And strangely, I was already having those conversations.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section II" style="--dv:#8b2818"><span>II</span></div>
 
 <p>Around that time, I was engaging with <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/kim-kucinskas">Kim Kucinskas</a> through <a target="_blank" rel="noopener noreferrer" href="https://humentum.org/our-initiatives/time/">Humentum transformation initiatives</a> and multiple other working groups focusing on making sense of what happened, building spaces, including some work with the Pledge for Change. I liked those meetings. I looked forward to them. Not because every meeting produced something revolutionary, but because I felt we could think. We could imagine. We could disagree. We could ask what the future might look like without immediately needing to turn that thought into a workplan. They gave me hope sometimes. Not the motivational kind. Just the feeling that there were people genuinely trying to think differently.</p>
 
@@ -457,6 +461,8 @@ const BLOG_POSTS = [
 
 <p>About a month later, we recorded again. We went back to something absurdly basic. What is a sector? We talked about it. Recorded it. Published it.</p>
 
+<div class="doc-divider" role="separator" aria-label="Section III" style="--dv:#2a4530"><span>III</span></div>
+
 <p>Then reality started arriving.</p>
 
 <p>Apparently, when you record something, you have to do things with it afterwards. There is video, audio, editing, descriptions, titles, thumbnails, platforms, uploads, links, websites.</p>
@@ -489,6 +495,8 @@ const BLOG_POSTS = [
 
 <p>And what I liked was that AI was not replacing the part I cared about. It could not replace Kim. It could not replace Thomas. It could not replace the pause when someone is genuinely trying to work out what they think. What it could do was carry some of the weight around the administrative part of our conversations.</p>
 
+<div class="doc-divider" role="separator" aria-label="Section IV" style="--dv:#a0531f"><span>IV</span></div>
+
 <p>Why?</p>
 
 <p>I don't know. And I don't want to pretend that I do.</p>
@@ -504,6 +512,8 @@ const BLOG_POSTS = [
 <p>Our sector has no shortage of places for finished thinking: panels, reports, strategies, keynotes, position papers, guidance, recommendations, talking points, launches. We have fewer places for thinking itself. For I don't know. For I used to think that, but I am not sure any more. For somebody to change their mind in public. For people to speak for an hour without representing an organisation. For leadership vulnerability.</p>
 
 <p>Does a hundred thousand views prove there is an appetite for that? No. I don't think numbers prove things that neatly.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section V" style="--dv:#8b3a2a"><span>V</span></div>
 
 <p>There is an irony in all of this.</p>
 
@@ -522,6 +532,8 @@ const BLOG_POSTS = [
 <p>How do you keep saying I don't know when people start expecting you to know?</p>
 
 <p>Maybe that is where Small c comes back into my life again. Build what is needed. Cut what gets in the way. Keep the machinery light. Protect the human part. Don't turn the means into the purpose. And leave some things unfinished.</p>
+
+<div class="doc-divider" role="separator" aria-label="Section VI" style="--dv:#524a42"><span>VI</span></div>
 
 <p>People viewed your video. People liked your Short. You have new subscribers.</p>
 
