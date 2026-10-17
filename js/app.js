@@ -377,6 +377,7 @@ function renderFeaturedEpisode(ep) {
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
   90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',     shape: 'editorial' },
+  12: { bg: '#E8B82C', fg: '#1A1614', accent: '#B83A2A', word: 'ACTING',    shape: 'circle' },
   11: { bg: '#B83A2A', fg: '#FAF6EA', accent: '#E8B82C', word: 'FLOURISH',  shape: 'sun'    },
   10: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ALLIANCE',  shape: 'lines'  },
   9:  { bg: '#0D1B2A', fg: '#F5F0E2', accent: '#E8B82C', word: 'PURPOSE',   shape: 'arc'    },

@@ -15,6 +15,17 @@ const PLATFORMS = {
 // All episodes from the playlist (newest first)
 const EPISODES = [
   {
+    n: 12,
+    id: 'GVBXQai3grM',
+    slug: 'acting-or-acting',
+    transcript: true,
+    title: 'Acting, or Acting?',
+    date: '2026-10-17',
+    duration: '52 min',
+    description: 'Kim Kucinskas comes back from three conferences in two weeks, the UNGA side events in New York, the WINGS Forum in Montreal and the InterAction annual conference in Washington, with a notebook full of the same words: trust, solidarity, collaboration, humility. One line from the WINGS opening stuck with her: act, as a verb, has two meanings. You can take action, or you can be an actor in a performance. Kim Kucinskas, Thomas Jepson-Lay and Ali Al Mokdad work through what those words are doing, and whether the sector is walking the talk or performing a part it thinks it is supposed to play. Ali Al Mokdad hears the same talking points recycled in Brussels, watches them lose their meaning in translation, and asks whether an NGO class has grown up that lives in the abstract while everything real happens outside it. Thomas Jepson-Lay asks whether this season will look like a pivot in hindsight, and brings a pole and a group of people holding it, attuned to one person\'s breathing, to show how collaboration works and how small things become scale. For him, the leaders thriving now are the ones stepping out of familiar discomforts into unknown ones. Kim Kucinskas argues that collaboration is a discipline rather than a sentiment, that there is no risk-free choice at a crucible moment, and that the hopeful shift is towards relational and moral language. It closes where these conversations tend to land: on leadership, with moral purpose at the centre of it.',
+    themes: ['Collaboration', 'Language', 'Leadership']
+  },
+  {
     n: 11,
     id: 'QYzV7tKraLI',
     slug: 'collaboration-over-control',
@@ -195,7 +206,10 @@ const QUOTES = [
   { text: "We have to distinguish between efficiency and transformation. I'm not talking only about organisational transformation. I'm talking about the ecosystem.",               source: "Ali Al Mokdad", color: "q-crimson" },
   { text: "It is one of the joys of this organisation that we don't control, we don't try to control, and we allow others to flourish.", source: "Susan le Jeune d'Allegeershecque", color: "q-mustard" },
   { text: "The electric light didn't come from continuous improvement of the candles.", source: "Ali Al Mokdad", color: "q-forest" },
-  { text: "But gosh, how do you get through it if you can't find the joy?", source: "Kim Kucinskas", color: "q-rust" }
+  { text: "But gosh, how do you get through it if you can't find the joy?", source: "Kim Kucinskas", color: "q-rust" },
+  { text: "Are you actually comfortable with change or are you just familiar with running change processes? Because those are two very different things.", source: "Thomas Jepson-Lay", color: "q-cream" },
+  { text: "Collaboration is a discipline. It's a skill set. It's not just an aspiration and a hope.", source: "Kim Kucinskas", color: "q-cobalt" },
+  { text: "Are we just getting very good at adapting terminology, but not behaviour and practice?", source: "Ali Al Mokdad", color: "q-crimson" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
@@ -555,6 +569,104 @@ const BLOG_POSTS = [
 <p>For now, I think that is enough.</p>
 
 <p>Ali Al Mokdad</p>`
+  },
+  {
+    epId: 'GVBXQai3grM',
+    epN: 12,
+    slug: 'the-words-and-the-work',
+    title: 'The Words and the Work: Acting, or Acting?',
+    excerpt: 'Notes from a hosts-only conversation. Kim came back from three conferences in two weeks with a notebook full of the same words, and one line from the WINGS Forum that stayed with her: act can mean doing something, or playing a part.',
+    readTime: '11 min',
+    reflections: [
+      "Kim heard trust, solidarity, collaboration and humility in every room, and asks whether we are walking the talk or performing a part. Pick the word your organisation uses most. What is one small decision this month where it was lived, and one where it was only said?",
+      "Ali finds that much of the sector's vocabulary loses its meaning in translation, and has to be described as practice before it means anything. Take a term your team uses every day. How would you describe it to someone outside the sector without using the term itself?",
+      "Thomas asks whether leaders who say they are comfortable with change are really just familiar with running change processes. Where are you comfortable with inherited uncertainty, and where does internal ambiguity make you uneasy?",
+      "In Thomas's exercise, everyone assumed someone else was pushing the pole up, and every instruction pointed the wrong way. Where is the daily noise in your organisation pulling against the direction you say you want to go?",
+      "When there is no risk-free choice, how do you act? Kim's favourite answer was to pick the side that is best for humanity. Think of a decision in front of you now. What would that answer ask of you?"
+    ],
+    body: `<p>This one had no guest. Kim Kucinskas, Thomas Jepson-Lay, and Ali Al Mokdad sat down to freestyle, and Thomas opened with a question for Kim: why was it taking her so long to make sense of the conference season? Her answer was three conferences in two weeks, the UNGA side events in New York, the WINGS Forum in Montreal, and two days at the InterAction Annual Conference in Washington, D.C., and a book of notes she expected to turn around on the Monday. Three weeks later it was still settling. What follows is our reading of where that took the three of us.</p>
+
+<h2>Same Words in Every Room</h2>
+
+<p>Kim's first headline was the vocabulary. Trust, solidarity, collaboration, humility: the same words across all three events, used in different ways. She admitted to feeling angsty and grumpy about it at first, because the sector has been using these words for decades, and without action behind them they become, in her phrase, kind of words. Then a line from the opening of the WINGS Forum, whose theme was act, gave her a frame for it.</p>
+
+<blockquote>You can take action and do something, or you can be an actor in a performance.</blockquote>
+
+<p>That is the question the episode keeps returning to. When we say these words, are we walking the talk, or performing a part we think we are supposed to play? Kim was careful to call it a spectrum rather than all or nothing, with a lot of good intent in the middle that does not always lead to action. Where she has run out of patience is the performance. And she located the difference in small decisions rather than big gestures: how do I trust by being trustworthy, how do I collaborate elbows down instead of talking about the importance of collaboration. Those, she said, add up.</p>
+
+<p>She also described three different angles on the same words. At UNGA the conversation was still diagnosing how institutions built 80 years ago are holding up. At WINGS, philanthropy was in a reform-or-die mood. At InterAction, among mainly US-based INGOs, it was still largely protect mode. Her point was that each room tends to think its reality is the reality, and that the sector needs a more coherent way of talking about itself even where people disagree on tactics.</p>
+
+<h2>Words That Do Not Translate</h2>
+
+<p>Ali had the same experience in Brussels the month before: the same messages, the same talking points, the same words, including from donors. He added a test of his own. When he works in another language, much of this vocabulary does not carry over; the words sound vague and cloudy, sometimes naive, and he finds he has to describe what they would look like in practice before they mean anything.</p>
+
+<blockquote>No, it's even like when you want to just talk about them in different language, they just don't have a meaning.</blockquote>
+
+<p>Thomas, who described himself as only an English speaker after years in rooms where he did not understand the language being spoken, noted that the terminology of the multilateral sector arrives in English anyway: a whole paragraph in another language can still carry terms like the cluster system. For him it shows how Westernised the system is. Read together, the two points make a useful check for any of these words: if a term only works in the language it was coined in, it may be describing a posture rather than a practice.</p>
+
+<h2>A Shift in the Language</h2>
+
+<p>Thomas pushed on whether anything was actually different this year, since the same reflections could carry almost any date. Kim's honest answer started with her notebook: flipping through it, she found pages she took to be from this event that were dated nine months earlier. She also offered a caveat we think is worth keeping. There is no such thing as a trend, only the signals you are listening for, and the sessions she attended and the notes she took reflect her own perspective.</p>
+
+<p>With that caveat, she did hear a difference in posture. Philanthropy, in her account, was asking whether to get rid of the grant system or one-year grants altogether, and locally led development and shift the power were no longer being argued for at WINGS because they were already assumed. And she heard the language moving: solidarity, humanity, and collaboration, rather than the technical vocabulary of efficiency, effectiveness, and risk. Underneath it, she said, is a set of values the sector assumed 80 years ago and has not kept refreshing.</p>
+
+<blockquote>But if you don't really defend this kind of humanistic set of values as a spine to everything you do, then the alternative is someone else is going to replace it with a different set of values.</blockquote>
+
+<p>Thomas called that move, from managerialist language of measurement and cost to relational and values-based language, an important pivot he had not heard called out before. Kim added the counterweight: in other rooms the language was still country first, and not only in America.</p>
+
+<h2>An NGO Class, and Everything Outside the Sector</h2>
+
+<p>Ali then offered three thoughts, which he framed as thinking aloud rather than conclusions. The first was a question about whether the sector has created, at country level, a class of its own: well paid, a little elite, with its own coffee shops, its own places, and its own language, living in the abstract in a way that does not match the communities around it. He raised it from what he saw in the countries where he has worked. The second was the vocabulary again.</p>
+
+<blockquote>So are we just getting very good at adapting terminology, but not behaviour and practice?</blockquote>
+
+<p>Each period brings a new set of terms, he said, sometimes recycled ones, and at least for funding that has worked before. The third came from a survey that asked what was happening outside the sector. His answer was everything: the economy, debt and credit, geopolitics, climate, innovation. The sector is part of a larger ecosystem, not its centre. And much of the funding for international aid and development is taxpayers' money, which follows decisions people made when they voted. Changing the language after each cut, in his view, is not the same as being proactive. Thomas recommended the book Dull Disasters, co-written by the former DFID economist Stefan Dercon, which in his reading makes the same point: aid finance follows votes and how the public perceives the cause.</p>
+
+<h2>Warm Connections, and Nothing Done With Them</h2>
+
+<p>Thomas brought the conversation home to Somerset, where he had spent the day before in two conversations about community resilience. Everyone agreed on the problem: economically deprived areas that need an uplift. Everyone was well connected: education, health, emergency services, the council, faith groups, local business, all warmly in touch. And nothing was coming of it beyond nice chats.</p>
+
+<blockquote>you need the connectivity in the relational element but you also then need the action to go along with that.</blockquote>
+
+<p>Kim's reply was that collaboration is a discipline and a skill set, not just an aspiration and a hope, and that it needs to be recognised, resourced, and built. She also brought back two things from the conferences: the growing role of middle actors, from middle states to companies and high net worth individuals, and the number of people who named tax reform as the single change that would matter most. And she connected it to where our previous episode ended, with Thomas and Kim disagreeing about whether the problem is structural or psychological. Real change costs something, she said, and saying the right things is easier than letting it cost you.</p>
+
+<h2>Comfortable With Change, or Familiar With It?</h2>
+
+<p>Thomas answered with a phrase about taking pleasure in our own displeasure: we are more comfortable bemoaning what we know does not work than moving into a place of unknown discomfort. Then he turned it on leaders.</p>
+
+<blockquote>are you actually comfortable with change or are you just familiar with running change processes? Because those are two very different things.</blockquote>
+
+<p>Ali's view from two to three years of transformation work was that it is a mix. Sometimes knowledge and organisational history are the barrier. Sometimes we forget that organisations are people with their own worries and rhythms. Sometimes the structure itself, field, country, region, headquarters, working groups, task forces, makes a decision almost impossible, and consultation turns into a loop that never produces one. His sharpest example was a simple workflow he had designed, and the comments that came back defending roles rather than improving the flow.</p>
+
+<p>Thomas had a more hopeful signal. Three organisations he is working with, unconnected to each other, have each told him that their current leadership dynamic is not working. He also shared a framing he had heard and found articulate: organisations are comfortable with inherited uncertainty, the context and the environment, and hugely uncomfortable with internal ambiguity, in structure, strategy, trust, culture, and the contradictions between the language of leadership and its actions. That, he said, is where the friction comes from.</p>
+
+<h2>When No Choice Is Risk-Free</h2>
+
+<p>Kim then contradicted her own position from the last episode, and said so. Systems are made of people, she agreed, and social change has to come through individual transformation first, which takes a long time. She described a question Nana from WACSI put to a panel, and a session at InterAction on crucible moments, the decisions that forge you through hardship.</p>
+
+<blockquote>When there is no risk-free choice, how do you act?</blockquote>
+
+<p>Her favourite answer from that week was to pick the side that is best for humanity. Ali added the view from the other side of the funding relationship. In his meetings with donors in Brussels, he found them restructuring, shifting focus, and carrying their own organisational and personal shocks. He felt he was doing emotional support before any conversation, and asked the sector to remember that there are people on the other side too.</p>
+
+<h2>The Pole Goes Up</h2>
+
+<p>Thomas then described an exercise from a two-day workshop on collaboration. People line up facing each other with their fingers out, a pole is laid across their fingers, and the task is to lower it to the floor while everyone keeps contact the whole time. Every time, the pole goes up. Everyone assumes someone else is pushing it, because they are not. And every instruction, keep your finger on the pole, keep your finger on it, points up while the task points down. He asked how much of our daily noise works against the direction we say we want to go.</p>
+
+<p>The group did get it down eventually, he said, by attuning: defaulting to one calm voice, moving with one person's breathing, noticing what worked, until the progress fed itself. Kim recognised the sector's vocabulary in it, collective sense making and an abundance mindset, and here was what they look like in practice. Thomas added his ecosystem picture, a single person surrounded by family, neighbours, community, faith groups, diaspora, the private sector, government, and somewhere in there the aid sector, which tends to assume it is all of it. When Kim wondered how attunement could scale globally, and offered humanity as the common denominator, Thomas added this.</p>
+
+<blockquote>It's not the rollout of big, it's the culmination of small.</blockquote>
+
+<h2>Money and Moral Purpose</h2>
+
+<p>Thomas did not want the episode to end on a simple moral, and he spoke directly to boards and executives. The need for financial stability is real, and so is the pressure to grow and compete for money. The biggest leadership challenge, in his words, is keeping the balance, and with a million surplus, whatever you decide, you will be criticised for it. Kim's response was that when values compete, you either make a transparent decision and feel okay about it, or you find the balance. Thomas added that there is no off-the-shelf answer and precedent is increasingly irrelevant: the leaders thriving now are the ones stepping out of known displeasures into unknown discomforts. Ali was candid that inside the machine he is driven by the same numbers, and that conversations like this one are what let him step back and balance them. Kim credited Thomas with the discernment and the pause, and Thomas noted that we do not budget for time.</p>
+
+<h2>Where We Left It</h2>
+
+<p>Kim left with more clarity, and with a mix of same old, same old and a little optimism. Ali left with a reminder that systems and institutions are people, and that those on the other side are struggling too. Thomas left with the two meanings of act, the performance and the progress. Kim had the last word.</p>
+
+<blockquote>Am I acting or am I acting?</blockquote>
+
+<p>A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and that interpretation is ours. The episode itself is the place to hear it in full.</p>`
   },
   {
     epId: 'QYzV7tKraLI',

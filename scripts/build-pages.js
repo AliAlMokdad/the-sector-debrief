@@ -30,8 +30,9 @@ const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.j
 
 const SITE = 'https://thesectordebrief.com';
 const ASSET_V = '2026-09-21d';                 // cache-bust for /css and shared assets
-const TODAY = '2026-09-21';
-const TRANSCRIPT_DATE = '2026-09-21';          // when the newest transcript was published
+const TODAY = '2026-10-17';
+const TRANSCRIPT_DATE = '2026-10-17';          // when the newest transcript was published
+const FILM_PAGE_DATE = '2026-09-13';           // last change to the hand-built film page
                      // build date (Date.now is avoided for reproducibility)
 const OG_DEFAULT = SITE + '/assets/cover.jpg';
 
@@ -284,6 +285,7 @@ const HOST_PROFILES = {
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',    shape: 'editorial' },
   90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',    shape: 'editorial' },
+  12: { bg: '#E8B82C', fg: '#1A1614', accent: '#B83A2A', word: 'ACTING',    shape: 'circle' },
   11: { bg: '#B83A2A', fg: '#FAF6EA', accent: '#E8B82C', word: 'FLOURISH',  shape: 'sun'    },
   10: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ALLIANCE', shape: 'lines'  },
   9:  { bg: '#0D1B2A', fg: '#F5F0E2', accent: '#E8B82C', word: 'PURPOSE',  shape: 'arc'    },
@@ -981,6 +983,9 @@ function buildSitemap() {
   add(SITE + '/episodes/', TODAY, '0.9', 'weekly');
   add(SITE + '/blog/', TODAY, '0.9', 'weekly');
   add(SITE + '/about/', TODAY, '0.6', 'monthly');
+  // The film page is hand-built (not generated here), so the sitemap has to name it explicitly:
+  // the Episode 11 rebuild dropped it because nothing in this file knew it existed.
+  add(SITE + '/100000-viewers-and-listeners/', FILM_PAGE_DATE, '0.7', 'monthly');
   // an episode carrying a transcript was modified on the transcript date, not on the
   // day the episode aired, so lastmod must reflect that or crawlers see it as stale
   EPISODES.forEach(ep => add(episodeUrl(ep),
@@ -1058,4 +1063,4 @@ written.push(writeFile('sitemap.xml', buildSitemap()));
 
 console.log(`Built ${written.length} files:`);
 written.forEach(f => console.log('  ' + f));
-console.log(`\nEpisodes: ${EPISODES.length} · Essays: ${BLOG_POSTS.length} · Sitemap URLs: ${4 + EPISODES.length + BLOG_POSTS.length}`);
+console.log(`\nEpisodes: ${EPISODES.length} · Essays: ${BLOG_POSTS.length} · Sitemap URLs: ${5 + EPISODES.length + BLOG_POSTS.length}`);
