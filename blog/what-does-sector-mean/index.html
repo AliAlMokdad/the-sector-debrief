@@ -39,6 +39,11 @@
 .doc-body a{color:var(--cobalt-deep);text-decoration-thickness:1px;text-underline-offset:2px}
 .doc-skip{position:absolute;left:-999px;top:0;background:var(--ink);color:var(--cream);padding:10px 16px;border-radius:4px;z-index:100}
 .doc-skip:focus{left:12px;top:12px}
+/* .doc-body a (one class plus an element) outranks a single-class rule, so these links took its
+   navy: the Listen button read navy on red, the footer platform icons navy on near-black, and the
+   skip link navy on ink. Scoping them under .doc-body restores their own colours. */
+.doc-body .doc-cta,.doc-body .doc-skip{color:var(--cream)}
+.doc-body .doc-orb{color:var(--cream-soft)}
 /* nav */
 .doc-nav{position:sticky;top:0;z-index:40;background:rgba(239,232,214,.96);backdrop-filter:saturate(1.1);border-bottom:1px solid var(--cream-deep)}
 .doc-nav-in{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:14px 24px}
@@ -52,6 +57,16 @@
 .doc-links a[aria-current=page]{color:var(--crimson);font-weight:600}
 .doc-cta{display:inline-flex;align-items:center;gap:6px;background:var(--crimson);color:var(--cream);font-weight:600;font-size:13.5px;padding:8px 15px;border-radius:7px;text-decoration:none;flex:0 0 auto}
 .doc-cta:hover{background:var(--crimson-deep)}
+/* On a phone the four links used to wrap into a column beside a three-line logo, a 189px
+   sticky header. Here the brand and Listen share the first row and the links take one row
+   below them, which keeps the header near 100px. */
+@media(max-width:640px){
+  .doc-nav-in{flex-wrap:wrap;gap:6px 12px;padding:10px 24px 8px}
+  .doc-brand{font-size:17px}
+  .doc-cta{margin-left:auto;padding:7px 13px;font-size:13px}
+  .doc-links{order:3;flex:1 0 100%;flex-wrap:nowrap;justify-content:space-between;margin:0 -10px;gap:0}
+  .doc-links a{padding:8px 10px}
+}
 /* layout */
 .doc-wrap{max-width:760px;margin:0 auto;padding:0 24px}
 .doc-wide{max-width:1080px;margin:0 auto;padding:0 24px}
@@ -59,7 +74,7 @@
 .doc-crumbs a{color:var(--ink-mute)}
 .doc-crumbs span{margin:0 7px;opacity:.5}
 /* article */
-.doc-article{padding:16px 0 72px}
+.doc-article{padding-top:16px;padding-bottom:72px}
 .doc-eyebrow{font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson);margin:14px 0 14px}
 .doc-h1{font-family:var(--fd);font-weight:700;font-size:clamp(30px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
 .doc-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--ink-mute);margin-bottom:26px}
@@ -166,8 +181,8 @@
 @media(max-width:640px){
   .tr-body{font-size:16.5px}
   .tr-turn{margin-top:32px}
-  .doc-transcript{scroll-margin-top:205px}
-  .tr-sec{font-size:19px;margin-top:44px;scroll-margin-top:205px}
+  .doc-transcript{scroll-margin-top:116px}
+  .tr-sec{font-size:19px;margin-top:44px;scroll-margin-top:116px}
   .tr-jump ol{columns:1}
 }
 /* prev / next episode */
@@ -219,8 +234,9 @@
 .doc-guests{padding-top:18px}
 .doc-host a:hover{text-decoration:underline}
 :target{scroll-margin-top:83px}
-/* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 189px at 390, where the brand and
-   the links stack, so one flat offset cannot clear it at both. The old single 90px value
+/* The sticky .doc-nav MEASURES 67px at 1440 and 768 but 100px at 375 to 390, where the links
+   take a second row (189px before the phone header rule of 17 Oct 2026), so one flat offset
+   cannot clear it at both. The old single 90px value
    left any anchored heading buried behind the nav on a phone. This is not only a
    transcript problem: it applies to every in-page anchor on these generated pages,
    including the host profiles on the about page that the transcript speaker names now
@@ -229,7 +245,7 @@
    which is why setting scroll-margin-top on .doc-transcript alone did nothing.
    (Second time a backtick in a comment inside this template literal broke the build.
    Plain prose only in here: a backtick ends the string.) */
-@media(max-width:640px){:target{scroll-margin-top:205px}}
+@media(max-width:640px){:target{scroll-margin-top:116px}}
 /* footer */
 .doc-foot{background:var(--ink);color:var(--cream-soft);margin-top:20px}
 .doc-foot-in{max-width:1080px;margin:0 auto;padding:52px 24px 30px}
@@ -250,6 +266,7 @@
 .doc-foot-copy sup{font-size:.6em}
 @media(max-width:720px){
   .doc-foot-grid{grid-template-columns:1fr 1fr;gap:26px}
+  .doc-foot-grid > div:first-child{grid-column:1/-1}
   .doc-pager{grid-template-columns:1fr}
   .doc-host{grid-template-columns:1fr;gap:14px}
   .doc-host img{width:96px;height:96px}
