@@ -377,6 +377,7 @@ function renderFeaturedEpisode(ep) {
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',     shape: 'editorial' },
   90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',     shape: 'editorial' },
+  13: { bg: '#C9963F', fg: '#1A1614', accent: '#1E3D7A', word: 'FATIGUE',   shape: 'lines'  },
   12: { bg: '#E8B82C', fg: '#1A1614', accent: '#B83A2A', word: 'ACTING',    shape: 'circle' },
   11: { bg: '#B83A2A', fg: '#FAF6EA', accent: '#E8B82C', word: 'FLOURISH',  shape: 'sun'    },
   10: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ALLIANCE',  shape: 'lines'  },
@@ -739,11 +740,11 @@ function renderAbout() {
       <div class="host-role">${escAttr(g.role)}</div>
       <p class="host-bio">${escAttr(g.bio)}</p>
       <a class="guest-ep" href="/episodes/${escAttr(g.epSlug)}/">Episode ${escAttr(String(g.epN))} &rarr;</a>
-      <a class="host-linkedin" href="${escAttr(safeUrl(g.linkedin))}" target="_blank" rel="noopener noreferrer">
+      ${g.linkedin ? `<a class="host-linkedin" href="${escAttr(safeUrl(g.linkedin))}" target="_blank" rel="noopener noreferrer">
         <span class="li-mark">in</span>
         <span>Connect on LinkedIn</span>
         <span class="li-arrow">→</span>
-      </a>
+      </a>` : ''}
     </article>
   `).join('');
   }

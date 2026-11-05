@@ -15,6 +15,19 @@ const PLATFORMS = {
 // All episodes from the playlist (newest first)
 const EPISODES = [
   {
+    n: 13,
+    id: 'sYCLKcam7aM',
+    slug: 'the-justification-fatigue',
+    transcript: true,
+    title: 'The Justification Fatigue',
+    guest: 'Ahmed Ibrahim',
+    hosts: ['Kim Kucinskas', 'Thomas Jepson-Lay'],
+    date: '2026-11-05',
+    duration: '57 min',
+    description: 'Ahmed Ibrahim, twenty years in the NGO sector in East Africa, joins Kim Kucinskas and Thomas Jepson-Lay. He puts trust at the centre of leading through cuts, and names the gap between the people who set the strategy and the operations, finance and HR teams who have to carry it. He describes a region where the money has fallen to a fraction of what it was while displacement has gone from half a million people to more than three million, and organisations that cut from the bottom up. Donor fatigue is the popular word; what he lives with is justification fatigue and change fatigue. His rule: when you ask me to do more, tell me also what to stop. Thomas on why everyone agrees something has to drop until it is their thing, why the funding cuts were the trigger and not the cause, and why leaders who know the language of change still have to back it up with what they do. Kim on the moment money gets scarce and the mission and your own people end up at odds. It lands on trust, and on why trust is expensive.',
+    themes: ['Trust', 'Change', 'Leadership']
+  },
+  {
     n: 12,
     id: 'GVBXQai3grM',
     slug: 'acting-or-acting',
@@ -209,7 +222,10 @@ const QUOTES = [
   { text: "But gosh, how do you get through it if you can't find the joy?", source: "Kim Kucinskas", color: "q-rust" },
   { text: "Are you actually comfortable with change or are you just familiar with running change processes? Because those are two very different things.", source: "Thomas Jepson-Lay", color: "q-cream" },
   { text: "Collaboration is a discipline. It's a skill set. It's not just an aspiration and a hope.", source: "Kim Kucinskas", color: "q-cobalt" },
-  { text: "Are we just getting very good at adapting terminology, but not behaviour and practice?", source: "Ali Al Mokdad", color: "q-crimson" }
+  { text: "Are we just getting very good at adapting terminology, but not behaviour and practice?", source: "Ali Al Mokdad", color: "q-crimson" },
+  { text: "People talk about donor fatigue, which has been a very popular word for a while, but I can tell you we have the justification fatigue.", source: "Ahmed Ibrahim", color: "q-mustard" },
+  { text: "You're putting out fires and there's no oxygen to reflect.", source: "Kim Kucinskas", color: "q-cobalt" },
+  { text: "Many, many, many leaders know the language of change. They know the language that they're supposed to say.", source: "Thomas Jepson-Lay", color: "q-rust" }
 ];
 
 // AI-generated long-form blog posts · one per episode + two pinned editorials
@@ -569,6 +585,94 @@ const BLOG_POSTS = [
 <p>For now, I think that is enough.</p>
 
 <p>Ali Al Mokdad</p>`
+  },
+  {
+    epId: 'sYCLKcam7aM',
+    epN: 13,
+    slug: 'tell-me-what-to-stop',
+    title: 'Tell Me What to Stop: The Justification Fatigue',
+    excerpt: 'Notes from our conversation with Ahmed Ibrahim, twenty years in the NGO sector in East Africa. Donor fatigue is the word the sector uses. What he lives with, he said, is justification fatigue: being asked ten times to explain the same small thing.',
+    readTime: '11 min',
+    reflections: [
+      "Ahmed told a supervisor that when you ask him to do more, you should also tell him what to stop. Think of the last thing your team was asked to take on. What was stopped to make room for it, and who decided?",
+      "Ahmed describes organisations that shrink from the bottom up: the field offices close first and the senior posts stay. If your organisation had to cut again, where would the first cut fall, and what would it cost the people you serve?",
+      "Kim says you do not get to be in solidarity if you are not giving up something. On localisation, or any commitment in your strategy, what is your own department actually willing to give up?",
+      "Thomas separates alignment from attunement: trust that runs across departments, not only inside a team. Which difficult conversation could your organisation not hold today, and what trust would have to exist first?",
+      "Justification fatigue, as Ahmed describes it, is being asked ten times to explain the same small thing. What do you ask people to justify that you could simply trust them with?"
+    ],
+    body: `<p>This was the first episode recorded without Ali, and Kim Kucinskas and Thomas Jepson-Lay were joined by Ahmed Ibrahim. He introduced himself with close to twenty years in the NGO world in East Africa, most of it in Somalia, with time in South Sudan, Sudan, Kenya and Ethiopia and briefly in Rwanda and Burundi, and a career that has run through the UN, international organisations, consultancies of his own and other people's, universities, and government work as a consultant. The conversation was about leading through the cuts, seen from the place where the decisions made in headquarters meet the work in the field. When he left, the microphones stayed on for a Hot Debrief. Both halves are in the episode.</p>
+
+<h2>Then and Now</h2>
+
+<p>Thomas asked how the turbulence in the world looks from East Africa now, compared with twenty years ago. Ahmed started in late 2006, which he remembers as the peak of the world's interest in the region. In 2007, he said, close to a quarter of a million people were displaced outside Mogadishu, and the question was never how much money there was, only who could deliver the water and where it could be taken. Now, by his account, less than 10% of the resources that used to reach that part of the world are available, while the number of internally displaced people in Somalia has gone from less than half a million to more than three million. Attention has moved as well, to Ukraine, to Sudan, to Gaza and the Middle East.</p>
+
+<blockquote>People talk about donor fatigue, which has been a very popular word for a while, but I can tell you we have the justification fatigue.</blockquote>
+
+<p>He put change fatigue next to it: a structure built today, a cut five months later and a new structure, another cut three months after that and another structure, until people are tired enough to ask whether it would be better to stop altogether. Many organisations, he said, already have. What worries him most is the ambiguity of what comes next.</p>
+
+<h2>Cutting from the Bottom Up</h2>
+
+<p>Thomas heard in that picture a system that had made the region dependent on multilateral aid, and asked whether anything new is growing in the gap it leaves. Ahmed described two patterns instead. The first is how organisations shrink: from the lowest level, not the highest. The field offices close first, everyone moves to the country office, and the organisation loses its connection with the communities it serves. The people who make the decisions keep their own posts until last, and he did not exclude himself from that. What remains can be a big skeleton of directors with less technical capacity under them.</p>
+
+<p>The second is localisation. If international organisations are too big and their machinery too expensive, the money and the capacity should move to smaller local organisations that can do the work. In his assessment the opposite is happening: the large organisations need to survive, so they transfer less. And when USAID closed, he said, the shock spread quickly to the other donors in the region, and offices closed and left communities without a proper transition. Where he sits, the argument now is for prevention rather than response, because responding to everyone will not be possible.</p>
+
+<h2>Tell Me What to Stop</h2>
+
+<p>Kim said that listening to him made her feel exhausted, and asked the question underneath the strategy: how is he doing, and how are his peers doing, in a position that pulls from both ends? Ahmed answered with the arithmetic of it. A team of ten becomes five, and the five who remain take on the work of the five who left. At the same moment the global office expects more money to be raised, at a time when it is very difficult to raise it, and more impact to be shown from less. The person who links the field to the global office absorbs the shocks from below and the pressure from above. The tool he described came from a conversation with a supervisor:</p>
+
+<blockquote>when you ask me do more on this, tell me also what I need to stop.</blockquote>
+
+<p>Otherwise, he said, he inherits crisis, and ends up frustrated and exhausted, or leaves. So the questions become which reports and which meetings could stop, and whether there is room for creative thinking at all, because an overwhelmed person stops thinking and only responds. Kim finished the sentence for him.</p>
+
+<blockquote>You're putting out fires and there's no oxygen to reflect.</blockquote>
+
+<p>Thomas recognised the pattern from the time he and Ahmed worked together: everyone agreed in principle that you cannot do more with less, and everyone was on board with dropping something until it came to their own thing. In his work with leadership teams now he hears something more: decisions arriving from more senior people without much explanation, and people experiencing them as an assault on their personal value. The hurt and the firefighting compound each other, he said, and the result is that people repeat what they have done before.</p>
+
+<h2>Strategy and the Back Office</h2>
+
+<p>Asked about the challenges he faces as a leader, Ahmed separated two lines that rarely meet. Organisations are quick to adapt their vision, strategy, plans and priorities. Their bureaucracy, operational guidelines and policies do not move with them, and the people in operations, finance and human resources are left outside the shift. His example was localisation itself: the commitment is in the strategy, but it is not clear what it means for the partnership department, and a finance director whose concern is to cover operating costs and a technical team that wants to transfer more to local partners end up pulling against each other. The work, as he described it, is convergence between the thinking and the delivery.</p>
+
+<p>He added two more. A single incident, poor performance or misuse of resources in one far-away office, can turn quickly into a new rule for everyone, at exactly the moment when there are fewer people and fewer resources. And genuine failure has to be allowed. If the smallest failure has negative consequences, nobody will take the risks that a resource crisis demands.</p>
+
+<p>Kim laughed, because this is her day-to-day: the intersection of big ideas and what she now calls strategic operations. Locally led development, she said, eventually hits a finance manager or a compliance officer who has to absorb it as part of their own values and be willing to give something up.</p>
+
+<blockquote>Because you don't get to accompany and be in solidarity with if you are not giving up something.</blockquote>
+
+<p>Ahmed's answer was that the change has to belong to the whole organisation rather than one department, that operational and bureaucratic approaches have to become as adaptive as the thinking, and that the people who rarely leave the building should be taken out of the rooms to see the forces driving the change, rather than written off as difficult.</p>
+
+<h2>When Values Clash</h2>
+
+<p>Kim named the harder version. When money was flowing, an organisation could usually find alignment between how it needed to run and meeting the mission. When money becomes scarce, two values can be at odds: the programmatic impact, and taking care of your own people and keeping the organisation sustainable. Sometimes, she said, the honest move is to call it out and say that trade-offs are coming, and that takes courage and clarity.</p>
+
+<p>Thomas had quite a lot to say about this, by his own announcement. He distinguishes alignment, whether finance, operations and leadership decisions all contribute to the outcomes, from attunement: emotional connectivity and trust across departments, not only within a team. Where attunement exists, he argued, a difficult conversation is still hard, but it can be held. Holding it is a leadership skill, and not one he thinks is widely available at senior level. There is no template for this moment, and blaming the donor is a way of making the organisation a victim of its own decisions. The executive orders, in his reading, were the trigger and not the cause: everything people are now being forced to change already needed changing.</p>
+
+<blockquote>Many, many, many leaders know the language of change. They know the language that they're supposed to say. They understand the rhetoric that is supposed to come out. Their actions don't back it up.</blockquote>
+
+<p>Teams pick that up, he said, and it creates hesitancy, a chilling effect, and people who will not put themselves out there, be creative or fail fast. His remedy was depth reflection by leaders, often helped by a conversation with someone else, whether a partner, a trusted colleague, a peer or a coach.</p>
+
+<h2>Trust Is Expensive</h2>
+
+<p>Ahmed remembered a forum where Thomas asked what was going right and what was going wrong, and some colleagues answered that everything was going right. Thomas's reply, as Ahmed recalled it, was that in that case they did not need the meeting. The defensiveness, Ahmed said, is the thing to change: asking whether there is a better way of working is not an attack. He described asking a boss for the two big things the office should achieve, hearing that the first was to mobilise resources, and asking in return why the resources were needed and what they were for.</p>
+
+<p>Kim drew the thread together around attunement, and then around trust. She shared a definition she had heard at a recent conference session, trust as sincerity, reliability, care, competence and safety, and pointed out how much a leader has to demonstrate at once, in actions as well as words. To her, Ahmed's role in the middle means facilitating that attunement whether he wanted the job or not, and doing the emotional labour of code switching, which, she pointed out, is not in his job description.</p>
+
+<blockquote>I actually learned that trust is expensive.</blockquote>
+
+<p>With even a little doubt, Ahmed said, no matter how hard you work, it will always look ugly. Trust starts with your own people, and he described it as psychological safety: the room to say that a decision was wrong, and a leader who can answer that he was wrong and apologise. Then he came back to justification fatigue, which, in his telling, means being asked ten times to explain the same small thing, until you decide not to bring anything new next time, because one small solution costs so much time and energy that you can only afford to bring what is necessary.</p>
+
+<h2>Reflections</h2>
+
+<p>Ahmed apologised for getting emotional, and said that people going through this need a place to come together, breathe and share their thinking, even outside the institutions they work in. Kim took away two words, attunement and justification fatigue, and named the opposite of the fatigue as creativity and curiosity, which nobody can offer if they are burnt out by the grind of the system. Thomas challenged the idea of a trade-off, because it turns into a zero-sum framing, and offered discernment instead: understanding where trust sits in the organisation, building it where it does not, owning your own part, and not being a victim in all this.</p>
+
+<h2>The Hot Debrief</h2>
+
+<p>After Ahmed left, Kim said she heard the same through lines as in a year of these conversations, in a different context and a different voice. Thomas noted that Ahmed had been careful to stay away from examples that could give organisational details away, which he thought was fair. Kim said she felt the middle role in her own body, and recalled how often the person in that seat is the one in the room asking what it is all for and what about the people.</p>
+
+<p>Thomas connected it to something he kept hearing in the region: we do not want to bother them, they are overworked. He understands the sentiment, but the result, as he described it, is that people at that level are left with business as usual and the performance indicators and excluded from the conversations where something new could happen. Kim had brought up the pole exercise from the last episode, and he returned to it: the task is to lower the pole, and all the noise is about raising it. Kim asked what would happen if the noise were put down, the reporting streamlined and the justification made less exhausting. Thomas described a workshop, five storeys underground in a hotel basement with the fire alarm going off, where he had argued for flipping the demand for data so that it serves the country office's own decisions first and global aggregation second. Kim added learning that runs horizontally, country office to country office, and the possibility of using technology to take some of the noise away.</p>
+
+<p>Thomas also named the question he did not get to ask: in five, ten or twenty years, where will the acts of humanity come from, and what role will leadership at the level of society play, if the answer turns out to be the culmination of many small things rather than the rollout of something big. He suggested they might have to have Ahmed back to ask it. Kim noted that this was the first time they had recorded without Ali and said they would be interested to hear his thoughts, and Thomas suggested starting the next episode with them.</p>
+
+<p>A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and that interpretation is ours. The episode itself, including the Hot Debrief, is the place to hear it in full.</p>`
   },
   {
     epId: 'GVBXQai3grM',
@@ -1582,15 +1686,24 @@ const GUESTS = [
     linkedin: 'https://uk.linkedin.com/in/susan-le-jeune-d-allegeershecque-35b78659',
     photo: 'assets/guest-susan.jpg', photoW: 440, photoH: 440,
     epN: 11, epSlug: 'collaboration-over-control'
+  },
+  {
+    name: 'Ahmed Ibrahim',
+    slug: 'ahmed-ibrahim',
+    role: 'Twenty years in the NGO sector in East Africa',
+    bio: 'Has worked in the NGO sector in East Africa for close to twenty years, across the UN, international organisations, consultancies, universities and government work as a consultant. On the show he described leading through the cuts from the place where decisions made at headquarters meet the work in the field, named justification fatigue, and argued that trust is expensive.',
+    linkedin: '',
+    photo: 'assets/guest-ahmed.jpg', photoW: 440, photoH: 440,
+    epN: 13, epSlug: 'the-justification-fatigue'
   }
 ];
 
 // Real channel stats · updated from the YouTube channel
-// Total listeners and viewers as of 2026-09-21: YouTube views 109,030 (Studio, supplied by Ali on release day) + podcast plays and downloads 334 + Google Search impressions 301 (both carried from the 13 Sep audience check) = 109,665.
+// Home page headline number as of 2026-11-05: the channel's total views as YouTube shows them (141,548), on Ali's instruction (5 Nov 2026). The Audience reach page keeps its own figures and was left as it is. The 2026-09-21 figure was 109,665 (YouTube 109,030 + podcast 334 + Search impressions 301).
 // Countries reached: 73 distinct countries across the three platforms. Both figures come from the audience dashboard (thesectordebrief.com/#audience).
 const STATS = {
   episodes: EPISODES.length,
-  views: '109,665',
+  views: '141,548',
   countries: 73
 };
 

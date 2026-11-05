@@ -30,8 +30,8 @@ const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.j
 
 const SITE = 'https://thesectordebrief.com';
 const ASSET_V = '2026-09-21d';                 // cache-bust for /css and shared assets
-const TODAY = '2026-10-17';
-const TRANSCRIPT_DATE = '2026-10-17';          // when the newest transcript was published
+const TODAY = '2026-11-05';
+const TRANSCRIPT_DATE = '2026-11-05';          // when the newest transcript was published
 const FILM_PAGE_DATE = '2026-09-13';           // last change to the hand-built film page
                      // build date (Date.now is avoided for reproducibility)
 const OG_DEFAULT = SITE + '/assets/cover.jpg';
@@ -235,7 +235,8 @@ const HOST_ID = {
   'Kim Kucinskas': SITE + '/#kim-kucinskas',
   'Thomas Jepson-Lay': SITE + '/#thomas-jepson-lay',
 };
-const hostRefs = () => HOSTS.map(h => ({ '@type': 'Person', '@id': HOST_ID[h.name] || undefined, name: h.name }));
+const hostRefs = (names) => HOSTS.filter(h => !names || names.includes(h.name))
+  .map(h => ({ '@type': 'Person', '@id': HOST_ID[h.name] || undefined, name: h.name }));
 
 // Rich, accurate identity data so Google can resolve each host as a real person
 // and tie them to the show. Ali carries his full senior leadership title, his
@@ -285,6 +286,7 @@ const HOST_PROFILES = {
 const BLOG_COVER_THEMES = {
   0:  { bg: '#FAF6EA', fg: '#1A1614', accent: '#EA4335', word: 'NOTES',    shape: 'editorial' },
   90: { bg: '#FAF6EA', fg: '#1A1614', accent: '#2C5BAA', word: 'PAUSE',    shape: 'editorial' },
+  13: { bg: '#C9963F', fg: '#1A1614', accent: '#1E3D7A', word: 'FATIGUE',   shape: 'lines'  },
   12: { bg: '#E8B82C', fg: '#1A1614', accent: '#B83A2A', word: 'ACTING',    shape: 'circle' },
   11: { bg: '#B83A2A', fg: '#FAF6EA', accent: '#E8B82C', word: 'FLOURISH',  shape: 'sun'    },
   10: { bg: '#1E3D7A', fg: '#FAF6EA', accent: '#E8B82C', word: 'ALLIANCE', shape: 'lines'  },
@@ -744,7 +746,7 @@ function buildEpisodePage(ep) {
         + (t.paras && t.paras.length ? t.paras.join(' ') : (t.text || ''))).join('\n\n') } : {}) },
     actor: [
       ...(ep.guest ? [{ '@type': 'Person', name: ep.guest }] : []),
-      ...hostRefs(),
+      ...hostRefs(ep.hosts),   // the hosts who were in this episode (EP13: Ali was away)
     ],
   };
 
@@ -954,7 +956,7 @@ function buildAboutPage() {
         <div class="role">${esc(g.role)}</div>
         <p>${esc(g.bio)}</p>
         <a href="/episodes/${esc(g.epSlug)}/">Episode ${g.epN} &rarr;</a>
-        <a href="${esc(g.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn &rarr;</a>
+        ${g.linkedin ? `<a href="${esc(g.linkedin)}" target="_blank" rel="noopener noreferrer">Connect on LinkedIn &rarr;</a>` : ''}
       </div>
     </article>`).join('');
 
