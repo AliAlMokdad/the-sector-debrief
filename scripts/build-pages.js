@@ -461,7 +461,7 @@ const DOC_CSS = `
 .doc-body .doc-cta,.doc-body .doc-skip{color:var(--cream)}
 .doc-body .doc-orb{color:var(--cream-soft)}
 /* nav */
-.doc-nav{position:sticky;top:0;z-index:40;background:rgba(239,232,214,.96);backdrop-filter:saturate(1.1);border-bottom:1px solid var(--cream-deep)}
+.doc-nav{position:sticky;top:0;z-index:40;background:var(--cream);backdrop-filter:saturate(1.1);border-bottom:1px solid var(--cream-deep)}
 .doc-nav-in{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:14px 24px}
 .doc-brand{display:flex;align-items:center;gap:9px;font-family:var(--fd);font-weight:700;font-size:19px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
 .doc-brand sup{font-size:.5em;opacity:.6}
@@ -488,7 +488,7 @@ const DOC_CSS = `
 .doc-wide{max-width:1080px;margin:0 auto;padding:0 24px}
 .doc-crumbs{max-width:1080px;margin:0 auto;padding:20px 24px 0;font-size:13px;color:var(--ink-mute)}
 .doc-crumbs a{color:var(--ink-mute)}
-.doc-crumbs span{margin:0 7px;opacity:.5}
+.doc-crumbs span{margin:0 7px}.doc-crumbs span[aria-hidden]{opacity:.5}
 /* article */
 .doc-article{padding-top:16px;padding-bottom:72px}
 .doc-eyebrow{font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson);margin:14px 0 14px}

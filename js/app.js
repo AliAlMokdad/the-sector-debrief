@@ -242,9 +242,10 @@ function bindEpCards(scope) {
     const trigger = e.target.closest('.ep-thumb, .ep-feat-thumb');
     if (!trigger || !scope.contains(trigger)) return;
     if (e.target.closest('.ep-actions, .ep-link')) return;
-    e.preventDefault();
     const ep = EPISODES.find(x => x.id === trigger.dataset.ep);
-    if (ep) openEpisode(ep);
+    if (!ep) return; // a plain link (the film card): let Enter follow it
+    e.preventDefault();
+    openEpisode(ep);
   });
 }
 
@@ -541,7 +542,7 @@ function renderPauseHero() {
   copyBtn?.addEventListener('click', async () => {
     const text = pool[idx].q;
     const ok = await safeCopy(`"${text}" · The Sector Debrief`);
-    const original = copyBtn.innerHTML;
+    const original = copyBtn.dataset.orig || (copyBtn.dataset.orig = copyBtn.innerHTML);
     if (ok) {
       const r = copyBtn.getBoundingClientRect();
       if (window.sparkBurst) window.sparkBurst(r.left + r.width/2, r.top + r.height/2);
@@ -695,7 +696,7 @@ function bindQuoteShare(scope) {
   });
 }
 function flash(el, text) {
-  const original = el.innerHTML;
+  const original = el.dataset.orig || (el.dataset.orig = el.innerHTML);
   // textContent, not innerHTML: callers only pass glyph literals today, but
   // this keeps the helper safe if any future caller passes dynamic text.
   el.textContent = text;
@@ -942,7 +943,7 @@ function bindPause(scope, post) {
         if (action === 'share-x')  window.open(`https://twitter.com/intent/tweet?text=${t}&url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'share-li') window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=500');
         if (action === 'copy') {
-          const original = btn.innerHTML;
+          const original = btn.dataset.orig || (btn.dataset.orig = btn.innerHTML);
           safeCopy(`"${text}" · The Sector Debrief`).then(ok => {
             btn.innerHTML = ok ? '✓' : '!';
             if (!ok) btn.title = 'Copy not available';
@@ -1444,6 +1445,15 @@ document.addEventListener('DOMContentLoaded', () => {
       // Pass opts through so popstate-driven host-anchor navigations preserve
       // the browser's restored scroll position (no jolt-to-top before scroll).
       openHostAnchor(raw, opts);
+      lastHashHandled = location.hash;
+      return;
+    }
+    if (raw.startsWith('main-') && valid.includes(raw.slice(5))) {
+      // "Skip to content" points at the active page landmark: stay on that page and focus it.
+      const pg = raw.slice(5);
+      history.replaceState({ page: pg }, '', '#' + pg);
+      if (pg !== state.page) _doNavigate(pg, opts);
+      document.getElementById(raw)?.focus();
       lastHashHandled = location.hash;
       return;
     }
