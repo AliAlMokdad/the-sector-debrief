@@ -56,6 +56,12 @@ Independent leadership coach for the humanitarian sector. Former senior operatio
 
 ## Episodes (newest first)
 
+### Episode 14: A Moral Story
+
+Date: 26 November 2026 · Duration: 70 min · Guest: Yuriy Boyechko · YouTube: https://www.youtube.com/watch?v=UUnDc94T1bk
+
+Yuriy Boyechko, founder and CEO of Hope for Ukraine and author of the forthcoming book Defiant Hope, joins Kim Kucinskas, Thomas Jepson-Lay and Ali Al Mokdad. Ali starts with the numbers: about $5 million in revenue, around 90% of it going to programmes, and millions of people reached. Yuriy's answer is operations: around 1,500 volunteers on the ground, vendors reassessed every week, food bought from Ukrainian producers, and an app his team built, "DoorDash for humanitarian aid", that tracks aid from the warehouse to the distribution. He talks about 2023, when revenue dropped 75% in one year, and the decision to innovate, with programming built around what is needed most on the ground, from a solar energy programme that began with one generator bought at Costco to rescuing abandoned pets. He also tells the story of Natalia in Kherson, whose answer to every suggestion to leave is the same: if not us, then who? Thomas on how the international system rolled into Ukraine with the same model it uses everywhere else, and on the difference between scale and replicability. Kim on the intersection between impact and operations, and on whether everything needs to scale. Ali on energy as humanitarian assistance, a type of programming the sector still does not fully embrace.
+
 ### Episode 13: The Justification Fatigue
 
 Date: 5 November 2026 · Duration: 57 min · Guest: Ahmed Ibrahim · YouTube: https://www.youtube.com/watch?v=sYCLKcam7aM
@@ -437,6 +443,86 @@ What will The Sector Debrief become? I really don't know. For now, a living expe
 For now, I think that is enough.
 
 Ali Al Mokdad
+
+---
+
+### Essay: If Not Us, Then Who? A Moral Story
+
+Companion to Episode 14 · 9 min read · canonical: https://thesectordebrief.com/blog/if-not-us-then-who/
+
+(A note on method, stated in the essay itself: this is the hosts' reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera; everything else is interpretation.)
+
+Kim Kucinskas, Thomas Jepson-Lay and Ali Al Mokdad were joined by Yuriy Boyechko, who introduced himself as the CEO and founder of Hope for Ukraine and the author of a forthcoming book, Defiant Hope: Ordinary Lives, Extraordinary Courage, and the Fight for Ukraine. Hope for Ukraine has worked on the ground in Ukraine since 2016 and marks ten years this year. He described food distribution through a family support programme, a solar energy resilience programme, five other programmes, about 1,500 volunteers working with them every day, a headquarters in Roseland, New Jersey, and a humanitarian hub in Lviv. When he left, the microphones stayed on for a Hot Debrief.
+
+Operations Is the Impact.
+
+Ali opened with the numbers he had found on the organisation's website: revenue of a little over $5 million, around 90% of it going to direct programme costs, and millions of people reached. How, he asked, does an organisation that size reach that many people? Yuriy's first answer was short.
+
+As spoken on camera: "Because we look at spreadsheets every morning."
+
+He then listed what sits behind it. Volunteers, because paying everyone who does the work on the ground would make the costs balloon. Vendors reassessed almost every week. Food that was bought in Europe at the start of the war and is now bought from producers in Ukraine, which he said roughly halved the cost. A shipping deal with one logistics company in the United States that also lets them store goods and build containers in its facility. His estimate was that $5 million does something like $20 million worth of work on the ground. Kim recognised her own field in it: this, she said, is the intersection between impact and operations, and in technical language much of it is cost share.
+
+A Delivery App for Aid.
+
+Kim asked how the logistics and the people are kept running, and Yuriy's answer was technology. In 2024 he had the idea of something like DoorDash for humanitarian aid, after seeing pictures of long lines of people waiting with paperwork, and distributions that took hours because of the strict documentation required on the Ukrainian side. After two vendors, they built the app and launched it at the beginning of 2025. Partners register and are verified, goods move from the warehouse to a partner, the partner creates a distribution event that shows on a map and a calendar, and the report comes back with pictures. Everything, he said, is visible in real time, work that would otherwise take about three people.
+
+When the System Rolled In.
+
+Thomas described, as he put it, an outside narrative from someone who has never worked in Ukraine: an international system that arrived with the same processes it uses everywhere, and rolled out a localisation process alongside it at the same time. Yuriy's account began in 2022, when every NGO came, and went on to 2024, when many left. The reason he gave was a new government rule after a year of waste: once aid crosses the border, the organisation on the ground has 90 days to document where it went and who received it. His example was a hospital in the Mykolaiv region that was brought a commercial generator by a well-meaning partner abroad and already had seven of them in the backyard.
+
+Hope for Ukraine could not leave, he said, because it is a Ukraine-based organisation, so it hired a legal team and local Ukrainian counsel and built the infrastructure to work with the government, and then built the app on top of it. He described the approach as grassroots up rather than top down: before a team is deployed, the person driving the van is the one who says whether a road is safe. And after USAID was dismantled, he said, the old model of an office in Washington and a report once a year is over.
+
+Innovate or Go Out of Business.
+
+Ali asked whether the experimenting was designed into the organisation or came from need. Yuriy said it was intentional, and traced it to his earlier career in media and entertainment, pitching reality shows. 2022 was a good year for everyone. In 2023 their revenue dropped 75% in one year.
+
+As spoken on camera: "So in 2023, it was the point where I realized we either innovate or we just go out of business as an organization."
+
+What followed, in his account, was updates on social media every two hours, a growing donor base, the app, and this year a tool built with the same developers that uses AI to match their programmes with open funding opportunities, with a person verifying and applying. The book, he said, is meant to work as a development tool too, sitting on shelves around the world. Later in the conversation he put a number on the change: since the bad year of 2023, the organisation has grown 70% to 100% year over year.
+
+If Not Us, Then Who?
+
+Thomas asked how a leader works with hope, and with a base of volunteers. Yuriy spoke about volunteers who have been with them since the start of the full-scale war, some of whom have made 157 trips to the front line, unpaid, with a van full of goods and a tank full of gas. He lives, he said, by one phrase: communication is the lifeline of every relationship. Then he told the story of Natalia, who works for them in Kherson. She has lost her home to occupation, her father and her husband, and lives in the city with her 14-year-old son, under constant drone attack. He has told her she could take her son and move somewhere peaceful.
+
+As spoken on camera: "And she always gives me the same answer: if not us, then who?"
+
+There are 60,000 people still living in the town, she tells him, mostly elderly and sick, and she will stay as long as there are supplies to distribute. Yuriy's own word for what that does to others was contagious: people write and call every week from Australia, New Zealand, Britain and the United States asking to volunteer on the ground. That, he said, is defiant hope.
+
+Scale or Replicate.
+
+Kim said her mind kept going to scale and that she was uncomfortable with it, because maybe not everything needs to be scaled. Yuriy described a foundation built through trial and error on two pillars, technology and a grassroots movement. They distribute about 2,000 food kits a week and could distribute 4,000 if there were money for the food, because the people on the ground are ready. Their average donation is $50, from thousands of donors he calls owners. Their office policy is that every email is answered and every phone call returned within 24 hours. At a donor roundtable, one person told them they read every one of the emails that go out twice a week.
+
+Thomas drew a line between two ideas that often get merged.
+
+As spoken on camera: "Now, for me, there's a strong distinction between scale and replicability."
+
+Yuriy's answer was a system that can be adjusted in days rather than weeks, attention on the most critical need of the community, and an organisation that can explain what it does in one sentence, because, as he put it, the public votes with money.
+
+Energy as Assistance.
+
+Ali asked about the solar programme, which he saw as energy as assistance, a type of programming that sits between humanitarian and development work. Yuriy described families who had food kits but nothing to cook on, firewood deliveries, and open fires close to the front line whose smoke could bring a drone. One day in a Costco he saw a solar power generator, bought one with a panel and a cooktop, and tested it. They first bought units store by store around New Jersey and now have a direct supplier. The programme, he said, was nominated this year for the Reuters Sustainability Awards alongside multi-billion-dollar companies. A pets programme followed this year, using the vans that come back empty from the front line to move abandoned dogs and cats to shelters.
+
+As spoken on camera: "I think the revenue will follow impact, not vision casting."
+
+Asked about his own experience of the full-scale invasion, Yuriy said that a lot of his family is still there, his father among them, and kept the answer short.
+
+A Moral Story.
+
+Ali named what he had been hearing.
+
+As spoken on camera: "The story that I'm hearing, for me, it's not the classic story. It's a moral story."
+
+It is about solidarity, innovation, experimenting and resilience, he said, and it is the kind of story the sector should tell more: values and principles shown in practice, rather than only needs and struggles. In the Hot Debrief Kim said she had been in listening mode the whole time, and that the way Yuriy speaks makes complex things seem obvious.
+
+As spoken on camera: "This is how development should just be done."
+
+Thomas wished he had asked whether anyone from the multilateral system had sat down with Yuriy and asked how things work there. He was careful about taking the model and copying it elsewhere: it works, in his view, because it is a local organisation in its own context, and the question for the international system is what support it can bring to something like this. For him the mission Yuriy narrated was values-based.
+
+As spoken on camera: "Building hope was his mission."
+
+Ali named three things he would keep thinking about: numbers that back up the story, energy treated as an essential need, and the moral story itself. Kim described a business as usual that is itself innovation, meant to meet tomorrow's need, and asked what the universal lessons are: technology meeting people, values as a spine, and communication that is clear. She ended on the role of intermediaries, and on why that unglamorous work needs to be funded in a different way. Thomas added the role international organisations can play in raising the profile of crises that are off the radar, and the conversation ended there, as a topic for the next episode.
+
+A note on these notes, because this page promises honesty about how it is made. This essay is our reading of the conversation, drafted from the episode transcript. The quoted passages are as spoken on camera. Everything else is interpretation, and that interpretation is ours. The episode itself, including the Hot Debrief, is the place to hear it in full.
 
 ---
 
