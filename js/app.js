@@ -202,9 +202,6 @@ function epCard(ep) {
     <article class="ep-card" data-ep="${ep.id}">
       <div class="ep-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open episode: ${altTitle}">
         <img src="https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg" alt="The Sector Debrief Episode ${ep.n}: ${altTitle}" loading="lazy"/>
-        <div class="ep-thumb-overlay">
-          <span class="ep-thumb-num">Ep ${String(ep.n).padStart(2,'0')}</span>
-        </div>
         <div class="ep-thumb-play"></div>
       </div>
       <div class="ep-body">
