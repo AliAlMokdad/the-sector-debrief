@@ -3120,3 +3120,12 @@ body.nav-open .nav { z-index: 300; }
   .ep-feat-meta .ep-feat-sep-guest { display: none; }
   .ep-feat-meta .ep-feat-guest { flex-basis: 100%; }
 }
+
+/* Phones only (Ali, 26 Nov 2026): the "What people actually said" quotes strip and the moving
+   sound-wave bars in the hero are hidden. Portrait phones by width, landscape phones by a short
+   touch screen. Tablets and laptops keep both. The ID beats motion.css, which sets the canvas to
+   display:block later in the cascade; a hidden canvas stops its animation loop (IntersectionObserver). */
+@media (max-width: 640px), (pointer: coarse) and (max-height: 500px) {
+  .quotes-marquee { display: none; }
+  #waveform { display: none; }
+}
