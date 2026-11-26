@@ -495,6 +495,7 @@ const DOC_CSS = `
 .doc-h1{font-family:var(--fd);font-weight:700;font-size:clamp(30px,5.4vw,52px);line-height:1.08;letter-spacing:-.02em;margin:0 0 18px;color:var(--ink)}
 .doc-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;color:var(--ink-mute);margin-bottom:26px}
 .doc-meta .dot{opacity:.4}
+@media(max-width:640px){.doc-meta .dot-guest{display:none}.doc-meta .doc-guest{flex-basis:100%}}
 .doc-byline{font-size:14.5px;color:var(--ink-mute);margin:-12px 0 26px}
 .doc-byline a{color:var(--cobalt-deep);font-weight:500;text-decoration:none}
 .doc-byline a:hover{text-decoration:underline}
@@ -715,7 +716,7 @@ function buildEpisodePage(ep) {
   const title = `Episode ${ep.n}: ${ep.title} | The Sector Debrief`;
   const desc = clip(ep.description, 158);
   const themes = (ep.themes || []).map(t => `<span class="doc-chip">${esc(t)}</span>`).join('');
-  const guestLine = ep.guest ? `<span class="dot">&middot;</span><span>with ${esc(ep.guest)}</span>` : '';
+  const guestLine = ep.guest ? `<span class="dot dot-guest">&middot;</span><span class="doc-guest">with ${esc(ep.guest)}</span>` : '';
 
   const crumbs = [
     { name: 'Home', path: '/', url: SITE + '/' },

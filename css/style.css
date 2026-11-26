@@ -2964,9 +2964,9 @@ body.nav-open { overflow: hidden; }
 .film-card .ep-link:hover { background: var(--paper); color: var(--ink); border-color: var(--paper); }
 .film-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-/* Phone: the film leads the home row, before Episode 10 (desktop keeps it after); the thumbnail carries the number. */
+/* Phone: the film card follows the latest episode, as on desktop (26 Nov 2026; it led the row on phones from 12 Sep);
+   the thumbnail carries the number. */
 @media (max-width: 640px) {
-  #home-episodes .film-card { order: -1; }
   .film-card-number { display: none; }
   .film-card .ep-title.film-card-title { font-size: 20px; }
   .film-card .ep-actions { flex-wrap: nowrap; }
@@ -3108,4 +3108,15 @@ body.nav-open .nav { z-index: 300; }
 .ep-feat-thumb:focus-visible {
   outline: 2px solid var(--cobalt);
   outline-offset: 3px;
+}
+
+/* ═══════ EPISODES ARCHIVE ON PHONES: the latest episode leads, the film follows (26 Nov 2026) ═══════ */
+@media (max-width: 640px) {
+  #main-episodes > section { display: flex; flex-direction: column; }
+  #main-episodes #ep-featured { order: 1; margin-bottom: 36px; }
+  #main-episodes #film-feature { order: 2; }
+  #main-episodes .filter-bar { order: 3; }
+  #main-episodes #episodes-grid { order: 4; }
+  .ep-feat-meta .ep-feat-sep-guest { display: none; }
+  .ep-feat-meta .ep-feat-guest { flex-basis: 100%; }
 }

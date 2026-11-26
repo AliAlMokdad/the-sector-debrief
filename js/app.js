@@ -347,7 +347,6 @@ function renderFeaturedEpisode(ep) {
     <div class="ep-feat-thumb" data-ep="${ep.id}" role="button" tabindex="0" aria-label="Open featured episode: ${altTitle}">
       <img src="https://i.ytimg.com/vi/${ep.id}/maxresdefault.jpg" alt="The Sector Debrief Episode ${ep.n}: ${altTitle}" loading="lazy" onerror="this.src='https://i.ytimg.com/vi/${ep.id}/hqdefault.jpg'"/>
       <div class="ep-feat-overlay">
-        <div class="ep-feat-num">E${String(ep.n).padStart(2,'0')}</div>
         <div class="ep-feat-play"></div>
       </div>
     </div>
@@ -357,7 +356,7 @@ function renderFeaturedEpisode(ep) {
       <div class="ep-feat-meta">
         <span>${fmtDate(ep.date)}</span>
         ${ep.duration ? `<span>·</span><span>${escAttr(ep.duration)}</span>` : ''}
-        ${ep.guest ? `<span>·</span><span>w/ ${escAttr(ep.guest)}</span>` : ''}
+        ${ep.guest ? `<span class="ep-feat-sep-guest">·</span><span class="ep-feat-guest">w/ ${escAttr(ep.guest)}</span>` : ''}
       </div>
       <div class="ep-feat-themes">${themeChips}</div>
       <p class="ep-feat-desc">${escAttr(ep.description)}</p>
