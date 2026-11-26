@@ -31,6 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
   <link rel="stylesheet" href="/css/style.css?v=2026-09-21d"/>
+  <link rel="stylesheet" href="/css/fourthchair.css?v=2026-11-26a"/>
   <style>
 :root{--cream:#EFE8D6;--cream-soft:#F5F0E2;--cream-deep:#E5DCC3;--paper:#FAF6EA;--ink:#1A1614;--ink-soft:#2C2622;--ink-mute:#524A42;--cobalt:#2C5BAA;--cobalt-deep:#1A3866;--crimson:#B83A2A;--crimson-deep:#8B2818;--mustard:#E8B82C;--forest:#2A4530;--rust:#A0531F;--fd:'Fraunces',Georgia,serif;--fb:'Inter',-apple-system,BlinkMacSystemFont,sans-serif}
 .doc-body{visibility:visible!important;opacity:1!important;margin:0;background:var(--cream);color:var(--ink);font-family:var(--fb);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -109,6 +110,11 @@
 .doc-btn.primary{background:var(--crimson);border-color:var(--crimson);color:var(--cream)}
 .doc-btn.primary:hover{background:var(--crimson-deep);border-color:var(--crimson-deep)}
 .doc-btn.yt:hover{background:var(--ink);color:var(--cream)}
+/* The Fourth Chair button: shown only once the widget exists on a laptop (fourthchair.js sets html.fc-ready) */
+.fc-episode-cta{display:none}
+html.fc-ready .fc-episode-cta{display:inline-flex;cursor:pointer;font-family:inherit;background:var(--ink);border-color:var(--ink);color:var(--cream)}
+html.fc-ready .fc-episode-cta:hover{background:var(--crimson);border-color:var(--crimson)}
+@media not all and (min-width:900px),(hover:none),(pointer:coarse){.fc-episode-cta{display:none!important}}
 /* callout / next steps */
 .doc-rule{height:2px;background:var(--ink);opacity:.12;margin:44px 0}
 .doc-next{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:26px;background:var(--paper);border:1px solid var(--cream-deep);border-radius:12px;margin:34px 0}
@@ -303,6 +309,7 @@
     <a class="doc-btn primary yt" href="https://www.youtube.com/watch?v=UUnDc94T1bk" target="_blank" rel="noopener noreferrer">&#9654; Watch on YouTube</a>
     <a class="doc-btn" href="https://open.spotify.com/show/1igMsRaLcEY9DN64GBDKbW" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
     <a class="doc-btn" href="https://podcasts.apple.com/podcast/id1861790994" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+    <button type="button" class="doc-btn fc-episode-cta" data-fc-episode="a-moral-story" data-fc-title="Episode 14: A Moral Story" data-fc-guest="Yuriy Boyechko">Talk about this episode</button>
   </div>
 
   <section class="doc-transcript" id="transcript" aria-labelledby="transcript-h">
@@ -763,5 +770,6 @@
       <span>Conversations that shape the future</span>
     </div>
   </div></footer>
+<script src="/js/fourthchair.js?v=2026-11-26a" defer></script>
 </body>
 </html>

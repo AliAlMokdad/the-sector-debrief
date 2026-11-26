@@ -29,7 +29,8 @@ const ROOT = path.resolve(__dirname, '..');
 const { EPISODES, BLOG_POSTS, HOSTS, GUESTS, PLATFORMS, STATS } = require(path.join(ROOT, 'js', 'data.js'));
 
 const SITE = 'https://thesectordebrief.com';
-const ASSET_V = '2026-09-21d';                 // cache-bust for /css and shared assets
+const ASSET_V = '2026-09-21d';
+const CHAIR_V = '2026-11-26a';                // cache-bust for the Fourth Chair widget on episode pages                 // cache-bust for /css and shared assets
 const TODAY = '2026-11-26';
 const TRANSCRIPT_DATE = '2026-11-26';          // when the newest transcript was published
 const FILM_PAGE_DATE = '2026-09-13';           // last change to the hand-built film page
@@ -396,7 +397,7 @@ function footerHtml() {
 }
 
 // ─── page shell ────────────────────────────────────────────────
-function shell({ title, desc, canonical, ogType, ogImage, jsonld, body, active }) {
+function shell({ title, desc, canonical, ogType, ogImage, jsonld, body, active, chair }) {
   const blocks = (jsonld || []).map(o =>
     `<script type="application/ld+json">${ldJson(o)}</script>`).join('\n  ');
   return `<!DOCTYPE html>
@@ -431,7 +432,8 @@ function shell({ title, desc, canonical, ogType, ogImage, jsonld, body, active }
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/></noscript>
-  <link rel="stylesheet" href="/css/style.css?v=${ASSET_V}"/>
+  <link rel="stylesheet" href="/css/style.css?v=${ASSET_V}"/>${chair ? `
+  <link rel="stylesheet" href="/css/fourthchair.css?v=${CHAIR_V}"/>` : ''}
   <style>${DOC_CSS}</style>
   ${blocks}
 </head>
@@ -441,7 +443,8 @@ ${navHtml(active)}
 <main id="doc-main">
 ${body}
 </main>
-${footerHtml()}
+${footerHtml()}${chair ? `
+<script src="/js/fourthchair.js?v=${CHAIR_V}" defer></script>` : ''}
 </body>
 </html>`;
 }
@@ -525,6 +528,11 @@ const DOC_CSS = `
 .doc-btn.primary{background:var(--crimson);border-color:var(--crimson);color:var(--cream)}
 .doc-btn.primary:hover{background:var(--crimson-deep);border-color:var(--crimson-deep)}
 .doc-btn.yt:hover{background:var(--ink);color:var(--cream)}
+/* The Fourth Chair button: shown only once the widget exists on a laptop (fourthchair.js sets html.fc-ready) */
+.fc-episode-cta{display:none}
+html.fc-ready .fc-episode-cta{display:inline-flex;cursor:pointer;font-family:inherit;background:var(--ink);border-color:var(--ink);color:var(--cream)}
+html.fc-ready .fc-episode-cta:hover{background:var(--crimson);border-color:var(--crimson)}
+@media not all and (min-width:900px),(hover:none),(pointer:coarse){.fc-episode-cta{display:none!important}}
 /* callout / next steps */
 .doc-rule{height:2px;background:var(--ink);opacity:.12;margin:44px 0}
 .doc-next{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:26px;background:var(--paper);border:1px solid var(--cream-deep);border-radius:12px;margin:34px 0}
@@ -768,6 +776,7 @@ function buildEpisodePage(ep) {
     <a class="doc-btn primary yt" href="https://www.youtube.com/watch?v=${ep.id}" target="_blank" rel="noopener noreferrer">&#9654; Watch on YouTube</a>
     <a class="doc-btn" href="${PLATFORMS.spotify}" target="_blank" rel="noopener noreferrer">Listen on Spotify</a>
     <a class="doc-btn" href="${PLATFORMS.apple}" target="_blank" rel="noopener noreferrer">Apple Podcasts</a>
+    <button type="button" class="doc-btn fc-episode-cta" data-fc-episode="${ep.slug}" data-fc-title="Episode ${ep.n}: ${esc(ep.title)}" data-fc-guest="${esc(ep.guest || '')}">Talk about this episode</button>
   </div>
   ${tr ? transcriptHtml(ep, tr) : ''}
   ${essay ? `<div class="doc-next"><div><div class="lbl">Read the companion essay</div><div class="ttl">${esc(essay.title)}</div></div><a class="doc-btn primary" href="/blog/${essay.slug}/">Read the essay</a></div>` : ''}
@@ -777,7 +786,7 @@ function buildEpisodePage(ep) {
 </article>`;
 
   return shell({
-    title, desc, canonical: url, ogType: 'video.episode', ogImage: ytThumb(ep.id),
+    title, desc, canonical: url, ogType: 'video.episode', ogImage: ytThumb(ep.id), chair: true,
     active: 'episodes', jsonld: [podcastLD, crumbLD(crumbs)], body,
   });
 }
