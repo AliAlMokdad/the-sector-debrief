@@ -606,7 +606,7 @@ const BLOG_POSTS = [
     epN: 14,
     slug: 'if-not-us-then-who',
     title: 'If Not Us, Then Who? A Moral Story',
-    excerpt: 'Notes from our conversation with Yuriy Boyechko of Hope for Ukraine. An organisation of about $5 million that looks at spreadsheets every morning, a woman in Kherson whose answer is always the same, and why Ali called it a moral story.',
+    excerpt: 'Notes from our conversation with Yuriy Boyechko of Hope for Ukraine. An organisation that makes each dollar go further through volunteers, careful buying and its own technology, a woman in Kherson whose answer is always the same, and why Ali called it a moral story.',
     readTime: '9 min',
     reflections: [
       "Ali found that around 90% of Hope for Ukraine's revenue goes to programmes. Which of the costs your organisation treats as fixed could you test against what the work on the ground actually needs?",
@@ -619,11 +619,13 @@ const BLOG_POSTS = [
 
 <h2>Operations Is the Impact</h2>
 
-<p>Ali opened with the numbers he had found on the organisation's website: revenue of a little over $5 million, around 90% of it going to direct programme costs, and millions of people reached. How, he asked, does an organisation that size reach that many people? Yuriy's first answer was short.</p>
+<p>Ali opened with the numbers he had found on the organisation's website: revenue of a little over $5 million, around 90% of it going to direct programme costs, and millions of people reached. How, he asked, does an organisation that size reach that many people? Yuriy's answer was the way the organisation runs.</p>
 
-<blockquote>Because we look at spreadsheets every morning.</blockquote>
+<p>The first part is people: the volunteers. If all of them had to be paid, he said, the costs would balloon. The second is what they buy and how they move it. Food that was bought in Europe at the start of the war now comes from producers in Ukraine, which he said roughly halved the cost. A shipping deal with one logistics company in the United States also lets them store goods and build containers in its facility. He reassesses vendors almost every week, and the reason he gave was the scale of what Ukraine is living through.</p>
 
-<p>He then listed what sits behind it. Volunteers, because paying everyone who does the work on the ground would make the costs balloon. Vendors reassessed almost every week. Food that was bought in Europe at the start of the war and is now bought from producers in Ukraine, which he said roughly halved the cost. A shipping deal with one logistics company in the United States that also lets them store goods and build containers in its facility. His estimate was that $5 million does something like $20 million worth of work on the ground. Kim recognised her own field in it: this, she said, is the intersection between impact and operations, and in technical language much of it is cost share.</p>
+<blockquote>So I think, because of the scope of human tragedy we're dealing in Ukraine, we need to make sure each dollar we receive as donation, we can double or triple by being super-efficient.</blockquote>
+
+<p>His estimate was that $5 million does something like $20 million worth of work on the ground. Kim recognised her own field in it: this, she said, is the intersection between impact and operations, and in technical language much of it is cost share. The third part, technology, came next.</p>
 
 <h2>A Delivery App for Aid</h2>
 
